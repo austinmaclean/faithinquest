@@ -1,0 +1,21 @@
+<div class="items-search">
+    <div class="input-group">
+        <span class="input-group-addon black"><span class="fa fa-fw fa-search" aria-hidden="true"></span></span>
+        <input type="text" class="form-control black" placeholder="Search for...">
+    </div>
+</div>
+
+<div class="items-panel">
+
+    <div class="items-list-panel flex flex-wrap-column">
+        <!-- iteration start-->
+        <sd-admin-study *ngFor="let studyElm of list" [item]="studyElm"></sd-admin-study>
+        <!-- iteration end-->
+    </div>
+
+    <!-- video placeholder -->
+    <div class="items-video-panel">
+        <div class="video-placeholder"></div>
+    </div>
+
+</div>

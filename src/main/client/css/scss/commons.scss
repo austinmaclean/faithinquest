@@ -1,0 +1,96 @@
+html, body {
+  height: 100%;
+  background-color: #454545;
+}
+
+@font-face {
+  font-family: 'BebasBold';
+  src: url('../fonts/custom/BebasNeue Bold.ttf');
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.highlight-blue {
+  color: #1fbbd2;
+}
+
+.row {
+
+  .header {
+    width: 100%;
+    background: url(../assets/img/faithbg.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 600px;
+  }
+
+  .main-content {
+    background: #e6eef0;
+    width: 100%;
+
+    .inner-panel {
+      width: 80%;
+      margin: 20px auto;
+      min-height: 100px;
+    }
+  }
+
+  .footer {
+    min-height: 100px;
+
+    font-family: 'BebasBold', sans-serif;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 0;
+    background: #454545;
+
+    .inner-panel {
+      margin: 0 auto;
+      display: table;
+      width: 80%;
+      min-height: 100%;
+      color: white;
+
+      .inner-panel-cell {
+        width: 50%;
+        display: table-cell;
+        vertical-align: middle;
+
+        &.right {
+          text-align: right;
+        }
+
+        &.left {
+          text-align: left;
+
+          font-size: 3em;
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+#application-version {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: transparent;
+  padding: 5px;
+  font-size: 4pt;
+  width: 100px;
+  &:hover {
+    color: inherit;
+    font-size: 11pt;
+    width: auto;
+  }
+}

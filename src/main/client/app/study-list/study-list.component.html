@@ -1,0 +1,110 @@
+<div class="row bible-study-page">
+    <div class="col-lg-12 header">
+
+        <div class="inner-panel flex flex-wrap-column flex-align-vertical-top flex-align-horizontal-center">
+            <div class="content-row top">
+                FaithInquest.com
+            </div>
+
+            <div class="content-row bottom">
+                <h1 class="searsh-title">Search any bible topic</h1>
+                <h4 class="search-title-desc">For example type "marriage" to find what bible says about marriage</h4>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-fw fa-search" aria-hidden="true"></span></span>
+                    <input type="text" class="form-control" placeholder="Search for...">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-12 main-content">
+        <div class="inner-panel">
+            <div class="top-panel">
+                <div class="top-panel-cell left">
+                    displaying results for "<span class="highlight-blue">marriage</span>"
+                </div>
+                <div class="top-panel-cell right form-inline">
+
+                    <div class="form-group">
+                        <label for="sel1">sort by: </label>
+                        <select class="form-control top-panel-select" id="sel1">
+                            <optgroup class="top-panel-select-option">
+                                <option>most recent</option>
+                                <option>most recent1</option>
+                                <option>most recent2</option>
+                                <option>most recent3</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="items-panel">
+
+                <div class="items-list-panel flex flex-wrap-column">
+
+                    <!-- iteration start-->
+                    <sd-study *ngFor="let studyElm of list" [item]="studyElm"></sd-study>
+                    <!-- iteration end-->
+
+                    <!--
+                                        <div class="item-list-panel-pagination">
+                                            <pagination>
+                                                <ul class="pagination">
+
+                                                    <li class="pagination-page page-item">
+                                                        <a class="page-link" href="">1</a>
+                                                    </li>
+                                                    <li class="pagination-page page-item">
+                                                        <a class="page-link" href="">2</a>
+                                                    </li>
+                                                    <li class="pagination-page page-item">
+                                                        <a class="page-link" href="">3</a>
+                                                    </li>
+                                                    <li class="pagination-page page-item active">
+                                                        <a class="page-link" href="">4</a>
+                                                    </li>
+                                                    <li class="pagination-page page-item">
+                                                        <a class="page-link" href="">5</a>
+                                                    </li>
+                                                    <li class="pagination-page page-item">
+                                                        <a class="page-link" href="">6</a>
+                                                    </li>
+                                                    <li class="pagination-page page-item">
+                                                        <a class="page-link" href="">7</a>
+                                                    </li>
+
+                                                </ul>
+                                            </pagination>
+                                        </div>
+                    -->
+
+
+                </div>
+
+                <!-- video placeholder -->
+                <div class="items-video-panel">
+                    <div class="video-placeholder"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-12 footer flex flex-align-vertical-center">
+        <div class="inner-panel">
+            <div class="inner-panel-cell left">
+                FaithInquest.com
+            </div>
+            <div class="inner-panel-cell right">
+                2016 &copy; FaithInquest.com All rights reserved.
+            </div>
+        </div>
+    </div>
+
+
+</div>

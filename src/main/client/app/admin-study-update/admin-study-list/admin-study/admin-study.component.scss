@@ -1,0 +1,31 @@
+.items-list-panel-element {
+  display: table;
+  margin-top: 10px;
+  padding-top: 10px;
+
+  width: 100%;
+  border-top: 1px solid #1fbbd2;
+
+  .items-list-panel-element-cell {
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 1.3em;
+
+    .item-title {
+      font-size: 1.3rem;
+    }
+
+    .item-author {
+      font-size: 1.3rem;
+    }
+
+    &.preview {
+      width: 240px;
+    }
+
+    &.share {
+      width: 60px;
+      text-align: center;
+    }
+  }
+}

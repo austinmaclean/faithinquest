@@ -1,0 +1,38 @@
+.signin-page {
+
+  .header {
+
+    font-family: 'BebasBold', sans-serif;
+    text-transform: uppercase;
+
+    .inner-panel {
+
+      .content-row {
+        width: 100%;
+        text-align: center;
+
+        &.top {
+          margin-top: 30px;
+          font-size: 2em;
+          text-transform: uppercase;
+        }
+
+        &.bottom {
+          margin-top: 150px;
+          h2 {
+            font-size: 5em;
+          }
+
+          input[type=password] {
+            width: 35%;
+            border-radius: 5px;
+            font-size: 1.5em;
+            padding: 10px;
+          }
+        }
+
+      }
+    }
+
+  }
+}
