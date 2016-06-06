@@ -3,7 +3,6 @@ package com.faithinquest.model;
 import com.faithinquest.persistence.BaseEntity;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 /**

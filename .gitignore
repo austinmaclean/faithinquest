@@ -41,7 +41,7 @@ dist
 dev
 docs
 lib
-test
+src/main/test
 tmp
 profiles/dev.properties
 src/main/webapp/app

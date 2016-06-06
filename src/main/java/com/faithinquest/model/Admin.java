@@ -3,11 +3,9 @@ package com.faithinquest.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.AssociationOverride;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,7 +15,6 @@ import javax.persistence.UniqueConstraint;
  * Time: 6:02 PM
  */
 @Entity
-@AssociationOverride( name = "avatar", joinColumns = @JoinColumn( name = "id_avatar" ) )
 @Table( uniqueConstraints = @UniqueConstraint( name = "uk_admin_email", columnNames = "email" ) )
 public class Admin extends Person
 {
