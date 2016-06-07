@@ -412,17 +412,15 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
-          <!--
           <execution>
             <id>npm run build</id>
             <goals>
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run-script build.${project.activeProfiles[0].id}</arguments>
+              <arguments>run-script typings</arguments>
             </configuration>
           </execution>
-          -->
           <!--
           <execution>
             <id>bower install</id>

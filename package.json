@@ -10,7 +10,7 @@
     "clean.all.dest": "gulp clean.all.dest --color",
     "generate.manifest": "gulp generate.manifest --color",
     "gulp": "gulp",
-    "postinstall": "typings install && npm prune",
+    "typings": "typings install",
     "reinstall": "npm cache clean && npm install",
     "tasks.list": "gulp --tasks-simple --color"
   },
