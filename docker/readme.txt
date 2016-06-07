@@ -16,7 +16,7 @@ Run Application
     logs - application logs
     .m2  - local maven repository cache
 
-    mkdir -r $DATA_FOLDER/aws $DATA_FOLDER/cert $DATA_FOLDER/data  $DATA_FOLDER/db  $DATA_FOLDER/logs $DATA_FOLDER/.m2 $DATA_FOLDER/email
+    mkdir -r $DATA_FOLDER/cert $DATA_FOLDER/data  $DATA_FOLDER/db  $DATA_FOLDER/logs $DATA_FOLDER/.m2
 
 4. Create Tomcat keystore file in $DATA_FOLDER/cert for HTTPS support (see https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html),
    edit HTTPS Connector section in ./docker/app/server.xml if needed
