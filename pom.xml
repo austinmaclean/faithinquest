@@ -412,15 +412,17 @@
               <arguments>install</arguments>
             </configuration>
           </execution>
+          <!--
           <execution>
             <id>npm run build</id>
             <goals>
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run build.${project.activeProfiles[0].id}</arguments>
+              <arguments>run-script build.${project.activeProfiles[0].id}</arguments>
             </configuration>
           </execution>
+          -->
           <!--
           <execution>
             <id>bower install</id>
@@ -432,17 +434,15 @@
             </configuration>
           </execution>
           -->
-          <!--
           <execution>
             <id>gulp build</id>
             <goals>
               <goal>gulp</goal>
             </goals>
             <configuration>
-              <arguments>${project.activeProfiles[0].id}-build</arguments>
+              <arguments>build.${project.activeProfiles[0].id}</arguments>
             </configuration>
           </execution>
-          -->
         </executions>
       </plugin>
       <plugin>
