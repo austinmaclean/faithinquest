@@ -1,10 +1,8 @@
 {
-  "name": "angular2-seed",
+  "name": "FaithInquest",
   "version": "0.0.0",
-  "description": "Modular seed project for Angular 2 apps with fast, statically typed build",
-  "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
-  },
+  "description": "FaithInquest project for Angular 2 apps",
+  "private": true,
   "scripts": {
     "build.dev": "gulp build.dev --color",
     "build.dev.watch": "gulp build.dev.watch --color",

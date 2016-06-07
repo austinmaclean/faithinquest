@@ -86,7 +86,7 @@
 
         <Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
                    maxThreads="250" SSLEnabled="true" scheme="https" secure="true"
-                   keystoreFile="/root/storage/cert/.keystore" keystorePass="msbc_keystore_password" keyPass="msbc_key_password"
+                   keystoreFile="/root/storage/cert/.keystore" keystorePass="faithinquest_keystore_password" keyPass="faithinquest_key_password"
                    clientAuth="false" sslProtocol="TLS" />
 
         <!-- Define an AJP 1.3 Connector on port 8009 -->
