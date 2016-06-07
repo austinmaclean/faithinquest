@@ -51,7 +51,7 @@ Run Application
     -d -p 80:8080 -p 443:8443 -e "APP_ENV=$MAVEN_PROFILE_NAME"  faithinquest/app:v1 start-app
 
     Example:
-        docker run --name=app --link db:db -v /home/ec2-user/faithinquest/:/root/repo -v /home/ec2-user/app/.m2:/root/.m2 -v /home/ec2-user/app/logs:/root/storage/logs -v /home/ec2-user/app/data:/root/storage/data -v /home/ec2-user/app/cert:/root/storage/cert -it -p 80:8080 -p 443:8443 -e "APP_ENV=stage"  faithinquest/app:v1 start-app
+        docker run --name=app --link db:db -v /home/ec2-user/faithinquest/:/root/repo -v /home/ec2-user/app/.m2:/root/.m2 -v /home/ec2-user/app/logs:/root/storage/logs -v /home/ec2-user/app/data:/root/storage/data -v /home/ec2-user/app/cert:/root/storage/cert -it -p 80:8080 -p 443:8443 -e "APP_ENV=prod"  faithinquest/app:v1 start-app
 
 
 Docker automatically build and run application
