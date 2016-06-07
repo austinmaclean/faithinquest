@@ -4,7 +4,7 @@ set -e
 
 if [ "$1" = 'start-app' ]; then
     cd $APP_HOME/repo
-    mvn clean package -P $APP_ENV -DskipTests=true
+    mvn -X clean package -P $APP_ENV -DskipTests=true
     if ! [[ -L "$file" && -d "$file" ]]
     then
         #Create tomcat logs directory and attach it to tomcat
