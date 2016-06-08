@@ -9,7 +9,6 @@ RUN apt-get update && \
  rm -rf /var/lib/apt/lists/* && \
  localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
-
 #Download JDK
 RUN curl -L -b "oraclelicense=a" -o $APP_HOME/jdk.tar.gz http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz && \
 mkdir $APP_HOME/jdk && \
@@ -27,7 +26,6 @@ RUN curl -o $APP_HOME/apache-tomcat.tar.gz http://archive.apache.org/dist/tomcat
 mkdir $APP_HOME/tomcat && \
 tar -xzf $APP_HOME/apache-tomcat.tar.gz -C $APP_HOME/tomcat --strip-components=1 && \
 rm $APP_HOME/apache-tomcat.tar.gz
-
 
 #Expose Tomcat PORT
 EXPOSE 8080
