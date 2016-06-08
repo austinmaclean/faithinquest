@@ -17,11 +17,12 @@ gulp.task('build.dev', (done:any) =>
         'build.html_css',
         'build.js.dev',
         'build.bundles.dev',
+        'build.bundles.app.dev',
         done));
 
 // --------------
-// Build dev watch.
-gulp.task('build.dev.watch.source', (done:any) =>
+// Build dev watch handler.
+gulp.task('build.dev.watch.handler', (done:any) =>
     runSequence('tslint',
         //'css-lint',
         'build.assets.dev',
@@ -48,8 +49,8 @@ gulp.task('build.prod', (done:any) =>
         'build.html_css',
         'copy.js.prod',
         'build.js.prod',
-        'build.bundles',
-        'build.bundles.app',
+        'build.bundles.prod',
+        'build.bundles.app.prod',
         done));
 
 // --------------
@@ -60,7 +61,7 @@ gulp.task('build.tools', (done:any) =>
         done));
 
 // --------------
-// Build tools.
+// Clean All in Dest.
 gulp.task('clean.all.dest', (done:any) =>
     runSequence('clean.all',
         done));

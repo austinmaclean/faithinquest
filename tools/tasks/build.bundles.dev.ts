@@ -1,10 +1,7 @@
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
 
 import { DEPENDENCIES, JS_DEST } from '../config';
-
-const plugins = <any>gulpLoadPlugins();
 
 /**
  * Executes the build process, bundling the shim files.
@@ -20,7 +17,7 @@ function getShims() {
 
     return libs.filter(l => l.inject === 'shims')
         .concat(libs.filter(l => l.inject === 'libs'))
-        .concat(libs.filter(l => l.inject === true || l.inject === false))
+        .concat(libs.filter(l => l.inject === true))
         .map(l => l.src);
 }
 
@@ -29,8 +26,5 @@ function getShims() {
  */
 function bundleShims() {
     return gulp.src(getShims(), {base: './node_modules'})
-        .pipe(plugins.uglify({
-            mangle: false
-        }))
         .pipe(gulp.dest(JS_DEST));
 }

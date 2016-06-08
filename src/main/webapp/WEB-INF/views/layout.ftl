@@ -72,31 +72,45 @@
 <script>
     System.config({
         "defaultJSExtensions": true,
-//        "packageConfigPaths": [
-//            "/js/*/package.json",
-//            "/js/**/package.json",
-//            "/js/@angular/*/package.json",
-//            "/js/ng2-bootstrap/*/package.json"
-//        ],
         "paths": {
             "app/main": "app/main",
-            "@angular/core": "js/@angular/core/core.umd.js",
-            "@angular/common": "js/@angular/common/common.umd.js",
-            "@angular/compiler": "js/@angular/compiler/compiler.umd.js",
-            "@angular/http": "js/@angular/http/http.umd.js",
-            "@angular/router": "js/@angular/router/router.umd.js",
-            "@angular/platform-browser": "js/@angular/platform-browser/platform-browser.umd.js",
-            "@angular/platform-browser-dynamic": "js/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js",
-            "rxjs/*": "js/rxjs/*",
             "app/*": "app/*",
             "*": "js/*"
         },
         "packages": {
-            "rxjs": {
-                "defaultExtension": false
+            '@angular/core': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/compiler': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/common': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/http': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/platform-browser': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/platform-browser-dynamic': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/router': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            'rxjs': {
+                defaultExtension: 'js'
             }
         }
-    })
+    });
 </script>
 
 <script src="js/zone.js/dist/zone.js"></script>

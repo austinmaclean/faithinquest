@@ -200,13 +200,13 @@ export class ProjectConfig {
      * The required NPM version to run the application.
      * @type {string}
      */
-    VERSION_NPM = '2.14.2';
+    VERSION_NPM = '2.15.5';
 
     /**
      * The required NodeJS version to run the application.
      * @type {string}
      */
-    VERSION_NODE = '4.0.0';
+    VERSION_NODE = '4.4.5';
 
     /**
      * The ruleset to be used by `codelyzer` for linting the TypeScript files.
@@ -230,7 +230,8 @@ export class ProjectConfig {
      * The list of NPM dependcies to be injected in the `index.html`.
      * @type {InjectableDependency[]}
      */
-    NPM_DEPENDENCIES_BASE:InjectableDependency[] = [
+
+    NPM_DEPENDENCIES:InjectableDependency[] = [
         {src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT},
         {src: 'zone.js/dist/zone.js', inject: 'libs'},
         {src: 'core-js/client/shim.min.js', inject: 'shims'},
@@ -239,19 +240,6 @@ export class ProjectConfig {
         {src: 'bootstrap-sass/assets/javascripts/bootstrap.min.js', inject: 'libs'},
         {src: 'jquery/dist/jquery.min.js', inject: 'shims'}
     ];
-
-    NPM_DEPENDENCIES_DEV:InjectableDependency[] = [
-        {src: '@angular/core/core.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT},
-        {src: '@angular/common/common.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT},
-        {src: '@angular/compiler/compiler.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT},
-        {src: '@angular/http/http.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT},
-        {src: '@angular/router/router.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT},
-        {src: '@angular/platform-browser/platform-browser.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT},
-        {src: '@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js', inject: false, env: ENVIRONMENTS.DEVELOPMENT}
-    ];
-
-    NPM_DEPENDENCIES = this.ENV === ENVIRONMENTS.DEVELOPMENT ?
-        this.NPM_DEPENDENCIES_BASE.concat(this.NPM_DEPENDENCIES_DEV) : this.NPM_DEPENDENCIES_BASE;
 
     /**
      * The list of local files to be injected in the `index.html`.
@@ -291,6 +279,51 @@ export class ProjectConfig {
         ],
         paths: {
             [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
+            '*': 'node_modules/*'
+        },
+        packages: {
+            '@angular/core': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/compiler': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/common': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/http': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/platform-browser': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/platform-browser-dynamic': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/router': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            'rxjs': {
+                defaultExtension: 'js'
+            }
+        }
+    };
+
+    SYSTEM_BUILDER_CONFIG_DEV: any = {
+        defaultJSExtensions: true,
+        packageConfigPaths: [
+            join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
+            join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+        ],
+        paths: {
+            [`${this.DEV_DEST}/app/*`]: `${this.DEV_DEST}/app/*`,
             '*': 'node_modules/*'
         },
         packages: {

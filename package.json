@@ -4,14 +4,14 @@
   "description": "FaithInquest project for Angular 2 apps",
   "private": true,
   "scripts": {
+    "postinstall": "typings install && gulp check.versions && npm prune",
+    "gulp": "gulp",
     "build.dev": "gulp build.dev --color",
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.prod": "gulp build.prod --color",
     "clean.all.dest": "gulp clean.all.dest --color",
-    "generate.manifest": "gulp generate.manifest --color",
-    "gulp": "gulp",
-    "typings": "typings install",
-    "reinstall": "npm cache clean && npm install"
+    "reinstall": "npm cache clean && npm install",
+    "bundles.app": "gulp build.bundles.app.dev --color"
   },
   "author": "Minko Gechev <mgechev>",
   "license": "MIT",
