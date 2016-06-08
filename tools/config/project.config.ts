@@ -275,7 +275,8 @@ export class ProjectConfig {
         defaultJSExtensions: true,
         packageConfigPaths: [
             join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-            join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+            join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json'),
+            join(this.PROJECT_ROOT, 'node_modules', 'ng2-bootstrap', '*', 'package.json')
         ],
         paths: {
             [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
@@ -312,7 +313,13 @@ export class ProjectConfig {
             },
             'rxjs': {
                 defaultExtension: 'js'
+            },
+            'ng2-bootstrap': {
+                defaultExtension: 'js'
             }
+        },
+        map: {
+            'moment': 'moment/moment'
         }
     };
 
@@ -320,7 +327,8 @@ export class ProjectConfig {
         defaultJSExtensions: true,
         packageConfigPaths: [
             join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-            join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+            join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json'),
+            join(this.PROJECT_ROOT, 'node_modules', 'ng2-bootstrap', '*', 'package.json')
         ],
         paths: {
             [`${this.DEV_DEST}/app/*`]: `${this.DEV_DEST}/app/*`,
@@ -357,7 +365,13 @@ export class ProjectConfig {
             },
             'rxjs': {
                 defaultExtension: 'js'
+            },
+            'ng2-bootstrap': {
+                defaultExtension: 'js'
             }
+        },
+        map: {
+            'moment': 'moment/moment'
         }
     };
 

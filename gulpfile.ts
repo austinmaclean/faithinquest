@@ -29,6 +29,7 @@ gulp.task('build.dev.watch.handler', (done:any) =>
         'build.fonts',
         'build.html_css',
         'build.js.dev',
+        'build.bundles.app.dev',
         done));
 
 // --------------

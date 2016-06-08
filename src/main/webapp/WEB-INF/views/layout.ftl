@@ -108,7 +108,13 @@
             },
             'rxjs': {
                 defaultExtension: 'js'
+            },
+            'ng2-bootstrap': {
+                defaultExtension: 'js'
             }
+        },
+        map: {
+            'moment': 'moment/moment'
         }
     });
 </script>
