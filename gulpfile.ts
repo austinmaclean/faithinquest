@@ -20,12 +20,6 @@ gulp.task('build.dev', (done:any) =>
         done));
 
 // --------------
-// Build stage.
-gulp.task('build.stage', (done:any) =>
-    runSequence('build.dev',
-        done));
-
-// --------------
 // Build dev watch.
 gulp.task('build.dev.watch.source', (done:any) =>
     runSequence('tslint',

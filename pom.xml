@@ -390,16 +390,17 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>0.0.26</version>
+        <version>1.0</version>
         <executions>
           <execution>
             <id>install node and npm</id>
             <goals>
               <goal>install-node-and-npm</goal>
             </goals>
+            <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v4.4.5</nodeVersion>
-              <npmVersion>2.15.5</npmVersion>
+              <nodeVersion>v6.2.1</nodeVersion>
+              <npmVersion>3.9.3</npmVersion>
             </configuration>
           </execution>
           <execution>
@@ -408,7 +409,7 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>install</arguments>
+              <arguments>install --unsafe-perm</arguments>
             </configuration>
           </execution>
           <execution>
@@ -417,7 +418,7 @@
               <goal>npm</goal>
             </goals>
             <configuration>
-              <arguments>run build.${project.activeProfiles[0].id}</arguments>
+              <arguments>run-script typings</arguments>
             </configuration>
           </execution>
           <!--
@@ -431,17 +432,15 @@
             </configuration>
           </execution>
           -->
-          <!--
           <execution>
             <id>gulp build</id>
             <goals>
               <goal>gulp</goal>
             </goals>
             <configuration>
-              <arguments>${project.activeProfiles[0].id}-build</arguments>
+              <arguments>build.${project.activeProfiles[0].id}</arguments>
             </configuration>
           </execution>
-          -->
         </executions>
       </plugin>
       <plugin>
