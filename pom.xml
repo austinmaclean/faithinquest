@@ -576,6 +576,18 @@
         <filters>
           <filter>${basedir}/profiles/prod.properties</filter>
         </filters>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.3.7.v20160115</version>
+            <configuration>
+              <webApp>
+                <descriptor>${project.basedir}/target/webapp/WEB-INF/web.xml</descriptor>
+              </webApp>
+            </configuration>
+          </plugin>
+        </plugins>
       </build>
     </profile>
   </profiles>

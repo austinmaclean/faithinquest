@@ -313,9 +313,6 @@ export class ProjectConfig {
             },
             'rxjs': {
                 defaultExtension: 'js'
-            },
-            'ng2-bootstrap': {
-                defaultExtension: 'js'
             }
         },
         map: {
@@ -364,9 +361,6 @@ export class ProjectConfig {
                 defaultExtension: 'js'
             },
             'rxjs': {
-                defaultExtension: 'js'
-            },
-            'ng2-bootstrap': {
                 defaultExtension: 'js'
             }
         },
