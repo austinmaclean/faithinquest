@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 import {StudyComponent} from './study/study.component';
 import {StudyService} from '../shared/index';
 import {Study} from '../shared/model/study';
@@ -9,7 +10,7 @@ import {Study} from '../shared/model/study';
     templateUrl: 'study-list.component.html',
     styleUrls: ['study-list.component.css'],
     providers: [StudyService],
-    directives: [<any>StudyComponent]
+    directives: [<any>StudyComponent, <any>AlertComponent]
 })
 
 export class StudyListComponent implements OnInit {

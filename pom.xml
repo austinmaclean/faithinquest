@@ -399,8 +399,8 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <nodeVersion>v6.2.1</nodeVersion>
-              <npmVersion>3.9.3</npmVersion>
+              <nodeVersion>v4.4.5</nodeVersion>
+              <npmVersion>2.15.5</npmVersion>
             </configuration>
           </execution>
           <execution>
@@ -412,6 +412,7 @@
               <arguments>install --unsafe-perm</arguments>
             </configuration>
           </execution>
+          <!--
           <execution>
             <id>npm run build</id>
             <goals>
@@ -421,6 +422,7 @@
               <arguments>run-script typings</arguments>
             </configuration>
           </execution>
+          -->
           <!--
           <execution>
             <id>bower install</id>
@@ -574,6 +576,18 @@
         <filters>
           <filter>${basedir}/profiles/prod.properties</filter>
         </filters>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.3.7.v20160115</version>
+            <configuration>
+              <webApp>
+                <descriptor>${project.basedir}/target/webapp/WEB-INF/web.xml</descriptor>
+              </webApp>
+            </configuration>
+          </plugin>
+        </plugins>
       </build>
     </profile>
   </profiles>
