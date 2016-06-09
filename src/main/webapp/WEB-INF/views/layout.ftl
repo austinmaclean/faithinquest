@@ -106,10 +106,15 @@
                 main: 'index.js',
                 defaultExtension: 'js'
             },
-            'rxjs': {
+            '@angular/router-deprecated': {
+                main: 'index.js',
                 defaultExtension: 'js'
             },
-            'ng2-bootstrap': {
+            '@angular/upgrade': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            'rxjs': {
                 defaultExtension: 'js'
             }
         },

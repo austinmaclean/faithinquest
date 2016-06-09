@@ -311,6 +311,14 @@ export class ProjectConfig {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
+            '@angular/router-deprecated': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/upgrade': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
             'rxjs': {
                 defaultExtension: 'js'
             }
@@ -320,12 +328,12 @@ export class ProjectConfig {
         }
     };
 
-    SYSTEM_BUILDER_CONFIG_DEV: any = {
+    SYSTEM_BUILDER_CONFIG_DEV:any = {
         defaultJSExtensions: true,
         packageConfigPaths: [
-            join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-            join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json'),
-            join(this.PROJECT_ROOT, 'node_modules', 'ng2-bootstrap', '*', 'package.json')
+            join( this.PROJECT_ROOT, 'node_modules', '*', 'package.json' ),
+            join( this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json' ),
+            join( this.PROJECT_ROOT, 'node_modules', 'ng2-bootstrap', '*', 'package.json' )
         ],
         paths: {
             [`${this.DEV_DEST}/app/*`]: `${this.DEV_DEST}/app/*`,
@@ -357,6 +365,14 @@ export class ProjectConfig {
                 defaultExtension: 'js'
             },
             '@angular/router': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/router-deprecated': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/upgrade': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
