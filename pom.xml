@@ -412,7 +412,6 @@
               <arguments>install --unsafe-perm</arguments>
             </configuration>
           </execution>
-          <!--
           <execution>
             <id>npm run build</id>
             <goals>
@@ -422,7 +421,6 @@
               <arguments>run-script typings</arguments>
             </configuration>
           </execution>
-          -->
           <!--
           <execution>
             <id>bower install</id>

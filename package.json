@@ -4,7 +4,7 @@
   "description": "FaithInquest project for Angular 2 apps",
   "private": true,
   "scripts": {
-    "postinstall": "typings install && gulp check.versions && npm prune",
+    "typings": "typings install",
     "gulp": "gulp",
     "build.dev": "gulp build.dev --color",
     "build.dev.watch": "gulp build.dev.watch --color",
