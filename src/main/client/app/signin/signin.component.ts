@@ -18,16 +18,17 @@ export class SignInComponent {
 
     signInUser(user:any) {
         let contentHeaders = new Headers();
-        contentHeaders.append('Accept', 'application/json');
-        contentHeaders.append('Content-Type', 'application/json');
+        //contentHeaders.append('Accept', 'application/json');
+        //contentHeaders.append('Content-Type', 'application/json');
+        contentHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        let data = JSON.stringify(user);
+        let router = this.router;
 
-        this.http.post('/api/admin/account/signin', data, {headers: contentHeaders})
+        this.http.post('/api/admin/account/signin', 'password=' + user.password, {headers: contentHeaders})
             .subscribe(
                 response => {
                     localStorage.setItem('auth', response.json());
-                    this.router.parent.navigateByUrl('/Admin');
+                    router.parent.navigateByUrl('/admin');
                 },
                 error => {
                     alert(error.text());

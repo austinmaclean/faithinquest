@@ -19,9 +19,10 @@ import {AdminStudyUpdateComponent} from './admin-study-update/index';
     directives: [AuthRouterOutletDirective]
 })
 @RouteConfig([
-    {path: '/', component: <any>StudyListComponent, as: 'Home'},
+    {path: '/', component: <any>StudyListComponent, as: 'Home', useAsDefault:true},
     {path: '/login', component: <any>SignInComponent, as: 'Login'},
-    {path: '/admin', component: <any>AdminStudyUpdateComponent, as: 'Admin'}
+    {path: '/admin', component: <any>AdminStudyUpdateComponent, as: 'Admin'},
+    {path: '/*path', redirectTo:['Home']}
 ])
 export class AppComponent {
 }
