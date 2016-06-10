@@ -1,7 +1,7 @@
 <#import "/spring.ftl" as spring/>
 
 <!DOCTYPE html>
-<html lang="en" data-cast-api-enabled="true" ng-app="saddlebackApp">
+<html lang="en">
 <head>
     <base href="/">
     <meta charset="utf-8">

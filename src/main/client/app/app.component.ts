@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {Routes, Router, ROUTER_DIRECTIVES} from '@angular/router';
+import {RouteConfig} from '@angular/router-deprecated';
 import {HTTP_PROVIDERS} from '@angular/http';
 
-import {SigninComponent} from './signin/index';
+import {AuthRouterOutletDirective} from './shared/index';
+import {SignInComponent} from './signin/index';
 import {StudyListComponent} from './study-list/index';
 import {AdminStudyUpdateComponent} from './admin-study-update/index';
 
@@ -13,24 +14,14 @@ import {AdminStudyUpdateComponent} from './admin-study-update/index';
 @Component({
     moduleId: module.id,
     selector: 'sd-app',
-    viewProviders: [HTTP_PROVIDERS],
     templateUrl: 'app.component.html',
-    directives: [ROUTER_DIRECTIVES]
+    viewProviders: [HTTP_PROVIDERS],
+    directives: [AuthRouterOutletDirective]
 })
-@Routes([
-    {path: '/', component: <any>StudyListComponent},
-    {path: '/login', component: <any>SigninComponent},
-    {path: '/admin-study', component: <any>AdminStudyUpdateComponent}
+@RouteConfig([
+    {path: '/', component: <any>StudyListComponent, as: 'Home'},
+    {path: '/login', component: <any>SignInComponent, as: 'Login'},
+    {path: '/admin', component: <any>AdminStudyUpdateComponent, as: 'Admin'}
 ])
-
 export class AppComponent {
-
-    constructor(private router:Router) {
-        this.router = router;
-    }
-
-    // ngOnInit() {
-    //     this.router.navigate(['/']);
-    // }
-
 }

@@ -33,6 +33,15 @@ public class AdminAccountController
 		return AccountHolder.ADMIN_KEY;
 	}
 
+	@RequestMapping( value = "/signin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public Admin signIn( @RequestParam( value = "password", required = true ) String password )
+	{
+		Admin admin = new Admin();
+		admin.setId( 1L );
+		return admin;
+	}
+
 	@RequestMapping( value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public Admin login( @RequestParam( value = "login", required = true ) String login,
