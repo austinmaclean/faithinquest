@@ -1,18 +1,17 @@
 .items-list-panel-element {
-  display: table;
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
 
   width: 100%;
   border-top: 1px solid #1fbbd2;
 
   .items-list-panel-element-cell {
-    display: table-cell;
+
     vertical-align: middle;
     line-height: 1.3em;
 
     .item-title {
-      font-size: 1.3rem;
+      font-size: 2.6rem;
     }
 
     .item-author {
@@ -26,6 +25,91 @@
     &.share {
       width: 60px;
       text-align: center;
+    }
+
+    &.middle {
+      width: calc(100% - 300px);
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 540px) {
+
+  .items-list-panel-element {
+
+    .items-list-panel-element-cell {
+
+      &.preview {
+        text-align: center;
+        width: 100%;
+      }
+
+      &.share {
+        width: 100%;
+        text-align: center;
+      }
+
+      &.middle {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .items-list-panel-element {
+
+    .items-list-panel-element-cell {
+
+      &.preview {
+        text-align: center;
+        width: 100%;
+      }
+
+      &.share {
+        width: 100%;
+        text-align: center;
+      }
+
+      &.middle {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 960px) {
+
+  .items-list-panel-element {
+
+    .items-list-panel-element-cell {
+
+      &.preview {
+        text-align: center;
+        width: 100%;
+      }
+
+      &.share {
+        width: 100%;
+        text-align: center;
+      }
+
+      &.middle {
+        width: 100%;
+        margin-top: 20px;
+      }
+
     }
 
   }

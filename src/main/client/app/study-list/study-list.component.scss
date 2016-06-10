@@ -20,10 +20,16 @@
         &.bottom {
           margin-top: 150px;
           h1 {
-            font-size: 5em !important;
+            &.searsh-title {
+              font-size: 6em !important;
+            }
           }
-          h2 {
-            font-size: 3em !important;
+          h4 {
+            &.search-title-desc {
+              color: #eee;
+              font-size: 30px !important;
+              margin-bottom: 30px;
+            }
           }
 
           .input-group {
@@ -92,47 +98,11 @@
       .items-panel {
 
         width: 100%;
-        display: table;
 
         .items-list-panel {
 
-          width: 70%;
-          display: table-cell;
+          width: calc(100% - 340px);
           vertical-align: top;
-
-          /*
-          .items-list-panel-element {
-            display: table;
-            margin-top: 10px;
-            padding-top: 10px;
-
-            width: 100%;
-            border-top: 1px solid #1fbbd2;
-
-            .items-list-panel-element-cell {
-              display: table-cell;
-              vertical-align: middle;
-              line-height: 1.3em;
-
-              .item-title {
-                font-size: 1.3rem;
-              }
-
-              .item-author {
-                font-size: 1.3rem;
-              }
-
-              &.preview {
-                width: 240px;
-              }
-
-              &.share {
-                width: 60px;
-                text-align: center;
-              }
-            }
-          }
-          */
 
           .item-list-panel-pagination {
             width: 100%;
@@ -166,20 +136,123 @@
         }
 
         .items-video-panel {
-          width: 30%;
-          display: table-cell;
           vertical-align: top;
-          padding: 10px;
-          margin: 10px;
+          padding: 20px 0 0 10px;
 
           .video-placeholder {
-            width: 100%;
-            min-height: 300px;
+            width: 320px;
+            min-height: 270px;
             background: #454545;
           }
 
         }
 
+      }
+    }
+  }
+
+}
+
+
+@media only screen and (max-width: 540px) {
+
+  .bible-study-page {
+
+    .main-content {
+      .inner-panel {
+
+        .items-panel {
+
+          width: 100%;
+
+          .items-list-panel {
+
+            width: 100%;
+          }
+
+          .items-video-panel {
+
+            margin: 0 auto 20px;
+
+            .video-placeholder {
+              width: 320px;
+              min-height: 270px;
+              background: #454545;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .bible-study-page {
+
+    .main-content {
+      .inner-panel {
+
+        .items-panel {
+
+          width: 100%;
+
+          .items-list-panel {
+
+            width: 100%;
+          }
+
+          .items-video-panel {
+
+            margin: 0 auto 20px;
+
+            .video-placeholder {
+              width: 320px;
+              min-height: 270px;
+              background: #454545;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 960px) {
+
+  .bible-study-page {
+
+    .main-content {
+      .inner-panel {
+
+        .items-panel {
+
+          width: 100%;
+
+          .items-list-panel {
+
+            width: 100%;
+          }
+
+          .items-video-panel {
+
+            margin: 0 auto 20px;
+
+            .video-placeholder {
+              width: 320px;
+              min-height: 270px;
+              background: #454545;
+            }
+
+          }
+
+        }
       }
     }
   }

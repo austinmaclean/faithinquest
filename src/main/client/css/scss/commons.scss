@@ -51,15 +51,11 @@ html, body {
 
     .inner-panel {
       margin: 0 auto;
-      display: table;
       width: 80%;
       min-height: 100%;
       color: white;
 
       .inner-panel-cell {
-        width: 50%;
-        display: table-cell;
-        vertical-align: middle;
 
         &.right {
           text-align: right;
@@ -93,4 +89,42 @@ html, body {
     font-size: 11pt;
     width: auto;
   }
+}
+
+
+@media only screen and (max-width: 540px) {
+
+  .footer {
+
+    .inner-panel {
+
+      .inner-panel-cell {
+
+        &.right {
+          width: 100%;
+          text-align: center;
+        }
+
+        &.left {
+          width: 100%;
+          text-align: center;
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+
+}
+
+@media only screen and (max-width: 960px) {
+
+
 }

@@ -1,0 +1,70 @@
+.footer {
+  min-height: 100px;
+
+  font-family: 'BebasBold', sans-serif;
+  text-transform: uppercase;
+  width: 100%;
+  margin: 0;
+  background: #454545;
+
+  .inner-panel {
+    margin: 0 auto;
+    width: 80%;
+    min-height: 100%;
+    color: white;
+
+    .inner-panel-cell {
+
+      &.right {
+        text-align: right;
+      }
+
+      &.left {
+        text-align: left;
+
+        font-size: 3em;
+
+      }
+
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 540px) {
+
+  .footer {
+
+    .inner-panel {
+
+      .inner-panel-cell {
+
+        &.right {
+          width: 100%;
+          text-align: center;
+        }
+
+        &.left {
+          width: 100%;
+          text-align: center;
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+
+}
+
+@media only screen and (max-width: 960px) {
+
+
+}

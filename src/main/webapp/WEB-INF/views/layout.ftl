@@ -57,6 +57,9 @@
     }
 </script>
 
+<#--YOUTUBE API-->
+<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
+
 <#if buildEnv?? && buildEnv == 'prod'>
 <#--PROD-->
 <script src="js/shims.js"></script>
