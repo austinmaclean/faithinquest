@@ -25,16 +25,14 @@ const BUNDLER_OPTIONS = {
 export = (done:any) => {
     let builder = new Builder(SYSTEM_BUILDER_CONFIG_DEV);
     builder
-        .buildStatic(join(DEV_DEST, BOOTSTRAP_MODULE),
-            null,
-            BUNDLER_OPTIONS)
+        .buildStatic(`${DEV_DEST}/${BOOTSTRAP_MODULE}`, null, BUNDLER_OPTIONS)
         .then((output) => {
             let paths:string[] = output.modules;
             paths = paths
-                .filter(d => !d.startsWith('src/main/webapp'))
+                .filter(d => !d.startsWith(DEV_DEST))
                 .map(d => join(PROJECT_ROOT, 'node_modules', d));
 
-            console.log(paths);
+            //console.log(paths);
 
             gulp.src(paths, {base: './node_modules'})
                 .pipe(gulp.dest(JS_DEST));
