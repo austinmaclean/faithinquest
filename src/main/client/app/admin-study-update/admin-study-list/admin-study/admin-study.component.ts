@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Study} from '../../../shared/model/study';
+import {Study} from '../../../shared/index';
 
 @Component({
     moduleId: module.id,
@@ -7,7 +7,6 @@ import {Study} from '../../../shared/model/study';
     templateUrl: 'admin-study.component.html',
     styleUrls: ['admin-study.component.css']
 })
-
 export class AdminStudyComponent {
 
     @Input() item:Study;

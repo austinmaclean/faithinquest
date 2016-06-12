@@ -22,7 +22,7 @@ export class AuthRouterOutletDirective extends RouterOutlet {
 
     activate(instruction: ComponentInstruction) {
         let url = instruction.urlPath;
-        if (!this.publicRoutes[url] && !localStorage.getItem('auth')) {
+        if (!this.publicRoutes[url] && !localStorage.getItem('adminAuth')) {
             this.parentRouter.navigateByUrl('/login');
         }
         return super.activate(instruction);

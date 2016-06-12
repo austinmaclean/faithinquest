@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Study} from '../../shared/model/study';
+import {Study} from '../../shared/index';
 
 @Component({
     moduleId: module.id,

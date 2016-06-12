@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 import {StudyComponent} from './study/study.component';
-import {StudyService} from '../shared/index';
-import {Study} from '../shared/model/study';
+import {StudyService, Study} from '../shared/index';
 
 @Component({
     moduleId: module.id,

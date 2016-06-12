@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Study} from '../model/study';
 
-var STUDIES:Study[] = [
+const STUDIES:Study[] = [
     {
         'id': 0, 'img': 'preview.jpg', 'title': 'What does bible says about marriage?', 'author': 'judah smith',
         'description': 'joins us at our sunday morning service at hills campus in sidney, australia'

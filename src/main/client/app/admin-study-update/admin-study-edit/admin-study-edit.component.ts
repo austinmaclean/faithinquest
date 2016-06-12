@@ -6,8 +6,5 @@ import {Component} from '@angular/core';
     templateUrl: 'admin-study-edit.component.html',
     styleUrls: ['admin-study-edit.component.css']
 })
-
 export class AdminStudyEditComponent {
-
-
 }
