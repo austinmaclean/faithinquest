@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import {Study} from '../model/study';
 
 const STUDIES:Study[] = [
@@ -19,8 +20,11 @@ const STUDIES:Study[] = [
 @Injectable()
 export class StudyService {
 
-    getStudies():Promise<Study[]> {
-        return Promise.resolve(STUDIES);
+    public getStudies():Observable<Study[]> {
+        return Observable.create(observer => {
+            observer.next(STUDIES);
+            observer.complete();
+        });
     };
 
 }
