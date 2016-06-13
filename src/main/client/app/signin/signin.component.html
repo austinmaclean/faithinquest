@@ -9,7 +9,9 @@
 
             <div class="content-row bottom">
                 <h2>Login</h2>
-                <input type="password" placeholder="password"/>
+                <form #signInForm="ngForm" (ngSubmit)="signInUser(signInForm.value)">
+                    <input id="password" type="password" placeholder="password" ngControl="password">
+                </form>
             </div>
 
         </div>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Study} from '../../shared/model/study';
-import {StudyService} from '../../shared/bible-study-list/bible-study-list.service';
+import {StudyService, Study} from '../../shared/index';
 import {AdminStudyComponent} from './admin-study/admin-study.component';
 
 @Component({
@@ -11,7 +10,6 @@ import {AdminStudyComponent} from './admin-study/admin-study.component';
     providers: [StudyService],
     directives: [<any>AdminStudyComponent]
 })
-
 export class AdminStudyListComponent implements OnInit {
 
     public list:Study[];
@@ -24,7 +22,7 @@ export class AdminStudyListComponent implements OnInit {
     }
 
     getStudies() {
-        this.studyService.getStudies().then(list => this.list = list);
+        this.studyService.getStudies().subscribe(studies => this.list = studies);
     }
 
 }
