@@ -1,8 +1,9 @@
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import {enableProdMode, provide} from '@angular/core';
 import {APP_BASE_HREF, FORM_PROVIDERS} from '@angular/common';
-import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {HTTP_PROVIDERS} from '@angular/http';
+import {ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
+import {XHRBackend, RequestOptions, HTTP_PROVIDERS} from '@angular/http';
+// import {HttpInterceptor} from './shared/index';
 
 import {AppComponent} from './app.component';
 
@@ -19,6 +20,11 @@ bootstrap(<any>AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     provide(APP_BASE_HREF, {useValue: '<%= APP_BASE %>'})
+    // provide(Http, {
+    //     useFactory: (xhrBackend:XHRBackend, requestOptions:RequestOptions, router:Router) =>
+    //         new HttpInterceptor(xhrBackend, requestOptions, router),
+    //     deps: [XHRBackend, RequestOptions, Router]
+    // })
 ]);
 
 // In order to start the Service Worker located at "./worker.js"
