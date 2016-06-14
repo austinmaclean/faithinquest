@@ -27,8 +27,7 @@ export class StudyListComponent implements OnInit {
     }
 
     getStudies() {
-        debugger;
-        this.studyService.getStudies().subscribe(list => {debugger; this.list = list});
+        this.studyService.getStudies().subscribe(list => this.list = list);
     }
 
 }

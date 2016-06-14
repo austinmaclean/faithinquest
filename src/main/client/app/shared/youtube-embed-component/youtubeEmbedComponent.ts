@@ -29,12 +29,10 @@ export class YTEmbedComponent implements OnInit {
     private done : boolean = false;
 
     constructor (el: ElementRef) {
-        debugger;
         this.el = el.nativeElement;
     }
 
     initYoutube() {
-        debugger;
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
 

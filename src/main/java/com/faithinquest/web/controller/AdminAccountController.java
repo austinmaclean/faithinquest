@@ -3,6 +3,7 @@ package com.faithinquest.web.controller;
 import com.faithinquest.model.Admin;
 import com.faithinquest.security.AccountHolder;
 import com.faithinquest.service.IAdminService;
+import com.faithinquest.web.exception.UnauthorizedException;
 import com.faithinquest.web.util.DefaultMessages;
 import com.faithinquest.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,12 @@ public class AdminAccountController
 	@ResponseBody
 	public Admin getLoggedInfo( HttpSession session )
 	{
-		return (Admin) session.getAttribute( getSessionKey() );
+		Admin admin = (Admin) session.getAttribute( getSessionKey() );
+		if( admin == null )
+		{
+			throw new UnauthorizedException();
+		}
+		return admin;
 	}
 
 	@RequestMapping( value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )

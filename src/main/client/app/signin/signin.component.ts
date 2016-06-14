@@ -9,7 +9,7 @@ import {FooterComponent} from '../shared/index';
     selector: 'sd-signin',
     templateUrl: 'signin.component.html',
     styleUrls: ['signin.component.css'],
-    directives: [<any>FooterComponent,<any>RouterLink, CORE_DIRECTIVES, FORM_DIRECTIVES]
+    directives: [<any>FooterComponent,<any>RouterLink, CORE_DIRECTIVES, FORM_DIRECTIVES],
     providers: [AccountService]
 })
 export class SignInComponent {

@@ -26,16 +26,12 @@ export class YoutubeEmbedComponent implements OnInit {
     private done : boolean = false;
 
     constructor (el: ElementRef) {
-        debugger;
         this.el = el.nativeElement;
         this.height = this.height ? this.height : 270;
         this.width = this.width ? this.width : 480;
-
     }
 
     initYoutube() {
-        debugger;
-
         var options : YT.PlayerOptions = {width: this.width, height: this.height};
 
         this.player = new Player('player', options);
