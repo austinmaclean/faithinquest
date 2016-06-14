@@ -1,0 +1,260 @@
+.bible-study-page {
+
+  font-family: 'BebasBold', sans-serif;
+  text-transform: uppercase;
+
+  .header {
+
+    .inner-panel {
+
+      .content-row {
+        width: 100%;
+        text-align: center;
+
+        &.top {
+          margin-top: 30px;
+          font-size: 2em;
+          text-transform: uppercase;
+        }
+
+        &.bottom {
+          margin-top: 150px;
+          h1 {
+            &.searsh-title {
+              font-size: 6em !important;
+            }
+          }
+          h4 {
+            &.search-title-desc {
+              color: #eee;
+              font-size: 30px !important;
+              margin-bottom: 30px;
+            }
+          }
+
+          .input-group {
+            width: 70%;
+            margin: 0 auto;
+
+            input[type=text] {
+              font-size: 1.5em;
+            }
+
+          }
+
+        }
+
+      }
+    }
+
+  }
+
+  .main-content {
+    .inner-panel {
+      .top-panel {
+        display: table;
+
+        width: 100%;
+        font-size: 1.5em;
+
+        .top-panel-cell {
+
+          display: table-cell;
+          vertical-align: middle;
+
+          &.left {
+            width: 70%;
+            text-align: left;
+          }
+
+          &.right {
+            width: 30%;
+            text-align: right;
+
+            .form-control {
+              &.top-panel-select {
+                font-size: 1em;
+                background-color: #454545;
+                color: #ffffff;
+                text-transform: capitalize;
+                height: 40px;
+                min-width: 150px;
+
+                .top-panel-select-option {
+                  font-size: 0.8em;
+                  font-family: 'BebasBold', sans-serif !important;
+                  text-transform: capitalize !important;
+                }
+
+              }
+            }
+
+          }
+
+        }
+
+      }
+
+      .items-panel {
+
+        width: 100%;
+
+        .items-list-panel {
+
+          width: calc(100% - 340px);
+          vertical-align: top;
+
+          .item-list-panel-pagination {
+            width: 100%;
+            margin: 20px 0;
+
+            .pagination {
+              .page-item {
+                a {
+                  margin-right: 10px;
+                  color: #454545;
+                  border: 2px solid #454545;
+                  -webkit-border-radius: 4px;
+                  -moz-border-radius: 4px;
+                  border-radius: 4px;
+                }
+
+                &.active {
+                  a {
+                    background: #454545;
+                    color: #ffffff;
+                    border: 2px solid #454545;
+                  }
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+        .items-video-panel {
+          vertical-align: top;
+          padding: 20px 0 0 10px;
+
+          .video-placeholder {
+            width: 320px;
+            min-height: 270px;
+            background: #454545;
+          }
+
+        }
+
+      }
+    }
+  }
+
+}
+
+
+@media only screen and (max-width: 540px) {
+
+  .bible-study-page {
+
+    .main-content {
+      .inner-panel {
+
+        .items-panel {
+
+          width: 100%;
+
+          .items-list-panel {
+
+            width: 100%;
+          }
+
+          .items-video-panel {
+
+            margin: 0 auto 20px;
+
+            .video-placeholder {
+              width: 320px;
+              min-height: 270px;
+              background: #454545;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .bible-study-page {
+
+    .main-content {
+      .inner-panel {
+
+        .items-panel {
+
+          width: 100%;
+
+          .items-list-panel {
+
+            width: 100%;
+          }
+
+          .items-video-panel {
+
+            margin: 0 auto 20px;
+
+            .video-placeholder {
+              width: 320px;
+              min-height: 270px;
+              background: #454545;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (max-width: 960px) {
+
+  .bible-study-page {
+
+    .main-content {
+      .inner-panel {
+
+        .items-panel {
+
+          width: 100%;
+
+          .items-list-panel {
+
+            width: 100%;
+          }
+
+          .items-video-panel {
+
+            margin: 0 auto 20px;
+
+            .video-placeholder {
+              width: 320px;
+              min-height: 270px;
+              background: #454545;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+}

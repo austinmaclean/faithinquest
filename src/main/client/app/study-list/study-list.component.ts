@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 import {StudyComponent} from './study/study.component';
 import {StudyService, Study, FooterComponent} from '../shared/index';

@@ -1,0 +1,27 @@
+<div class="items-list-panel-element flex flex-wrap-row flex-align-horizontal-stretch flex-align-vertical-center">
+
+    <div class="items-list-panel-element-cell preview">
+        <img src="../../assets/img/{{item.img}}">
+    </div>
+    <div class="items-list-panel-element-cell middle">
+        <div class="item-title">
+            {{item.title}}
+        </div>
+        <div class="item-author">
+            by <span class="highlight-blue">{{item.author}}</span>
+        </div>
+        <div class="item-description" [innerHTML]="item.description">
+        </div>
+    </div>
+    <div class="items-list-panel-element-cell share">
+        <span *ngIf="viewMode">
+            <span>edit</span><br/>
+            <span>delete</span>
+        </span>
+        <span *ngIf="!viewMode">
+            <img src="../../../assets/img/share.png"><br>
+            <span>share</span>
+        </span>
+    </div>
+
+</div>
