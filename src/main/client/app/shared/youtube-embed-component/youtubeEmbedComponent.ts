@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, provide } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, provide , OnChanges} from '@angular/core';
 
 provide(Window, { useValue: window });
 
@@ -16,10 +16,12 @@ export class Player extends YT.Player {
 export class YTEmbedComponent implements OnInit {
     @Input() ytheight : number;
     @Input() ytwidth : number;
+    @Input() ytid : number;
     @Input() videoid : string;
 
     private height : number;
     private width : number;
+    private id : number;
 
     private el : ElementRef;
 
@@ -33,6 +35,8 @@ export class YTEmbedComponent implements OnInit {
     }
 
     initYoutube() {
+        this.id = this.ytid ? this.ytid : 0;
+
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
 
@@ -47,7 +51,7 @@ export class YTEmbedComponent implements OnInit {
 
     }
 
-    public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'medium') {
+    public playVideo (id: string, start: number = 0, end: number = 10000000000000, quality: string = 'medium') {
         if (this.ready) {
 
             var params : YT.VideoByIdParams = {
@@ -87,6 +91,11 @@ export class YTEmbedComponent implements OnInit {
 
     ngOnInit() {
         console.log('init player container');
+        //this.initYoutube();
+    }
+
+    ngOnChanges(changes) {
+        console.log(changes);
         this.initYoutube();
     }
 

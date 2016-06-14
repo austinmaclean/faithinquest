@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
-import {Study} from '../shared/model/study';
 
 @Component({
     moduleId: module.id,
@@ -14,10 +13,7 @@ import {Study} from '../shared/model/study';
 
 export class ClientListComponent implements OnInit {
 
-    public list: Study[];
-
-    constructor() {
-    }
+    @Input() editmode: string;
 
     ngOnInit() {
         console.log('study init');

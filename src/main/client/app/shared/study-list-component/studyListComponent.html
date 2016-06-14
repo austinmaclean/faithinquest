@@ -2,13 +2,13 @@
 
     <div class="items-list-panel flex flex-wrap-column">
         <!-- iteration start-->
-        <ti-study *ngFor="let studyElm of list" [item]="studyElm" editMode="{{editMode}}"></ti-study>
+        <ti-study *ngFor="let studyElm of list" [item]="studyElm" [editmode]="editmode"></ti-study>
         <!-- iteration end-->
     </div>
 
     <!-- video placeholder -->
     <div class="items-video-panel">
-        <ti-yt-embed ytwidth="320" ytheight="200" videoid=""></ti-yt-embed>
+        <ti-yt-embed [ytwidth]="320" [ytheight]="200" [ytid]="2" [videoid]=""></ti-yt-embed>
     </div>
 
 </div>

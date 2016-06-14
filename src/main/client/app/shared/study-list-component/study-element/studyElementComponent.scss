@@ -10,6 +10,11 @@
     vertical-align: middle;
     line-height: 1.3em;
 
+    a, a:hover, a:active {
+      color: #000;
+      cursor: pointer;
+    }
+
     .item-title {
       font-size: 2.6rem;
     }
@@ -20,6 +25,11 @@
 
     &.preview {
       width: 240px;
+
+      img {
+        cursor: pointer;
+      }
+
     }
 
     &.share {

@@ -1,0 +1,33 @@
+.bible-study-page {
+
+  font-family: 'BebasBold', sans-serif;
+  text-transform: uppercase;
+
+  .main-content {
+
+    .inner-panel {
+
+    }
+
+    .items-search {
+      width: 100%;
+      padding: 40px 0;
+
+      .input-group {
+        .black {
+
+          &input[text] {
+            border-left: 0;
+          }
+
+          background-color: #454545;
+          color: #ffffff;
+        }
+      }
+
+    }
+
+
+  }
+
+}

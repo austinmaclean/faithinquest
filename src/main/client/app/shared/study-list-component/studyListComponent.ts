@@ -27,7 +27,11 @@ export class StudyListComponent implements OnInit {
     }
 
     getStudies() {
-        this.studyService.getStudies().subscribe(list => this.list = list);
+        this.studyService.getStudies().subscribe(list => {this.list = list;});
+    }
+
+    playVideo(study : Study) {
+        this.videoPlayer.playVideo(study.code, study.start); //7L6zcVQIhBE //M7lc1UVf-VE
     }
 
 }

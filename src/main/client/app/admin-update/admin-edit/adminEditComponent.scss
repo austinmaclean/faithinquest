@@ -1,0 +1,48 @@
+.items-panel {
+  display: table;
+  width: 100%;
+
+  .admin-item-edit-panel {
+
+    display: table-cell;
+    width: 60%;
+    padding-right: 20px;
+    vertical-align: top;
+
+    form {
+      &.admin-item-edit {
+        width: 100%;
+
+        fieldset {
+          width: 100%;
+
+          input {
+            width: 100%;
+            &.time {
+              width: 40px;
+            }
+          }
+
+        }
+
+        .btn-form {
+          background-color: #454545;
+
+          &:hover {
+            color: #cccccc;
+          }
+
+        }
+
+      }
+    }
+
+  }
+
+  .admin-item-video-panel {
+    display: table-cell;
+    width: 40%;
+    vertical-align: top;
+
+  }
+}

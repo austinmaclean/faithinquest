@@ -4,8 +4,7 @@ import {HTTP_PROVIDERS} from '@angular/http';
 
 import {AuthRouterOutletDirective} from './shared/index';
 import {SignInComponent} from './signin/index';
-import {StudyListComponent} from './study-list/index';
-import {AdminStudyUpdateComponent} from './admin-study-update/index';
+import {AdminUpdateComponent} from './admin-update/adminUpdateComponent';
 import {ClientListComponent} from './client-list/clientListComponent';
 
 /**
@@ -20,10 +19,9 @@ import {ClientListComponent} from './client-list/clientListComponent';
     directives: [<any>AuthRouterOutletDirective]
 })
 @RouteConfig([
-    {path: '/', component: <any>StudyListComponent, as: 'Home', useAsDefault:true},
-    {path: '/list', component: <any>ClientListComponent, as: 'List'},
+    {path: '/', component: <any>ClientListComponent, as: 'Home', useAsDefault:true},
     {path: '/login', component: <any>SignInComponent, as: 'Login'},
-    {path: '/admin', component: <any>AdminStudyUpdateComponent, as: 'Admin'},
+    {path: '/admin', component: <any>AdminUpdateComponent, as: 'Admin'},
     {path: '/*path', redirectTo:['Home']}
 ])
 export class AppComponent {
