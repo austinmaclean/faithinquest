@@ -34,7 +34,7 @@ export class AuthRouterOutletDirective extends RouterOutlet {
             return super.activate(instruction);
         } else {
             return this._accountService.getInfo().toPromise().then(res => {
-                return super.activate(instruction)
+                return super.activate(instruction);
             }).catch(err => {
                 this.parentRouter.navigateByUrl('/login');
                 return super.activate(instruction);

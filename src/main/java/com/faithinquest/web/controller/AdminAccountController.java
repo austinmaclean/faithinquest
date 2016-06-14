@@ -36,10 +36,11 @@ public class AdminAccountController
 
 	@RequestMapping( value = "/signin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public Admin signIn( @RequestParam( value = "password", required = true ) String password )
+	public Admin signIn( @RequestParam( value = "password", required = true ) String password, HttpSession session )
 	{
 		Admin admin = new Admin();
 		admin.setId( 1L );
+		session.setAttribute( getSessionKey(), admin );
 		return admin;
 	}
 

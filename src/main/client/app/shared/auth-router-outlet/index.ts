@@ -3,5 +3,5 @@
  */
 
 export * from './auth-router-outlet.directive';
-export * from './http-interceptor.service';
+export * from './http-interceptor';
 

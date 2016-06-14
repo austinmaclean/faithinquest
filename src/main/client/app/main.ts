@@ -2,8 +2,8 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
 import {enableProdMode, provide} from '@angular/core';
 import {APP_BASE_HREF, FORM_PROVIDERS} from '@angular/common';
 import {ROUTER_PROVIDERS, Router} from '@angular/router-deprecated';
-import {XHRBackend, RequestOptions, HTTP_PROVIDERS} from '@angular/http';
-// import {HttpInterceptor} from './shared/index';
+import {Http, XHRBackend, RequestOptions, HTTP_PROVIDERS} from '@angular/http';
+import {HttpInterceptor} from './shared/index';
 
 import {AppComponent} from './app.component';
 
