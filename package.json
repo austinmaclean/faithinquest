@@ -8,6 +8,7 @@
     "gulp": "gulp",
     "build.dev": "gulp build.dev --color",
     "build.dev.watch": "gulp build.dev.watch --color",
+    "build.stage": "gulp build.stage --color",
     "build.prod": "gulp build.prod --color",
     "clean.all.dest": "gulp clean.all.dest --color",
     "reinstall": "npm cache clean && npm install",

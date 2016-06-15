@@ -40,6 +40,20 @@ gulp.task('build.dev.watch', (done:any) =>
         done));
 
 // --------------
+// Build stage.
+gulp.task('build.stage', (done:any) =>
+    runSequence('clean.dev',
+        'tslint',
+        'css-lint',
+        'build.assets.dev',
+        'build.fonts',
+        'build.html_css',
+        'build.js.dev',
+        'build.bundles.dev',
+        'build.bundles.app.dev',
+        done));
+
+// --------------
 // Build prod.
 gulp.task('build.prod', (done:any) =>
     runSequence('clean.prod',
