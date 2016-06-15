@@ -3,10 +3,13 @@ package com.faithinquest.web.controller;
 import com.faithinquest.model.Admin;
 import com.faithinquest.security.AccountHolder;
 import com.faithinquest.service.IAdminService;
+import com.faithinquest.validation.ValidationException;
+import com.faithinquest.validation.ValidationResult;
 import com.faithinquest.web.exception.UnauthorizedException;
 import com.faithinquest.web.util.DefaultMessages;
 import com.faithinquest.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -26,6 +28,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping( Routes.ADMIN_ACCOUNT )
 public class AdminAccountController
 {
+	@Value( "${admin.password}" )
+	private String adminPassword;
+
 	@Autowired
 	private IAdminService adminService;
 
@@ -38,12 +43,17 @@ public class AdminAccountController
 	@ResponseBody
 	public Admin signIn( @RequestParam( value = "password", required = true ) String password, HttpSession session )
 	{
+		if( !password.equals( adminPassword ) )
+		{
+			throw new ValidationException( "Password Incorrect", new ValidationResult( "password", "Password incorrect" ) );
+		}
 		Admin admin = new Admin();
 		admin.setId( 1L );
 		session.setAttribute( getSessionKey(), admin );
 		return admin;
 	}
 
+/*
 	@RequestMapping( value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public Admin login( @RequestParam( value = "login", required = true ) String login,
@@ -54,6 +64,7 @@ public class AdminAccountController
 		session.setAttribute( getSessionKey(), admin );
 		return admin;
 	}
+*/
 
 	@RequestMapping( value = "/info", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -75,6 +86,7 @@ public class AdminAccountController
 		return DefaultMessages.OK_RESPONSE;
 	}
 
+/*
 	@RequestMapping( value = "/change-password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public Admin changePassword( @RequestParam( value = "login", required = true ) String login,
@@ -87,4 +99,5 @@ public class AdminAccountController
 		session.setAttribute( getSessionKey(), admin );
 		return admin;
 	}
+*/
 }
