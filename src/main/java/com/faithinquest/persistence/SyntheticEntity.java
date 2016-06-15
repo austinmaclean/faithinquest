@@ -19,7 +19,7 @@ public class SyntheticEntity extends DynamicEntity<Long>
 	@Id
 	@GenericGenerator(
 		name = "sequence",
-		strategy = "com.mysaddleback.persistence.generator.TableSequenceStyleGenerator",
+		strategy = "com.faithinquest.persistence.generator.TableSequenceStyleGenerator",
 //		strategy = "enhanced-sequence",                                             // org.hibernate.id.enhanced.SequenceStyleGenerator
 		parameters = {
 			@Parameter( name = "prefer_sequence_per_entity", value = "true" ),
