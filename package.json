@@ -96,7 +96,6 @@
     "@angular/router": "2.0.0-rc.1",
     "@angular/router-deprecated": "2.0.0-rc.1",
     "@angular/upgrade": "2.0.0-rc.1",
-    "angular2-jwt": "^0.1.16",
     "bootstrap-sass": "^3.3.6",
     "core-js": "^2.4.0",
     "es6-module-loader": "^0.17.8",

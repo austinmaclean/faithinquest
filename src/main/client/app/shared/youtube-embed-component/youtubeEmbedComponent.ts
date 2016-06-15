@@ -1,10 +1,6 @@
-import { Component, OnInit, Input, ElementRef, provide } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ElementRef, provide } from '@angular/core';
 
 provide(Window, { useValue: window });
-
-export class Player extends YT.Player {
-    public container : YTEmbedComponent;
-}
 
 @Component({
     moduleId: module.id,
@@ -13,7 +9,7 @@ export class Player extends YT.Player {
     providers: [Window]
 })
 
-export class YTEmbedComponent implements OnInit {
+export class YTEmbedComponent implements OnInit, OnChanges {
     @Input() ytheight : number;
     @Input() ytwidth : number;
     @Input() ytid : number;
@@ -25,7 +21,7 @@ export class YTEmbedComponent implements OnInit {
 
     private el : ElementRef;
 
-    private player: Player;
+    private player: YT.Player;
 
     private ready : boolean = false;
     private done : boolean = false;
@@ -42,13 +38,17 @@ export class YTEmbedComponent implements OnInit {
 
         var options : YT.PlayerOptions = {width: this.width, height: this.height};
 
-        this.player = new Player('player', options);
-        this.player.container = this;
-        this.player.addEventListener('onReady', <YT.EventHandler>this.onPlayerReady);
-        this.player.addEventListener('onPlayback', <YT.EventHandler>this.onPlayerPlayback);
-        this.player.addEventListener('onPlayerStateChange', <YT.EventHandler>this.onPlayerStateChange);
-        this.player.addEventListener('onError', <YT.EventHandler>this.onPlayerError);
-
+        setTimeout(() => {
+            this.player = new YT.Player('player', options);
+            this.player.addEventListener('onReady', <YT.EventHandler>((event: YT.EventArgs) =>
+                this.onPlayerReady(event)));
+            this.player.addEventListener('onPlayback', <YT.EventHandler>((event: YT.EventArgs) =>
+                this.onPlayerPlayback(event)));
+            this.player.addEventListener('onPlayerStateChange', <YT.EventHandler>((event: YT.EventArgs) =>
+                this.onPlayerStateChange(event)));
+            this.player.addEventListener('onError', <YT.EventHandler>((event: YT.EventArgs) =>
+                this.onPlayerError(event)));
+        },2000);
     }
 
     public playVideo (id: string, start: number = 0, end: number = 10000000000000, quality: string = 'medium') {
@@ -68,7 +68,7 @@ export class YTEmbedComponent implements OnInit {
 
     onPlayerReady(event: YT.EventArgs) {
         console.log('player ready');
-        event.target['container'].ready = true;
+        this.ready = true;
     }
 
     onPlayerPlayback(event: YT.EventArgs) {
@@ -81,7 +81,7 @@ export class YTEmbedComponent implements OnInit {
     onPlayerStateChange(event: YT.EventArgs) {
         console.log('playing state:: '+event.data);
         if (event.data === YT.PlayerState.ENDED) {
-            event.target['container'].done = true;
+            this.done = true;
         }
     }
 
