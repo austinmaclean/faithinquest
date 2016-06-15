@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, provide , OnChanges} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, provide } from '@angular/core';
 
 provide(Window, { useValue: window });
 

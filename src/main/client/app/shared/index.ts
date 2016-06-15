@@ -3,7 +3,7 @@
  */
 export * from './model/index';
 export * from './service/index';
-export * from './auth-router-outlet/index';
+export * from './auth/index';
 export * from './footer/footer.component';
 export * from './study-list-component/index';
 export * from './youtube-embed-component/youtubeEmbedComponent'

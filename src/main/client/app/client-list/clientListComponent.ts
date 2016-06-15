@@ -19,5 +19,4 @@ export class ClientListComponent implements OnInit {
         console.log('study init');
     }
 
-
 }

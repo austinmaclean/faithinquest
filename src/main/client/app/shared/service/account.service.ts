@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
+import {Headers, Response} from '@angular/http';
 import {Admin} from '../model/admin';
 import {Observable} from 'rxjs/Observable';
+
+import {DataService} from '../auth/data.service';
 
 const formHeaders:Headers = new Headers();
 formHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -11,7 +13,7 @@ var Token:any = null;
 @Injectable()
 export class AccountService {
 
-    constructor(private _http:Http) {
+    constructor(private dataService:DataService) {
     }
 
     public getInfo():Observable<any> {
@@ -20,11 +22,11 @@ export class AccountService {
                 observer.next(Token);
                 observer.complete();
             } else {
-                this._http.get('/api/admin/account/info').subscribe(
+                this.dataService.get('/api/admin/account/info').subscribe(
                     result => {
                         Token = result;
                         observer.next(Token);
-                        observer.complete()
+                        observer.complete();
                     },
                     error => {
                         observer.error(error);
@@ -35,7 +37,7 @@ export class AccountService {
     }
 
     public login(admin:Admin):Observable<Response> {
-        let o = this._http.post('/api/admin/account/signin', 'password=' + admin.password, {headers: formHeaders});
+        let o = this.dataService.post('/api/admin/account/signin', 'password=' + admin.password, {headers: formHeaders});
         o.subscribe(
             response => {
                 Token = response;
