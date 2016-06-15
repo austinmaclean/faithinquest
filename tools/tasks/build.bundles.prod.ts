@@ -31,7 +31,8 @@ function bundleShims() {
   return gulp.src(getShims())
     // Strip comments and sourcemaps
     .pipe(plugins.uglify({
-      mangle: false
+      mangle: false,
+      compress: false
     }))
     .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))
     // Strip the first (global) 'use strict' added by reflect-metadata, but don't strip any others to avoid unintended scope leaks.

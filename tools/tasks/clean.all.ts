@@ -12,6 +12,7 @@ export = clean([
     join(PROJECT_ROOT,DEV_DEST,'fonts'),
     join(PROJECT_ROOT,DEV_DEST,'js'),
 
+    join(PROJECT_ROOT,PROD_DEST,'app'),
     join(PROJECT_ROOT,PROD_DEST,'assets'),
     join(PROJECT_ROOT,PROD_DEST,'css'),
     join(PROJECT_ROOT,PROD_DEST,'fonts'),

@@ -6,6 +6,7 @@ import { clean } from '../utils';
  * Executes the build process, cleaning all files within the `/dist/dev` and `dist/tmp` directory.
  */
 export = clean([
+    join(PROJECT_ROOT,PROD_DEST,'app'),
     join(PROJECT_ROOT,PROD_DEST,'assets'),
     join(PROJECT_ROOT,PROD_DEST,'css'),
     join(PROJECT_ROOT,PROD_DEST,'fonts'),

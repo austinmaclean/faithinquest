@@ -33,10 +33,10 @@ export class DataService {
     }
 
     private getRequestOptionArgs(options?:RequestOptionsArgs):RequestOptionsArgs {
-        if (options === null) {
+        if (options == null) {
             options = new RequestOptions();
         }
-        if (options.headers === null) {
+        if (options.headers == null) {
             options.headers = new Headers();
             options.headers.append('Accept', 'application/json');
             options.headers.append('Content-Type', 'application/json');
