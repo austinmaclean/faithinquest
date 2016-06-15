@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
 
 @Component({
@@ -8,7 +7,7 @@ import {StudyService, FooterComponent, StudyListComponent} from '../shared/index
     templateUrl: 'clientListComponent.html',
     styleUrls: ['clientListComponent.css'],
     providers: [StudyService],
-    directives: [<any>StudyListComponent, <any>AlertComponent, <any>FooterComponent]
+    directives: [<any>StudyListComponent, <any>FooterComponent]
 })
 
 export class ClientListComponent implements OnInit {

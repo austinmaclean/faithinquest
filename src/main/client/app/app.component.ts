@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 import {RouteConfig} from '@angular/router-deprecated';
 import {HTTP_PROVIDERS} from '@angular/http';
 
@@ -26,4 +26,12 @@ import {ClientListComponent} from './client-list/clientListComponent';
     {path: '/*path', redirectTo: ['Home']}
 ])
 export class AppComponent {
+
+    viewContainerRef:ViewContainerRef = null;
+
+    public constructor(viewContainerRef:ViewContainerRef) {
+        // You need this small hack in order to catch application root view container ref
+        this.viewContainerRef = viewContainerRef;
+    }
+
 }
