@@ -6,11 +6,12 @@ export class LoadScript {
 
         if (typeof opts === 'function') {
             cb = opts;
-            opts = {}
+            opts = {};
         }
 
         opts = opts || {};
-        cb = cb || function () {};
+        cb = cb || function () {
+            };
 
         script.type = opts.type || 'text/javascript';
         script.charset = opts.charset || 'utf8';
@@ -18,11 +19,11 @@ export class LoadScript {
         script.src = src;
 
         if (opts.attrs) {
-            this.setAttributes(script, opts.attrs)
+            this.setAttributes(script, opts.attrs);
         }
 
         if (opts.text) {
-            script.text = '' + opts.text
+            script.text = '' + opts.text;
         }
 
         var onend = 'onload' in script ? this.stdOnEnd : this.ieOnEnd;
@@ -35,7 +36,7 @@ export class LoadScript {
             this.stdOnEnd(script, cb);
         }
 
-        head.appendChild(script)
+        head.appendChild(script);
     }
 
     private static setAttributes(script, attrs) {
@@ -47,13 +48,13 @@ export class LoadScript {
     private static stdOnEnd(script, cb) {
         script.onload = function () {
             this.onerror = this.onload = null;
-            cb(null, script)
+            cb(null, script);
         };
         script.onerror = function () {
             // this.onload = null here is necessary
             // because even IE9 works not like others
             this.onerror = this.onload = null;
-            cb(new Error('Failed to load ' + this.src), script)
+            cb(new Error('Failed to load ' + this.src), script);
         }
     }
 

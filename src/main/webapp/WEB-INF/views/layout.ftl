@@ -4,10 +4,13 @@
 <html lang="en">
 <head>
     <base href="/">
+
+    <link rel="shortcut icon" href="<@spring.url "/assets/img/favicon.png"/>" type="image/x-icon"/>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FaithInquest</title>
-    <meta name="description" content="">
+    <meta name="description" content="FaithInquest">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <#if buildEnv?? && buildEnv == 'prod'>
@@ -16,8 +19,6 @@
 <#--end-->
 <#else >
 <#--DEV-->
-    <#--<link rel="stylesheet" href="css/font-awesome.min.css">-->
-    <#--<link rel="stylesheet" href="css/bootstrap.min.css">-->
     <link rel="stylesheet" href="css/main.css">
 <#--end-->
 </#if>
@@ -56,9 +57,6 @@
     function module() {
     }
 </script>
-
-<#--YOUTUBE API-->
-<#--<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>-->
 
 <#if buildEnv?? && buildEnv == 'prod'>
 <#--PROD-->
@@ -132,10 +130,9 @@
 <script src="js/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
 
 <script>
-    System.import('app/main')
-            .catch(function (e) {
-                console.error(e, 'Error');
-            });
+    System.import('app/main').catch(function (e) {
+        console.error(e, 'Error');
+    });
 </script>
 <#--end-->
 </#if>

@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
-import {Study} from "../model/study";
-import {YTEmbedComponent} from "../youtube-embed-component/youtubeEmbedComponent";
+import {Study} from '../model/study';
+import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 
 @Component({
     moduleId: module.id,

@@ -23,8 +23,8 @@ public class PagingParameterAspect
 	public static final String LIMIT_PARAMETER_NAME = "limit";
 	public static final String OFFSET_PARAMETER_NAME = "offset";
 	public static final String SORT_ORDER_PARAMETER_NAME = "order";
-	public static final String SORT_COLUMN_PARAMETER_NAME = "sort";
 	public static final String DESCENDING_SORT_ORDER_VALUE = "desc";
+	public static final String SORT_COLUMN_PARAMETER_NAME = "sort";
 
 	private static final Pattern ONLY_DIGITS = Pattern.compile( "^\\d+$" );
 
