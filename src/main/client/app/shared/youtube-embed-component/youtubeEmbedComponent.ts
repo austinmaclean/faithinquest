@@ -52,7 +52,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         },2000);
     }
 
-    public playVideo (id: string, start: number = 0, end: number = 10000000000000, quality: string = 'medium') {
+    public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'medium') {
         if (this.ready) {
 
             var params : YT.VideoByIdParams = {

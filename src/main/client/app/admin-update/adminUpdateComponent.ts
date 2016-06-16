@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminEditComponent} from './admin-edit/adminEditComponent';
-import {FooterComponent, StudyListComponent} from '../shared/index';
+import {StudyListComponent} from '../shared/study-list-component/studyListComponent';
+import {FooterComponent} from '../shared/footer/footer.component';
 
 @Component({
     moduleId: module.id,

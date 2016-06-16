@@ -5,31 +5,31 @@
         <form role="form" class="admin-item-edit">
 
             <fieldset class="form-group">
-                <label>Title</label>
-                <input class="form-control" name="title" id="title" placeholder="title">
+                <label for="title">Title</label>
+                <input class="form-control" name="title" id="title" placeholder="title" [(ngModel)]="model.title">
             </fieldset>
 
             <fieldset class="form-group">
-                <label>Description</label>
-                <textarea class="form-control" rows="3"></textarea>
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" id="description" rows="3" [(ngModel)]="model.description"></textarea>
             </fieldset>
 
             <fieldset class="form-group">
-                <label>Speaker</label>
-                <input class="form-control" name="speaker" id="speaker" placeholder="speaker">
+                <label for="speaker">Speaker</label>
+                <input class="form-control" name="speaker" id="speaker" placeholder="speaker" [(ngModel)]="model.speaker">
             </fieldset>
 
             <fieldset class="form-group">
-                <label>Video Link</label>
-                <input class="form-control" name="video-link" id="video-link" placeholder="video link">
+                <label for="link">Video Link</label>
+                <input class="form-control" name="link" id="link" placeholder="video link" [(ngModel)]="model.link">
             </fieldset>
 
 
             <fieldset class="form-group">
                 <label>Start Time</label>
                 <div class="form-inline">
-                    <input class="form-control time" name="time-min" id="time-min" placeholder="MM">
-                    <input class="form-control time" name="time-sec" id="time-sec" placeholder="SS">
+                    <input class="form-control time" name="startMin" id="startMin" placeholder="MM" [(ngModel)]="model.startMin">
+                    <input class="form-control time" name="startSec" id="startSec" placeholder="SS" [(ngModel)]="model.startSec">
                 </div>
             </fieldset>
 

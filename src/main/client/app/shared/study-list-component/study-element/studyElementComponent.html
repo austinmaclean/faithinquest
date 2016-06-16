@@ -1,14 +1,14 @@
 <div class="items-list-panel-element flex flex-wrap-row flex-align-horizontal-stretch flex-align-vertical-center">
 
-    <div class="items-list-panel-element-cell preview">
-        <img src="../../assets/img/{{item.img}}" (click)="playVideo()">
+    <div class="items-list-panel-element-cell preview" (click)="playVideo()">
+        <img src="../../assets/img/preview.jpg">
     </div>
     <div class="items-list-panel-element-cell middle">
         <div class="item-title">
             {{item.title}}
         </div>
         <div class="item-author">
-            by <span class="highlight-blue">{{item.author}}</span>
+            by <span class="highlight-blue">{{item.speaker}}</span>
         </div>
         <div class="item-description" [innerHTML]="item.description">
         </div>

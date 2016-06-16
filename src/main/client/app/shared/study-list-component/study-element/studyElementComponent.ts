@@ -14,15 +14,16 @@ export class StudyElementComponent {
     @Input() item:Study;
     @Input() editmode: boolean;
 
-    studyListComponent: StudyListComponent;
+    //component: StudyListComponent;
 
-    constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) component: StudyListComponent) {
-        this.studyListComponent = component;
+    constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component: StudyListComponent) {
+        //this.component = component;
     }
 
     playVideo() {
         console.log(this.item);
-        this.studyListComponent.playVideo(this.item);
+        debugger;
+        this.component.playVideo(this.item);
     }
 
     actionEdit() {

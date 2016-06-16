@@ -1,5 +1,6 @@
 <div class="items-panel flex flex-wrap-row flex-align-vertical-top">
 
+<!--
     <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -21,6 +22,9 @@
             </div>
         </div>
     </div>
+-->
+
+    <modal-component></modal-component>
 
     <div class="items-list-panel flex flex-wrap-column">
         <!-- iteration start-->
@@ -30,7 +34,9 @@
 
     <!-- video placeholder -->
     <div class="items-video-panel">
-        <ti-yt-embed [ytwidth]="320" [ytheight]="200" [ytid]="2" [videoid]=""></ti-yt-embed>
+        <div class="video-placeholder"></div>
     </div>
 
 </div>
+
+<ti-modal-video></ti-modal-video>
