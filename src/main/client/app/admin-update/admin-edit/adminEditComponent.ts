@@ -2,7 +2,7 @@ import {Component, ViewChild, OnInit} from '@angular/core';
 import { NgForm } from '@angular/common';
 import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
-import {Study, StudyModel} from "../../shared/model/study";
+import {Study} from "../../shared/model/study";
 
 @Component({
     moduleId: module.id,
@@ -17,7 +17,7 @@ export class AdminEditComponent implements OnInit {
 
     @ViewChild (<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
 
-    model = new StudyModel(new Date().getTime(), '', '', '', '', 0, 0);
+    model = new Study(new Date().getTime(), '', '', '', '', 0, 0);
 
     constructor(private studyService:StudyService) {
     }

@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Headers, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {Study} from '../model/study';
 import {DataService} from '../auth/data.service';
 import 'rxjs/add/operator/map';
-
-import Response = Express.Response;
 
 @Injectable()
 export class StudyService {
