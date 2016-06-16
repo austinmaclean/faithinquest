@@ -26,7 +26,7 @@ export class StudyService extends RESTClient {
         super(dataService);
     }
 
-    @GET("study")
+    @GET('study')
     @Produces(MediaType.JSON)
     public get(@Query('limit') limit?:number,
                @Query('offset') offset?:number,
@@ -35,19 +35,19 @@ export class StudyService extends RESTClient {
         return null;
     }
 
-    @GET("study/{id}")
+    @GET('study/{id}')
     @Produces(MediaType.JSON)
     public read(@Path("id") id:string):Observable<Study> {
         return null;
     }
 
-    @POST("admin/study")
+    @POST('admin/study')
     @Produces(MediaType.JSON)
     public create(@Body study:Study):Observable<Study> {
         return null;
     }
 
-    @PUT("admin/study")
+    @PUT('admin/study')
     @Produces(MediaType.JSON)
     public update(@Body study:Study):Observable<Study> {
         return null;

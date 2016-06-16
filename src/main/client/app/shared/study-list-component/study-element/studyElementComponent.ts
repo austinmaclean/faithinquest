@@ -20,18 +20,17 @@ export class StudyElementComponent {
         //this.component = component;
     }
 
-    playVideo() {
+    processStudy() {
         console.log(this.item);
-        debugger;
-        this.component.playVideo(this.item);
+        this.component.processStudy(this.item);
     }
 
     actionEdit() {
-        window.alert('edit');
+        this.processStudy();
     }
 
     actionDelete() {
-        window.alert('delete');
+        this.component.deleteStudy(this.item);
     }
 
     actionShare() {

@@ -1,0 +1,13 @@
+.modal {
+  &.modal-video {
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          &.video-embed {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

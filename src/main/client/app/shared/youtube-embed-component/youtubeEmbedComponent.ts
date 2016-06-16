@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges, Input, ElementRef, provide } from '@angular/core';
-import {LoadScript} from "./loadScript";
+import { Component, OnInit, OnChanges, Input, ElementRef, provide, Output, EventEmitter } from '@angular/core';
+import {LoadScript} from './loadScript';
 
 provide(Window, { useValue: window });
 
@@ -16,6 +16,8 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     @Input() ytid : number;
     @Input() videoid : string;
 
+    @Output() onYTReady = new EventEmitter<boolean>();
+
     private height : number;
     private width : number;
     private id : number;
@@ -24,7 +26,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
 
     private player: YT.Player;
 
-    private ready : boolean = false;
+    public ready : boolean = false;
     private done : boolean = false;
 
     constructor (el: ElementRef) {
@@ -49,7 +51,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
                 this.onPlayerStateChange(event)));
             this.player.addEventListener('onError', <YT.EventHandler>((event: YT.EventArgs) =>
                 this.onPlayerError(event)));
-        },2000);
+        },1000);
     }
 
     public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'medium') {
@@ -67,9 +69,25 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         }
     }
 
+    public loadAndPause (id: string) {
+        if (this.ready) {
+
+            var params : YT.VideoByIdParams = {
+                videoId: id,
+                startSeconds: 0,
+                suggestedQuality: 'medium'
+            };
+
+            this.videoid = id;
+            this.player.cueVideoById(params);
+            this.player.pauseVideo();
+        }
+    }
+
     onPlayerReady(event: YT.EventArgs) {
         console.log('player ready');
         this.ready = true;
+        this.onYTReady.emit(true);
     }
 
     onPlayerPlayback(event: YT.EventArgs) {
@@ -106,5 +124,15 @@ export class YTEmbedComponent implements OnInit, OnChanges {
             this.initYoutube();
         }
     }
+
+    public stop() {
+        this.player.stopVideo();
+    }
+
+    public clear() {
+        this.player.clearVideo();
+    }
+
+    public
 
 }

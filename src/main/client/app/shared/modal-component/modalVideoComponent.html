@@ -1,0 +1,15 @@
+<div bsModal #lgModal="bs-modal" class="modal modal-video fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{study ? study.title : ''}}</h4>
+            </div>
+            <div class="modal-body video-embed">
+                <ti-yt-embed [ytwidth]="480" [ytheight]="270" [videoid]="" (onYTReady)="onYTReady($event)"></ti-yt-embed>
+            </div>
+        </div>
+    </div>
+</div>

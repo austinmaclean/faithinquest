@@ -6,22 +6,22 @@
 
             <fieldset class="form-group">
                 <label for="title">Title</label>
-                <input class="form-control" name="title" id="title" placeholder="title" [(ngModel)]="model.title">
+                <input class="form-control" name="title" id="title" placeholder="title" [(ngModel)]="model.title" required>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" name="description" id="description" rows="3" [(ngModel)]="model.description"></textarea>
+                <textarea class="form-control" name="description" id="description" rows="3" [(ngModel)]="model.description" required></textarea>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="speaker">Speaker</label>
-                <input class="form-control" name="speaker" id="speaker" placeholder="speaker" [(ngModel)]="model.speaker">
+                <input class="form-control" name="speaker" id="speaker" placeholder="speaker" [(ngModel)]="model.speaker" required>
             </fieldset>
 
             <fieldset class="form-group">
                 <label for="link">Video Link</label>
-                <input class="form-control" name="link" id="link" placeholder="video link" [(ngModel)]="model.link">
+                <input class="form-control" name="link" id="link" placeholder="video link" [(ngModel)]="model.link" (ngModelChange)="onChange(model.link)" required>
             </fieldset>
 
 
@@ -33,7 +33,8 @@
                 </div>
             </fieldset>
 
-            <button (click)="onSubmit()" class="btn btn-secondary btn-form">Submit</button>
+            <button [disabled]="!playerReady" (click)="onSubmit()" class="btn btn-secondary btn-form">Submit</button>
+            <button [disabled]="!playerReady" (click)="onClear()" class="btn btn-secondary btn-form">Clear</button>
 
         </form>
 
@@ -42,7 +43,7 @@
 
     <div class="admin-item-video-panel">
 
-        <ti-yt-embed [ytwidth]="400" [ytheight]="300" [ytid]="1" [videoid]=""></ti-yt-embed>
+        <ti-yt-embed [ytwidth]="400" [ytheight]="300" [ytid]="1" [videoid]="" (onYTReady)="onYTReady($event)"></ti-yt-embed>
 
     </div>
 

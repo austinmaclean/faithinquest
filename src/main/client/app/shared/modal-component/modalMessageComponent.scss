@@ -1,0 +1,25 @@
+.modal {
+  &.modal-message {
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          &.message-embed {
+            margin: 20px 0;
+            text-align: center;
+            font: 1.2rem;
+          }
+
+          .btn-form {
+            background-color: #454545;
+            font: 1.2rem;
+
+            &:hover {
+              color: #cccccc;
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
