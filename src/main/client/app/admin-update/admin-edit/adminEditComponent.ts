@@ -36,12 +36,12 @@ export class AdminEditComponent implements OnInit {
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {
                 this.onStudiesUpdated.emit('Study "'+this.model.title+'" created');
-                this.model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
+                this.onClear();
             });
         } else {
             this.studyService.update(<Study>this.model).subscribe(res => {
                 this.onStudiesUpdated.emit('Study "'+this.model.title+'" updated');
-                this.model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
+                this.onClear();
             });
         }
     }

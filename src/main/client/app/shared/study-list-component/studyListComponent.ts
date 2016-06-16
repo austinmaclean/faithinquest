@@ -28,7 +28,6 @@ export class StudyListComponent implements OnInit {
 
     @ViewChild(<any>ModalVideoComponent) private component : ModalVideoComponent;
 
-    public selectedStudy:Study;
     public list:Study[];
 
     constructor(private studyService:StudyService) {

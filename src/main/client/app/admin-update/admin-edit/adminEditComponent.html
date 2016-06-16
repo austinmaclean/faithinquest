@@ -2,7 +2,7 @@
 
     <div class="admin-item-edit-panel">
 
-        <form role="form" class="admin-item-edit">
+        <form role="form" class="admin-item-edit" (ngSubmit)="onSubmit()">
 
             <fieldset class="form-group">
                 <label for="title">Title</label>
@@ -33,7 +33,7 @@
                 </div>
             </fieldset>
 
-            <button [disabled]="!playerReady" (click)="onSubmit()" class="btn btn-secondary btn-form">Submit</button>
+            <button [disabled]="!playerReady" type="submit" class="btn btn-secondary btn-form">Submit</button>
             <button [disabled]="!playerReady" (click)="onClear()" class="btn btn-secondary btn-form">Clear</button>
 
         </form>

@@ -116,7 +116,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     ngOnChanges(changes) {
         console.log(changes);
 
-        if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+        if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
             LoadScript.load('https://www.youtube.com/iframe_api', {async: false}, (err, script) => {
                 this.initYoutube();
             });
@@ -132,7 +132,5 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     public clear() {
         this.player.clearVideo();
     }
-
-    public
 
 }

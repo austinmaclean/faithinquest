@@ -15,11 +15,11 @@ import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent
 export class ModalVideoComponent {
 
     @ViewChild('lgModal') lgModal;
-    @ViewChild(<any>YTEmbedComponent) videoPlayer : YTEmbedComponent;
+    @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
 
-    study: Study = null;
-    playerReady : boolean;
-    playing: boolean = false;
+    study:Study = null;
+    playerReady:boolean;
+    playing:boolean = false;
 
     showModal(study:Study) {
 
@@ -29,28 +29,28 @@ export class ModalVideoComponent {
 
             if (this.playerReady && !this.playing) {
                 this.playVideo();
-            } 
+            }
         }
     }
 
-    onYTReady(flag: boolean) {
+    onYTReady(flag:boolean) {
         console.log(flag);
         this.playerReady = true;
         if (this.study && !this.playing) {
-            this.playVideo();    
+            this.playVideo();
         }
-     }
+    }
 
     playVideo() {
         setTimeout(() => {
             var code = this.getParameterByName('v', this.study.link);
-            var startTime = this.study.startMin*60+this.study.startSec;
+            var startTime = this.study.startMin * 60 + this.study.startSec;
             this.videoPlayer.playVideo(code, startTime);
             this.playing = true;
-        }, 500)
+        }, 500);
     }
-    
-    close () {
+
+    close() {
         this.videoPlayer.stop();
         this.videoPlayer.loadAndPause(null);
         this.study = null;

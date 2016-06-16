@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AdminEditComponent} from './admin-edit/adminEditComponent';
 import {StudyListComponent} from '../shared/study-list-component/studyListComponent';
 import {FooterComponent} from '../shared/footer/footer.component';
-import {Study} from "../shared/model/study";
-import {ModalMessageComponent} from "../shared/modal-component/modalMessageComponent";
-import {DialogObject, ModalDialogComponent} from "../shared/modal-component/modalDialogComponent";
+import {Study} from '../shared/model/study';
+import {ModalMessageComponent} from '../shared/modal-component/modalMessageComponent';
+import {DialogObject, ModalDialogComponent} from '../shared/modal-component/modalDialogComponent';
 
 
 @Component({
