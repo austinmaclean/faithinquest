@@ -30,7 +30,7 @@ export class AdminEditComponent implements OnInit {
         //this.videoPlayer.playVideo('7L6zcVQIhBE', 30); //7L6zcVQIhBE //M7lc1UVf-VE
         console.log(JSON.stringify(this.model));
         this.studyService.create(<Study>this.model).subscribe(res => {
-            model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
+            this.model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
         });
     }
 }

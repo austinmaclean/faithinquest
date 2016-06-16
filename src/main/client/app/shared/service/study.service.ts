@@ -1,34 +1,62 @@
 import {Injectable} from '@angular/core';
-import {Response} from '@angular/http';
+import {Response, Request} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Study} from '../model/study';
-import {Paging, Order} from '../dto/paging';
 import {DataService} from '../auth/data.service';
+import {RESTClient, GET, PUT, POST, DELETE, BaseUrl, Headers, Produces, MediaType, DefaultHeaders, Path, Body, Query} from './rest-client';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class StudyService {
+@BaseUrl('/api/')
+@DefaultHeaders({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+})
+export class StudyService extends RESTClient {
 
-    constructor(private dataService:DataService) {
+    protected requestInterceptor(req:Request) {
+        //
     }
 
-    public get(paging?:Paging):Observable<Study[]> {
-        return this.dataService.get('/api/study', paging)
-            .map(res => res.json().result);
-    };
-
-    public create(study:Study):Observable<Study> {
-        return this.dataService.post('/api/admin/study', JSON.stringify(study))
-            .map(res => res.json().result);
+    protected responseInterceptor(res:Observable<any>):Observable<any> {
+        return res;
     }
 
-    public update(study:Study):Observable<Study> {
-        return this.dataService.put('/api/admin/study', JSON.stringify(study))
-            .map(res => res.json().result);
+    public constructor(protected dataService:DataService) {
+        super(dataService);
     }
 
-    public remove(studyId:number):Observable<Response> {
-        return this.dataService.delete(`/api/admin/study/${studyId}`);
+    @GET("study")
+    @Produces(MediaType.JSON)
+    public get(@Query('limit') limit?:number,
+               @Query('offset') offset?:number,
+               @Query('order') order?:string,
+               @Query('sort') sort?:string):Observable<Study[]> {
+        return null;
+    }
+
+    @GET("study/{id}")
+    @Produces(MediaType.JSON)
+    public read(@Path("id") id:string):Observable<Study> {
+        return null;
+    }
+
+    @POST("admin/study")
+    @Produces(MediaType.JSON)
+    public create(@Body study:Study):Observable<Study> {
+        return null;
+    }
+
+    @PUT("admin/study")
+    @Produces(MediaType.JSON)
+    public update(@Body study:Study):Observable<Study> {
+        return null;
+    }
+
+    @DELETE("admin/study/{id}")
+    @Produces(MediaType.JSON)
+    public remove(@Path("id") id:string):Observable<Response> {
+        return null;
     }
 
 }

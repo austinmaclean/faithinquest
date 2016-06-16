@@ -3,3 +3,4 @@
  */
 export * from './account.service';
 export * from './study.service';
+export * from './rest-client';
