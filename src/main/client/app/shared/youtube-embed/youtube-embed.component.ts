@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ElementRef, provide } from '@angular/core';
+import {LoadScript} from "../youtube-embed-component/loadScript";
 
 provide(Window, { useValue: window });
 
@@ -83,7 +84,13 @@ export class YoutubeEmbedComponent implements OnInit {
 
     ngOnInit() {
         console.log('init player container');
-        this.initYoutube();
+        if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+            LoadScript.load('https://www.youtube.com/iframe_api', {async: false}, (err, script) => {
+                this.initYoutube();
+            });
+        } else {
+            this.initYoutube();
+        }
     }
 
 }

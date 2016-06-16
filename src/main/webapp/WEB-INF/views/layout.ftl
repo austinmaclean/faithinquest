@@ -58,7 +58,7 @@
 </script>
 
 <#--YOUTUBE API-->
-<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
+<#--<script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>-->
 
 <#if buildEnv?? && buildEnv == 'prod'>
 <#--PROD-->

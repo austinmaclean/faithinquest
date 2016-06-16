@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef, provide } from '@angular/core';
+import {LoadScript} from "./loadScript";
 
 provide(Window, { useValue: window });
 
@@ -96,7 +97,14 @@ export class YTEmbedComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes) {
         console.log(changes);
-        this.initYoutube();
+
+        if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+            LoadScript.load('https://www.youtube.com/iframe_api', {async: false}, (err, script) => {
+                this.initYoutube();
+            });
+        } else {
+            this.initYoutube();
+        }
     }
 
 }
