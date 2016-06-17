@@ -33,6 +33,17 @@ export class StudyService extends BaseService {
         return null;
     }
 
+    @GET('study/find')
+    @Produces(MediaType.JSON)
+    public find(@Query('pattern') pattern?:string,
+                @Query('speaker') speaker?:string,
+                @Query('limit') limit?:number,
+                @Query('offset') offset?:number,
+                @Query('order') order?:string,
+                @Query('sort') sort?:string):Observable<Study[]> {
+        return null;
+    }
+
     @GET('study/{id}')
     @Produces(MediaType.JSON)
     public read(@Path("id") id:string):Observable<Study> {

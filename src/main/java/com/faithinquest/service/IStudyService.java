@@ -1,7 +1,11 @@
 package com.faithinquest.service;
 
 import com.faithinquest.model.Study;
+import com.faithinquest.model.dto.StudySearch;
 import com.faithinquest.persistence.IPersistenceService;
+import com.faithinquest.persistence.Paging;
+
+import java.util.List;
 
 /**
  * User: gleb
@@ -10,5 +14,6 @@ import com.faithinquest.persistence.IPersistenceService;
  */
 public interface IStudyService extends IPersistenceService<Study, Long>
 {
+	List<Study> findStudy( StudySearch search, Paging paging );
 }
 

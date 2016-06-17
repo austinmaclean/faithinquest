@@ -9,17 +9,14 @@ import {StudyListComponent} from '../studyListComponent';
     styleUrls: ['studyElementComponent.css']
 })
 
-export class StudyElementComponent implements OnInit{
+export class StudyElementComponent implements OnInit, OnChanges {
 
     @Input() item:Study;
     @Input() editmode: boolean;
 
     thumbUrl : string = '../../assets/img/preview.jpg';
 
-    //component: StudyListComponent;
-
     constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component: StudyListComponent) {
-        //this.component = component;
     }
 
     ngOnInit():any {

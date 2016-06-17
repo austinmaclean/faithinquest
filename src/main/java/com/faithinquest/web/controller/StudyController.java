@@ -1,6 +1,7 @@
 package com.faithinquest.web.controller;
 
 import com.faithinquest.model.Study;
+import com.faithinquest.model.dto.StudySearch;
 import com.faithinquest.persistence.Paging;
 import com.faithinquest.service.IStudyService;
 import com.faithinquest.web.util.DefaultMessages;
@@ -26,8 +27,8 @@ public class StudyController
 	@Autowired
 	private IStudyService studyService;
 
-	@RequestMapping( value = { Routes.ADMIN_STUDY + "/", Routes.ADMIN_STUDY + "" },
-		method = RequestMethod.POST,  produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = { Routes.ADMIN_STUDY + "/", Routes.ADMIN_STUDY + "" }, method = RequestMethod.POST,
+		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public Study create( @RequestBody Study study )
 	{
@@ -36,8 +37,8 @@ public class StudyController
 		return study;
 	}
 
-	@RequestMapping( value = { Routes.ADMIN_STUDY + "/", Routes.ADMIN_STUDY + "" },
-		method = RequestMethod.PUT,  produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = { Routes.ADMIN_STUDY + "/", Routes.ADMIN_STUDY + "" }, method = RequestMethod.PUT,
+		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public Study update( @RequestBody Study study )
 	{
@@ -60,5 +61,12 @@ public class StudyController
 		paging.setSortColumn( "created" );
 		paging.setSortDesc( true );
 		return new GridResult<>( studyService.readAll( paging ), paging.getTotal() );
+	}
+
+	@RequestMapping( value = { Routes.STUDY + "/find" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public GridResult<Study> findCurriculumDistribution( StudySearch search, Paging paging )
+	{
+		return new GridResult<>( studyService.findStudy( search, paging ) );
 	}
 }

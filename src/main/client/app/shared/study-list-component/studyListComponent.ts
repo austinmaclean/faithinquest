@@ -44,8 +44,7 @@ export class StudyListComponent implements OnInit {
     }
 
     processStudy(study:Study) {
-
-        var studyCopy : Study = Object.assign({}, study);;
+        var studyCopy : Study = Object.assign({}, study);
 
         if (this.editmode) {
             this.onStudyEdit.emit(studyCopy);
