@@ -56,8 +56,12 @@ public class StudyController
 
 	@RequestMapping( value = { Routes.STUDY + "/", Routes.STUDY + "" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public GridResult<Study> readAll( final Paging paging )
+	public GridResult<Study> readAll( Paging paging )
 	{
+		if( paging == null )
+		{
+			paging = new Paging();
+		}
 		paging.setSortColumn( "created" );
 		paging.setSortDesc( true );
 		return new GridResult<>( studyService.readAll( paging ), paging.getTotal() );
@@ -65,8 +69,14 @@ public class StudyController
 
 	@RequestMapping( value = { Routes.STUDY + "/find" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public GridResult<Study> findCurriculumDistribution( StudySearch search, Paging paging )
+	public GridResult<Study> findStudy( StudySearch search, Paging paging )
 	{
+		if( paging == null )
+		{
+			paging = new Paging();
+		}
+		paging.setSortColumn( "created" );
+		paging.setSortDesc( true );
 		return new GridResult<>( studyService.findStudy( search, paging ) );
 	}
 }
