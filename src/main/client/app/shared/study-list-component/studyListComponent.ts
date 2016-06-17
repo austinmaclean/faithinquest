@@ -48,7 +48,8 @@ export class StudyListComponent implements OnInit {
 
         if (this.editmode) {
             this.onStudyEdit.emit(studyCopy);
-            window.scrollTo(0, 0);
+            var time = document.body.scrollTop*0.7;
+            this.scrollTo(document.body, 0, time);
         } else {
             this.component.showModal(studyCopy);
         }
@@ -59,6 +60,18 @@ export class StudyListComponent implements OnInit {
         if (this.editmode) {
             this.onStudyDelete.emit(studyCopy);
         }
+    }
+
+    scrollTo(element, to, duration) {
+        if (duration <= 0) return;
+        var difference = to - element.scrollTop;
+        var perTick = difference / duration * 10;
+
+        setTimeout(() => {
+            element.scrollTop = element.scrollTop + perTick;
+            if (element.scrollTop === to) return;
+            this.scrollTo(element, to, duration - 10);
+        }, 10);
     }
 
 }
