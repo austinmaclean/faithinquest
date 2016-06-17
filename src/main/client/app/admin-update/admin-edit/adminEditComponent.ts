@@ -1,5 +1,5 @@
 import {Component, ViewChild, OnInit, Output, EventEmitter} from '@angular/core';
-import { NgForm, FORM_DIRECTIVES } from '@angular/common';
+import { FORM_DIRECTIVES } from '@angular/common';
 import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
 import {Study} from '../../shared/model/study';
@@ -33,23 +33,15 @@ export class AdminEditComponent implements OnInit {
 
     validateYouTubeLink() {
         var linkElm : HTMLInputElement = <HTMLInputElement>document.getElementById('link');
-        if (linkElm.validity.valueMissing) {
-            linkElm.setCustomValidity('Please fill out this field');
-            return;
-        } else {
-            linkElm.setCustomValidity('');
-        }
         if (!this.matchYoutubeUrl(linkElm.value)) {
             linkElm.setCustomValidity('Please enter valid youtube link');
             return;
         } else {
             linkElm.setCustomValidity('');
         }
-
     }
 
     onSubmit() {
-
         console.log(JSON.stringify(this.model));
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {
