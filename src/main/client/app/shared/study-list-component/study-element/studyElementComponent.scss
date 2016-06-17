@@ -49,11 +49,13 @@
     }
 
     &.share {
+      margin-top: 5px;
       width: 60px;
       text-align: center;
     }
 
     &.middle {
+      margin-top: 5px;
       width: calc(100% - 300px);
     }
 
