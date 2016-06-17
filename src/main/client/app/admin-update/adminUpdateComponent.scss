@@ -6,6 +6,12 @@
   .main-content {
 
     .inner-panel {
+      &.head-title {
+        margin-top: 30px;
+        font-size: 2em;
+        text-transform: uppercase;
+        text-align: center;
+      }
 
     }
 
