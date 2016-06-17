@@ -48,6 +48,7 @@ export class StudyListComponent implements OnInit {
 
         if (this.editmode) {
             this.onStudyEdit.emit(studyCopy);
+            window.scrollTo(0, 0);
         } else {
             this.component.showModal(studyCopy);
         }
