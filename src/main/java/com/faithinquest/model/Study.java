@@ -44,6 +44,7 @@ public class Study extends SyntheticEntity
 		this.title = title;
 	}
 
+	@Column(length = 5120)
 	public String getDescription()
 	{
 		return description;

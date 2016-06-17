@@ -11,7 +11,7 @@
     create table study (
         id int8 not null,
         created timestamp not null,
-        description varchar(255),
+        description varchar(5120),
         link varchar(255) not null,
         speaker varchar(255),
         start_min int4 not null,
