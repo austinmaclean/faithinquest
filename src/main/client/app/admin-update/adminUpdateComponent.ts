@@ -24,18 +24,30 @@ export class AdminUpdateComponent implements OnInit {
 
     search:any = {
         pattern: null,
-        patternOld: null
+        patternOld: null,
+        speaker: null,
+        speakerOld: null
     };
 
     ngOnInit() {
         console.log('init');
     }
 
-    onSearch() {
-        if (this.search.pattern !== this.search.patternOld) {
-            this.search.patternOld = this.search.pattern;
-            this.listComponent.getStudies(this.search.pattern);
+    onSearch(speaker?:string) {
+        if(speaker) {
+            this.search.speaker = speaker;
+            this.search.pattern = null;
         }
+        if (this.search.pattern !== this.search.patternOld || this.search.speaker !== this.search.speakerOld) {
+            this.search.patternOld = this.search.pattern;
+            this.search.speakerOld = this.search.speaker;
+            this.listComponent.getStudies(this.search.pattern, this.search.speaker);
+        }
+    }
+
+    onSearchClear(fieldName:string) {
+        this.search[fieldName] = null;
+        this.onSearch();
     }
 
     public editStudy (study: Study) {

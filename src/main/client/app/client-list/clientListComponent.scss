@@ -97,6 +97,11 @@
 
         }
 
+        .search-pattern:hover {
+          cursor: pointer;
+          text-decoration: line-through;
+        }
+
       }
 
       .items-panel {

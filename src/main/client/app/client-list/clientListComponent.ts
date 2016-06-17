@@ -18,18 +18,30 @@ export class ClientListComponent implements OnInit {
 
     search:any = {
         pattern: null,
-        patternOld: null
+        patternOld: null,
+        speaker: null,
+        speakerOld: null
     };
 
     ngOnInit() {
         console.log('study init');
     }
 
-    onSearch() {
-        if (this.search.pattern !== this.search.patternOld) {
-            this.search.patternOld = this.search.pattern;
-            this.studyListComponent.getStudies(this.search.pattern);
+    onSearch(speaker?:string) {
+        if(speaker) {
+            this.search.speaker = speaker;
+            this.search.pattern = null;
         }
+        if (this.search.pattern !== this.search.patternOld || this.search.speaker !== this.search.speakerOld) {
+            this.search.patternOld = this.search.pattern;
+            this.search.speakerOld = this.search.speaker;
+            this.studyListComponent.getStudies(this.search.pattern, this.search.speaker);
+        }
+    }
+
+    onSearchClear(fieldName:string) {
+        this.search[fieldName] = null;
+        this.onSearch();
     }
 
 }

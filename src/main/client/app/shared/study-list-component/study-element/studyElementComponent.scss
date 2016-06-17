@@ -23,6 +23,14 @@
       font-size: 1.3rem;
     }
 
+    .search-pattern-select {
+      cursor: pointer;
+    }
+
+    .search-pattern-select:hover {
+      opacity: 0.6;
+    }
+
     &.preview {
       width: 240px;
 

@@ -19,7 +19,29 @@
                 </form>
             </div>
 
-            <ti-study-list [editmode]="true" (onStudyEdit)="editStudy($event)" (onStudyDelete)="deleteStudy($event)"></ti-study-list>
+            <div class="top-panel">
+                <div class="top-panel-cell left">
+                    <span *ngIf="search.patternOld || search.speakerOld">displaying results for </span>
+                    <span *ngIf="search.patternOld">"<span class="highlight-blue search-pattern" [innerHTML]="search.patternOld" (click)="onSearchClear('pattern')"></span>"</span>
+                    <span *ngIf="search.patternOld && search.speakerOld"> and </span>
+                    <span *ngIf="search.speakerOld">"<span class="highlight-blue search-pattern" [innerHTML]="search.speakerOld" (click)="onSearchClear('speaker')"></span>"</span>
+                </div>
+                <div class="top-panel-cell right form-inline">
+                    <div class="form-group">
+                        <label for="sel1">sort by: </label>
+                        <select class="form-control top-panel-select" id="sel1">
+                            <optgroup class="top-panel-select-option">
+                                <option>most recent</option>
+                                <option>most recent1</option>
+                                <option>most recent2</option>
+                                <option>most recent3</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <ti-study-list [editmode]="true" (onStudyEdit)="editStudy($event)" (onStudyDelete)="deleteStudy($event)" (onSearchData)="onSearch($event)"></ti-study-list>
 
         </div>
 

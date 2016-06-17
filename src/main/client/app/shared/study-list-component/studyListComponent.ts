@@ -25,6 +25,7 @@ export class StudyListComponent implements OnInit {
 
     @Output() onStudyEdit = new EventEmitter<Study>();
     @Output() onStudyDelete = new EventEmitter<Study>();
+    @Output() onSearchData = new EventEmitter<string>();
 
     @ViewChild(<any>ModalVideoComponent) private component : ModalVideoComponent;
 
@@ -35,6 +36,12 @@ export class StudyListComponent implements OnInit {
 
     ngOnInit() {
         this.getStudies();
+    }
+
+    public onSelectSpeaker(speaker:string) {
+        if (this.onSearchData) {
+            this.onSearchData.emit(speaker);
+        }
     }
 
     public getStudies(pattern?:string, speaker?:string) {
