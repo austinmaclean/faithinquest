@@ -19,9 +19,9 @@ public class StudySearch
 		if( pattern != null )
 		{
 			criteria.add( Restrictions.or(
-				Restrictions.ilike( "title", pattern, MatchMode.START ),
-				Restrictions.ilike( "description", pattern, MatchMode.START ),
-				Restrictions.ilike( "speaker", pattern, MatchMode.START ) ) );
+				Restrictions.ilike( "title", pattern, MatchMode.ANYWHERE ),
+				Restrictions.ilike( "description", pattern, MatchMode.ANYWHERE ),
+				Restrictions.ilike( "speaker", pattern, MatchMode.ANYWHERE ) ) );
 		}
 		if( speaker != null )
 		{
