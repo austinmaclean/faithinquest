@@ -69,12 +69,12 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         }
     }
 
-    public loadAndPause (id: string) {
+    public loadAndPause (id: string, start: number = 0) {
         if (this.ready) {
 
             var params : YT.VideoByIdParams = {
                 videoId: id,
-                startSeconds: 0,
+                startSeconds: start,
                 suggestedQuality: 'medium'
             };
 

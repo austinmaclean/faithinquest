@@ -1,4 +1,4 @@
-import {Component, Input, Host, forwardRef, Inject} from '@angular/core';
+import {Component, Input, Host, forwardRef, Inject, OnInit, OnChanges} from '@angular/core';
 import {Study} from '../../model/study';
 import {StudyListComponent} from '../studyListComponent';
 
@@ -9,15 +9,30 @@ import {StudyListComponent} from '../studyListComponent';
     styleUrls: ['studyElementComponent.css']
 })
 
-export class StudyElementComponent {
+export class StudyElementComponent implements OnInit{
 
     @Input() item:Study;
     @Input() editmode: boolean;
+
+    thumbUrl : string = '../../assets/img/preview.jpg';
 
     //component: StudyListComponent;
 
     constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component: StudyListComponent) {
         //this.component = component;
+    }
+
+    ngOnInit():any {
+        console.log('init');
+    }
+
+    ngOnChanges(changes) {
+        if (this.item) {
+            var code = this.getParameterByName('v', this.item.link);
+            if (code) {
+                this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/0.jpg'
+            }
+        }
     }
 
     processStudy() {
@@ -36,4 +51,14 @@ export class StudyElementComponent {
     actionShare() {
         window.alert('share');
     }
+
+    getParameterByName(name, url) {
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
 }

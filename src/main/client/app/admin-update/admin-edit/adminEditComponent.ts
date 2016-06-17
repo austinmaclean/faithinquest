@@ -31,7 +31,25 @@ export class AdminEditComponent implements OnInit {
         this.createMode = true;
     }
 
+    validateYouTubeLink() {
+        var linkElm : HTMLInputElement = <HTMLInputElement>document.getElementById('link');
+        if (linkElm.validity.valueMissing) {
+            linkElm.setCustomValidity('Please fill out this field');
+            return;
+        } else {
+            linkElm.setCustomValidity('');
+        }
+        if (!this.matchYoutubeUrl(linkElm.value)) {
+            linkElm.setCustomValidity('Please enter valid youtube link');
+            return;
+        } else {
+            linkElm.setCustomValidity('');
+        }
+
+    }
+
     onSubmit() {
+
         console.log(JSON.stringify(this.model));
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {
@@ -49,6 +67,7 @@ export class AdminEditComponent implements OnInit {
     public deleteStudy (study: Study) {
         this.studyService.remove(study.id.toString()).subscribe(res => {
             this.onStudiesUpdated.emit('Study was deleted');
+            this.onClear();
         });
 
     }
@@ -71,9 +90,11 @@ export class AdminEditComponent implements OnInit {
     }
 
     onChange(newVal) {
+        this.validateYouTubeLink();
         var code = this.getParameterByName('v', newVal);
         if (code) {
-            this.videoPlayer.loadAndPause(code);
+            var startTime = this.model.startMin*60+this.model.startSec;
+            this.videoPlayer.loadAndPause(code, startTime);
         }
     }
 
@@ -90,6 +111,14 @@ export class AdminEditComponent implements OnInit {
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    matchYoutubeUrl(url) {
+        var p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+        if(url.match(p)){
+            return url.match(p)[1];
+        }
+        return false;
     }
 
 }

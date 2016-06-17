@@ -2,9 +2,13 @@ import {Component, ViewChild, Output, EventEmitter} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
-export class DialogObject {
+export enum ModalAction { OK, CANCEL }
+
+export interface ModalResult {
+    action: ModalAction;
     message: string;
-    data: any;
+    type?: string;
+    data?: any;
 }
 
 @Component({
@@ -19,11 +23,12 @@ export class DialogObject {
 export class ModalDialogComponent {
 
     @ViewChild('smModal') smModal;
-    @Output() onOk = new EventEmitter<DialogObject>();
 
-    data : DialogObject;
+    @Output('closed') closeEmitter: EventEmitter<ModalResult> = new EventEmitter<ModalResult>();
+    
+    data : ModalResult;
 
-    showModal(data:DialogObject) {
+    showModal(data:ModalResult) {
 
         this.data = data;
         if (this.smModal) {
@@ -32,12 +37,15 @@ export class ModalDialogComponent {
     }
 
     close () {
+        this.data.action = ModalAction.CANCEL;
+        this.closeEmitter.emit(this.data);
         this.data = null;
         this.smModal.hide();
     }
 
     process () {
-        this.onOk.emit(this.data);
+        this.data.action = ModalAction.OK;
+        this.closeEmitter.emit(this.data);
         this.data = null;
         this.smModal.hide();
     }

@@ -4,7 +4,7 @@ import {StudyListComponent} from '../shared/study-list-component/studyListCompon
 import {FooterComponent} from '../shared/footer/footer.component';
 import {Study} from '../shared/model/study';
 import {ModalMessageComponent} from '../shared/modal-component/modalMessageComponent';
-import {DialogObject, ModalDialogComponent} from '../shared/modal-component/modalDialogComponent';
+import {ModalResult, ModalAction, ModalDialogComponent} from '../shared/modal-component/modalDialogComponent';
 
 
 @Component({
@@ -36,13 +36,17 @@ export class AdminUpdateComponent implements OnInit {
     }
     
     public deleteStudy(study:Study) {
-        var data: DialogObject = new DialogObject();
-        data.message = 'Delete study "'+study.title+'"?';
-        data.data = study;
-        this.dialogComponent.showModal(data);
+        var modalData = <ModalResult>{};
+        modalData.type = 'deleteStudy';
+        modalData.message = 'Delete study "'+study.title+'"?';
+        modalData.data = study;
+        this.dialogComponent.showModal(modalData);
+    }
+
+    public onProcessModal(res:ModalResult) {
+        if (res.action == ModalAction.OK && res.type == 'deleteStudy') {
+            this.editComponent.deleteStudy(<Study>res.data);
+        }
     }
     
-    public onDeleteOk(data:DialogObject) {
-        this.editComponent.deleteStudy(<Study>data.data);
-    }
 }
