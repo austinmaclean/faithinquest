@@ -85,7 +85,7 @@ export class AccountService extends BaseService {
             this.signOut().subscribe(null, null, () => {
                 Token = null;
                 observer.next(true);
-                Observable.complete();
+                observer.complete();
             });
         });
     }
