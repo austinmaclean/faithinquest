@@ -5,7 +5,6 @@ import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {HTTP_PROVIDERS} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {DataService} from './shared/index';
 
 if ('<%= ENV %>' === 'prod') {
     enableProdMode();
@@ -19,8 +18,7 @@ bootstrap(<any>AppComponent, [
     FORM_PROVIDERS,
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
-    provide(APP_BASE_HREF, {useValue: '<%= APP_BASE %>'}),
-    provide(DataService, {useClass: DataService})
+    provide(APP_BASE_HREF, {useValue: '<%= APP_BASE %>'})
 ]);
 
 // In order to start the Service Worker located at "./worker.js"

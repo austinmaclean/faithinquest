@@ -1,28 +1,54 @@
 import {Injectable} from '@angular/core';
-import {Headers, Response} from '@angular/http';
 import {Admin} from '../model/admin';
+import {Http, Response} from '@angular/http';
+import {Router} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
+import {BaseService} from './base.service';
+import {
+    GET, PUT, POST,
+    DELETE, BaseUrl, Headers, Header,
+    Produces, MediaType, DefaultHeaders,
+    Path, Body, Query
+} from './rest-client';
 
-import {DataService} from '../auth/data.service';
-
-const formHeaders:Headers = new Headers();
-formHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
-
-var Token:any = null;
+var Token:Admin = null;
 
 @Injectable()
-export class AccountService {
+@BaseUrl('/api/admin/account/')
+@DefaultHeaders({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+})
+export class AccountService extends BaseService {
 
-    constructor(private dataService:DataService) {
+    constructor(protected router:Router, protected http:Http) {
+        super(router, http);
     }
 
-    public getInfo():Observable<any> {
-        return new Observable(observer => {
+    @GET('info')
+    @Produces(MediaType.JSON)
+    private info():Observable<Admin> {
+        return null;
+    }
+
+    @POST('sign-in')
+    @Produces(MediaType.JSON)
+    private signIn(@Body admin:Admin):Observable<Admin> {
+        return null;
+    }
+
+    @GET('sign-out')
+    private signOut():Observable<any> {
+        return null;
+    }
+
+    public getInfo():Observable<Admin> {
+        return Observable.create(observer => {
             if (Token) {
                 observer.next(Token);
                 observer.complete();
             } else {
-                this.dataService.get('/api/admin/account/info').subscribe(
+                this.info().subscribe(
                     result => {
                         Token = result;
                         observer.next(Token);
@@ -36,21 +62,31 @@ export class AccountService {
         });
     }
 
-    public login(admin:Admin):Observable<Response> {
-        let o = this.dataService.post('/api/admin/account/signin', 'password=' + admin.password, {headers: formHeaders});
-        o.subscribe(
-            response => {
-                Token = response;
-            },
-            error => {
-                console.log(error.text());
-            }
-        );
-        return o;
+    public login(admin:Admin):Observable<Admin> {
+        return Observable.create(observer => {
+            this.signIn(admin).subscribe(
+                response => {
+                    Token = response;
+                    observer.next(Token);
+                    observer.complete();
+                },
+                error => {
+                    console.log(error.json().message);
+
+                    observer.error(error);
+                    observer.complete();
+                }
+            );
+        });
     }
 
-    public logout() {
-        Token = null;
+    public logout():Observable<any> {
+        return Observable.create(observer => {
+            this.signOut().subscribe(null, null, () => {
+                Token = null;
+                Observable.complete();
+            });
+        });
     }
 
 }

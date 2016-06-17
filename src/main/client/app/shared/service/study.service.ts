@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Response, Request} from '@angular/http';
+import {Http, Response, Request} from '@angular/http';
+import {Router} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
 import {Study} from '../model/study';
-import {DataService} from '../auth/data.service';
-import {RESTClient, GET, PUT, POST, DELETE, BaseUrl, Headers, Produces, MediaType, DefaultHeaders, Path, Body, Query} from './rest-client';
+import {BaseService} from './base.service';
+import {
+    GET, PUT, POST,
+    DELETE, BaseUrl, Headers,
+    Produces, MediaType, DefaultHeaders,
+    Path, Body, Query
+} from './rest-client';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -12,18 +18,10 @@ import 'rxjs/add/operator/map';
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 })
-export class StudyService extends RESTClient {
+export class StudyService extends BaseService {
 
-    protected requestInterceptor(req:Request) {
-        //
-    }
-
-    protected responseInterceptor(res:Observable<any>):Observable<any> {
-        return res;
-    }
-
-    public constructor(protected dataService:DataService) {
-        super(dataService);
+    constructor(protected router:Router, protected http:Http) {
+        super(router, http);
     }
 
     @GET('study')

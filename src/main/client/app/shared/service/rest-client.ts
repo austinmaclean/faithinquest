@@ -1,13 +1,13 @@
 import {
+    Http,
     Headers as AngularHeaders,
     Request,
     RequestOptions,
     RequestMethod as RequestMethods,
     Response,
     URLSearchParams
-} from "@angular/http";
-import {DataService} from '../auth/data.service';
-import {Observable} from "rxjs/Observable";
+} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 /*
@@ -39,12 +39,9 @@ import 'rxjs/add/operator/map';
  * @class RESTClient
  * @constructor
  */
-export class RESTClient {
+export abstract class RESTClient {
 
-    protected dataService:DataService;
-
-    public constructor(dataService:DataService) {
-        this.dataService = dataService;
+    public constructor(protected http:Http) {
     }
 
     protected getBaseUrl():string {
@@ -250,7 +247,7 @@ function methodBuilder(method:number) {
                 // intercept the request
                 this.requestInterceptor(req);
                 // make the request and store the observable for later transformation
-                var observable:Observable<Response> = this.dataService.request(req);
+                var observable:Observable<Response> = this.http.request(req);
 
                 // transform the obserable in accordance to the @Produces decorator
                 if (descriptor.isJSON) {

@@ -1,8 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {RouteConfig} from '@angular/router-deprecated';
-import {HTTP_PROVIDERS} from '@angular/http';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
 
-import {DataService} from './shared/index';
 import {AuthRouterOutletDirective} from './shared/index';
 import {SignInComponent} from './signin/index';
 import {AdminUpdateComponent} from './admin-update/adminUpdateComponent';
@@ -16,7 +15,7 @@ import {ClientListComponent} from './client-list/clientListComponent';
     moduleId: module.id,
     selector: 'sd-app',
     templateUrl: 'app.component.html',
-    viewProviders: [DataService, HTTP_PROVIDERS],
+    viewProviders: [Http, HTTP_PROVIDERS],
     directives: [<any>AuthRouterOutletDirective]
 })
 @RouteConfig([

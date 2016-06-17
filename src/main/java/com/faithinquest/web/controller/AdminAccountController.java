@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,15 +36,14 @@ public class AdminAccountController
 		return AccountHolder.ADMIN_KEY;
 	}
 
-	@RequestMapping( value = "/signin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = "/sign-in", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public Admin signIn( @RequestParam( value = "password", required = true ) String password, HttpSession session )
+	public Admin signIn(@RequestBody(required = true) Admin admin, HttpSession session )
 	{
-		if( !password.equals( adminPassword ) )
+		if( !adminPassword.equals( admin.getPassword() ) )
 		{
 			throw new ValidationException( "Password Incorrect", new ValidationResult( "password", "Password incorrect" ) );
 		}
-		Admin admin = new Admin();
 		admin.setId( 1L );
 		session.setAttribute( getSessionKey(), admin );
 		return admin;
@@ -78,9 +74,9 @@ public class AdminAccountController
 		return admin;
 	}
 
-	@RequestMapping( value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+	@RequestMapping( value = "/sign-out", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public OkResponse logout( HttpSession session )
+	public OkResponse signOut( HttpSession session )
 	{
 		session.removeAttribute( getSessionKey() );
 		return DefaultMessages.OK_RESPONSE;

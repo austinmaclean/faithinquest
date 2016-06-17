@@ -3,5 +3,3 @@
  */
 
 export * from './auth-router-outlet.directive';
-export * from './data.service';
-
