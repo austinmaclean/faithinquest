@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
 
 @Component({
@@ -12,10 +12,24 @@ import {StudyService, FooterComponent, StudyListComponent} from '../shared/index
 
 export class ClientListComponent implements OnInit {
 
-    @Input() editmode: string;
+    @Input() editmode:string;
+
+    @ViewChild(<any>StudyListComponent) private studyListComponent:StudyListComponent;
+
+    search:any = {
+        pattern: null,
+        patternOld: null
+    };
 
     ngOnInit() {
         console.log('study init');
+    }
+
+    onSearch() {
+        if (this.search.pattern !== this.search.patternOld) {
+            this.search.patternOld = this.search.pattern;
+            this.studyListComponent.getStudies(this.search.pattern);
+        }
     }
 
 }

@@ -11,10 +11,12 @@
             <ti-admin-study-edit (onStudiesUpdated)="onStudyUpdated($event)"></ti-admin-study-edit>
 
             <div class="items-search">
-                <div class="input-group">
-                    <span class="input-group-addon black"><span class="fa fa-fw fa-search" aria-hidden="true"></span></span>
-                    <input type="text" class="form-control black" placeholder="Search for...">
-                </div>
+                <form role="form" class="item-search" (ngSubmit)="onSearch()">
+                    <div class="input-group">
+                        <span class="input-group-addon black" (click)="onSearch()"><span class="fa fa-fw fa-search" aria-hidden="true"></span></span>
+                        <input type="text" class="form-control" name="pattern" placeholder="Search for..." [(ngModel)]="search.pattern">
+                    </div>
+                </form>
             </div>
 
             <ti-study-list [editmode]="true" (onStudyEdit)="editStudy($event)" (onStudyDelete)="deleteStudy($event)"></ti-study-list>

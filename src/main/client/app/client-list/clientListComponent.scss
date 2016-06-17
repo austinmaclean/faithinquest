@@ -36,6 +36,10 @@
             width: 70%;
             margin: 0 auto;
 
+            .input-group-addon {
+              cursor: pointer;
+            }
+
             input[type=text] {
               font-size: 1.5em;
             }

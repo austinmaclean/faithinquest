@@ -37,8 +37,8 @@ export class StudyListComponent implements OnInit {
         this.getStudies();
     }
 
-    public getStudies() {
-        this.studyService.get().subscribe(list => {
+    public getStudies(pattern?:string, speaker?:string) {
+        this.studyService.find(pattern, speaker).subscribe(list => {
             this.list = list;
         });
     }

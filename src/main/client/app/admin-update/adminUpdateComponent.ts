@@ -22,8 +22,20 @@ export class AdminUpdateComponent implements OnInit {
     @ViewChild(<any>ModalMessageComponent) private messageComponent : ModalMessageComponent;
     @ViewChild(<any>ModalDialogComponent) private dialogComponent : ModalDialogComponent;
 
+    search:any = {
+        pattern: null,
+        patternOld: null
+    };
+
     ngOnInit() {
         console.log('init');
+    }
+
+    onSearch() {
+        if (this.search.pattern !== this.search.patternOld) {
+            this.search.patternOld = this.search.pattern;
+            this.listComponent.getStudies(this.search.pattern);
+        }
     }
 
     public editStudy (study: Study) {
