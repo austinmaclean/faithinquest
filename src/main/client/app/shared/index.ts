@@ -8,3 +8,4 @@ export * from './footer/footer.component';
 export * from './study-list-component/index';
 export * from './youtube-embed-component/youtubeEmbedComponent';
 export * from './modal-component/modalVideoComponent';
+export * from './infinite-scroll/infiniteScroll';

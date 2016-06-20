@@ -24,7 +24,7 @@
 
     <ti-modal-video></ti-modal-video>
 
-    <div class="items-list-panel flex flex-wrap-column">
+    <div class="items-list-panel flex flex-wrap-column" InfiniteScroll (OnScrollMethod)="nextPage()" [ScrollDistance]="3">
         <!-- iteration start-->
         <ti-study *ngFor="let studyElm of list" [item]="studyElm" [editmode]="editmode"></ti-study>
         <!-- iteration end-->

@@ -8,6 +8,7 @@ import {StudyService} from '../../shared/index';
 import {StudyElementComponent} from './study-element/studyElementComponent';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
+import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
 
 @Component({
     moduleId: module.id,
@@ -16,7 +17,7 @@ import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
     styleUrls: ['studyListComponent.css'],
     providers: [StudyService],
     viewProviders: [BS_VIEW_PROVIDERS],
-    directives: [<any>StudyElementComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
+    directives: [<any>InfiniteScroll, <any>StudyElementComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
 })
 
 export class StudyListComponent implements OnInit, OnChanges {
@@ -68,7 +69,6 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     viewVideo(study:Study) {
-        debugger;
         var studyCopy : Study = Object.assign({}, study);
         this.component.showModal(studyCopy);
     }
@@ -93,7 +93,6 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     public onPatternSearch(pattern : string) {
-        debugger;
         this.search.pattern = pattern;
         this.onSearch();
     }
@@ -118,5 +117,8 @@ export class StudyListComponent implements OnInit, OnChanges {
         this.onSearch();
     }
 
+    nextPage() {
+        debugger;
+    }
 
 }
