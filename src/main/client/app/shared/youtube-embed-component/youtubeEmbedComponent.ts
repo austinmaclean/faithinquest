@@ -6,7 +6,7 @@ provide(Window, { useValue: window });
 @Component({
     moduleId: module.id,
     selector: 'ti-yt-embed',
-    template: '<div id="player"></div>',
+    template: '<div id="player-{{id}}"></div>',
     providers: [Window]
 })
 
@@ -35,14 +35,13 @@ export class YTEmbedComponent implements OnInit, OnChanges {
 
     initYoutube() {
         this.id = this.ytid ? this.ytid : 0;
-
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
 
         var options : YT.PlayerOptions = {width: this.width, height: this.height};
 
         setTimeout(() => {
-            this.player = new YT.Player('player', options);
+            this.player = new YT.Player('player-'+this.id, options);
             this.player.addEventListener('onReady', <YT.EventHandler>((event: YT.EventArgs) =>
                 this.onPlayerReady(event)));
             this.player.addEventListener('onPlayback', <YT.EventHandler>((event: YT.EventArgs) =>
@@ -123,6 +122,10 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         } else {
             this.initYoutube();
         }
+    }
+
+    public play() {
+        this.player.playVideo();
     }
 
     public stop() {

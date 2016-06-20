@@ -6,7 +6,7 @@ import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent
 
 @Component({
     moduleId: module.id,
-    selector: 'modal-component',
+    selector: 'ti-modal-video',
     templateUrl: 'modalVideoComponent.html',
     styleUrls: ['modalVideoComponent.css'],
     viewProviders: [BS_VIEW_PROVIDERS],

@@ -14,7 +14,7 @@ export class StudyElementComponent implements OnInit, OnChanges {
     @Input() item:Study;
     @Input() editmode: boolean;
 
-    thumbUrl : string = '../../assets/img/preview.jpg';
+    thumbUrl : string = '../../assets/img/over.png';
 
     constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component: StudyListComponent) {
     }
@@ -27,18 +27,17 @@ export class StudyElementComponent implements OnInit, OnChanges {
         if (this.item) {
             var code = this.getParameterByName('v', this.item.link);
             if (code) {
-                this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/0.jpg'
+                this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/default.jpg'
             }
         }
     }
 
-    processStudy() {
-        console.log(this.item);
-        this.component.processStudy(this.item);
+    viewVideo() {
+        this.component.viewVideo(this.item);
     }
 
     actionEdit() {
-        this.processStudy();
+        this.component.editStudy(this.item);
     }
 
     actionDelete() {

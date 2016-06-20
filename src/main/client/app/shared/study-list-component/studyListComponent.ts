@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
@@ -19,7 +19,7 @@ import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
     directives: [<any>StudyElementComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
 })
 
-export class StudyListComponent implements OnInit {
+export class StudyListComponent implements OnInit, OnChanges {
 
     @Input() editmode:boolean;
 
@@ -35,7 +35,12 @@ export class StudyListComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('study component init')
         this.getStudies();
+    }
+
+    ngOnChanges(changes) {
+        console.log('study component changes')
     }
 
     public onSelectSpeaker(speaker:string) {
@@ -50,16 +55,17 @@ export class StudyListComponent implements OnInit {
         });
     }
 
-    processStudy(study:Study) {
+    editStudy(study: Study) {
         var studyCopy : Study = Object.assign({}, study);
+        this.onStudyEdit.emit(studyCopy);
+        var time = document.body.scrollTop*0.7;
+        this.scrollTo(document.body, 0, time);
+    }
 
-        if (this.editmode) {
-            this.onStudyEdit.emit(studyCopy);
-            var time = document.body.scrollTop*0.7;
-            this.scrollTo(document.body, 0, time);
-        } else {
-            this.component.showModal(studyCopy);
-        }
+    viewVideo(study:Study) {
+        debugger;
+        var studyCopy : Study = Object.assign({}, study);
+        this.component.showModal(studyCopy);
     }
 
     deleteStudy (study: Study) {

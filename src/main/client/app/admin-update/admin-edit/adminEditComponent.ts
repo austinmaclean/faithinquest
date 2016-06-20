@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 import { FORM_DIRECTIVES } from '@angular/common';
 import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
@@ -13,13 +13,16 @@ import {Study} from '../../shared/model/study';
     directives: [<any>YTEmbedComponent, FORM_DIRECTIVES]
 })
 
-export class AdminEditComponent implements OnInit {
+export class AdminEditComponent implements OnInit, OnChanges {
 
     @ViewChild (<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
     @Output() onStudiesUpdated = new EventEmitter<string>();
 
+    thumbUrl : string = '../../assets/img/over_big.png';
+
     createMode: boolean;
     playerReady : boolean;
+    hideThumb = false;
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
@@ -29,6 +32,10 @@ export class AdminEditComponent implements OnInit {
     ngOnInit() {
         console.log('init');
         this.createMode = true;
+    }
+
+    ngOnChanges(changes) {
+        console.log('changes');
     }
 
     validateYouTubeLink() {
@@ -69,6 +76,8 @@ export class AdminEditComponent implements OnInit {
         this.videoPlayer.stop();
         this.videoPlayer.loadAndPause(null);
         this.createMode = true;
+        this.thumbUrl = '../../assets/img/over_big.png';
+        this.hideThumb = false;
     }
 
     public editStudy(study: Study) {
@@ -87,6 +96,8 @@ export class AdminEditComponent implements OnInit {
         if (code) {
             var startTime = this.model.startMin*60+this.model.startSec;
             this.videoPlayer.loadAndPause(code, startTime);
+            this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/0.jpg';
+            this.hideThumb = false;
         }
     }
 
@@ -95,6 +106,13 @@ export class AdminEditComponent implements OnInit {
         this.playerReady = true;
     }
 
+    onThumbClick() {
+        console.log('thumb click');
+        if (this.model.link != '' && !this.hideThumb) {
+            this.hideThumb = true;
+            this.videoPlayer.play();
+        }
+    }
 
     getParameterByName(name, url) {
         name = name.replace(/[\[\]]/g, "\\$&");
