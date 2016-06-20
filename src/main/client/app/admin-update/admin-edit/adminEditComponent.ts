@@ -108,24 +108,24 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     onThumbClick() {
         console.log('thumb click');
-        if (this.model.link != '' && !this.hideThumb) {
+        if (this.model.link !== '' && !this.hideThumb) {
             this.hideThumb = true;
             this.videoPlayer.play();
         }
     }
 
     getParameterByName(name, url) {
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
             results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
     matchYoutubeUrl(url) {
         var p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-        if(url.match(p)){
+        if(url.match(p)) {
             return url.match(p)[1];
         }
         return false;

@@ -27,7 +27,7 @@ export class StudyElementComponent implements OnInit, OnChanges {
         if (this.item) {
             var code = this.getParameterByName('v', this.item.link);
             if (code) {
-                this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/default.jpg'
+                this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/default.jpg';
             }
         }
     }
@@ -49,12 +49,12 @@ export class StudyElementComponent implements OnInit, OnChanges {
     }
 
     getParameterByName(name, url) {
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
             results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
 }

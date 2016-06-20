@@ -11,6 +11,9 @@ provide(Window, { useValue: window });
 })
 
 export class YTEmbedComponent implements OnInit, OnChanges {
+
+    public ready : boolean = false;
+
     @Input() ytheight : number;
     @Input() ytwidth : number;
     @Input() ytid : number;
@@ -21,12 +24,8 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     private height : number;
     private width : number;
     private id : number;
-
     private el : ElementRef;
-
     private player: YT.Player;
-
-    public ready : boolean = false;
     private done : boolean = false;
 
     constructor (el: ElementRef) {

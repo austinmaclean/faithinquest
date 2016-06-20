@@ -12,36 +12,23 @@ import {StudyService, FooterComponent, StudyListComponent} from '../shared/index
 
 export class ClientListComponent implements OnInit {
 
+    pattern : string = null;
+
     @Input() editmode:string;
 
-    @ViewChild(<any>StudyListComponent) private studyListComponent:StudyListComponent;
-
-    search:any = {
-        pattern: null,
-        patternOld: null,
-        speaker: null,
-        speakerOld: null
-    };
+    @ViewChild(<any>StudyListComponent) private listComponent:StudyListComponent;
 
     ngOnInit() {
         console.log('study init');
     }
 
-    onSearch(speaker?:string) {
-        if(speaker) {
-            this.search.speaker = speaker;
-            this.search.pattern = null;
-        }
-        if (this.search.pattern !== this.search.patternOld || this.search.speaker !== this.search.speakerOld) {
-            this.search.patternOld = this.search.pattern;
-            this.search.speakerOld = this.search.speaker;
-            this.studyListComponent.getStudies(this.search.pattern, this.search.speaker);
-        }
+    onSearch() {
+        this.listComponent.onPatternSearch(this.pattern);
     }
 
-    onSearchClear(fieldName:string) {
-        this.search[fieldName] = null;
-        this.onSearch();
+    onSearchPattern(outString : string) {
+        this.pattern = outString;
     }
+
 
 }

@@ -33,6 +33,14 @@ export class ModalVideoComponent {
         }
     }
 
+    onHideHanler() {
+        console.log('hide');
+        this.videoPlayer.stop();
+        this.videoPlayer.loadAndPause(null);
+        this.study = null;
+        this.playing = false;
+    }
+
     onYTReady(flag:boolean) {
         console.log(flag);
         this.playerReady = true;
@@ -51,20 +59,16 @@ export class ModalVideoComponent {
     }
 
     close() {
-        this.videoPlayer.stop();
-        this.videoPlayer.loadAndPause(null);
-        this.study = null;
-        this.playing = false;
         this.lgModal.hide();
     }
 
     getParameterByName(name, url) {
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
             results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
 }

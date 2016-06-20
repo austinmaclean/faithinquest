@@ -1,3 +1,47 @@
+.top-panel {
+
+  width: 100%;
+  font-size: 1.5em;
+
+  .top-panel-cell {
+
+    &.left {
+      width: 70%;
+      text-align: left;
+    }
+
+    &.right {
+      width: 30%;
+      text-align: right;
+
+      .form-control {
+        &.top-panel-select {
+          font-size: 1em;
+          background-color: #454545;
+          color: #ffffff;
+          text-transform: capitalize;
+          height: 40px;
+          min-width: 150px;
+
+          .top-panel-select-option {
+            font-size: 0.8em;
+            font-family: 'BebasBold', sans-serif !important;
+            text-transform: capitalize !important;
+          }
+
+        }
+      }
+
+    }
+
+  }
+
+  .search-pattern:hover {
+    cursor: pointer;
+    text-decoration: line-through;
+  }
+}
+
 .items-panel {
 
   width: 100%;

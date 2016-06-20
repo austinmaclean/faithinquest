@@ -12,42 +12,29 @@ import {ModalResult, ModalAction, ModalDialogComponent} from '../shared/modal-co
     selector: 'ti-admin-study-update',
     templateUrl: 'adminUpdateComponent.html',
     styleUrls: ['adminUpdateComponent.css'],
-    directives: [<any>StudyListComponent, <any>AdminEditComponent, <any>FooterComponent, <any>ModalMessageComponent, <any>ModalDialogComponent]
+    directives: [<any>StudyListComponent, <any>AdminEditComponent, <any>FooterComponent,
+        <any>ModalMessageComponent, <any>ModalDialogComponent]
 })
 
 export class AdminUpdateComponent implements OnInit {
+
+    pattern : string = null;
 
     @ViewChild(<any>AdminEditComponent) private editComponent : AdminEditComponent;
     @ViewChild(<any>StudyListComponent) private listComponent : StudyListComponent;
     @ViewChild(<any>ModalMessageComponent) private messageComponent : ModalMessageComponent;
     @ViewChild(<any>ModalDialogComponent) private dialogComponent : ModalDialogComponent;
 
-    search:any = {
-        pattern: null,
-        patternOld: null,
-        speaker: null,
-        speakerOld: null
-    };
-
     ngOnInit() {
         console.log('init');
     }
 
-    onSearch(speaker?:string) {
-        if(speaker) {
-            this.search.speaker = speaker;
-            this.search.pattern = null;
-        }
-        if (this.search.pattern !== this.search.patternOld || this.search.speaker !== this.search.speakerOld) {
-            this.search.patternOld = this.search.pattern;
-            this.search.speakerOld = this.search.speaker;
-            this.listComponent.getStudies(this.search.pattern, this.search.speaker);
-        }
+    onSearch() {
+        this.listComponent.onPatternSearch(this.pattern);
     }
 
-    onSearchClear(fieldName:string) {
-        this.search[fieldName] = null;
-        this.onSearch();
+    onSearchPattern(outString : string) {
+        this.pattern = outString;
     }
 
     public editStudy (study: Study) {
@@ -58,7 +45,7 @@ export class AdminUpdateComponent implements OnInit {
         this.listComponent.getStudies();
         this.messageComponent.showModal(message);
     }
-    
+
     public deleteStudy(study:Study) {
         var modalData = <ModalResult>{};
         modalData.type = 'deleteStudy';
@@ -68,9 +55,8 @@ export class AdminUpdateComponent implements OnInit {
     }
 
     public onProcessModal(res:ModalResult) {
-        if (res.action == ModalAction.OK && res.type == 'deleteStudy') {
+        if (res.action === ModalAction.OK && res.type === 'deleteStudy') {
             this.editComponent.deleteStudy(<Study>res.data);
         }
     }
-    
 }

@@ -21,32 +21,37 @@ import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
 
 export class StudyListComponent implements OnInit, OnChanges {
 
+    search:any = {
+        pattern: null,
+        patternOld: null,
+        speaker: null,
+        speakerOld: null
+    };
+
+    public list:Study[];
+
     @Input() editmode:boolean;
 
     @Output() onStudyEdit = new EventEmitter<Study>();
     @Output() onStudyDelete = new EventEmitter<Study>();
-    @Output() onSearchData = new EventEmitter<string>();
+    @Output() onSearchPattern = new EventEmitter<string>();
 
     @ViewChild(<any>ModalVideoComponent) private component : ModalVideoComponent;
-
-    public list:Study[];
 
     constructor(private studyService:StudyService) {
     }
 
     ngOnInit() {
-        console.log('study component init')
+        console.log('study component init');
         this.getStudies();
     }
 
     ngOnChanges(changes) {
-        console.log('study component changes')
+        console.log('study component changes');
     }
 
     public onSelectSpeaker(speaker:string) {
-        if (this.onSearchData) {
-            this.onSearchData.emit(speaker);
-        }
+        this.onSearch(speaker);
     }
 
     public getStudies(pattern?:string, speaker?:string) {
@@ -86,5 +91,32 @@ export class StudyListComponent implements OnInit, OnChanges {
             this.scrollTo(element, to, duration - 10);
         }, 10);
     }
+
+    public onPatternSearch(pattern : string) {
+        debugger;
+        this.search.pattern = pattern;
+        this.onSearch();
+    }
+
+    public onSearch(speaker?:string) {
+        if(speaker) {
+            this.search.speaker = speaker;
+            this.search.pattern = null;
+        }
+        if (this.search.pattern !== this.search.patternOld || this.search.speaker !== this.search.speakerOld) {
+            this.search.patternOld = this.search.pattern;
+            this.search.speakerOld = this.search.speaker;
+            this.getStudies(this.search.pattern, this.search.speaker);
+        }
+    }
+
+    onSearchClear(fieldName:string) {
+        this.search[fieldName] = null;
+        if (fieldName === 'pattern') {
+            this.onSearchPattern.emit('');
+        }
+        this.onSearch();
+    }
+
 
 }
