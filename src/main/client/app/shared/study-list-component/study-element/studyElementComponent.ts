@@ -1,12 +1,14 @@
 import {Component, Input, Host, forwardRef, Inject, OnInit, OnChanges} from '@angular/core';
 import {Study} from '../../model/study';
 import {StudyListComponent} from '../studyListComponent';
+import {AddThisComponent} from '../../../shared/addthis/addThisComponent';
 
 @Component({
     moduleId: module.id,
     selector: 'ti-study',
     templateUrl: 'studyElementComponent.html',
-    styleUrls: ['studyElementComponent.css']
+    styleUrls: ['studyElementComponent.css'],
+    directives: [<any>AddThisComponent]
 })
 
 export class StudyElementComponent implements OnInit, OnChanges {
@@ -15,6 +17,13 @@ export class StudyElementComponent implements OnInit, OnChanges {
     @Input() editmode: boolean;
 
     thumbUrl : string = '../../assets/img/over.png';
+
+    public share = {
+        code: 'ra-5768d6ade5563361',
+        url: '',
+        title: '',
+        description: ''
+    };
 
     constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component: StudyListComponent) {
     }
@@ -29,6 +38,9 @@ export class StudyElementComponent implements OnInit, OnChanges {
             if (code) {
                 this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/default.jpg';
             }
+            this.share.url = this.item.link;
+            this.share.title = this.item.title;
+            this.share.description = this.item.description;
         }
     }
 
