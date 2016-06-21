@@ -8,7 +8,7 @@
     vertical-align: top;
 
     form {
-      &.admin-item-edit {
+      &.admin-item-edit, &.admin-bulk-upload {
         width: 100%;
 
         fieldset {
@@ -29,12 +29,40 @@
           &:hover {
             color: #cccccc;
           }
+        }
+      }
 
+      &.admin-bulk-upload {
+        margin-bottom: 10px;
+
+        .btn-file-input {
+          position: relative;
+          padding: 10px 12px;
+          overflow: hidden;
+
+          border-style: none;
+          color: rgba(255, 255, 255, 0.87);
         }
 
-      }
-    }
+        .btn-file-input input {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+          transform: none !important;
 
+          top: 0;
+          right: 0;
+          margin: 0;
+          opacity: 0;
+
+          filter: alpha(opacity=0);
+          direction: ltr;
+          cursor: pointer;
+        }
+      }
+
+    }
   }
 
   .admin-item-video-panel {
@@ -43,9 +71,9 @@
 
     .admin-item-video-container {
       position: relative;
-      overflow:hidden;
+      overflow: hidden;
       width: 400px;
-      height:230px;
+      height: 230px;
       background-color: #454545;
       border: 1px solid #454545;
       margin: 0 auto;
@@ -54,19 +82,20 @@
         position: absolute;
         width: 100%;
         height: auto;
-        top:-100%; left:0; right: 0; bottom:-100%;
+        top: -100%;
+        left: 0;
+        right: 0;
+        bottom: -100%;
         margin: auto;
         cursor: pointer;
       }
 
     }
 
-
   }
 }
 
 @media only screen and (max-width: 540px) {
-
 
   .items-panel {
 

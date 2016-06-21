@@ -2,6 +2,16 @@
 
     <div class="admin-item-edit-panel">
 
+        <form role="form" class="admin-bulk-upload" (ngSubmit)="onBulkUpload()" enctype="multipart/form-data">
+            <span class="btn btn-secondary btn-form btn-file-input">
+                 <span>
+                    <input type="file" ng-model="file" upload="onBulkUpload"
+                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <span class="text">Bulk Upload</span>
+                </span>
+            </span>
+        </form>
+
         <form role="form" class="admin-item-edit" (ngSubmit)="onSubmit()">
 
             <fieldset class="form-group">

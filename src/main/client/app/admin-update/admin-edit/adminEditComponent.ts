@@ -38,6 +38,10 @@ export class AdminEditComponent implements OnInit, OnChanges {
         console.log('changes');
     }
 
+    onBulkUpload() {
+        console.log('bulkUpload');
+    }
+
     validateYouTubeLink() {
         var linkElm : HTMLInputElement = <HTMLInputElement>document.getElementById('link');
         if (!this.matchYoutubeUrl(linkElm.value)) {
