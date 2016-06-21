@@ -58,14 +58,11 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Unsecured context</web-resource-name>
-            <url-pattern>/components/*</url-pattern>
+            <url-pattern>/app/*</url-pattern>
+            <url-pattern>/assets/*</url-pattern>
             <url-pattern>/css/*</url-pattern>
-            <url-pattern>/swf/*</url-pattern>
             <url-pattern>/fonts/*</url-pattern>
-            <url-pattern>/img/*</url-pattern>
             <url-pattern>/js/*</url-pattern>
-            <url-pattern>/partials/*</url-pattern>
-            <url-pattern>/doc/*</url-pattern>
         </web-resource-collection>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>

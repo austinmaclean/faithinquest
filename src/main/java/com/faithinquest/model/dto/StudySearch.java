@@ -1,5 +1,6 @@
 package com.faithinquest.model.dto;
 
+import com.faithinquest.persistence.ICriteriaModifier;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -9,12 +10,13 @@ import org.hibernate.criterion.Restrictions;
  * Date: 6/4/16
  * Time: 11:36 AM
  */
-public class StudySearch
+public class StudySearch implements ICriteriaModifier
 {
 	private String pattern;
 	private String speaker;
 
-	public void applyConditions( final Criteria criteria )
+	@Override
+	public void modify( final Criteria criteria )
 	{
 		if( pattern != null )
 		{

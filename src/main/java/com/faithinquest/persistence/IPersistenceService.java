@@ -47,4 +47,6 @@ public interface IPersistenceService<T extends BaseEntity<I>, I extends Serializ
 	long findCountBy( Criteria criteria, ICriteriaModifier modifier );
 
 	List findBy( Criteria criteria, ICriteriaModifier modifier, Paging paging );
+
+	void findBy( ICriteriaModifier conditions, Paging paging, IPartialResultCallback<T, I> callback );
 }

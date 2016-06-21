@@ -10,5 +10,5 @@ import org.hibernate.Criteria;
  */
 public interface ICriteriaModifier
 {
-	public void modify( Criteria criteria );
+	void modify( Criteria criteria );
 }

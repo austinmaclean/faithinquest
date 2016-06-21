@@ -4,7 +4,11 @@ import com.faithinquest.model.Study;
 import com.faithinquest.model.dto.StudySearch;
 import com.faithinquest.persistence.Paging;
 import com.faithinquest.service.IStudyService;
+import com.faithinquest.service.conversion.FormatType;
+import com.faithinquest.service.conversion.IConversionService;
+import com.faithinquest.service.conversion.processors.IDataProcessor;
 import com.faithinquest.web.util.DefaultMessages;
+import com.faithinquest.web.util.DocumentDataView;
 import com.faithinquest.web.util.GridResult;
 import com.faithinquest.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
+
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * User: gleb
@@ -26,6 +36,10 @@ public class StudyController
 {
 	@Autowired
 	private IStudyService studyService;
+	@Autowired
+	private IConversionService conversionService;
+	@Autowired
+	private IDataProcessor studyDataProcessor;
 
 	@RequestMapping( value = { Routes.ADMIN_STUDY + "/", Routes.ADMIN_STUDY + "" }, method = RequestMethod.POST,
 		produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
@@ -77,6 +91,20 @@ public class StudyController
 		}
 		paging.setSortColumn( "created" );
 		paging.setSortDesc( true );
-		return new GridResult<>( studyService.findStudy( search, paging ) );
+		return new GridResult<>( studyService.findBy( search, paging ) );
+	}
+
+	@RequestMapping( value = Routes.ADMIN_STUDY + "/import", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public OkResponse importStudy( @RequestParam( value = "attachment" ) MultipartFile file, @RequestParam FormatType attachmentType ) throws IOException
+	{
+		conversionService.importData( studyDataProcessor, file.getInputStream(), attachmentType );
+		return DefaultMessages.OK_RESPONSE;
+	}
+
+	@RequestMapping( value = Routes.ADMIN_STUDY + "/export", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+	public View exportGroups( StudySearch search, @RequestParam( required = false ) Set<String> exportCols ) throws IOException
+	{
+		return new DocumentDataView( conversionService, studyDataProcessor, "study", FormatType.XLS, search, exportCols );
 	}
 }

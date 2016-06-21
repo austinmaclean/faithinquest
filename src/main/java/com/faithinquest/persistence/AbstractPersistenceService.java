@@ -2,8 +2,11 @@ package com.faithinquest.persistence;
 
 import com.faithinquest.validation.ValidationException;
 import com.faithinquest.validation.ValidationResult;
+import org.hibernate.CacheMode;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.ScrollMode;
+import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -22,9 +25,12 @@ import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: gleb
@@ -227,7 +233,6 @@ public class AbstractPersistenceService<T extends BaseEntity<I>, I extends Seria
 		return criteria.list();
 	}
 
-
 	@Override
 	@Transactional( readOnly = true )
 	public long findCountBy( ICriteriaModifier modifier )
@@ -244,6 +249,39 @@ public class AbstractPersistenceService<T extends BaseEntity<I>, I extends Seria
 			paging.setTotal( findCountBy( modifier ) );
 		}
 		return (List<T>) findBy( createCriteria(), modifier, paging );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public void findBy( ICriteriaModifier conditions, Paging paging, IPartialResultCallback<T, I> callback )
+	{
+		Criteria criteria = createCriteria();
+		conditions.modify( criteria );
+		applyFetching( criteria );
+		applyPaging( criteria, paging );
+		criteria.setResultTransformer( Criteria.DISTINCT_ROOT_ENTITY );
+		criteria.setCacheMode( CacheMode.IGNORE );
+		ScrollableResults results = criteria.scroll( ScrollMode.SCROLL_INSENSITIVE );
+
+		List<T> part = new ArrayList<>( callback.getPartSize() );
+		Set<I> ids = new HashSet<>();
+		while( results.next() )
+		{
+			T item = (T) results.get( 0 );
+			if( !ids.contains( item.getId() ) )
+			{
+				ids.add( item.getId() );
+				part.add( item );
+			}
+
+			if( part.size() >= callback.getPartSize() || results.isLast() )
+			{
+				callback.invoke( part );
+				getSession().clear();
+				part.clear();
+			}
+		}
+		results.close();
 	}
 
 	protected void applyFetching( Criteria criteria )
