@@ -22,8 +22,7 @@
             <span><a (click)="actionDelete()">delete</a></span>
         </span>
         <span *ngIf="!editmode">
-            <img src="../../../assets/img/share.png"><br>
-            <span><a (click)="actionShare()">share</a></span>
+            <span><ti-addthis-share [atcode]="share.code" [aturl]="share.url" [attitle]="share.title" [atdesc]="share.description"></ti-addthis-share></span>
         </span>
     </div>
 
