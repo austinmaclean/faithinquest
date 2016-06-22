@@ -1,5 +1,6 @@
 import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
-import { FORM_DIRECTIVES } from '@angular/common';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
+import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
 import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
 import {Study} from '../../shared/model/study';
@@ -10,21 +11,27 @@ import {Study} from '../../shared/model/study';
     templateUrl: 'adminEditComponent.html',
     styleUrls: ['adminEditComponent.css'],
     providers: [StudyService],
-    directives: [<any>YTEmbedComponent, FORM_DIRECTIVES]
+    directives: [FILE_UPLOAD_DIRECTIVES, <any>NgClass, <any>NgStyle, <any>YTEmbedComponent, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 
 export class AdminEditComponent implements OnInit, OnChanges {
 
-    @ViewChild (<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
+    @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
     @Output() onStudiesUpdated = new EventEmitter<string>();
 
-    thumbUrl : string = '../../assets/img/over_big.png';
+    thumbUrl:string = '../../assets/img/over_big.png';
 
-    createMode: boolean;
-    playerReady : boolean;
+    createMode:boolean;
+    playerReady:boolean;
     hideThumb = false;
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
+
+    public uploader:FileUploader = new FileUploader({
+        url: '/api/admin/study/import',
+        autoUpload: true,
+        allowedFileType: ['xls']
+    });
 
     constructor(private studyService:StudyService) {
     }
@@ -43,7 +50,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     validateYouTubeLink() {
-        var linkElm : HTMLInputElement = <HTMLInputElement>document.getElementById('link');
+        var linkElm:HTMLInputElement = <HTMLInputElement>document.getElementById('link');
         if (!this.matchYoutubeUrl(linkElm.value)) {
             linkElm.setCustomValidity('Please enter valid youtube link');
             return;
@@ -56,18 +63,18 @@ export class AdminEditComponent implements OnInit, OnChanges {
         console.log(JSON.stringify(this.model));
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {
-                this.onStudiesUpdated.emit('Study "'+this.model.title+'" created');
+                this.onStudiesUpdated.emit('Study "' + this.model.title + '" created');
                 this.onClear();
             });
         } else {
             this.studyService.update(<Study>this.model).subscribe(res => {
-                this.onStudiesUpdated.emit('Study "'+this.model.title+'" updated');
+                this.onStudiesUpdated.emit('Study "' + this.model.title + '" updated');
                 this.onClear();
             });
         }
     }
 
-    public deleteStudy (study: Study) {
+    public deleteStudy(study:Study) {
         this.studyService.remove(study.id.toString()).subscribe(res => {
             this.onStudiesUpdated.emit('Study was deleted');
             this.onClear();
@@ -84,7 +91,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
         this.hideThumb = false;
     }
 
-    public editStudy(study: Study) {
+    public editStudy(study:Study) {
         if (this.playerReady) {
             this.model = study;
             this.createMode = false;
@@ -98,14 +105,14 @@ export class AdminEditComponent implements OnInit, OnChanges {
         this.validateYouTubeLink();
         var code = this.getParameterByName('v', newVal);
         if (code) {
-            var startTime = this.model.startMin*60+this.model.startSec;
+            var startTime = this.model.startMin * 60 + this.model.startSec;
             this.videoPlayer.loadAndPause(code, startTime);
-            this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/0.jpg';
+            this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
             this.hideThumb = false;
         }
     }
 
-    onYTReady(flag: boolean) {
+    onYTReady(flag:boolean) {
         console.log(flag);
         this.playerReady = true;
     }
@@ -129,7 +136,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     matchYoutubeUrl(url) {
         var p = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-        if(url.match(p)) {
+        if (url.match(p)) {
             return url.match(p)[1];
         }
         return false;

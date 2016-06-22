@@ -96,9 +96,10 @@ public class StudyController
 
 	@RequestMapping( value = Routes.ADMIN_STUDY + "/import", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public OkResponse importStudy( @RequestParam( value = "attachment" ) MultipartFile file, @RequestParam FormatType attachmentType ) throws IOException
+	public OkResponse importStudy( @RequestParam MultipartFile file ) throws IOException
 	{
-		conversionService.importData( studyDataProcessor, file.getInputStream(), attachmentType );
+		FormatType type = FormatType.valueOf( file.getOriginalFilename().split( "\\." )[1].toUpperCase() );
+		conversionService.importData( studyDataProcessor, file.getInputStream(), type );
 		return DefaultMessages.OK_RESPONSE;
 	}
 
