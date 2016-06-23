@@ -22,27 +22,26 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     thumbUrl:string = '../../assets/img/over_big.png';
 
+    uploader:BulkUploader;
     createMode:boolean;
     playerReady:boolean;
     hideThumb = false;
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
-    uploader:BulkUploader = new BulkUploader({
-        url: '/api/admin/study/import',
-        autoUpload: true,
-        allowedFileType: ['xls']
-    }, (fileName) => {
-        this.onStudiesUpdated.emit(new OutputMessage(true, fileName + ' imported successfully'));
-    }, (fileName) => {
-        this.onStudiesUpdated.emit(new OutputMessage(false, fileName + ' import error'));
-    });
-
     constructor(private studyService:StudyService) {
+        this.uploader = new BulkUploader({
+            url: '/api/admin/study/import',
+            autoUpload: true,
+            allowedFileType: ['xls']
+        });
+        this.uploader.successHandler.subscribe(fileName =>
+            this.onStudiesUpdated.emit(new OutputMessage(true, fileName + ' imported successfully')));
+        this.uploader.errorHandler.subscribe(fileName =>
+            this.onStudiesUpdated.emit(new OutputMessage(false, fileName + ' import error')));
     }
 
     ngOnInit() {
-        console.log('init');
         this.createMode = true;
     }
 
