@@ -9,6 +9,7 @@ import {StudyElementComponent} from './study-element/studyElementComponent';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
 import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
+import {LoadScript} from '../youtube-embed-component/loadScript';
 
 @Component({
     moduleId: module.id,
@@ -45,6 +46,7 @@ export class StudyListComponent implements OnInit, OnChanges {
     ngOnInit() {
         console.log('study component init');
         this.getStudies();
+        this.loadWidget();
     }
 
     ngOnChanges(changes) {
@@ -56,8 +58,8 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     public getStudies(pattern?:string, speaker?:string) {
-        this.studyService.find(pattern, speaker).subscribe(list => {
-            this.list = list;
+        this.studyService.find(pattern, speaker).subscribe(data => {
+            this.list = data.result;
         });
     }
 
@@ -115,6 +117,11 @@ export class StudyListComponent implements OnInit, OnChanges {
             this.onSearchPattern.emit('');
         }
         this.onSearch();
+    }
+
+    loadWidget() {
+        // TODO !!!
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5768d6ade5563361', {async: false},(err, script) => {});
     }
 
     nextPage() {

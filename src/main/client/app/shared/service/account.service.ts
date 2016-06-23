@@ -27,13 +27,13 @@ export class AccountService extends BaseService {
 
     @GET('info')
     @Produces(MediaType.JSON)
-    private info():Observable<Admin> {
+    private info():Observable<any> {
         return null;
     }
 
     @POST('sign-in')
     @Produces(MediaType.JSON)
-    private signIn(@Body admin:Admin):Observable<Admin> {
+    private signIn(@Body admin:Admin):Observable<any> {
         return null;
     }
 
@@ -42,7 +42,7 @@ export class AccountService extends BaseService {
         return null;
     }
 
-    public getInfo():Observable<Admin> {
+    public getInfo():Observable<any> {
         return Observable.create(observer => {
             if (Token) {
                 observer.next(Token);
@@ -62,7 +62,7 @@ export class AccountService extends BaseService {
         });
     }
 
-    public login(admin:Admin):Observable<Admin> {
+    public login(admin:Admin):Observable<any> {
         return Observable.create(observer => {
             this.signIn(admin).subscribe(
                 response => {

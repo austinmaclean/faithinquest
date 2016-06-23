@@ -29,7 +29,6 @@ export class StudyElementComponent implements OnInit, OnChanges {
     }
 
     ngOnInit():any {
-        console.log('init');
     }
 
     ngOnChanges(changes) {

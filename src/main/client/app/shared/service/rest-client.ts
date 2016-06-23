@@ -251,7 +251,7 @@ function methodBuilder(method:number) {
 
                 // transform the obserable in accordance to the @Produces decorator
                 if (descriptor.isJSON) {
-                    observable = observable.map(res => res.json().result);
+                    observable = observable.map(res => res.json());
                 }
 
                 // intercept the response
