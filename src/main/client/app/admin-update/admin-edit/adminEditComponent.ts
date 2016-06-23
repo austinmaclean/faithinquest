@@ -1,6 +1,8 @@
 import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
-import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
+import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
+import {BulkUploader} from './bulkUploader';
+import {OutputMessage} from './outputMessage';
 import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
 import {Study} from '../../shared/model/study';
@@ -13,11 +15,10 @@ import {Study} from '../../shared/model/study';
     providers: [StudyService],
     directives: [FILE_UPLOAD_DIRECTIVES, <any>NgClass, <any>NgStyle, <any>YTEmbedComponent, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
-
 export class AdminEditComponent implements OnInit, OnChanges {
 
     @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
-    @Output() onStudiesUpdated = new EventEmitter<string>();
+    @Output() onStudiesUpdated = new EventEmitter<OutputMessage>();
 
     thumbUrl:string = '../../assets/img/over_big.png';
 
@@ -27,10 +28,14 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
-    public uploader:FileUploader = new FileUploader({
+    uploader:BulkUploader = new BulkUploader({
         url: '/api/admin/study/import',
         autoUpload: true,
         allowedFileType: ['xls']
+    }, (fileName) => {
+        this.onStudiesUpdated.emit(new OutputMessage(true, fileName + ' imported successfully'));
+    }, (fileName) => {
+        this.onStudiesUpdated.emit(new OutputMessage(false, fileName + ' import error'));
     });
 
     constructor(private studyService:StudyService) {
@@ -43,10 +48,6 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes) {
         console.log('changes');
-    }
-
-    onBulkUpload() {
-        console.log('bulkUpload');
     }
 
     validateYouTubeLink() {
@@ -63,12 +64,12 @@ export class AdminEditComponent implements OnInit, OnChanges {
         console.log(JSON.stringify(this.model));
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {
-                this.onStudiesUpdated.emit('Study "' + this.model.title + '" created');
+                this.onStudiesUpdated.emit(new OutputMessage(true, 'Study "' + this.model.title + '" created'));
                 this.onClear();
             });
         } else {
             this.studyService.update(<Study>this.model).subscribe(res => {
-                this.onStudiesUpdated.emit('Study "' + this.model.title + '" updated');
+                this.onStudiesUpdated.emit(new OutputMessage(true, 'Study "' + this.model.title + '" updated'));
                 this.onClear();
             });
         }
@@ -76,10 +77,9 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     public deleteStudy(study:Study) {
         this.studyService.remove(study.id.toString()).subscribe(res => {
-            this.onStudiesUpdated.emit('Study was deleted');
+            this.onStudiesUpdated.emit(new OutputMessage(true, 'Study was deleted'));
             this.onClear();
         });
-
     }
 
     onClear() {

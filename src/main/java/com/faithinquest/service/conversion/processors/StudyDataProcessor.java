@@ -141,13 +141,13 @@ public class StudyDataProcessor extends AbstractDataProcessor<Study, Long>
 		String startMinField = getField( colNamesMap, row, importStartMin );
 		if( NumberUtils.isNumber( startMinField ) )
 		{
-			study.setStartMin( NumberUtils.toInt( startMinField ) );
+			study.setStartMin( (int) Double.parseDouble( startMinField ) );
 		}
 
 		String startSecField = getField( colNamesMap, row, importStartSec );
 		if( NumberUtils.isNumber( startSecField ) )
 		{
-			study.setStartSec( NumberUtils.toInt( startSecField ) );
+			study.setStartSec( (int) Double.parseDouble( startSecField ) );
 		}
 
 		return study;

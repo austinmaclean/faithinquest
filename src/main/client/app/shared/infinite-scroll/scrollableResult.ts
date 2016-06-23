@@ -1,7 +1,8 @@
 import {Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {BaseModel} from "../model/baseModel";
 
-interface IScrollableResult<T> {
+interface IScrollableResult<T extends BaseModel> {
     getItems():T[];
     stop();
     hasNext():boolean;
@@ -19,7 +20,7 @@ interface IScrollableResult<T> {
 }
 
 @Injectable()
-export class ScrollableResult<T> implements IScrollableResult, OnInit {
+export abstract class ScrollableResult<T extends BaseModel> implements IScrollableResult<T>, OnInit {
 
     private items:T[];
     private itemsReversed:T[];
@@ -29,7 +30,7 @@ export class ScrollableResult<T> implements IScrollableResult, OnInit {
     private itemsCount:number;
     private externalItemsCount:number;
 
-    constructor(private resource?:Observable,
+    constructor(private resource?:Observable<T[]>,
                 private holderId?:string,
                 private limit?:number,
                 private filter?:any[],

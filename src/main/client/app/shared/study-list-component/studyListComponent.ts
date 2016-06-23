@@ -64,7 +64,7 @@ export class StudyListComponent implements OnInit, OnChanges {
     editStudy(study: Study) {
         var studyCopy : Study = Object.assign({}, study);
         this.onStudyEdit.emit(studyCopy);
-        var time = document.body.scrollTop*0.7;
+        var time = document.body.scrollTop * 0.7 / (document.body.scrollTop * 0.001);
         this.scrollTo(document.body, 0, time);
     }
 
@@ -118,7 +118,7 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     nextPage() {
-        debugger;
+        // debugger;
     }
 
 }

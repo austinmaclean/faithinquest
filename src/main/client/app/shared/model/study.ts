@@ -1,5 +1,6 @@
-export class Study {
-    public id:number;
+import {BaseModel} from './baseModel';
+
+export class Study extends BaseModel {
     public created:number;
     public title:string;
     public description:string;
@@ -16,7 +17,7 @@ export class Study {
                 link?:string,
                 startMin?:number,
                 startSec?:number) {
-        this.id = id;
+        super(id);
         this.created = created;
         this.title = title;
         this.description = description;
