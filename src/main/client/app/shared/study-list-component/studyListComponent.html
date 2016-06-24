@@ -20,14 +20,12 @@
     </div>
 </div>
 
-<div class="items-panel flex flex-wrap-row flex-align-vertical-top">
+<div class="items-panel flex flex-wrap-row flex-align-vertical-top" *ngIf="scrollableResult">
 
     <ti-modal-video></ti-modal-video>
 
-    <div class="items-list-panel flex flex-wrap-column" InfiniteScroll (OnScrollMethod)="nextPage()" [ScrollDistance]="3">
-        <!-- iteration start-->
-        <ti-study *ngFor="let studyElm of list" [item]="studyElm" [editmode]="editmode"></ti-study>
-        <!-- iteration end-->
+    <div class="items-list-panel flex flex-wrap-column" InfiniteScroll (OnScrollMethod)="nextPage()" [ScrollDistance]="300" [ScrollDisabled]="!scrollableResult.hasNext()">
+        <ti-study *ngFor="let studyElm of scrollableResult.getItems()" [item]="studyElm" [editmode]="editmode"></ti-study>
     </div>
 
     <!-- video placeholder -->

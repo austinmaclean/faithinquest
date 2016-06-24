@@ -1,6 +1,5 @@
-import {Injectable, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {BaseModel} from "../model/baseModel";
+import {StudyService} from "../service/study.service";
 
 interface IScrollableResult<T extends BaseModel> {
     getItems():T[];
@@ -18,8 +17,7 @@ interface IScrollableResult<T extends BaseModel> {
     getTotal():number;
 }
 
-@Injectable()
-export class ScrollableResult<T extends BaseModel> implements IScrollableResult<T>, OnInit {
+export class ScrollableResult<T extends BaseModel> implements IScrollableResult<T> {
 
     private items:T[];
     private itemsReversed:T[];
@@ -29,7 +27,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
     private itemsCount:number;
     private externalItemsCount:number;
 
-    constructor(private resource:Observable<any>,
+    constructor(private resource:StudyService,
                 private limit?:number,
                 private filter?:any[],
                 private checkDuplicate?:boolean,
@@ -45,10 +43,6 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         if (reversEnable) {
             this.itemsReversed = [];
         }
-    }
-
-    ngOnInit():any {
-        console.log('init');
     }
 
     getItems():T[] {
@@ -79,9 +73,11 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
         this.busy = true;
 
-        var requestData = {
+        let requestData = {
             limit: this.limit,
-            offset: (this.itemsCount - this.externalItemsCount)
+            offset: (this.itemsCount - this.externalItemsCount),
+            pattern: null,
+            speaker: null
         };
 
         if (this.filter) {
@@ -90,50 +86,52 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
             });
         }
 
-        this.resource.subscribe((res) => {
-           this.totalCount = res.count;
-           var items = res.result;
-           var i, j;
-        
-           if (this.checkDuplicate) {
-        
-               var exists;
-               for (i = 0; i < items.length; i++) {
-                   exists = false;
-                   for (j = 0; j < this.items.length; j++) {
-                       if (items[i].id === this.items[j].id) {
-                           exists = true;
-                           break;
-                       }
-                   }
-                   if (!exists) {
-                       this.items.push(items[i]);
-                   }
-               }
-        
-           } else {
-        
-               for (i = 0; i < items.length; i++) {
-                   this.items.push(items[i]);
-               }
-        
-           }
-        
-           this.itemsCount += items.length;
-        
-           this.hasMore = res.result.length > 0;
-        
-           this._refreshReversed();
-        
-           if (call) {
-               call(items);
-           }
-        
-           this.busy = false;
-        
-           if (postCall) {
-               postCall(items);
-           }
+        this.resource.find(requestData.pattern, requestData.speaker, requestData.limit, requestData.offset, null, null).subscribe((res) => {
+
+            this.totalCount = res.count;
+
+            var items = res.result;
+            var i, j;
+
+            if (this.checkDuplicate) {
+
+                var exists;
+                for (i = 0; i < items.length; i++) {
+                    exists = false;
+                    for (j = 0; j < this.items.length; j++) {
+                        if (items[i].id === this.items[j].id) {
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists) {
+                        this.items.push(items[i]);
+                    }
+                }
+
+            } else {
+
+                for (i = 0; i < items.length; i++) {
+                    this.items.push(items[i]);
+                }
+
+            }
+
+            this.itemsCount += items.length;
+
+            this.hasMore = res.result.length > 0;
+
+            this._refreshReversed();
+
+            if (call) {
+                call(items);
+            }
+
+            this.busy = false;
+
+            if (postCall) {
+                postCall(items);
+            }
         });
     }
 

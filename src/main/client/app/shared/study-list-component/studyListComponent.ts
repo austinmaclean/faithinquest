@@ -9,6 +9,7 @@ import {StudyElementComponent} from './study-element/studyElementComponent';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
 import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
+import {ScrollableResult} from '../infinite-scroll/scrollableResult';
 import {LoadScript} from '../youtube-embed-component/loadScript';
 
 @Component({
@@ -38,14 +39,15 @@ export class StudyListComponent implements OnInit, OnChanges {
     @Output() onStudyDelete = new EventEmitter<Study>();
     @Output() onSearchPattern = new EventEmitter<string>();
 
-    @ViewChild(<any>ModalVideoComponent) private component : ModalVideoComponent;
+    @ViewChild(<any>ModalVideoComponent) private component:ModalVideoComponent;
+
+    scrollableResult:ScrollableResult<Study>;
 
     constructor(private studyService:StudyService) {
+        this.scrollableResult = new ScrollableResult<Study>(studyService, 10, [], true, false);
     }
 
     ngOnInit() {
-        console.log('study component init');
-        this.getStudies();
         this.loadWidget();
     }
 
@@ -58,25 +60,23 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     public getStudies(pattern?:string, speaker?:string) {
-        this.studyService.find(pattern, speaker).subscribe(data => {
-            this.list = data.result;
-        });
+        this.scrollableResult.updateFilter([{key:'pattern',value:pattern},{key:'speaker',value:speaker}]);
     }
 
-    editStudy(study: Study) {
-        var studyCopy : Study = Object.assign({}, study);
+    editStudy(study:Study) {
+        var studyCopy:Study = Object.assign({}, study);
         this.onStudyEdit.emit(studyCopy);
         var time = document.body.scrollTop * 0.7 / (document.body.scrollTop * 0.001);
         this.scrollTo(document.body, 0, time);
     }
 
     viewVideo(study:Study) {
-        var studyCopy : Study = Object.assign({}, study);
+        var studyCopy:Study = Object.assign({}, study);
         this.component.showModal(studyCopy);
     }
 
-    deleteStudy (study: Study) {
-        var studyCopy : Study = Object.assign({}, study);
+    deleteStudy(study:Study) {
+        var studyCopy:Study = Object.assign({}, study);
         if (this.editmode) {
             this.onStudyDelete.emit(studyCopy);
         }
@@ -94,13 +94,13 @@ export class StudyListComponent implements OnInit, OnChanges {
         }, 10);
     }
 
-    public onPatternSearch(pattern : string) {
+    public onPatternSearch(pattern:string) {
         this.search.pattern = pattern;
         this.onSearch();
     }
 
     public onSearch(speaker?:string) {
-        if(speaker) {
+        if (speaker) {
             this.search.speaker = speaker;
             this.search.pattern = null;
         }
@@ -121,11 +121,12 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     loadWidget() {
         // TODO !!!
-        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5768d6ade5563361', {async: false},(err, script) => {});
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5768d6ade5563361', {async: false}, (err, script) => {
+        });
     }
 
     nextPage() {
-        // debugger;
+        this.scrollableResult.next();
     }
 
 }

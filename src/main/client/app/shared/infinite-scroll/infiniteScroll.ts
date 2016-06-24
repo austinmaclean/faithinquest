@@ -1,5 +1,6 @@
-import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter,Directive, provide} from '@angular/core';
+import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter, Directive, provide} from '@angular/core';
 import {NgModel} from '@angular/common';
+import {ScrollableResult} from '../infinite-scroll/scrollableResult';
 
 @Directive({
     selector: '[InfiniteScroll]',
@@ -41,8 +42,7 @@ export class InfiniteScroll implements OnInit, OnChanges {
     onScroll():void {
         if (jQuery(document).height() > jQuery(window).height()) {
             // scroll visible
-            if (jQuery(window).scrollTop() + jQuery(window).height() >
-                jQuery(document).height() - this.scrollDistance) {
+            if (jQuery(window).scrollTop() + jQuery(window).height() > jQuery(document).height() - this.scrollDistance) {
                 if (this.scrollEnabled) {
                     this.OnScrollMethod.emit(null);
                 } else {
