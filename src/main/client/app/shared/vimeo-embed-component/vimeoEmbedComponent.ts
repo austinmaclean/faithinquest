@@ -49,7 +49,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     }
 
     public loadVideo(id:string, start?:number = 0, autoPlay?:boolean = false) {
-        debugger;
         this.autoplay = autoPlay;
         this.start = start;
         this.player.loadVideo(id);
@@ -78,13 +77,11 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     }
 
     onTimeUpdate(event:any) {
-/*
         if (this.autoplay) {
             this.player.play();
         }else{
             this.player.pause();
         }
-*/
     }
 
     onReady(event:any) {
@@ -96,10 +93,7 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     }
 
     onLoaded(event:any) {
-        let self = this;
-        this.player.setCurrentTime(this.start).then(seconds=>{
-            self.player.pause();
-        });
+        this.player.setCurrentTime(this.start);
     }
 
     public stopVideo() {

@@ -123,13 +123,13 @@ export class AdminEditComponent implements OnInit, OnChanges {
         var startTime = this.model.startMin * 60 + this.model.startSec;
 
         if (this.videoMode == VideoType.YOUTUBE) {
-            var code = this.getParameterByName('v', newVal);
+            let code = this.getParameterByName('v', newVal);
             this.videoPlayer.loadAndPause(code, startTime);
             this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
             this.hideThumb = false;
         } else if (this.videoMode == VideoType.VIMEO) {
-            var ar = newVal.split('/');
-            var code = ar[ar.length-1];
+            let ar = newVal.split('/');
+            let code = ar[ar.length-1];
             this.thumbUrl = '../../assets/img/over_big.png';
             this.vimeoPlayer.loadVideo(code, startTime);
             this.hideThumb = false;
@@ -142,7 +142,6 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     onVimeoEditLoaded(flag:boolean) {
-        debugger;
         this.playerReady = true;
         this.vimeoPlayer.initVimeoPlayer(59777392, 0, false);
     }
