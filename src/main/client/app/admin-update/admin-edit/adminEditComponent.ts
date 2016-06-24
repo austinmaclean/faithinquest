@@ -6,6 +6,8 @@ import {OutputMessage} from './outputMessage';
 import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
 import {Study} from '../../shared/model/study';
+import {VimeoEmbedComponent} from '../../shared/vimeo-embed-component/vimeoEmbedComponent';
+import {VideoType} from '../../shared/modal-component/modalVideoComponent';
 
 @Component({
     moduleId: module.id,
@@ -13,19 +15,22 @@ import {Study} from '../../shared/model/study';
     templateUrl: 'adminEditComponent.html',
     styleUrls: ['adminEditComponent.css'],
     providers: [StudyService],
-    directives: [FILE_UPLOAD_DIRECTIVES, <any>NgClass, <any>NgStyle, <any>YTEmbedComponent, CORE_DIRECTIVES, FORM_DIRECTIVES]
+    directives: [FILE_UPLOAD_DIRECTIVES, <any>NgClass, <any>NgStyle,
+        <any>YTEmbedComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, <any>VimeoEmbedComponent]
 })
 export class AdminEditComponent implements OnInit, OnChanges {
 
     @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
+    @ViewChild(<any>VimeoEmbedComponent) vimeoPlayer:VimeoEmbedComponent;
     @Output() onStudiesUpdated = new EventEmitter<OutputMessage>();
 
     thumbUrl:string = '../../assets/img/over_big.png';
 
     uploader:BulkUploader;
     createMode:boolean;
-    playerReady:boolean;
+    playerReady:boolean = false;
     hideThumb = false;
+    videoMode: VideoType = VideoType.NONE;
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
@@ -49,18 +54,28 @@ export class AdminEditComponent implements OnInit, OnChanges {
         console.log('changes');
     }
 
-    validateYouTubeLink() {
+    validateVideoLink() {
         var linkElm:HTMLInputElement = <HTMLInputElement>document.getElementById('link');
-        if (!this.matchYoutubeUrl(linkElm.value)) {
-            linkElm.setCustomValidity('Please enter valid youtube link');
+        if (!this.matchYoutubeUrl(linkElm.value) && !this.matchVimeo(linkElm.value)) {
+            linkElm.setCustomValidity('Please enter valid youtube or vimeo link');
             return;
         } else {
             linkElm.setCustomValidity('');
         }
     }
 
+    getVideoType(urlString:string) {
+
+        if (this.matchYoutubeUrl(urlString)) {
+            return VideoType.YOUTUBE;
+        } else if (this.matchVimeo(urlString)) {
+            return VideoType.VIMEO;
+        } else {
+            return -1;
+        }
+    }
+
     onSubmit() {
-        console.log(JSON.stringify(this.model));
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {
                 this.onStudiesUpdated.emit(new OutputMessage(true, 'Study "' + this.model.title + '" created'));
@@ -88,6 +103,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
         this.createMode = true;
         this.thumbUrl = '../../assets/img/over_big.png';
         this.hideThumb = false;
+        this.videoMode = VideoType.NONE;
     }
 
     public editStudy(study:Study) {
@@ -101,12 +117,21 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     onChange(newVal) {
-        this.validateYouTubeLink();
-        var code = this.getParameterByName('v', newVal);
-        if (code) {
-            var startTime = this.model.startMin * 60 + this.model.startSec;
+
+        this.validateVideoLink();
+        this.videoMode = this.getVideoType(newVal);
+        var startTime = this.model.startMin * 60 + this.model.startSec;
+
+        if (this.videoMode == VideoType.YOUTUBE) {
+            var code = this.getParameterByName('v', newVal);
             this.videoPlayer.loadAndPause(code, startTime);
             this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
+            this.hideThumb = false;
+        } else if (this.videoMode == VideoType.VIMEO) {
+            var ar = newVal.split('/');
+            var code = ar[ar.length-1];
+            this.thumbUrl = '../../assets/img/over_big.png';
+            this.vimeoPlayer.loadVideo(code, startTime);
             this.hideThumb = false;
         }
     }
@@ -116,11 +141,20 @@ export class AdminEditComponent implements OnInit, OnChanges {
         this.playerReady = true;
     }
 
+    onVimeoEditLoaded(flag:boolean) {
+        debugger;
+        this.playerReady = true;
+        this.vimeoPlayer.initVimeoPlayer(59777392, 0, false);
+    }
+
     onThumbClick() {
-        console.log('thumb click');
         if (this.model.link !== '' && !this.hideThumb) {
             this.hideThumb = true;
-            this.videoPlayer.play();
+            if (this.videoMode == VideoType.YOUTUBE) {
+                this.videoPlayer.play();
+            } else if (this.videoMode == VideoType.VIMEO) {
+                this.vimeoPlayer.playVideo();
+            }
         }
     }
 
@@ -139,6 +173,12 @@ export class AdminEditComponent implements OnInit, OnChanges {
             return url.match(p)[1];
         }
         return false;
+    }
+
+    matchVimeo(url) {
+        var p = /^https?:\/\/vimeo.com/;
+        var res = (p).test(url);
+        return res;
     }
 
 }

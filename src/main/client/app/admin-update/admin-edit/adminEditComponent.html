@@ -52,7 +52,8 @@
 
     <div class="admin-item-video-panel">
         <div class="admin-item-video-container">
-            <ti-yt-embed [ytwidth]="400" [ytheight]="230" [ytid]="1" [videoid]="" (onYTReady)="onYTReady($event)"></ti-yt-embed>
+            <ti-vimeo-embed [hidden]="videoMode != 1" vid="edit" [vwidth]="400" [vheight]="230" (onVimeoLoaded)="onVimeoEditLoaded($event)"></ti-vimeo-embed>
+            <ti-yt-embed videoid="" [hidden]="videoMode != 0" [ytwidth]="400" [ytheight]="230" [ytid]="1" [videoid]="" (onYTReady)="onYTReady($event)"></ti-yt-embed>
             <img src="{{thumbUrl}}" width="400" height="230" [hidden]="hideThumb">
             <img src="../../assets/img/over_big.png" width="400" height="230" (click)="onThumbClick()" [hidden]="hideThumb">
         </div>

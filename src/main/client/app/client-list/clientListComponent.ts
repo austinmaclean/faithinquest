@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
+import {LoadScript} from "../shared/youtube-embed-component/loadScript";
 
 @Component({
     moduleId: module.id,
@@ -29,6 +30,5 @@ export class ClientListComponent implements OnInit {
     onSearchPattern(outString : string) {
         this.pattern = outString;
     }
-
 
 }
