@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input, ElementRef, provide, Output, EventEmitter } from '@angular/core';
 import {LoadScript} from '../youtube-embed-component/loadScript';
+import timeout = Q.timeout;
 
 @Component({
     moduleId: module.id,
@@ -22,6 +23,8 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     id: string;
     start: number = 0;
     embed : string;
+
+    videos:string[] = [];
 
     ngOnInit() {
         console.log('init player container');
@@ -51,12 +54,17 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     public loadVideo(id:string, start?:number = 0, autoPlay?:boolean = false) {
         this.autoplay = autoPlay;
         this.start = start;
-        this.player.loadVideo(id);
+        this.id = id;
+        self = this;
+        this.player.loadVideo(id).then(id => {
+            self.setTime();
+        });
     }
 
     public initVimeoPlayer(id, start?:number = 0, autoPlay?: boolean = false) {
         this.id = id;
         this.autoplay = autoPlay;
+        this.videos.push(id);
         this.start = start;
         var options = {
             id: id,
@@ -73,7 +81,12 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
             this.onError(event)));
         this.player.on('seeked', <any>((event: any) =>
             this.onTimeUpdate(event)));
+        this.player.on('finish', <any>((event: any) =>
+            this.onFinish(event)));
 
+    }
+
+    onFinish(event:any) {
     }
 
     onTimeUpdate(event:any) {
@@ -92,12 +105,23 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
         console.log(event);
     }
 
+    setTime() {
+        setTimeout(() => {
+            this.player.setCurrentTime(this.start);
+        }, 500);
+    }
+
     onLoaded(event:any) {
-        this.player.setCurrentTime(this.start);
+        this.setTime();
+    }
+
+    removePlayer() {
+        this.player = null;
     }
 
     public stopVideo() {
         this.autoplay = false;
+        self = this;
         this.player.unload();
     }
 
