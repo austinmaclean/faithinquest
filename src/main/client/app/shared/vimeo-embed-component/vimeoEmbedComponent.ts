@@ -24,8 +24,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     start: number = 0;
     embed : string;
 
-    videos:string[] = [];
-
     ngOnInit() {
         console.log('init player container');
         //this.initYoutube();
@@ -51,21 +49,21 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
 
     }
 
-    public loadVideo(id:string, start?:number = 0, autoPlay?:boolean = false) {
-        this.autoplay = autoPlay;
-        this.start = start;
+    public loadVideo(id:string, start?:number, autoPlay?:boolean) {
+        this.autoplay = autoPlay ? autoPlay : false;
+        this.start = start ? start : 0;
         this.id = id;
         self = this;
         this.player.loadVideo(id).then(id => {
+            debugger;
             self.setTime();
         });
     }
 
-    public initVimeoPlayer(id, start?:number = 0, autoPlay?: boolean = false) {
+    public initVimeoPlayer(id, start?:number, autoPlay?: boolean) {
         this.id = id;
-        this.autoplay = autoPlay;
-        this.videos.push(id);
-        this.start = start;
+        this.autoplay = autoPlay ? autoPlay : false;
+        this.start = start ? start : 0;
         var options = {
             id: id,
             width: this.vwidth,
@@ -112,6 +110,7 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     }
 
     onLoaded(event:any) {
+        debugger;
         this.setTime();
     }
 
@@ -121,7 +120,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
 
     public stopVideo() {
         this.autoplay = false;
-        self = this;
         this.player.unload();
     }
 
