@@ -55,7 +55,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
         this.id = id;
         self = this;
         this.player.loadVideo(id).then(id => {
-            debugger;
             self.setTime();
         });
     }
@@ -110,7 +109,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     }
 
     onLoaded(event:any) {
-        debugger;
         this.setTime();
     }
 
