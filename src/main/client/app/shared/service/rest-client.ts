@@ -29,6 +29,7 @@ import 'rxjs/add/operator/map';
  - Parameter Decorators:
      @Path(string)
      @Query(string)
+     @QueryObject
      @Header(string)
      @Body
  */
@@ -129,6 +130,10 @@ export var Path = paramBuilder("Path");
  */
 export var Query = paramBuilder("Query");
 /**
+ * QueryObject value of a method's url, type: object
+ */
+export var QueryObject = paramBuilder("QueryObject")("QueryObject");
+/**
  * Body of a REST method, type: key-value pair object
  * Only one body per method!
  */
@@ -178,6 +183,7 @@ function methodBuilder(method:number) {
 
             var pPath = target[`${propertyKey}_Path_parameters`];
             var pQuery = target[`${propertyKey}_Query_parameters`];
+            var pQueryObject = target[`${propertyKey}_QueryObject_parameters`];
             var pBody = target[`${propertyKey}_Body_parameters`];
             var pHeader = target[`${propertyKey}_Header_parameters`];
 
@@ -212,6 +218,25 @@ function methodBuilder(method:number) {
                                 value = JSON.stringify(value);
                             }
                             search.set(encodeURIComponent(key), encodeURIComponent(value));
+                        });
+                }
+
+                // QueryObject
+                if (pQueryObject) {
+                    pQueryObject
+                        .filter(p => args[p.parameterIndex]) // filter out optional parameters
+                        .forEach(p => {
+                            var value = args[p.parameterIndex];
+                            for(var k in value){
+                               let attrValue = value[k];
+                                if(attrValue != null) {
+                                    // if the value is a instance of Object, we stringify it
+                                    if (attrValue instanceof Object) {
+                                        attrValue = JSON.stringify(value);
+                                    }
+                                    search.set(encodeURIComponent(k), encodeURIComponent(attrValue));
+                                }
+                            }
                         });
                 }
 

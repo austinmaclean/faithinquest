@@ -8,7 +8,7 @@ import {
     GET, PUT, POST,
     DELETE, BaseUrl, Headers,
     Produces, MediaType, DefaultHeaders,
-    Path, Body, Query
+    Path, Body, Query, QueryObject
 } from './rest-client';
 import 'rxjs/add/operator/map';
 
@@ -33,14 +33,20 @@ export class StudyService extends BaseService {
         return null;
     }
 
+    // @GET('study/find')
+    // @Produces(MediaType.JSON)
+    // public find(@Query('pattern') pattern?:string,
+    //             @Query('speaker') speaker?:string,
+    //             @Query('limit') limit?:number,
+    //             @Query('offset') offset?:number,
+    //             @Query('order') order?:string,
+    //             @Query('sort') sort?:string):Observable<any> {
+    //     return null;
+    // }
+
     @GET('study/find')
     @Produces(MediaType.JSON)
-    public find(@Query('pattern') pattern?:string,
-                @Query('speaker') speaker?:string,
-                @Query('limit') limit?:number,
-                @Query('offset') offset?:number,
-                @Query('order') order?:string,
-                @Query('sort') sort?:string):Observable<any> {
+    public find(@QueryObject search:any):Observable<any> {
         return null;
     }
 

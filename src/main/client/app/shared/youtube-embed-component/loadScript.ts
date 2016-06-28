@@ -1,6 +1,6 @@
 export class LoadScript {
 
-    public static load(src, opts, cb) {
+    public static load(src, opts, cb?) {
         var head = document.head || document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
 
@@ -10,8 +10,7 @@ export class LoadScript {
         }
 
         opts = opts || {};
-        cb = cb || function () {
-            };
+        cb = cb || function () {};
 
         script.type = opts.type || 'text/javascript';
         script.charset = opts.charset || 'utf8';

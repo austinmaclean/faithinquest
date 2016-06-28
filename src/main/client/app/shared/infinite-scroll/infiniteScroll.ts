@@ -1,6 +1,6 @@
 import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter, Directive, provide} from '@angular/core';
 import {NgModel} from '@angular/common';
-import {ScrollableResult} from '../infinite-scroll/scrollableResult';
+import {IScrollableResult} from '../infinite-scroll/scrollableResult';
 
 @Directive({
     selector: '[InfiniteScroll]',

@@ -44,7 +44,7 @@ export class StudyListComponent implements OnInit, OnChanges {
     scrollableResult:ScrollableResult<Study>;
 
     constructor(private studyService:StudyService) {
-        this.scrollableResult = new ScrollableResult<Study>(studyService, 10, [], true, false);
+        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, [], true, false);
     }
 
     ngOnInit() {
@@ -123,8 +123,7 @@ export class StudyListComponent implements OnInit, OnChanges {
         // TODO !!!
         //SB account ra-5771ed6bfe470e48
         //test account ra-5768d6ade5563361
-            LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false}, (err, script) => {
-        });
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false});
     }
 
     nextPage() {

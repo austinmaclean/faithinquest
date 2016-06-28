@@ -53,7 +53,7 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
         this.autoplay = autoPlay ? autoPlay : false;
         this.start = start ? start : 0;
         this.id = id;
-        self = this;
+        let self = this;
         this.player.loadVideo(id).then(id => {
             self.setTime();
         });

@@ -1,7 +1,7 @@
 import {BaseModel} from "../model/baseModel";
-import {StudyService} from "../service/study.service";
+import {Observable} from 'rxjs/Observable';
 
-interface IScrollableResult<T extends BaseModel> {
+export interface IScrollableResult<T extends BaseModel> {
     getItems():T[];
     stop();
     hasNext():boolean;
@@ -27,7 +27,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
     private itemsCount:number;
     private externalItemsCount:number;
 
-    constructor(private resource:StudyService,
+    constructor(private search:(args:any) => Observable<any>,
                 private limit?:number,
                 private filter?:any[],
                 private checkDuplicate?:boolean,
@@ -45,7 +45,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     }
 
-    getItems():T[] {
+    public getItems():T[] {
         if (this.reversEnable) {
             return this.itemsReversed;
         } else {
@@ -67,7 +67,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         return !this.busy && this.hasMore;
     };
 
-    public next(call?:Function, postCall?:Function) {
+    public next(call?:(items:T[]) => void, postCall?:(items:T[]) => void) {
         if (this.busy || !this.hasMore) {
             return;
         }
@@ -75,9 +75,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
 
         let requestData = {
             limit: this.limit,
-            offset: (this.itemsCount - this.externalItemsCount),
-            pattern: null,
-            speaker: null
+            offset: (this.itemsCount - this.externalItemsCount)
         };
 
         if (this.filter) {
@@ -86,11 +84,11 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
             });
         }
 
-        this.resource.find(requestData.pattern, requestData.speaker, requestData.limit, requestData.offset, null, null).subscribe((res) => {
+        this.search(requestData).subscribe((res) => {
 
             this.totalCount = res.count;
 
-            var items = res.result;
+            let items:T[] = res.result;
             var i, j;
 
             if (this.checkDuplicate) {
@@ -135,21 +133,23 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         });
     }
 
-    _readAll(call) {
+    private _readAll(call?:() => void) {
         if (this.hasMore) {
             this.next(null, function () {
                 this._readAll(call)
             });
         } else {
-            call();
+            if (call) {
+                call();
+            }
         }
     };
 
-    public readAll(call:Function) {
+    public readAll(call?:() => void) {
         this._readAll(call)
     };
 
-    public addExternalFirs(item:T, call?:Function) {
+    public addExternalFirs(item:T, call?:() => void) {
         this.items.unshift(item);
         this.externalItemsCount++;
 
@@ -160,7 +160,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    public addFirs(item:T, call?:Function) {
+    public addFirs(item:T, call?:() => void) {
         this.items.unshift(item);
         this.totalCount++;
 
@@ -171,7 +171,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    updateItemField(item:T, fieldName:string, call?:Function) {
+    public updateItemField(item:T, fieldName:string, call?:() => void) {
         for (var i = 0; i < this.items.length; i++) {
             if (this.items[i].id === item.id) {
                 this.items[i][fieldName] = item[fieldName];
@@ -186,7 +186,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    update(item:T, call?:Function) {
+    public update(item:T, call?:() => void) {
         for (var i = 0; i < this.items.length; i++) {
             if (this.items[i].id === item.id) {
                 this.items[i] = item;
@@ -201,7 +201,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    remove(item:T, call?:Function) {
+    public remove(item:T, call?:() => void) {
         for (var i = 0; i < this.items.length; i++) {
             if (this.items[i].id === item.id) {
                 this.items.splice(i, 1);
@@ -218,15 +218,10 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    clearAll(call?:Function) {
-        var self = this;
-
-        var handler = function () {
-            self.clearAll(call);
-        };
-
+    public clearAll(call?:() => void) {
         if (this.busy) {
-            setTimeout(handler, 500);
+            let self = this;
+            setTimeout(() => self.clearAll(call), 500);
         } else {
             this.items = [];
             this.itemsCount = 0;
@@ -242,15 +237,10 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    clearInternal(call?:Function, nextCall?:Function, nextPostCall?:Function) {
-        var self = this;
-
-        var handler = function () {
-            self.clearAll(call);
-        };
-
+    public clearInternal(call?:() => void, nextCall?:(items:T[]) => void, nextPostCall?:(items:T[]) => void) {
         if (this.busy) {
-            setTimeout(handler, 500);
+            let self = this;
+            setTimeout(()=>self.clearAll(call), 500);
         } else {
             this.items = this.items.slice(0, this.externalItemsCount);
             this.itemsCount = 0;
@@ -265,12 +255,12 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    updateFilter(filter:any[], call?:Function, nextCall?:Function, nextPostCall?:Function) {
+    public updateFilter(filter:any[], call?:() => void, nextCall?:(items:T[]) => void, nextPostCall?:(items:T[]) => void) {
         this.filter = filter;
         this.clearInternal(call, nextCall, nextPostCall);
     };
 
-    getTotal():number {
+    public getTotal():number {
         return this.totalCount + this.externalItemsCount;
     };
 
