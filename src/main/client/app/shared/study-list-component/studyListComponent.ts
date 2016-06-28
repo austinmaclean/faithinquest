@@ -1,6 +1,7 @@
 import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from '@angular/core';
 
 import {CORE_DIRECTIVES} from '@angular/common';
+import {Router, RouteParams, Instruction} from '@angular/router-deprecated';
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
 import {Study} from '../../shared/model/study';
@@ -9,7 +10,7 @@ import {StudyElementComponent} from './study-element/studyElementComponent';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
 import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
-import {ScrollableResult} from '../infinite-scroll/scrollableResult';
+import {IScrollableResult, ScrollableResult} from '../infinite-scroll/scrollableResult';
 import {LoadScript} from '../youtube-embed-component/loadScript';
 
 @Component({
@@ -41,10 +42,10 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     @ViewChild(<any>ModalVideoComponent) private component:ModalVideoComponent;
 
-    scrollableResult:ScrollableResult<Study>;
+    scrollableResult:IScrollableResult<Study>;
 
-    constructor(private studyService:StudyService) {
-        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, [], true, false);
+    constructor(private studyService:StudyService, private routeParams:RouteParams, private router:Router) {
+        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, routeParams.params, true, false);
     }
 
     ngOnInit() {
@@ -60,7 +61,16 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     public getStudies(pattern?:string, speaker?:string) {
-        this.scrollableResult.updateFilter([{key:'pattern',value:pattern},{key:'speaker',value:speaker}]);
+        let current:Instruction = this.router.parent.currentInstruction;
+        current.urlParams.splice(0);
+        if (pattern != null) current.urlParams.push('pattern=' + encodeURIComponent(pattern));
+        if (speaker != null) current.urlParams.push('speaker=' + encodeURIComponent(speaker));
+        this.router.parent.navigateByInstruction(current, false);
+
+        this.scrollableResult.updateFilter({
+            'pattern': pattern,
+            'speaker': speaker
+        });
     }
 
     editStudy(study:Study) {

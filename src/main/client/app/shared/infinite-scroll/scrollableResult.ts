@@ -13,7 +13,7 @@ export interface IScrollableResult<T extends BaseModel> {
     update(item:T, call?:Function);
     remove(item:T, call?:Function);
     clearInternal(call?:Function, nextCall?:Function, nextPostCall?:Function);
-    updateFilter(filter:any[], call?:Function, nextCall?:Function, nextPostCall?:Function);
+    updateFilter(filter:any, call?:Function, nextCall?:Function, nextPostCall?:Function);
     getTotal():number;
 }
 
@@ -29,7 +29,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
 
     constructor(private search:(args:any) => Observable<any>,
                 private limit?:number,
-                private filter?:any[],
+                private filter?:any,
                 private checkDuplicate?:boolean,
                 private reversEnable?:boolean) {
 
@@ -79,9 +79,11 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         };
 
         if (this.filter) {
-            this.filter.forEach(function (item) {
-                requestData[item.key] = item.value;
-            });
+            for (var key in this.filter) {
+                if (this.filter.hasOwnProperty(key)) {
+                    requestData[key] = this.filter[key];
+                }
+            }
         }
 
         this.search(requestData).subscribe((res) => {
@@ -255,7 +257,7 @@ export class ScrollableResult<T extends BaseModel> implements IScrollableResult<
         }
     };
 
-    public updateFilter(filter:any[], call?:() => void, nextCall?:(items:T[]) => void, nextPostCall?:(items:T[]) => void) {
+    public updateFilter(filter:any, call?:() => void, nextCall?:(items:T[]) => void, nextPostCall?:(items:T[]) => void) {
         this.filter = filter;
         this.clearInternal(call, nextCall, nextPostCall);
     };
