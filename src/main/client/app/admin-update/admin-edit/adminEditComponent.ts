@@ -1,4 +1,5 @@
 import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
+import {Http} from '@angular/http';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
 import {BulkUploader} from './bulkUploader';
@@ -7,7 +8,7 @@ import {StudyService} from '../../shared/index';
 import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
 import {Study} from '../../shared/model/study';
 import {VimeoEmbedComponent} from '../../shared/vimeo-embed-component/vimeoEmbedComponent';
-import {VideoType} from '../../shared/modal-component/modalVideoComponent';
+import {VideoType} from '../../shared/model/videoType';
 
 @Component({
     moduleId: module.id,
@@ -34,7 +35,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
-    constructor(private studyService:StudyService) {
+    constructor(private studyService:StudyService, private http: Http) {
         this.uploader = new BulkUploader({
             url: '/api/admin/study/import',
             autoUpload: true,
@@ -130,7 +131,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
         } else if (this.videoMode == VideoType.VIMEO) {
             let ar = newVal.split('/');
             let code = ar[ar.length-1];
-            this.thumbUrl = '../../assets/img/over_big.png';
+            this.getVimeoThumb(code);
             this.vimeoPlayer.loadVideo(code, startTime);
             this.hideThumb = false;
         }
@@ -179,5 +180,25 @@ export class AdminEditComponent implements OnInit, OnChanges {
         var res = (p).test(url);
         return res;
     }
+
+    getVimeoThumb(id:string) {
+        let url = 'http://vimeo.com/api/v2/video/'+id+'.json';
+        this.http.get(url)
+            .map(res => res.json())
+            .subscribe(
+                data => this.updateThumbUrl(data),
+                err => this.logError(err),
+                () => console.log('Vimeo Thumb')
+            );
+    }
+
+    updateThumbUrl (data) {
+        this.thumbUrl = data[0].thumbnail_medium;
+    }
+
+    logError(err) {
+        console.log(err);
+    }
+
 
 }

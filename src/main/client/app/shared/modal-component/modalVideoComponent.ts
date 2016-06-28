@@ -4,8 +4,7 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 import {Study} from '../model/study';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {VimeoEmbedComponent} from '../vimeo-embed-component/vimeoEmbedComponent';
-
-export enum VideoType { YOUTUBE, VIMEO, NONE }
+import {VideoType} from '../model/videoType';
 
 @Component({
     moduleId: module.id,

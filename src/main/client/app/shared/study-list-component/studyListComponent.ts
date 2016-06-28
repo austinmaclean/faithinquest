@@ -121,7 +121,9 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     loadWidget() {
         // TODO !!!
-        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5768d6ade5563361', {async: false}, (err, script) => {
+        //SB account ra-5771ed6bfe470e48
+        //test account ra-5768d6ade5563361
+            LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false}, (err, script) => {
         });
     }
 
