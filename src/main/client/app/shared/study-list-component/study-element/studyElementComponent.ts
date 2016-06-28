@@ -42,7 +42,7 @@ export class StudyElementComponent implements OnInit, OnChanges {
                 this.videoMode = VideoType.YOUTUBE;
                 var code = this.getParameterByName('v', this.item.link);
                 if (code) {
-                    this.thumbUrl = 'http://img.youtube.com/vi/'+code+'/default.jpg';
+                    this.thumbUrl = 'https://img.youtube.com/vi/'+code+'/hqdefault.jpg';
                 }
             } else if (this.matchVimeo(this.item.link)) {
                 this.videoMode = VideoType.VIMEO;
