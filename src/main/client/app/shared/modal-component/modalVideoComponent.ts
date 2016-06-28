@@ -74,6 +74,9 @@ export class ModalVideoComponent {
             if (this.videoMode == VideoType.YOUTUBE) {
                 setTimeout(() => {
                     var code = this.getParameterByName('v', this.study.link);
+                    if (code.length>11) {
+                        code = code.substr(0, 11);
+                    }
                     this.videoPlayer.playVideo(code, startTime);
                     this.playing = true;
                 }, 500);

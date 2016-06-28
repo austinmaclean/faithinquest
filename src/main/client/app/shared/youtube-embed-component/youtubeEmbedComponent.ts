@@ -52,7 +52,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         },1000);
     }
 
-    public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'medium') {
+    public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'default') {
         if (this.ready) {
 
             var params : YT.VideoByIdParams = {
@@ -80,20 +80,20 @@ export class YTEmbedComponent implements OnInit, OnChanges {
             this.player.cueVideoById(params);
             this.player.pauseVideo();
         }
-    }
+    };
 
     onPlayerReady(event: YT.EventArgs) {
         console.log('player ready');
         this.ready = true;
         this.onYTReady.emit(true);
-    }
+    };
 
     onPlayerPlayback(event: YT.EventArgs) {
         console.log('playback');
         if (!this.videoid || this.videoid === '') {
             return;
         }
-    }
+    };
 
     onPlayerStateChange(event: YT.EventArgs) {
         console.log('playing state:: '+event.data);

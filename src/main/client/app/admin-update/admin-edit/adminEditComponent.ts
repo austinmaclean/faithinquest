@@ -118,13 +118,15 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     onChange(newVal) {
-
         this.validateVideoLink();
         this.videoMode = this.getVideoType(newVal);
         var startTime = this.model.startMin * 60 + this.model.startSec;
 
         if (this.videoMode == VideoType.YOUTUBE) {
             let code = this.getParameterByName('v', newVal);
+            if (code.length>11) {
+                code = code.substr(0, 11);
+            }
             this.videoPlayer.loadAndPause(code, startTime);
             this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
             this.hideThumb = false;
