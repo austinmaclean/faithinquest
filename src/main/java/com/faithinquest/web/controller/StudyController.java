@@ -7,6 +7,7 @@ import com.faithinquest.service.IStudyService;
 import com.faithinquest.service.conversion.FormatType;
 import com.faithinquest.service.conversion.IConversionService;
 import com.faithinquest.service.conversion.processors.IDataProcessor;
+import com.faithinquest.web.exception.ResourceNotFoundException;
 import com.faithinquest.web.util.DefaultMessages;
 import com.faithinquest.web.util.DocumentDataView;
 import com.faithinquest.web.util.GridResult;
@@ -66,6 +67,18 @@ public class StudyController
 	{
 		studyService.delete( id );
 		return DefaultMessages.OK_RESPONSE;
+	}
+
+	@RequestMapping( value = Routes.STUDY + "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public Study read( @PathVariable Long id )
+	{
+		Study entity = studyService.read( id );
+		if( entity == null )
+		{
+			throw new ResourceNotFoundException();
+		}
+		return entity;
 	}
 
 	@RequestMapping( value = { Routes.STUDY + "/", Routes.STUDY + "" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE )

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, Output, EventEmitter} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 import {Study} from '../model/study';
@@ -20,27 +20,29 @@ export class ModalVideoComponent {
     @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
     @ViewChild(<any>VimeoEmbedComponent) vimeoPlayer:VimeoEmbedComponent;
 
+    @Output() onShown = new EventEmitter<any>();
+    @Output() onHide = new EventEmitter<any>();
+
     study:Study = null;
     playerReady:boolean;
     vimeoReady:boolean;
     playing:boolean = false;
 
-    videoMode: VideoType = VideoType.NONE;
+    videoMode:VideoType = VideoType.NONE;
 
     showModal(study:Study) {
-
         this.study = study;
-        
+
         if (this.matchYoutubeUrl(this.study.link)) {
             this.videoMode = VideoType.YOUTUBE;
         } else if (this.matchVimeo(this.study.link)) {
             this.videoMode = VideoType.VIMEO;
         }
-        
+
         if (this.lgModal) {
             this.lgModal.show();
 
-            var flag :boolean = (this.playerReady && this.videoMode == VideoType.YOUTUBE) || (this.vimeoReady && this.videoMode == VideoType.VIMEO);
+            var flag:boolean = (this.playerReady && this.videoMode == VideoType.YOUTUBE) || (this.vimeoReady && this.videoMode == VideoType.VIMEO);
 
             if (flag && !this.playing) {
                 this.playVideo();
@@ -48,7 +50,12 @@ export class ModalVideoComponent {
         }
     }
 
-    onHideHanler() {
+    onShownHandler() {
+        console.log('shown');
+        this.onShown.emit(this.study);
+    }
+
+    onHideHandler() {
         console.log('hide');
         if (this.videoMode == VideoType.YOUTUBE) {
             this.videoPlayer.stop();
@@ -56,8 +63,11 @@ export class ModalVideoComponent {
         } else {
             this.vimeoPlayer.stopVideo();
         }
-        this.study = null;
+
+        this.onHide.emit(this.study);
+
         this.playing = false;
+        this.study = null;
     }
 
     onYTReady(flag:boolean) {
@@ -74,7 +84,7 @@ export class ModalVideoComponent {
             if (this.videoMode == VideoType.YOUTUBE) {
                 setTimeout(() => {
                     var code = this.getParameterByName('v', this.study.link);
-                    if (code.length>11) {
+                    if (code.length > 11) {
                         code = code.substr(0, 11);
                     }
                     this.videoPlayer.playVideo(code, startTime);
@@ -83,7 +93,7 @@ export class ModalVideoComponent {
             } else {
                 setTimeout(() => {
                     var ar = this.study.link.split('/');
-                    var code = ar[ar.length-1];
+                    var code = ar[ar.length - 1];
                     if (!this.vimeoPlayer.player) {
                         this.vimeoPlayer.initVimeoPlayer(code, startTime, true);
                     } else {

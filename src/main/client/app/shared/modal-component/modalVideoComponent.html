@@ -1,4 +1,5 @@
-<div bsModal #lgModal="bs-modal" class="modal modal-video fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" (onHide)="onHideHanler()">
+<div bsModal #lgModal="bs-modal" class="modal modal-video fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+     (onShown)="onShownHandler()" (onHide)="onHideHandler()">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

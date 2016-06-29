@@ -26,7 +26,7 @@
 
 <div class="items-panel flex flex-wrap-row flex-align-vertical-top" *ngIf="scrollableResult">
 
-    <ti-modal-video></ti-modal-video>
+    <ti-modal-video (onShown)="onShownVideo($event)" (onHide)="onHideVideo($event)"></ti-modal-video>
 
     <div class="items-list-panel flex flex-wrap-column" InfiniteScroll (OnScrollMethod)="nextPage()" [ScrollDistance]="300" [ScrollDisabled]="!scrollableResult.hasNext()">
         <ti-study *ngFor="let studyElm of scrollableResult.getItems()" [item]="studyElm" [editmode]="editmode"></ti-study>
