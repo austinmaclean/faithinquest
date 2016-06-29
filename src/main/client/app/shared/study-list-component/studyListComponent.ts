@@ -39,8 +39,8 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     constructor(private studyService:StudyService, private routeParams:RouteParams, private router:Router) {
         let filterConfig = {
-            pattern: {value: null, oldValue: null},
-            speaker: {value: null, oldValue: null}
+            pattern: {value: null},
+            speaker: {value: null}
         };
         this.queryFilter = new QueryFilter(filterConfig, routeParams, router);
         let filterReq = this.queryFilter.makeFilterRequest();

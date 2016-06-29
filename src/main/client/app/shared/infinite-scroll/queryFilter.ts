@@ -5,7 +5,11 @@ export class QueryFilter {
     public filter:any;
 
     constructor(private filterConfig:any, private routeParams:RouteParams, private router:Router) {
-        this.filter = filterConfig;
+        this.filter = {};
+        for (var filterConfigItemKey in filterConfig) {
+            let filterConfigItem = filterConfig[filterConfigItemKey];
+            this.filter[filterConfigItemKey] = {value: filterConfigItem.value, oldValue: filterConfigItem.value}
+        }
 
         this.setFilterDataFromUrl();
     }

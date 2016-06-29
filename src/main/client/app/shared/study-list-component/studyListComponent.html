@@ -1,12 +1,12 @@
 <div class="top-panel flex flex-wrap-row flex-align-horizontal-stretch flex-align-vertical-center">
     <div class="top-panel-cell left">
-        <span *ngIf="queryFilter.filter.pattern.oldValue || queryFilter.filter.speaker.oldValue">displaying results for </span>
-        <span *ngIf="queryFilter.filter.pattern.oldValue">
-            "<span class="highlight-blue search-pattern" [innerHTML]="queryFilter.filter.pattern.oldValue" (click)="onSearchClear('pattern')"></span>"
+        <span *ngIf="queryFilter.filter.pattern.value || queryFilter.filter.speaker.value">displaying results for </span>
+        <span *ngIf="queryFilter.filter.pattern.value">
+            "<span class="highlight-blue search-pattern" [innerHTML]="queryFilter.filter.pattern.value" (click)="onSearchClear('pattern')"></span>"
         </span>
-        <span *ngIf="queryFilter.filter.pattern.oldValue && queryFilter.filter.speaker.oldValue"> and </span>
-        <span *ngIf="queryFilter.filter.speaker.oldValue">
-            "<span class="highlight-blue search-pattern" [innerHTML]="queryFilter.filter.speaker.oldValue" (click)="onSearchClear('speaker')"></span>"
+        <span *ngIf="queryFilter.filter.pattern.value && queryFilter.filter.speaker.value"> and </span>
+        <span *ngIf="queryFilter.filter.speaker.value">
+            "<span class="highlight-blue search-pattern" [innerHTML]="queryFilter.filter.speaker.value" (click)="onSearchClear('speaker')"></span>"
         </span>
     </div>
     <div class="top-panel-cell right form-inline">
