@@ -1,17 +1,16 @@
-import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from '@angular/core';
-
-import {CORE_DIRECTIVES} from '@angular/common';
-import {Router, RouteParams, Instruction} from '@angular/router-deprecated';
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
-
-import {Study} from '../../shared/model/study';
-import {StudyService} from '../../shared/index';
-import {StudyElementComponent} from './study-element/studyElementComponent';
-import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
-import {ModalVideoComponent} from '../modal-component/modalVideoComponent';
+import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from "@angular/core";
+import {CORE_DIRECTIVES} from "@angular/common";
+import {Router, RouteParams, Instruction} from "@angular/router-deprecated";
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
+import {Study} from "../../shared/model/study";
+import {StudyService} from "../../shared/index";
+import {StudyElementComponent} from "./study-element/studyElementComponent";
+import {YTEmbedComponent} from "../youtube-embed-component/youtubeEmbedComponent";
+import {ModalVideoComponent} from "../modal-component/modalVideoComponent";
 import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
-import {IScrollableResult, ScrollableResult} from '../infinite-scroll/scrollableResult';
-import {LoadScript} from '../youtube-embed-component/loadScript';
+import {IScrollableResult, ScrollableResult} from "../infinite-scroll/scrollableResult";
+import {QueryFilter} from "../infinite-scroll/queryFilter";
+import {LoadScript} from "../youtube-embed-component/loadScript";
 
 @Component({
     moduleId: module.id,
@@ -25,13 +24,6 @@ import {LoadScript} from '../youtube-embed-component/loadScript';
 
 export class StudyListComponent implements OnInit, OnChanges {
 
-    search:any = {
-        pattern: null,
-        patternOld: null,
-        speaker: null,
-        speakerOld: null
-    };
-
     public list:Study[];
 
     @Input() editmode:boolean;
@@ -42,10 +34,17 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     @ViewChild(<any>ModalVideoComponent) private component:ModalVideoComponent;
 
+    queryFilter:QueryFilter;
     scrollableResult:IScrollableResult<Study>;
 
     constructor(private studyService:StudyService, private routeParams:RouteParams, private router:Router) {
-        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, routeParams.params, true, false);
+        let filterConfig = {
+            pattern: {value: null, oldValue: null},
+            speaker: {value: null, oldValue: null}
+        };
+        this.queryFilter = new QueryFilter(filterConfig, routeParams, router);
+        let filterReq = this.queryFilter.makeFilterRequest();
+        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, filterReq, true, false);
     }
 
     ngOnInit() {
@@ -60,17 +59,10 @@ export class StudyListComponent implements OnInit, OnChanges {
         this.onSearch(speaker);
     }
 
-    public getStudies(pattern?:string, speaker?:string) {
-        let current:Instruction = this.router.parent.currentInstruction;
-        current.urlParams.splice(0);
-        if (pattern != null) current.urlParams.push('pattern=' + encodeURIComponent(pattern));
-        if (speaker != null) current.urlParams.push('speaker=' + encodeURIComponent(speaker));
-        this.router.parent.navigateByInstruction(current, false);
-
-        this.scrollableResult.updateFilter({
-            'pattern': pattern,
-            'speaker': speaker
-        });
+    public getStudies() {
+        this.queryFilter.updateUrlByFilterData();
+        let filterReq = this.queryFilter.makeFilterRequest();
+        this.scrollableResult.updateFilter(filterReq);
     }
 
     editStudy(study:Study) {
@@ -105,24 +97,23 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     public onPatternSearch(pattern:string) {
-        this.search.pattern = pattern;
+        this.queryFilter.filter.pattern.value = pattern;
         this.onSearch();
     }
 
     public onSearch(speaker?:string) {
         if (speaker) {
-            this.search.speaker = speaker;
-            this.search.pattern = null;
+            this.queryFilter.filter.speaker.value = speaker;
+            this.queryFilter.filter.pattern.value = null;
+            this.onSearchPattern.emit('');
         }
-        if (this.search.pattern !== this.search.patternOld || this.search.speaker !== this.search.speakerOld) {
-            this.search.patternOld = this.search.pattern;
-            this.search.speakerOld = this.search.speaker;
-            this.getStudies(this.search.pattern, this.search.speaker);
+        if (this.queryFilter.isFilterChanged(true)) {
+            this.getStudies();
         }
     }
 
     onSearchClear(fieldName:string) {
-        this.search[fieldName] = null;
+        this.queryFilter.filter[fieldName].value = null;
         if (fieldName === 'pattern') {
             this.onSearchPattern.emit('');
         }
