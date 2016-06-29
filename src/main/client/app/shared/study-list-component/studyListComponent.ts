@@ -52,11 +52,12 @@ export class StudyListComponent implements OnInit, OnChanges {
         this.loadWidget();
 
         if(this.queryFilter.filter.view.value != null) {
-            // setTimeout(() => {
-            //     this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
-            //         this.viewVideo(study);
-            //     });
-            // }, 1000);
+            // TODO
+            setTimeout(() => {
+                this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
+                    this.viewVideo(study);
+                });
+            }, 5000);
         }
     }
 
@@ -148,9 +149,9 @@ export class StudyListComponent implements OnInit, OnChanges {
         //SB account ra-5771ed6bfe470e48
         //test account ra-5768d6ade5563361
         LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false});
-        // if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
-        //     LoadScript.load('https://www.youtube.com/iframe_api', {async: false});
-        // }
+        if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
+            LoadScript.load('//www.youtube.com/iframe_api', {async: false});
+        }
     }
 
     nextPage() {
