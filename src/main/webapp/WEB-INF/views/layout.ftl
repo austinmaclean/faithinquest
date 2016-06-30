@@ -5,7 +5,7 @@
 <head>
     <base href="/">
 
-    <link rel="shortcut icon" href="<@spring.url "/assets/img/favicon.png"/>" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<@spring.url "/assets/img/favicon.ico"/>" type="image/x-icon"/>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
