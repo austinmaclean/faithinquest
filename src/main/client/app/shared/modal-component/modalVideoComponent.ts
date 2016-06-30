@@ -28,7 +28,15 @@ export class ModalVideoComponent {
     vimeoReady:boolean;
     playing:boolean = false;
 
+    coof:number = 0.57;
+    defaultVideoWidth: number = 600;
+    defaultVideoHeight:number = 340;
+
+    videoWidth: number = 0;
+    videoHeight:number = 0;
+
     videoMode:VideoType = VideoType.NONE;
+    open:boolean = false;
 
     showModal(study:Study) {
         this.study = study;
@@ -41,22 +49,39 @@ export class ModalVideoComponent {
 
         if (this.lgModal) {
             this.lgModal.show();
-
-            var flag:boolean = (this.playerReady && this.videoMode == VideoType.YOUTUBE) || (this.vimeoReady && this.videoMode == VideoType.VIMEO);
-
-            if (flag && !this.playing) {
-                this.playVideo();
-            }
         }
     }
 
     onShownHandler() {
+
+        if (this.open) return;
+
+        this.open = true;
+
+        let wdth:number = this.lgModal.element.nativeElement.children[0].offsetWidth;
+        let delta: number = 40;
+        if (wdth>this.defaultVideoWidth+delta) {
+            this.videoWidth = this.defaultVideoWidth;
+            this.videoHeight = this.videoWidth * this.coof;
+        } else {
+            this.videoWidth = wdth - delta;
+            this.videoHeight = this.videoWidth * this.coof;
+        }
+
         console.log('shown');
+
+        var flag:boolean = (this.playerReady && this.videoMode == VideoType.YOUTUBE) || (this.vimeoReady && this.videoMode == VideoType.VIMEO);
+
+        if (flag && !this.playing) {
+            this.playVideo();
+        }
         this.onShown.emit(this.study);
     }
 
     onHideHandler() {
         console.log('hide');
+        this.open = false;
+
         if (this.videoMode == VideoType.YOUTUBE) {
             this.videoPlayer.stop();
             this.videoPlayer.loadAndPause(null);

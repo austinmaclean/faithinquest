@@ -9,8 +9,8 @@
                 <h4 class="modal-title">{{study ? study.title : ''}}</h4>
             </div>
             <div class="modal-body video-embed">
-                <ti-yt-embed [hidden]="videoMode != 0" [ytwidth]="600" [ytheight]="340" [videoid]="" [ytid]="2" (onYTReady)="onYTReady($event)"></ti-yt-embed>
-                <ti-vimeo-embed [hidden]="videoMode != 1" vid="modal" [vwidth]="600" [vheight]="340" (onVimeoLoaded)="onVimeoLoaded($event)"></ti-vimeo-embed>
+                <ti-yt-embed [hidden]="videoMode != 0" [ytwidth]="videoWidth" [ytheight]="videoHeight" [videoid]="" [ytid]="2" (onYTReady)="onYTReady($event)"></ti-yt-embed>
+                <ti-vimeo-embed [hidden]="videoMode != 1" vid="modal" [vwidth]="videoWidth" [vheight]="videoHeight" (onVimeoLoaded)="onVimeoLoaded($event)"></ti-vimeo-embed>
                 <div [hidden]="videoMode != 2">Video URL is incorrect.</div>
             </div>
         </div>

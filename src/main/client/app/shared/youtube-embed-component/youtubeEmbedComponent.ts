@@ -37,7 +37,10 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
 
-        var options : YT.PlayerOptions = {width: this.width, height: this.height};
+        var options : YT.PlayerOptions = {
+            width: Math.floor(this.width),
+            height: Math.floor(this.height)
+        };
 
         setTimeout(() => {
             this.player = new YT.Player('player-'+this.id, options);

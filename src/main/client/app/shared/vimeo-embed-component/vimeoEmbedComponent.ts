@@ -26,7 +26,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         console.log('init player container');
-        //this.initYoutube();
     }
 
     ngOnChanges(changes) {
@@ -65,8 +64,8 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
         this.start = start ? start : 0;
         var options = {
             id: id,
-            width: this.vwidth,
-            height: this.vheight
+            width: Math.floor(this.vwidth),
+            height: Math.floor(this.vheight)
         };
 
         this.player = new Vimeo.Player('vimeo-'+this.embed, options);
@@ -105,7 +104,7 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     setTime() {
         setTimeout(() => {
             this.player.setCurrentTime(this.start);
-        }, 500);
+        }, 1000);
     }
 
     onLoaded(event:any) {
