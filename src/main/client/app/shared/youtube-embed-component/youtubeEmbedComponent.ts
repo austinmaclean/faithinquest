@@ -33,6 +33,10 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     }
 
     initYoutube() {
+        if(this.player) {
+            return;
+        }
+
         this.id = this.ytid ? this.ytid : 0;
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
@@ -113,14 +117,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes) {
         console.log(changes);
-
-        if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
-            LoadScript.load('https://www.youtube.com/iframe_api', {async: false}, (err, script) => {
-                this.initYoutube();
-            });
-        } else {
-            this.initYoutube();
-        }
+        this.initYoutube();
     }
 
     public play() {

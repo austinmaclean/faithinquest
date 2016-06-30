@@ -52,12 +52,11 @@ export class StudyListComponent implements OnInit, OnChanges {
         this.loadWidget();
 
         if(this.queryFilter.filter.view.value != null) {
-            // TODO
             setTimeout(() => {
                 this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
                     this.viewVideo(study);
                 });
-            }, 5000);
+            }, 3000);
         }
     }
 
