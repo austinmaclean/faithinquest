@@ -25,18 +25,14 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     private width : number;
     private id : number;
     private el : ElementRef;
-    private player: YT.Player;
+    public player: YT.Player;
     private done : boolean = false;
 
     constructor (el: ElementRef) {
         this.el = el.nativeElement;
     }
 
-    initYoutube() {
-        if(this.player) {
-            return;
-        }
-
+    public initYoutube(id:string, start:number) {
         this.id = this.ytid ? this.ytid : 0;
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
@@ -46,7 +42,9 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         setTimeout(() => {
             this.player = new YT.Player('player-'+this.id, options);
             this.player.addEventListener('onReady', <YT.EventHandler>((event: YT.EventArgs) =>
-                this.onPlayerReady(event)));
+            {
+                this.playVideo(id, start);
+            }));
             this.player.addEventListener('onPlayback', <YT.EventHandler>((event: YT.EventArgs) =>
                 this.onPlayerPlayback(event)));
             this.player.addEventListener('onPlayerStateChange', <YT.EventHandler>((event: YT.EventArgs) =>
@@ -57,39 +55,34 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     }
 
     public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'default') {
-        if (this.ready) {
 
-            var params : YT.VideoByIdParams = {
-                videoId: id,
-                startSeconds: start,
-                endSeconds: end,
-                suggestedQuality: quality
-            };
+        var params : YT.VideoByIdParams = {
+            videoId: id,
+            startSeconds: start,
+            endSeconds: end,
+            suggestedQuality: quality
+        };
 
-            this.videoid = id;
-            this.player.loadVideoById(params);
-        }
+        this.videoid = id;
+        this.player.loadVideoById(params);
     }
 
     public loadAndPause (id: string, start: number = 0) {
-        if (this.ready) {
 
-            var params : YT.VideoByIdParams = {
-                videoId: id,
-                startSeconds: start,
-                suggestedQuality: 'medium'
-            };
+        var params : YT.VideoByIdParams = {
+            videoId: id,
+            startSeconds: start,
+            suggestedQuality: 'medium'
+        };
 
-            this.videoid = id;
-            this.player.cueVideoById(params);
-            this.player.pauseVideo();
-        }
+        this.videoid = id;
+        this.player.cueVideoById(params);
+        this.player.pauseVideo();
     };
 
     onPlayerReady(event: YT.EventArgs) {
         console.log('player ready');
         this.ready = true;
-        this.onYTReady.emit(true);
     };
 
     onPlayerPlayback(event: YT.EventArgs) {
@@ -117,19 +110,31 @@ export class YTEmbedComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes) {
         console.log(changes);
-        this.initYoutube();
+
+        if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
+            LoadScript.load('https://www.youtube.com/iframe_api', {async: false}, (err, script) => {
+                this.onYTReady.emit(true);
+            });
+        } else {
+        }
     }
 
     public play() {
-        this.player.playVideo();
+        if (this.player) {
+            this.player.playVideo();
+        }
     }
 
     public stop() {
-        this.player.stopVideo();
+        if (this.player) {
+            this.player.stopVideo();
+        }
     }
 
     public clear() {
-        this.player.clearVideo();
+        if (this.player) {
+            this.player.clearVideo();
+        }
     }
 
 }

@@ -87,7 +87,11 @@ export class ModalVideoComponent {
                     if (code.length > 11) {
                         code = code.substr(0, 11);
                     }
-                    this.videoPlayer.playVideo(code, startTime);
+                    if (!this.videoPlayer.player) {
+                        this.videoPlayer.initYoutube(code, startTime);
+                    } else {
+                        this.videoPlayer.playVideo(code, startTime);
+                    }
                     this.playing = true;
                 }, 500);
             } else {
