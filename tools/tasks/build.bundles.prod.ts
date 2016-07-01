@@ -15,27 +15,27 @@ export = () => merge(bundleShims());
  * Returns the shim files to be injected.
  */
 function getShims() {
-  let libs = DEPENDENCIES
-    .filter(d => /\.js$/.test(d.src));
+    let libs = DEPENDENCIES
+        .filter(d => /\.js$/.test(d.src));
 
-  return libs.filter(l => l.inject === 'shims')
-    .concat(libs.filter(l => l.inject === 'libs'))
-    .concat(libs.filter(l => l.inject === true))
-    .map(l => l.src);
+    return libs.filter(l => l.inject === 'shims')
+        .concat(libs.filter(l => l.inject === 'libs'))
+        .concat(libs.filter(l => l.inject === true))
+        .map(l => l.src);
 }
 
 /**
  * Bundles the shim files.
  */
 function bundleShims() {
-  return gulp.src(getShims())
+    return gulp.src(getShims())
     // Strip comments and sourcemaps
-    .pipe(plugins.uglify({
-      mangle: false,
-      compress: false
-    }))
-    .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))
-    // Strip the first (global) 'use strict' added by reflect-metadata, but don't strip any others to avoid unintended scope leaks.
-    .pipe(plugins.replace(/('|")use strict\1;var Reflect;/, 'var Reflect;'))
-    .pipe(gulp.dest(JS_DEST));
+        .pipe(plugins.uglify({
+            mangle: false,
+            compress: false
+        }))
+        .pipe(plugins.concat(JS_PROD_SHIMS_BUNDLE))
+        // Strip the first (global) 'use strict' added by reflect-metadata, but don't strip any others to avoid unintended scope leaks.
+        .pipe(plugins.replace(/('|")use strict\1;var Reflect;/, 'var Reflect;'))
+        .pipe(gulp.dest(JS_DEST));
 }

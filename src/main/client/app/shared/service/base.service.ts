@@ -1,5 +1,5 @@
 import {Http, Request} from '@angular/http';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -20,7 +20,7 @@ export abstract class BaseService extends RESTClient {
     protected responseInterceptor(observable:Observable<any>):Observable<any> {
         return observable.catch((err, source) => {
             if (err.status === 401 && err.url.indexOf('api/admin/account/signin') !== -1) {
-                this.router.parent.navigateByUrl('/login');
+                this.router.navigateByUrl('login');
                 return Observable.empty();
             } else {
                 return Observable.throw(err);

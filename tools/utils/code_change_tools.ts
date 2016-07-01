@@ -43,7 +43,7 @@ let changed = (files: any) => {
   // } else {
   //TODO: Figure out why you can't pass a file to reload
   // if (onlyStylesChanged === false) {
-    browserSync.reload(files);
+  browserSync.reload(files);
   // } else {
   //   browserSync.reload('*.css');
   // }

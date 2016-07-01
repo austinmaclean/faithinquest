@@ -72,14 +72,14 @@
 
 <script>
     System.config({
-        "defaultJSExtensions": true,
-        "paths": {
+        defaultJSExtensions: true,
+        paths: {
             "app/main": "app/main",
             "app/*": "app/*",
             "*": "js/*"
         },
-        "packages": {
-            '@angular/core': {
+        packages: {
+            '@angular/common': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
@@ -87,7 +87,11 @@
                 main: 'index.js',
                 defaultExtension: 'js'
             },
-            '@angular/common': {
+            '@angular/core': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/forms': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },

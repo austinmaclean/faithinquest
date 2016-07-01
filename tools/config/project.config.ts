@@ -7,7 +7,7 @@ import {Environments, InjectableDependency} from './project.config.interfaces.ts
  * The enumeration of available environments.
  * @type {Environments}
  */
-export const ENVIRONMENTS:Environments = {
+export const ENVIRONMENTS: Environments = {
     DEVELOPMENT: 'dev',
     PRODUCTION: 'prod'
 };
@@ -40,7 +40,7 @@ export class ProjectConfig {
 
     /**
      * The current environment.
-     * The default environment is `dev`, which can be overriden by the `--env` flag when running `npm start`.
+     * The default environment is `dev`, which can be overriden by the `--config-env ENV_NAME` flag when running `npm start`.
      */
     ENV = getEnvironment();
 
@@ -50,14 +50,6 @@ export class ProjectConfig {
      * @type {string}
      */
     APP_BASE = argv['base'] || '/';
-
-    /**
-     * The flag to include templates into JS app prod file.
-     * Per default the option is `true`, but can it can be set to false using `--inline-template false`
-     * flag when running `npm run build.prod`.
-     * @type {boolean}
-     */
-    INLINE_TEMPLATES = argv['inline-template'] !== 'false';
 
     /**
      * The flag for the hot-loader option of the application.
@@ -237,6 +229,7 @@ export class ProjectConfig {
         {src: 'core-js/client/shim.min.js', inject: 'shims'},
         {src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT},
         {src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT},
+
         {src: 'bootstrap-sass/assets/javascripts/bootstrap.min.js', inject: 'libs'},
         {src: 'jquery/dist/jquery.min.js', inject: 'shims'}
     ];
@@ -245,7 +238,7 @@ export class ProjectConfig {
      * The list of local files to be injected in the `index.html`.
      * @type {InjectableDependency[]}
      */
-    APP_ASSETS:InjectableDependency[] = [
+    APP_ASSETS: InjectableDependency[] = [
         { src: `${this.CSS_SRC}/main.${ this.getInjectableStyleExtension() }`, inject: true, vendor: false },
     ];
 
@@ -253,7 +246,7 @@ export class ProjectConfig {
      * The list of editor temporary files to ignore in watcher and asset builder.
      * @type {string[]}
      */
-    TEMP_FILES:string[] = [
+    TEMP_FILES: string[] = [
         '**/*___jb_tmp___',
         '**/*~',
     ];
@@ -282,7 +275,7 @@ export class ProjectConfig {
             '*': 'node_modules/*'
         },
         packages: {
-            '@angular/core': {
+            '@angular/common': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
@@ -290,7 +283,11 @@ export class ProjectConfig {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
-            '@angular/common': {
+            '@angular/core': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/forms': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
@@ -338,7 +335,7 @@ export class ProjectConfig {
             '*': 'node_modules/*'
         },
         packages: {
-            '@angular/core': {
+            '@angular/common': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
@@ -346,7 +343,11 @@ export class ProjectConfig {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
-            '@angular/common': {
+            '@angular/core': {
+                main: 'index.js',
+                defaultExtension: 'js'
+            },
+            '@angular/forms': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
@@ -403,7 +404,7 @@ export class ProjectConfig {
      * Configurations for NPM module configurations. Add to or override in project.config.ts.
      * If you like, use the mergeObject() method to assist with this.
      */
-    PLUGIN_CONFIGS:any = {
+    PLUGIN_CONFIGS: any = {
         /**
          * The BrowserSync configuration of the application.
          * The default open behavior is to open the browser. To prevent the browser from opening use the `--b`  flag when
@@ -412,7 +413,7 @@ export class ProjectConfig {
          * @type {any}
          */
         'browser-sync': {
-            middleware: [require('connect-history-api-fallback')({index: `${this.APP_BASE}index.html`})],
+            middleware: [require('connect-history-api-fallback')({ index: `${this.APP_BASE}index.html` })],
             port: this.PORT,
             startPath: this.APP_BASE,
             open: argv['b'] ? false : true,
@@ -425,7 +426,9 @@ export class ProjectConfig {
                     [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
                 }
             }
-        }
+        },
+        // Note: you can customize the location of the file
+        'environment-config': require('../env/config.json')
     };
 
     /**
@@ -433,7 +436,7 @@ export class ProjectConfig {
      * @param {any} target The target object (to receive values from source)
      * @param {any} source The source object (to be merged onto target)
      */
-    mergeObject(target:any, source:any) {
+    mergeObject(target: any, source: any) {
         const deepExtend = require('deep-extend');
         deepExtend(target, source);
     }
@@ -442,8 +445,8 @@ export class ProjectConfig {
      * Locate a plugin configuration object by plugin key.
      * @param {any} pluginKey The object key to look up in PLUGIN_CONFIGS.
      */
-    getPluginConfig(pluginKey:string):any {
-        if (this.PLUGIN_CONFIGS[pluginKey]) {
+    getPluginConfig(pluginKey: string): any {
+        if (this.PLUGIN_CONFIGS[ pluginKey ]) {
             return this.PLUGIN_CONFIGS[pluginKey];
         }
         return null;
@@ -459,10 +462,10 @@ export class ProjectConfig {
  * Normalizes the given `deps` to skip globs.
  * @param {InjectableDependency[]} deps - The dependencies to be normalized.
  */
-export function normalizeDependencies(deps:InjectableDependency[]) {
+export function normalizeDependencies(deps: InjectableDependency[]) {
     deps
-        .filter((d:InjectableDependency) => !/\*/.test(d.src)) // Skip globs
-        .forEach((d:InjectableDependency) => d.src = require.resolve(d.src));
+        .filter((d: InjectableDependency) => !/\*/.test(d.src)) // Skip globs
+        .forEach((d: InjectableDependency) => d.src = require.resolve(d.src));
     return deps;
 }
 
@@ -472,7 +475,7 @@ export function normalizeDependencies(deps:InjectableDependency[]) {
  * @param  {InjectableDependency} d   - The dependency to check.
  * @return {boolean}                    `true` if the dependency is used in this environment, `false` otherwise.
  */
-function filterDependency(env:string, d:InjectableDependency):boolean {
+function filterDependency(env: string, d: InjectableDependency): boolean {
     if (!d.env) {
         d.env = Object.keys(ENVIRONMENTS).map(k => ENVIRONMENTS[k]);
     }
@@ -486,7 +489,7 @@ function filterDependency(env:string, d:InjectableDependency):boolean {
  * Returns the applications version as defined in the `package.json`.
  * @return {number} The applications version.
  */
-function appVersion():number | string {
+function appVersion(): number | string {
     var pkg = require('../../package.json');
     return pkg.version;
 }
@@ -495,7 +498,7 @@ function appVersion():number | string {
  * Returns the linting configuration to be used for `codelyzer`.
  * @return {string[]} The list of linting rules.
  */
-function customRules():string[] {
+function customRules(): string[] {
     var lintConf = require('../../tslint.json');
     return lintConf.rulesDirectory;
 }
@@ -504,7 +507,7 @@ function customRules():string[] {
  * Returns the environment of the application.
  */
 function getEnvironment() {
-    let base:string[] = argv['_'];
+    let base: string[] = argv['_'];
     let prodKeyword = !!base.filter(o => o.indexOf(ENVIRONMENTS.PRODUCTION) >= 0).pop();
     let env = (argv['env'] || '').toLowerCase();
     if ((base && prodKeyword) || env === ENVIRONMENTS.PRODUCTION) {

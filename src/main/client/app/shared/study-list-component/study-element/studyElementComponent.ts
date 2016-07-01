@@ -1,4 +1,4 @@
-import {Component, Input, Host, forwardRef, Inject, OnInit, OnChanges} from '@angular/core';
+import {Component, Input, Host, forwardRef, Inject, OnChanges} from '@angular/core';
 import {Http} from '@angular/http';
 import {Study} from '../../model/study';
 import {StudyListComponent} from '../studyListComponent';
@@ -13,12 +13,12 @@ import {VideoType} from '../../model/videoType';
     directives: [<any>AddThisComponent]
 })
 
-export class StudyElementComponent implements OnInit, OnChanges {
+export class StudyElementComponent implements OnChanges {
 
     @Input() item:Study;
-    @Input() editmode: boolean;
+    @Input() editMode:boolean;
 
-    thumbUrl : string = '../../assets/img/over.png';
+    thumbUrl:string = '../../assets/img/over.png';
 
     videoMode = VideoType.NONE;
 
@@ -29,10 +29,7 @@ export class StudyElementComponent implements OnInit, OnChanges {
         description: ''
     };
 
-    constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component: StudyListComponent, private http: Http) {
-    }
-
-    ngOnInit():any {
+    constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component:StudyListComponent, private http:Http) {
     }
 
     ngOnChanges(changes) {
@@ -42,12 +39,12 @@ export class StudyElementComponent implements OnInit, OnChanges {
                 this.videoMode = VideoType.YOUTUBE;
                 var code = this.getParameterByName('v', this.item.link);
                 if (code) {
-                    this.thumbUrl = 'https://img.youtube.com/vi/'+code+'/hqdefault.jpg';
+                    this.thumbUrl = 'https://img.youtube.com/vi/' + code + '/hqdefault.jpg';
                 }
             } else if (this.matchVimeo(this.item.link)) {
                 this.videoMode = VideoType.VIMEO;
                 var ar = this.item.link.split('/');
-                var code = ar[ar.length-1];
+                var code = ar[ar.length - 1];
                 this.getVimeoThumb(code);
             }
 
@@ -83,7 +80,7 @@ export class StudyElementComponent implements OnInit, OnChanges {
     }
 
     getVimeoThumb(id:string) {
-        let url = 'http://vimeo.com/api/v2/video/'+id+'.json';
+        let url = 'http://vimeo.com/api/v2/video/' + id + '.json';
         this.http.get(url)
             .map(res => res.json())
             .subscribe(
@@ -93,7 +90,7 @@ export class StudyElementComponent implements OnInit, OnChanges {
             );
     }
 
-    updateThumbUrl (data) {
+    updateThumbUrl(data) {
         this.thumbUrl = data[0].thumbnail_medium;
     }
 

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Admin} from '../model/admin';
-import {Http, Response} from '@angular/http';
-import {Router} from '@angular/router-deprecated';
+import {Http} from '@angular/http';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {BaseService} from './base.service';
 import {

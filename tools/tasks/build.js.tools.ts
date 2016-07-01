@@ -18,12 +18,12 @@ export = () => {
     join(TOOLS_DIR, '**/*.ts')
   ];
   let result = gulp.src(src, { base: './' })
-    .pipe(plugins.plumber())
-    .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.typescript(tsProject));
+      .pipe(plugins.plumber())
+      .pipe(plugins.sourcemaps.init())
+      .pipe(plugins.typescript(tsProject));
 
   return result.js
-    .pipe(plugins.sourcemaps.write())
-    .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest('./'));
+      .pipe(plugins.sourcemaps.write())
+      .pipe(plugins.template(templateLocals()))
+      .pipe(gulp.dest('./'));
 };

@@ -1,11 +1,9 @@
 import {Component, ViewContainerRef} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
 import {Http, HTTP_PROVIDERS} from '@angular/http';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+// import {AuthRouterOutletDirective} from './shared/index';
 
-import {AuthRouterOutletDirective} from './shared/index';
-import {SignInComponent} from './signin/index';
-import {AdminUpdateComponent} from './admin-update/adminUpdateComponent';
-import {ClientListComponent} from './client-list/clientListComponent';
+import { Config } from './shared/index';
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -16,21 +14,16 @@ import {ClientListComponent} from './client-list/clientListComponent';
     selector: 'sd-app',
     templateUrl: 'app.component.html',
     viewProviders: [Http, HTTP_PROVIDERS],
-    directives: [<any>AuthRouterOutletDirective]
+    // directives: [<any>AuthRouterOutletDirective]
+    directives: [ROUTER_DIRECTIVES]
 })
-@RouteConfig([
-    {path: '/', component: <any>ClientListComponent, as: 'Home', useAsDefault: true},
-    {path: '/login', component: <any>SignInComponent, as: 'Login'},
-    {path: '/admin', component: <any>AdminUpdateComponent, as: 'Admin'},
-    {path: '/*path', redirectTo: ['Home']}
-])
 export class AppComponent {
-
     viewContainerRef:ViewContainerRef = null;
 
     public constructor(viewContainerRef:ViewContainerRef) {
+        console.log('Environment config', Config);
+        
         // You need this small hack in order to catch application root view container ref
         this.viewContainerRef = viewContainerRef;
     }
-
 }

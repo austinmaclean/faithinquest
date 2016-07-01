@@ -16,9 +16,9 @@ const BUNDLER_OPTIONS = {
 };
 
 /**
- * Executes the build process, bundlig the JavaScript files using the SystemJS builder.
+ * Executes the build process, bundling the JavaScript files using the SystemJS builder.
  */
-export = (done:any) => {
+export = (done: any) => {
     let builder = new Builder(SYSTEM_BUILDER_CONFIG);
     builder
         .buildStatic(`${TMP_DIR}/${BOOTSTRAP_MODULE}`,

@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "API": "dev"
+  },
+  "prod": {
+    "API": "prod"
+  },
+  "staging": {
+    "API": "staging"
+  }
+}

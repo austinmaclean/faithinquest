@@ -1,6 +1,6 @@
 import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
-import {Router, RouteParams, Instruction} from "@angular/router-deprecated";
+import {Router} from "@angular/router";
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
 import {Study} from "../../shared/model/study";
 import {StudyService} from "../../shared/index";
@@ -26,7 +26,7 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     public list:Study[];
 
-    @Input() editmode:boolean;
+    @Input() editMode:boolean;
 
     @Output() onStudyEdit = new EventEmitter<Study>();
     @Output() onStudyDelete = new EventEmitter<Study>();
@@ -37,13 +37,13 @@ export class StudyListComponent implements OnInit, OnChanges {
     queryFilter:QueryFilter;
     scrollableResult:IScrollableResult<Study>;
 
-    constructor(private studyService:StudyService, private routeParams:RouteParams, private router:Router) {
+    constructor(private studyService:StudyService, private router:Router) {
         let filterConfig = {
             pattern: {value: null},
             speaker: {value: null},
             view: {value: null}
         };
-        this.queryFilter = new QueryFilter(filterConfig, routeParams, router);
+        this.queryFilter = new QueryFilter(filterConfig, router);
         let filterReq = this.queryFilter.makeFilterRequest();
         this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, filterReq, true, false);
     }
@@ -102,7 +102,7 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     deleteStudy(study:Study) {
         var studyCopy:Study = Object.assign({}, study);
-        if (this.editmode) {
+        if (this.editMode) {
             this.onStudyDelete.emit(studyCopy);
         }
     }

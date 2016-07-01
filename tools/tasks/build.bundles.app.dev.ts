@@ -13,16 +13,13 @@ import {
 
 const BUNDLER_OPTIONS = {
     minify: false,
-    mangle: false,
-    globalDefs: {
-        DEBUG: false
-    }
+    mangle: false
 };
 
 /**
- * Executes the build process, bundlig the JavaScript files using the SystemJS builder.
+ * Executes the build process, bundling the JavaScript files using the SystemJS builder.
  */
-export = (done:any) => {
+export = (done: any) => {
     let builder = new Builder(SYSTEM_BUILDER_CONFIG_DEV);
     builder
         .buildStatic(`${DEV_DEST}/${BOOTSTRAP_MODULE}`, null, BUNDLER_OPTIONS)

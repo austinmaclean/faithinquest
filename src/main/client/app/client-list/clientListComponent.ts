@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+
 import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
-import {LoadScript} from "../shared/youtube-embed-component/loadScript";
+import {Study} from '../shared/model/study';
 
 @Component({
     moduleId: module.id,
@@ -10,12 +11,9 @@ import {LoadScript} from "../shared/youtube-embed-component/loadScript";
     providers: [StudyService],
     directives: [<any>StudyListComponent, <any>FooterComponent]
 })
-
 export class ClientListComponent implements OnInit {
 
-    pattern : string = null;
-
-    @Input() editmode:string;
+    pattern:string = null;
 
     @ViewChild(<any>StudyListComponent) private listComponent:StudyListComponent;
 
@@ -27,8 +25,13 @@ export class ClientListComponent implements OnInit {
         this.listComponent.onPatternSearch(this.pattern);
     }
 
-    onSearchPattern(outString : string) {
+    onSearchPattern(outString:string) {
         this.pattern = outString;
     }
 
+    public editStudy(study:Study) {
+    }
+
+    public deleteStudy(study:Study) {
+    }
 }

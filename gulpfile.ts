@@ -10,8 +10,8 @@ loadTasks(TASKS_DIR);
 // Build dev.
 gulp.task('build.dev', (done:any) =>
     runSequence('clean.dev',
-        'tslint',
-        'css-lint',
+        //'tslint',
+        //'css-lint',
         'build.assets.dev',
         'build.fonts',
         'build.html_css',
@@ -23,7 +23,7 @@ gulp.task('build.dev', (done:any) =>
 // --------------
 // Build dev watch handler.
 gulp.task('build.dev.watch.handler', (done:any) =>
-    runSequence('tslint',
+    runSequence(//'tslint',
         //'css-lint',
         'build.assets.dev',
         'build.fonts',

@@ -23,7 +23,7 @@ export function watch(taskname: string) {
     ].concat(TEMP_FILES.map((p) => { return '!'+p; }));
 
     plugins.watch(paths, (e:any) =>
-      runSequence(taskname, () => notifyLiveReload(e))
+        runSequence(taskname, () => notifyLiveReload(e))
     );
   };
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, Request} from '@angular/http';
-import {Router} from '@angular/router-deprecated';
+import {Http, Response} from '@angular/http';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Study} from '../model/study';
 import {BaseService} from './base.service';

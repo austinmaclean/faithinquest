@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router, RouterLink} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {AccountService, Admin} from '../shared/index';
 import {FooterComponent} from '../shared/index';
@@ -9,7 +9,7 @@ import {FooterComponent} from '../shared/index';
     selector: 'sd-signin',
     templateUrl: 'signin.component.html',
     styleUrls: ['signin.component.css'],
-    directives: [<any>FooterComponent,<any>RouterLink, CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [<any>FooterComponent, CORE_DIRECTIVES, FORM_DIRECTIVES],
     providers: [AccountService]
 })
 export class SignInComponent {
@@ -20,7 +20,7 @@ export class SignInComponent {
     signInUser(admin:Admin) {
         this.accountService.login(admin).subscribe(
             response => {
-                this.router.parent.navigateByUrl('/admin');
+                this.router.navigateByUrl('admin');
             }
         );
     }

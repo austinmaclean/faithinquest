@@ -1,10 +1,10 @@
-import {Router, RouteParams, Instruction} from "@angular/router-deprecated";
+import {Router} from "@angular/router";
 
 export class QueryFilter {
 
     public filter:any;
 
-    constructor(private filterConfig:any, private routeParams:RouteParams, private router:Router) {
+    constructor(private filterConfig:any, private router:Router) {
         this.filter = {};
         for (var filterConfigItemKey in filterConfig) {
             let filterConfigItem = filterConfig[filterConfigItemKey];
@@ -33,23 +33,23 @@ export class QueryFilter {
     setFilterDataFromUrl():void {
         for (var filterItemKey in this.filter) {
             let filterItem = this.filter[filterItemKey];
-            let routeItemValue = this.routeParams.params[filterItemKey];
-            if (routeItemValue != null && routeItemValue.length > 0) {
-                filterItem.value = filterItem.oldValue = decodeURIComponent(routeItemValue);
-            }
+            // let routeItemValue = this.routeParams.params[filterItemKey];
+            // if (routeItemValue != null && routeItemValue.length > 0) {
+            //     filterItem.value = filterItem.oldValue = decodeURIComponent(routeItemValue);
+            // }
         }
     }
 
     updateUrlByFilterData():void {
-        let current:Instruction = this.router.parent.currentInstruction;
-        current.urlParams.splice(0);
-        for (var filterItemKey in this.filter) {
-            let filterItem = this.filter[filterItemKey];
-            if (filterItem.value != null && filterItem.value.length > 0) {
-                current.urlParams.push(filterItemKey + '=' + encodeURIComponent(filterItem.value));
-            }
-        }
-        this.router.parent.navigateByInstruction(current, false);
+        // let current:Instruction = this.router.parent.currentInstruction;
+        // current.urlParams.splice(0);
+        // for (var filterItemKey in this.filter) {
+        //     let filterItem = this.filter[filterItemKey];
+        //     if (filterItem.value != null && filterItem.value.length > 0) {
+        //         current.urlParams.push(filterItemKey + '=' + encodeURIComponent(filterItem.value));
+        //     }
+        // }
+        // this.router.parent.navigateByInstruction(current, false);
     }
 
     makeFilterRequest():any {

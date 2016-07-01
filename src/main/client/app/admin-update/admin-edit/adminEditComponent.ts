@@ -2,6 +2,7 @@ import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter} from '@an
 import {Http} from '@angular/http';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
+
 import {BulkUploader} from './bulkUploader';
 import {OutputMessage} from './outputMessage';
 import {StudyService} from '../../shared/index';

@@ -17,11 +17,11 @@
         </div>
     </div>
     <div class="items-list-panel-element-cell share">
-        <span *ngIf="editmode">
+        <span *ngIf="editMode">
             <span><a (click)="actionEdit()">edit</a></span><br/>
             <span><a (click)="actionDelete()">delete</a></span>
         </span>
-        <span *ngIf="!editmode">
+        <span *ngIf="!editMode">
             <span><ti-addthis-share [atcode]="share.code" [aturl]="share.url" [attitle]="share.title" [atdesc]="share.description"></ti-addthis-share></span>
         </span>
     </div>

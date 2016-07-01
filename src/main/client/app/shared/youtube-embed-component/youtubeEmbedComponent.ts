@@ -1,7 +1,5 @@
-import { Component, OnInit, OnChanges, Input, ElementRef, provide, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import {LoadScript} from './loadScript';
-
-provide(Window, { useValue: window });
 
 @Component({
     moduleId: module.id,
@@ -58,7 +56,6 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     }
 
     public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'default') {
-
         var params : YT.VideoByIdParams = {
             videoId: id,
             startSeconds: start,
@@ -71,7 +68,6 @@ export class YTEmbedComponent implements OnInit, OnChanges {
     }
 
     public loadAndPause (id: string, start: number = 0) {
-
         var params : YT.VideoByIdParams = {
             videoId: id,
             startSeconds: start,
@@ -79,7 +75,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         };
 
         this.videoid = id;
-        this.player.cueVideoById(params);
+        this.player.loadVideoById(params);
         this.player.pauseVideo();
     };
 
