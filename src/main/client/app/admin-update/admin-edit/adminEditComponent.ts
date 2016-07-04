@@ -113,6 +113,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     public editStudy(study:Study) {
+        this.onClear();
         if (this.playerReady) {
             this.model = study;
             this.createMode = false;
