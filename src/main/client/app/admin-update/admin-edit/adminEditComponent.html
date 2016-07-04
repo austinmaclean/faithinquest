@@ -43,7 +43,7 @@
             </fieldset>
 
             <button [disabled]="!playerReady" type="submit" class="btn btn-secondary btn-form">Submit</button>
-            <button [disabled]="!playerReady" (click)="onClear()" class="btn btn-secondary btn-form">Clear</button>
+            <button [disabled]="!playerReady" type="reset" (click)="onClear()" class="btn btn-secondary btn-form">Clear</button>
 
         </form>
 

@@ -113,7 +113,7 @@ export class ModalVideoComponent {
                         code = code.substr(0, 11);
                     }
                     if (!this.videoPlayer.player) {
-                        this.videoPlayer.initYoutube(code, startTime);
+                        this.videoPlayer.initYoutube(code, startTime, false);
                     } else {
                         this.videoPlayer.playVideo(code, startTime);
                     }

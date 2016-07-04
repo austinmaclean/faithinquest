@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter} from '@angular/core';
+import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter, ElementRef} from '@angular/core';
 import {Http} from '@angular/http';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
@@ -98,13 +98,18 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     onClear() {
-        this.model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
-        this.videoPlayer.stop();
-        this.videoPlayer.loadAndPause(null);
+        if (this.videoPlayer.player) {
+            this.videoPlayer.stop();
+            this.videoPlayer.loadAndPause(null);
+        }
+        if (this.vimeoPlayer.player) {
+            this.vimeoPlayer.stopVideo();
+        }
         this.createMode = true;
         this.thumbUrl = '../../assets/img/over_big.png';
         this.hideThumb = false;
         this.videoMode = VideoType.NONE;
+        this.model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
     }
 
     public editStudy(study:Study) {
@@ -112,13 +117,17 @@ export class AdminEditComponent implements OnInit, OnChanges {
             this.model = study;
             this.createMode = false;
             if (this.model.link) {
-                this.onChange(this.model.link);
+                this.updateVideo(this.model.link);
             }
         }
     }
 
     onChange(newVal) {
         this.validateVideoLink();
+        this.updateVideo(newVal);
+    }
+
+    updateVideo(newVal) {
         this.videoMode = this.getVideoType(newVal);
         var startTime = this.model.startMin * 60 + this.model.startSec;
 
@@ -127,8 +136,15 @@ export class AdminEditComponent implements OnInit, OnChanges {
             if (code.length>11) {
                 code = code.substr(0, 11);
             }
-            this.videoPlayer.loadAndPause(code, startTime);
-            this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
+            if (code) {
+                if (this.videoPlayer.player) {
+                    this.videoPlayer.loadAndPause(code, startTime);
+                    this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
+                } else {
+                    this.videoPlayer.initYoutube(code, startTime, true);
+                    this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
+                }
+            }
             this.hideThumb = false;
         } else if (this.videoMode == VideoType.VIMEO) {
             let ar = newVal.split('/');
@@ -137,6 +153,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
             this.vimeoPlayer.loadVideo(code, startTime);
             this.hideThumb = false;
         }
+
     }
 
     onYTReady(flag:boolean) {
