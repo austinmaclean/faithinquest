@@ -1,8 +1,8 @@
-import {Component, ViewContainerRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {Http, HTTP_PROVIDERS} from '@angular/http';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
-import { Config } from './shared/index';
+import {Config} from './shared/index';
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -16,12 +16,9 @@ import { Config } from './shared/index';
     directives: [ROUTER_DIRECTIVES]
 })
 export class AppComponent {
-    viewContainerRef:ViewContainerRef = null;
 
-    public constructor(viewContainerRef:ViewContainerRef) {
+    constructor() {
         console.log('Environment config', Config);
-        
-        // You need this small hack in order to catch application root view container ref
-        this.viewContainerRef = viewContainerRef;
     }
+
 }

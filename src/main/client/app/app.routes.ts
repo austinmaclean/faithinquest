@@ -1,15 +1,19 @@
 import {provideRouter, RouterConfig} from '@angular/router';
 
-import {SignInComponent} from './signin/index';
-import {AdminUpdateComponent} from './admin-update/adminUpdateComponent';
-import {ClientListComponent} from './client-list/clientListComponent';
+import {SignInRoutes, AUTH_PROVIDERS} from './signin/signin.routes';
+import {AdminRoutes} from './admin-update/adminRoutes.routes';
+import {HomeRoutes} from './client-list/home.routes';
 
-const routes:RouterConfig = [
-    ...<RouterConfig>[{path: 'login', component: SignInComponent}],
-    ...<RouterConfig>[{path: 'admin', component: AdminUpdateComponent}],
-    ...<RouterConfig>[{path: '', component: ClientListComponent}]
+import { CanDeactivateGuard } from './shared/service/canComponentDeactivate';
+
+export const routes:RouterConfig = [
+    ...HomeRoutes,
+    ...SignInRoutes,
+    ...AdminRoutes
 ];
 
 export const APP_ROUTER_PROVIDERS = [
-    provideRouter(routes)
+    provideRouter(routes),
+    AUTH_PROVIDERS,
+    CanDeactivateGuard
 ];

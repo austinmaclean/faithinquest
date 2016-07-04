@@ -9,8 +9,7 @@ import {FooterComponent} from '../shared/index';
     selector: 'sd-signin',
     templateUrl: 'signin.component.html',
     styleUrls: ['signin.component.css'],
-    directives: [<any>FooterComponent, CORE_DIRECTIVES, FORM_DIRECTIVES],
-    providers: [AccountService]
+    directives: [<any>FooterComponent, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class SignInComponent {
 
@@ -18,11 +17,9 @@ export class SignInComponent {
     }
 
     signInUser(admin:Admin) {
-        this.accountService.login(admin).subscribe(
-            response => {
-                this.router.navigateByUrl('admin');
-            }
-        );
+        this.accountService.login(admin).subscribe(response => {
+            this.router.navigate(['/admin']);
+        });
     }
 
 }
