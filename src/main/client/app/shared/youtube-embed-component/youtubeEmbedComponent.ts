@@ -30,7 +30,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         this.el = el.nativeElement;
     }
 
-    public initYoutube(id:string, start:number) {
+    public initYoutube(id:string, start:number, pause:boolean) {
         this.id = this.ytid ? this.ytid : 0;
         this.height = this.ytheight ? Number(this.ytheight) : 270;
         this.width = this.ytwidth ? Number(this.ytwidth) : 480;
@@ -44,7 +44,11 @@ export class YTEmbedComponent implements OnInit, OnChanges {
             this.player = new YT.Player('player-'+this.id, options);
             this.player.addEventListener('onReady', <YT.EventHandler>((event: YT.EventArgs) =>
             {
-                this.playVideo(id, start);
+                if (pause) {
+                    this.loadAndPause(id, start);
+                } else {
+                    this.playVideo(id, start);
+                }
             }));
             this.player.addEventListener('onPlayback', <YT.EventHandler>((event: YT.EventArgs) =>
                 this.onPlayerPlayback(event)));
@@ -104,7 +108,6 @@ export class YTEmbedComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         console.log('init player container');
-        //this.initYoutube();
     }
 
     ngOnChanges(changes) {
