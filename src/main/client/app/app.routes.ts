@@ -5,10 +5,9 @@ import {AdminUpdateComponent} from './admin-update/adminUpdateComponent';
 import {ClientListComponent} from './client-list/clientListComponent';
 
 const routes:RouterConfig = [
-    ...<RouterConfig>[{path: '', component: ClientListComponent}],
     ...<RouterConfig>[{path: 'login', component: SignInComponent}],
     ...<RouterConfig>[{path: 'admin', component: AdminUpdateComponent}],
-    ...<RouterConfig>[{path: '*path', redirectTo: ''}]
+    ...<RouterConfig>[{path: '', component: ClientListComponent}]
 ];
 
 export const APP_ROUTER_PROVIDERS = [

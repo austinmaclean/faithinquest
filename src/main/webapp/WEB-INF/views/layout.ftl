@@ -111,14 +111,6 @@
                 main: 'index.js',
                 defaultExtension: 'js'
             },
-            '@angular/router-deprecated': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/upgrade': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
             'rxjs': {
                 defaultExtension: 'js'
             }

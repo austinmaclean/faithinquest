@@ -307,14 +307,6 @@ export class ProjectConfig {
                 main: 'index.js',
                 defaultExtension: 'js'
             },
-            '@angular/router-deprecated': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/upgrade': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
             'rxjs': {
                 defaultExtension: 'js'
             }
@@ -364,14 +356,6 @@ export class ProjectConfig {
                 defaultExtension: 'js'
             },
             '@angular/router': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/router-deprecated': {
-                main: 'index.js',
-                defaultExtension: 'js'
-            },
-            '@angular/upgrade': {
                 main: 'index.js',
                 defaultExtension: 'js'
             },

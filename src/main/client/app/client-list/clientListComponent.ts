@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 
 import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
-import {Study} from '../shared/model/study';
 
 @Component({
     moduleId: module.id,
@@ -27,11 +26,5 @@ export class ClientListComponent implements OnInit {
 
     onSearchPattern(outString:string) {
         this.pattern = outString;
-    }
-
-    public editStudy(study:Study) {
-    }
-
-    public deleteStudy(study:Study) {
     }
 }

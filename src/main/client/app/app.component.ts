@@ -1,7 +1,6 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {Http, HTTP_PROVIDERS} from '@angular/http';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-// import {AuthRouterOutletDirective} from './shared/index';
 
 import { Config } from './shared/index';
 
@@ -14,7 +13,6 @@ import { Config } from './shared/index';
     selector: 'sd-app',
     templateUrl: 'app.component.html',
     viewProviders: [Http, HTTP_PROVIDERS],
-    // directives: [<any>AuthRouterOutletDirective]
     directives: [ROUTER_DIRECTIVES]
 })
 export class AppComponent {
