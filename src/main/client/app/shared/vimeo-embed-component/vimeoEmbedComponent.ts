@@ -116,12 +116,16 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     }
 
     public stopVideo() {
-        this.autoplay = false;
-        this.player.unload();
+        if (this.player) {
+            this.autoplay = false;
+            this.player.unload();
+        }
     }
 
     public playVideo() {
-        this.player.play();
+        if (this.player) {
+            this.player.play();
+        }
     }
 
 }
