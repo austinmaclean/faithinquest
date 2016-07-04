@@ -20,8 +20,7 @@ bootstrap(<any>AppComponent, [
     provideForms(),
     HTTP_PROVIDERS,
     APP_ROUTER_PROVIDERS,
-    {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'},
-    {provide: Window, useValue: window}
+    {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
 ]).catch(err => console.error(err));
 
 // In order to start the Service Worker located at "./worker.js"

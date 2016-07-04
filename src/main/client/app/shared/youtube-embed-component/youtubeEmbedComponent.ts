@@ -4,8 +4,7 @@ import {LoadScript} from './loadScript';
 @Component({
     moduleId: module.id,
     selector: 'ti-yt-embed',
-    template: '<div id="player-{{id}}"></div>',
-    providers: [Window]
+    template: '<div id="player-{{id}}"></div>'
 })
 
 export class YTEmbedComponent implements OnInit, OnChanges {
@@ -79,7 +78,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
         };
 
         this.videoid = id;
-        this.player.loadVideoById(params);
+        this.player.cueVideoById(params);
         this.player.pauseVideo();
     };
 

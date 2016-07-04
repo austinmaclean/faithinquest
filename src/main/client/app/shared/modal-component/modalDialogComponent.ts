@@ -1,6 +1,6 @@
 import {Component, ViewChild, Output, EventEmitter} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, ModalDirective} from 'ng2-bootstrap/ng2-bootstrap';
 
 export enum ModalAction { OK, CANCEL }
 
@@ -22,7 +22,7 @@ export interface ModalResult {
 
 export class ModalDialogComponent {
 
-    @ViewChild('smModal') smModal;
+    @ViewChild(<any>ModalDirective) smModal:ModalDirective;
 
     @Output('closed') closeEmitter: EventEmitter<ModalResult> = new EventEmitter<ModalResult>();
     

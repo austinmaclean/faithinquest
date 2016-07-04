@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, ModalDirective} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
@@ -13,7 +13,7 @@ import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
 export class ModalMessageComponent {
 
-    @ViewChild('smModal') smModal;
+    @ViewChild(<any>ModalDirective) smModal:ModalDirective;
 
     message : string = '';
 

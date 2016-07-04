@@ -1,6 +1,6 @@
 import {Component, ViewChild, Output, EventEmitter} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, ModalDirective} from 'ng2-bootstrap/ng2-bootstrap';
 import {Study} from '../model/study';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {VimeoEmbedComponent} from '../vimeo-embed-component/vimeoEmbedComponent';
@@ -16,7 +16,7 @@ import {VideoType} from '../model/videoType';
 })
 export class ModalVideoComponent {
 
-    @ViewChild('lgModal') lgModal;
+    @ViewChild(<any>ModalDirective) lgModal:any;
     @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
     @ViewChild(<any>VimeoEmbedComponent) vimeoPlayer:VimeoEmbedComponent;
 
@@ -53,18 +53,17 @@ export class ModalVideoComponent {
     }
 
     onShownHandler() {
-
         if (this.open) return;
 
         this.open = true;
 
-        let wdth:number = this.lgModal.element.nativeElement.children[0].offsetWidth;
+        let width:number = this.lgModal.element.nativeElement.children[0].offsetWidth;
         let delta: number = 40;
-        if (wdth>this.defaultVideoWidth+delta) {
+        if (width>this.defaultVideoWidth+delta) {
             this.videoWidth = this.defaultVideoWidth;
             this.videoHeight = this.videoWidth * this.coof;
         } else {
-            this.videoWidth = wdth - delta;
+            this.videoWidth = width - delta;
             this.videoHeight = this.videoWidth * this.coof;
         }
 
