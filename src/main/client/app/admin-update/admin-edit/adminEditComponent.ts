@@ -77,7 +77,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
         }
     }
 
-    onSubmit() {
+    onSubmit(v) {
         // TODO !!!
         if (this.createMode) {
             this.studyService.create(<Study>this.model).subscribe(res => {

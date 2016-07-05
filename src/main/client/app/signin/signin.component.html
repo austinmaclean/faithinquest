@@ -9,7 +9,7 @@
 
             <div class="content-row bottom">
                 <h2>Login</h2>
-                <form #signInForm="ngForm" (ngSubmit)="signInUser(signInForm.value)">
+                <form #signInForm="ngForm" (submit)="signInUser(signInForm.value)">
                     <input id="password" type="password" placeholder="password" ngControl="password">
                 </form>
             </div>

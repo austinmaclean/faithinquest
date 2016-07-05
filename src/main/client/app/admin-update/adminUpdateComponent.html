@@ -11,7 +11,7 @@
             <ti-admin-study-edit (onStudiesUpdated)="onStudyUpdated($event)"></ti-admin-study-edit>
 
             <div class="items-search">
-                <form role="form" class="item-search" (ngSubmit)="onSearch()">
+                <form role="form" class="item-search" (submit)="onSearch()">
                     <div class="input-group">
                         <span class="input-group-addon black" (click)="onSearch()"><span class="fa fa-fw fa-search" aria-hidden="true"></span></span>
                         <input type="text" class="form-control" name="pattern" placeholder="Search for..." [(ngModel)]="pattern">

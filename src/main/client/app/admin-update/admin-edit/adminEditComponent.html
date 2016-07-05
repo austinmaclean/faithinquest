@@ -11,7 +11,7 @@
             </span>
         </form>
 
-        <form role="form" class="admin-item-edit" (ngSubmit)="onSubmit()">
+        <form role="form" class="admin-item-edit" (submit)="onSubmit($event)">
 
             <fieldset class="form-group">
                 <label for="title">Title</label>
@@ -32,7 +32,6 @@
                 <label for="link">Video Link</label>
                 <input class="form-control" name="link" id="link" placeholder="video link" [(ngModel)]="model.link" (ngModelChange)="onChange(model.link)" [disabled]="!playerReady" required>
             </fieldset>
-
 
             <fieldset class="form-group">
                 <label>Start Time</label>

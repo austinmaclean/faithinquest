@@ -1,4 +1,3 @@
-import {APP_BASE_HREF} from '@angular/common';
 import {disableDeprecatedForms, provideForms} from '@angular/forms';
 import {enableProdMode} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
@@ -19,8 +18,7 @@ bootstrap(<any>AppComponent, [
     disableDeprecatedForms(), // disable the old form functionality and the warning message.
     provideForms(),
     HTTP_PROVIDERS,
-    APP_ROUTER_PROVIDERS,
-    {provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>'}
+    APP_ROUTER_PROVIDERS
 ]).catch(err => console.error(err));
 
 // In order to start the Service Worker located at "./worker.js"

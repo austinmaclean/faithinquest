@@ -9,7 +9,7 @@
             <div class="content-row bottom">
                 <h1 class="searsh-title">Search any bible topic</h1>
                 <h4 class="search-title-desc">For example type "marriage" to find what bible says about marriage</h4>
-                <form role="form" class="item-search" (ngSubmit)="onSearch()">
+                <form role="form" class="item-search" (submit)="onSearch()">
                     <div class="input-group">
                         <span class="input-group-addon" (click)="onSearch()"><span class="fa fa-fw fa-search" aria-hidden="true"></span></span>
                         <input type="text" class="form-control" name="pattern" placeholder="Search for..." [(ngModel)]="pattern">
