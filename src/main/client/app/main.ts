@@ -16,7 +16,7 @@ if ('<%= ENV %>' === 'prod') {
  * @see https://angular.io/docs/ts/latest/api/platform-browser-dynamic/index/bootstrap-function.html
  */
 bootstrap(<any>AppComponent, [
-    disableDeprecatedForms(),
+    disableDeprecatedForms(), // disable the old form functionality and the warning message.
     provideForms(),
     HTTP_PROVIDERS,
     APP_ROUTER_PROVIDERS,
