@@ -234,7 +234,7 @@ function methodBuilder(method:number) {
                                     if (attrValue instanceof Object) {
                                         attrValue = JSON.stringify(value);
                                     }
-                                    search.set(encodeURIComponent(k), encodeURIComponent(attrValue));
+                                    search.set(encodeURIComponent(k), attrValue);
                                 }
                             }
                         });
