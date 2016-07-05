@@ -40,4 +40,14 @@ public class StudySearch implements ICriteriaModifier
 	{
 		this.speaker = speaker;
 	}
+
+	public String getPattern()
+	{
+		return pattern;
+	}
+
+	public String getSpeaker()
+	{
+		return speaker;
+	}
 }

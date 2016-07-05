@@ -104,7 +104,7 @@ public class StudyController
 		}
 		paging.setSortColumn( "created" );
 		paging.setSortDesc( true );
-		return new GridResult<>( studyService.findBy( search, paging ) );
+		return new GridResult<>( studyService.findByFullText( search, paging ) );
 	}
 
 	@RequestMapping( value = Routes.ADMIN_STUDY + "/import", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )

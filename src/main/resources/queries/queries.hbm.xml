@@ -4,4 +4,25 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
+    <sql-query name="Study.fullTextSearch">
+        <![CDATA[
+            SELECT id,
+                   created,
+                   title,
+                   description,
+	               speaker,
+	               link,
+	               start_min,
+	               start_sec
+            FROM (SELECT s.*,
+                         setweight(to_tsvector(title), 'A') ||
+                         setweight(to_tsvector(description), 'B') ||
+                         setweight(to_tsvector('simple', speaker), 'C')  as document
+                  FROM study s
+                  ) p_search
+            WHERE p_search.document @@ to_tsquery(:searchPattern)
+            ORDER BY ts_rank(p_search.document, to_tsquery(:searchPattern)) DESC;
+	    ]]>
+    </sql-query>
+
 </hibernate-mapping>
