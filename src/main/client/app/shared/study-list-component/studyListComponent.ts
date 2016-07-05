@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {Router} from "@angular/router";
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
@@ -22,7 +22,7 @@ import {LoadScript} from "../youtube-embed-component/loadScript";
     directives: [<any>InfiniteScroll, <any>StudyElementComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
 })
 
-export class StudyListComponent implements OnInit, OnChanges {
+export class StudyListComponent implements OnInit {
 
     public list:Study[];
 
@@ -38,20 +38,25 @@ export class StudyListComponent implements OnInit, OnChanges {
     scrollableResult:IScrollableResult<Study>;
 
     constructor(private studyService:StudyService, private router:Router) {
+    }
+
+    initList() {
         let filterConfig = {
             pattern: {value: null},
             speaker: {value: null},
             view: {value: null}
         };
-        this.queryFilter = new QueryFilter(filterConfig, router);
+        this.queryFilter = new QueryFilter(filterConfig, this.router);
         let filterReq = this.queryFilter.makeFilterRequest();
-        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, filterReq, true, false);
+
+        this.scrollableResult = new ScrollableResult<Study>((data)=> this.studyService.find(data), 10, filterReq, true, false);
     }
 
     ngOnInit() {
         this.loadWidget();
+        this.initList();
 
-        if(this.queryFilter.filter.view.value != null) {
+        if (this.queryFilter.filter.view.value != null) {
             setTimeout(() => {
                 this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
                     this.viewVideo(study);

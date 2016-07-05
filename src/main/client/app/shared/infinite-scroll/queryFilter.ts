@@ -1,4 +1,4 @@
-import {Router} from "@angular/router";
+import {Router, UrlTree} from "@angular/router";
 
 export class QueryFilter {
 
@@ -31,25 +31,26 @@ export class QueryFilter {
     }
 
     setFilterDataFromUrl():void {
+        let url:UrlTree = (<any>this.router).currentUrlTree;
         for (var filterItemKey in this.filter) {
             let filterItem = this.filter[filterItemKey];
-            // let routeItemValue = this.routeParams.params[filterItemKey];
-            // if (routeItemValue != null && routeItemValue.length > 0) {
-            //     filterItem.value = filterItem.oldValue = decodeURIComponent(routeItemValue);
-            // }
+            let routeItemValue = url.queryParams[filterItemKey];
+            if (routeItemValue != null && routeItemValue.length > 0) {
+                filterItem.value = filterItem.oldValue = decodeURIComponent(routeItemValue);
+            }
         }
     }
 
     updateUrlByFilterData():void {
-        // let current:Instruction = this.router.parent.currentInstruction;
-        // current.urlParams.splice(0);
-        // for (var filterItemKey in this.filter) {
-        //     let filterItem = this.filter[filterItemKey];
-        //     if (filterItem.value != null && filterItem.value.length > 0) {
-        //         current.urlParams.push(filterItemKey + '=' + encodeURIComponent(filterItem.value));
-        //     }
-        // }
-        // this.router.parent.navigateByInstruction(current, false);
+        let url:UrlTree = (<any>this.router).currentUrlTree;
+        url.queryParams={};
+        for (var filterItemKey in this.filter) {
+            let filterItem = this.filter[filterItemKey];
+            if (filterItem.value != null && filterItem.value.length > 0) {
+                url.queryParams[filterItemKey] = encodeURIComponent(filterItem.value);
+            }
+        }
+        this.router.navigateByUrl(url);
     }
 
     makeFilterRequest():any {
