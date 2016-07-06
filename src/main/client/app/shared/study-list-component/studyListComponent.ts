@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {Router} from "@angular/router";
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
@@ -22,7 +22,7 @@ import {LoadScript} from "../youtube-embed-component/loadScript";
     directives: [<any>InfiniteScroll, <any>StudyElementComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
 })
 
-export class StudyListComponent implements OnInit {
+export class StudyListComponent implements OnInit, OnChanges {
 
     public list:Study[];
 
@@ -38,25 +38,22 @@ export class StudyListComponent implements OnInit {
     scrollableResult:IScrollableResult<Study>;
 
     constructor(private studyService:StudyService, private router:Router) {
-    }
-
-    initList() {
         let filterConfig = {
             pattern: {value: null},
             speaker: {value: null},
             view: {value: null}
         };
-        this.queryFilter = new QueryFilter(filterConfig, this.router);
+        this.queryFilter = new QueryFilter(filterConfig, router);
         let filterReq = this.queryFilter.makeFilterRequest();
-
-        this.scrollableResult = new ScrollableResult<Study>((data)=> this.studyService.find(data), 10, filterReq, true, false);
+        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, filterReq, true, false);
     }
 
     ngOnInit() {
         this.loadWidget();
-        this.initList();
+    }
 
-        if (this.queryFilter.filter.view.value != null) {
+    initQueryFilter() {
+        if(this.queryFilter.filter.view.value != null) {
             setTimeout(() => {
                 this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
                     this.viewVideo(study);
@@ -152,7 +149,9 @@ export class StudyListComponent implements OnInit {
         // TODO !!!
         //SB account ra-5771ed6bfe470e48
         //test account ra-5768d6ade5563361
-        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false});
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false}, (err, script) => {
+            this.initQueryFilter();
+        });
         if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
             LoadScript.load('//www.youtube.com/iframe_api', {async: false});
         }
