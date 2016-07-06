@@ -65,7 +65,8 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
         var options = {
             id: id,
             width: Math.floor(this.vwidth),
-            height: Math.floor(this.vheight)
+            height: Math.floor(this.vheight),
+            quality: '360p'
         };
 
         this.player = new Vimeo.Player('vimeo-'+this.embed, options);
