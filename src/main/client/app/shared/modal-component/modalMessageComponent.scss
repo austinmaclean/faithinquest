@@ -2,6 +2,14 @@
   &.modal-message {
     .modal-dialog {
       .modal-content {
+        .modal-header {
+          .close {
+            span {
+              font-size: 2.5em;
+            }
+          }
+        }
+
         .modal-body {
           &.message-embed {
             margin: 20px 0;

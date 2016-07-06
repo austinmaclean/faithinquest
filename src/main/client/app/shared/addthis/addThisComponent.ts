@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -7,7 +7,7 @@ import {Component, Input, OnChanges} from '@angular/core';
     styleUrls: ['addThisComponent.css'],
 })
 
-export class AddThisComponent implements OnChanges {
+export class AddThisComponent implements OnChanges, OnInit {
 
     @Input() atcode:string;
     @Input() aturl:string = '';
@@ -20,6 +20,12 @@ export class AddThisComponent implements OnChanges {
         title: '',
         description: ''
     };
+
+    ngOnInit() {
+        if (window['addthis']) {
+            window['addthis'].button('.addthis_button_compact');
+        }
+    }
 
     ngOnChanges(changes) {
         this.atcode = this.atcode;

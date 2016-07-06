@@ -23,7 +23,7 @@ export class StudyElementComponent implements OnChanges {
     videoMode = VideoType.NONE;
 
     public share = {
-        code: 'ra-5768d6ade5563361',
+        code: 'ra-5771ed6bfe470e48',
         url: '',
         title: '',
         description: ''

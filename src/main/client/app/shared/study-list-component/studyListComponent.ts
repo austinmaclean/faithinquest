@@ -50,6 +50,7 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.loadWidget();
+        this.initQueryFilter();
     }
 
     initQueryFilter() {
@@ -73,7 +74,7 @@ export class StudyListComponent implements OnInit, OnChanges {
     public getStudies() {
         this.queryFilter.updateUrlByFilterData();
         let filterReq = this.queryFilter.makeFilterRequest();
-        this.scrollableResult.updateFilter(filterReq);
+        this.scrollableResult.updateFilter(filterReq, null, null);
     }
 
     editStudy(study:Study) {
@@ -149,9 +150,8 @@ export class StudyListComponent implements OnInit, OnChanges {
         // TODO !!!
         //SB account ra-5771ed6bfe470e48
         //test account ra-5768d6ade5563361
-        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false}, (err, script) => {
-            this.initQueryFilter();
-        });
+
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false});
         if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
             LoadScript.load('//www.youtube.com/iframe_api', {async: false});
         }
