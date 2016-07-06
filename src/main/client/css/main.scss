@@ -64,6 +64,8 @@ button:hover {
 }
 
 /* common fonts */
+@import "scss/html-loader";
+@import "scss/loader";
 @import "scss/mixins";
 @import "scss/flex";
 @import "scss/commons";

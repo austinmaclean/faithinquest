@@ -32,7 +32,9 @@
 </head>
 <body>
 
-<sd-app>Loading...</sd-app>
+<sd-app>
+    <div class="loader"></div>
+</sd-app>
 
 <script>
     // function.name (all IE)

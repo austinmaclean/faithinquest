@@ -67,10 +67,11 @@ export abstract class RESTClient {
      * Response Interceptor
      *
      * @method responseInterceptor
+     * @param {Request} req - request object
      * @param {Response} res - response object
      * @returns {Response} res - transformed response object
      */
-    protected responseInterceptor(res:Observable<any>):Observable<any> {
+    protected responseInterceptor(req:Request, res:Observable<any>):Observable<any> {
         return res;
     }
 
@@ -280,7 +281,7 @@ function methodBuilder(method:number) {
                 }
 
                 // intercept the response
-                observable = this.responseInterceptor(observable);
+                observable = this.responseInterceptor(req, observable);
 
                 return observable;
             };

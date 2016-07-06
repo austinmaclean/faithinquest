@@ -4,7 +4,7 @@ import {SignInRoutes, AUTH_PROVIDERS} from './signin/signin.routes';
 import {AdminRoutes} from './admin-update/adminRoutes.routes';
 import {HomeRoutes} from './client-list/home.routes';
 
-import { CanDeactivateGuard } from './shared/service/canComponentDeactivate';
+import { CanDeactivateGuard } from './shared/auth/canComponentDeactivate';
 
 export const routes:RouterConfig = [
     ...HomeRoutes,

@@ -1,16 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Router} from '@angular/router';
+
 import {Observable} from 'rxjs/Observable';
-import {Study} from '../model/study';
-import {BaseService} from './base.service';
+import 'rxjs/add/operator/map';
+
 import {
     GET, PUT, POST,
     DELETE, BaseUrl, Headers,
     Produces, MediaType, DefaultHeaders,
     Path, Body, Query, QueryObject
 } from './rest-client';
-import 'rxjs/add/operator/map';
+import {Study} from '../model/study';
+import {BaseService} from './base.service';
+import {HttpLoaderService} from '../http-loader/httpLoaderService';
 
 @Injectable()
 @BaseUrl('/api/')
@@ -20,8 +23,8 @@ import 'rxjs/add/operator/map';
 })
 export class StudyService extends BaseService {
 
-    constructor(protected router:Router, protected http:Http) {
-        super(router, http);
+    constructor(protected router:Router, protected http:Http, protected httpLoaderService:HttpLoaderService) {
+        super(router, http, httpLoaderService);
     }
 
     @GET('study')

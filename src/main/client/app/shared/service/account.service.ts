@@ -3,13 +3,15 @@ import {Admin} from '../model/admin';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {BaseService} from './base.service';
+
 import {
     GET, PUT, POST,
     DELETE, BaseUrl, Headers, Header,
     Produces, MediaType, DefaultHeaders,
     Path, Body, Query
 } from './rest-client';
+import {BaseService} from './base.service';
+import {HttpLoaderService} from '../http-loader/httpLoaderService';
 
 var Token:Admin = null;
 
@@ -21,8 +23,8 @@ var Token:Admin = null;
 })
 export class AccountService extends BaseService {
 
-    constructor(protected router:Router, protected http:Http) {
-        super(router, http);
+    constructor(protected router:Router, protected http:Http, protected httpLoaderService:HttpLoaderService) {
+        super(router, http, httpLoaderService);
     }
 
     @GET('info')
