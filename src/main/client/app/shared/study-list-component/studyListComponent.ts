@@ -37,20 +37,30 @@ export class StudyListComponent implements OnInit, OnChanges {
     queryFilter:QueryFilter;
     scrollableResult:IScrollableResult<Study>;
 
+
     constructor(private studyService:StudyService, private router:Router) {
+    }
+
+    ngOnInit() {
+        this.loadWidget();
+        this.initList();
+        this.initQueryFilter();
+    }
+
+    ngOnChanges(changes) {
+        console.log('study component changes');
+    }
+
+    initList() {
         let filterConfig = {
             pattern: {value: null},
             speaker: {value: null},
             view: {value: null}
         };
-        this.queryFilter = new QueryFilter(filterConfig, router);
+        this.queryFilter = new QueryFilter(filterConfig, this.router);
         let filterReq = this.queryFilter.makeFilterRequest();
-        this.scrollableResult = new ScrollableResult<Study>((data)=> studyService.find(data), 10, filterReq, true, false);
-    }
 
-    ngOnInit() {
-        this.loadWidget();
-        this.initQueryFilter();
+        this.scrollableResult = new ScrollableResult<Study>((data)=> this.studyService.find(data), 10, filterReq, true, false);
     }
 
     initQueryFilter() {
@@ -61,10 +71,6 @@ export class StudyListComponent implements OnInit, OnChanges {
                 });
             }, 3000);
         }
-    }
-
-    ngOnChanges(changes) {
-        console.log('study component changes');
     }
 
     public onSelectSpeaker(speaker:string) {
