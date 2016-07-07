@@ -12,7 +12,8 @@ import {CanDeactivateGuard} from './shared/auth/canComponentDeactivate';
 export const routes:RouterConfig = [
     ...HomeRoutes,
     ...SignInRoutes,
-    ...AdminRoutes
+    ...AdminRoutes,
+    { path: '**', redirectTo: '' }
 ];
 
 export const AUTH_PROVIDERS = [AuthGuard, AccountService, HttpLoaderService];
