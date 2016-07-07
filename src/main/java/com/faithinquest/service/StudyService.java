@@ -2,6 +2,7 @@ package com.faithinquest.service;
 
 import com.faithinquest.model.Study;
 import com.faithinquest.model.dto.StudySearch;
+import com.faithinquest.model.dto.StudySort;
 import com.faithinquest.persistence.AbstractPersistenceService;
 import com.faithinquest.persistence.Paging;
 import org.hibernate.SQLQuery;
@@ -27,13 +28,13 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		String pattern = search.getPattern();
 		if( StringUtils.isEmpty( pattern ) )
 		{
-			return findBy( search, paging );
+			return findStudies( search, paging );
 		}
 
 		String[] words = pattern.split( "\\W|_" );
-		if ( words.length == 0 )
+		if( words.length == 0 )
 		{
-			return findBy( search, paging );
+			return findStudies( search, paging );
 		}
 		StringBuilder sb = new StringBuilder();
 		for( String word : words )
@@ -50,9 +51,43 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		}
 
 		SQLQuery query = (SQLQuery) getSession().getNamedQuery( "Study.fullTextSearch" );
-		String queryString = query.getQueryString();
+		StringBuilder queryString = new StringBuilder( query.getQueryString() );
+		if( search.getSpeaker() != null )
+		{
+			queryString.append( "\n            AND speaker = :speaker" );
+		}
+		String sortMode = paging.getSortColumn();
+		if( StudySort.MostRecent.name().equals( sortMode ) )
+		{
+			queryString.append( "\n            ORDER BY created DESC" );
+		}
+		else
+		{
+			queryString.append( "\n            ORDER BY ts_rank(p_search.document, to_tsquery(:searchPattern)) DESC" );
+		}
+
+		query = getSession().createSQLQuery( queryString.toString() );
 		query.addEntity( Study.class );
-		query.setParameter( "searchPattern",  sb.toString() );
+		query.setParameter( "searchPattern", sb.toString() );
+		if( search.getSpeaker() != null )
+		{
+			query.setParameter( "speaker", search.getSpeaker() );
+		}
+		if( paging.getOffset() != null )
+		{
+			query.setFirstResult( paging.getOffset() );
+		}
+		if( paging.getLimit() != null )
+		{
+			query.setMaxResults( paging.getLimit() );
+		}
 		return query.list();
+	}
+
+	private List<Study> findStudies( StudySearch search, Paging paging )
+	{
+		paging.setSortColumn( "created" );  //todo change this to sort by other options
+		paging.setSortDesc( true );
+		return findBy( search, paging );
 	}
 }

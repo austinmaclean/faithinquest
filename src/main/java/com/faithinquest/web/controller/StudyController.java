@@ -15,6 +15,7 @@ import com.faithinquest.web.util.OkResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,12 +99,7 @@ public class StudyController
 	@ResponseBody
 	public GridResult<Study> findStudy( StudySearch search, Paging paging )
 	{
-		if( paging == null )
-		{
-			paging = new Paging();
-		}
-		paging.setSortColumn( "created" );
-		paging.setSortDesc( true );
+		Assert.notNull( paging );
 		return new GridResult<>( studyService.findByFullText( search, paging ) );
 	}
 

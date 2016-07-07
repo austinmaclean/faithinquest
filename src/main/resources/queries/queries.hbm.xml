@@ -21,7 +21,6 @@
                   FROM study s
                   ) p_search
             WHERE p_search.document @@ to_tsquery(:searchPattern)
-            ORDER BY ts_rank(p_search.document, to_tsquery(:searchPattern)) DESC;
 	    ]]>
     </sql-query>
 
