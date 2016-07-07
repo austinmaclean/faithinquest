@@ -22,7 +22,7 @@
             <span><a (click)="actionDelete()">delete</a></span>
         </span>
         <span *ngIf="!editMode">
-            <span><ti-addthis-share [atcode]="share.code" [aturl]="share.url" [attitle]="share.title" [atdesc]="share.description"></ti-addthis-share></span>
+            <span><ti-addthis-share [ShareConfig]="share"></ti-addthis-share></span>
         </span>
     </div>
 

@@ -1,4 +1,7 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input, AfterViewInit} from '@angular/core';
+import {AddThisShare} from '../model/AddThisShare';
+import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
     moduleId: module.id,
@@ -7,30 +10,19 @@ import {Component, Input, OnChanges} from '@angular/core';
     styleUrls: ['addThisComponent.css'],
 })
 
-export class AddThisComponent implements OnChanges {
+export class AddThisComponent implements AfterViewInit {
 
-    @Input() atcode:string;
-    @Input() aturl:string = '';
-    @Input() attitle:string = '';
-    @Input() atdesc:string = '';
+    public share:AddThisShare;
 
-    public share = {
-        code: '',
-        url: '',
-        title: '',
-        description: ''
+    shareConfig:Subject<AddThisShare> = new BehaviorSubject(null);
+
+    @Input() set ShareConfig(config:AddThisShare) {
+        this.share = config;
     };
 
-    ngOnChanges(changes) {
-        this.atcode = this.atcode;
-        this.share.code = this.atcode;
-        this.share.url = this.aturl;
-        this.share.title = this.attitle;
-        this.share.description = this.atdesc;
+    ngAfterViewInit() {
         if (window['addthis']) {
-            setTimeout(() => {
-                window['addthis'].button('.addthis_button_compact');
-            }, 500);
+            window['addthis'].button('.addthis_button_compact');
         }
     }
 

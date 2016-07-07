@@ -4,6 +4,8 @@ import {Study} from '../../model/study';
 import {StudyListComponent} from '../studyListComponent';
 import {AddThisComponent} from '../../../shared/addthis/addThisComponent';
 import {VideoType} from '../../model/videoType';
+import {AddThisShare} from '../../model/AddThisShare';
+
 
 @Component({
     moduleId: module.id,
@@ -22,12 +24,7 @@ export class StudyElementComponent implements OnChanges {
 
     videoMode = VideoType.NONE;
 
-    public share = {
-        code: 'ra-5771ed6bfe470e48',
-        url: '',
-        title: '',
-        description: ''
-    };
+    public share:AddThisShare = new AddThisShare('ra-5771ed6bfe470e48', '', '', '');
 
     constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component:StudyListComponent, private http:Http) {
     }
@@ -47,7 +44,6 @@ export class StudyElementComponent implements OnChanges {
                 var code = ar[ar.length - 1];
                 this.getVimeoThumb(code);
             }
-
             this.share.url = this.item.link;
             this.share.title = this.item.title;
             this.share.description = this.item.description;
@@ -64,10 +60,6 @@ export class StudyElementComponent implements OnChanges {
 
     actionDelete() {
         this.component.deleteStudy(this.item);
-    }
-
-    actionShare() {
-        window.alert('share');
     }
 
     getParameterByName(name, url) {
