@@ -81,7 +81,12 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		{
 			query.setMaxResults( paging.getLimit() );
 		}
-		return query.list();
+		List studies = query.list();
+		if ( studies.isEmpty() )
+		{
+			studies = findStudies( search, paging );
+		}
+		return studies;
 	}
 
 	private List<Study> findStudies( StudySearch search, Paging paging )
