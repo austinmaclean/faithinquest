@@ -6,7 +6,6 @@ import {AddThisComponent} from '../../../shared/addthis/addThisComponent';
 import {VideoType} from '../../model/videoType';
 import {AddThisShare} from '../../model/AddThisShare';
 
-
 @Component({
     moduleId: module.id,
     selector: 'ti-study',
@@ -24,7 +23,7 @@ export class StudyElementComponent implements OnChanges {
 
     videoMode = VideoType.NONE;
 
-    public share:AddThisShare = new AddThisShare('ra-5771ed6bfe470e48', '', '', '');
+    public share:AddThisShare = new AddThisShare(AppConfig.addThisKey, '', '', '');
 
     constructor(@Host() @Inject(forwardRef(() => StudyListComponent)) private component:StudyListComponent, private http:Http) {
     }

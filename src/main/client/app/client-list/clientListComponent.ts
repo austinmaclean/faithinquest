@@ -4,7 +4,7 @@ import {StudyService, FooterComponent, StudyListComponent} from '../shared/index
 
 @Component({
     moduleId: module.id,
-    selector: 'ti-study-list',
+    selector: 'client-list-component',
     templateUrl: 'clientListComponent.html',
     styleUrls: ['clientListComponent.css'],
     providers: [StudyService],

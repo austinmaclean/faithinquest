@@ -24,9 +24,10 @@
 </#if>
 
     <script type="application/javascript">
-        window.appConfig = {
+        window.AppConfig = {
             appPath: "<@spring.url "/"/>",
-            baseUrl: "${baseUrl}/"
+            baseUrl: "${baseUrl}/",
+            addThisKey: "${addThisKey}"
         };
     </script>
 </head>
