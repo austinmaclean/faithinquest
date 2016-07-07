@@ -20,7 +20,7 @@ export abstract class BaseService extends RESTClient {
 
     protected responseInterceptor(req:Request, observable:Observable<any>):Observable<any> {
         // Load handling        
-        this.httpLoaderService.process(req.url, observable);
+        observable = this.httpLoaderService.process(req.url, observable);
 
         // Unauthorized Error handling
         return observable.catch((err, source) => {

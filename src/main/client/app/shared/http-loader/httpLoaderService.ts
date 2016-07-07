@@ -5,7 +5,7 @@ import {Subject} from 'rxjs/Subject';
 import {Notification} from '../notification/notification';
 
 interface IHttpLoaderService {
-    process(url:string, observable:Observable<any>);
+    process(url:string, observable:Observable<any>):Observable<any>;
 }
 
 @Injectable()
@@ -34,9 +34,24 @@ export class HttpLoaderService implements IHttpLoaderService, OnDestroy {
         this.subject.next(this.numLoadings);
     }
 
-    public process(url:string, observable:Observable<any>) {
+    public process(url:string, observable:Observable<any>):Observable<any> {
         this.increment(url);
-        observable.subscribe(null, null, () => this.decrement(url));
+
+        return Observable.create(observer => {
+            observable.subscribe(
+                data => {
+                    this.decrement(url);
+
+                    observer.next(data);
+                    observer.complete();
+                },
+                error => {
+                    this.decrement(url);
+
+                    observer.error(error);
+                    observer.complete();
+                });
+        });
     }
 
     ngOnDestroy() {
