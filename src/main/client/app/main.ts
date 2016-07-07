@@ -3,6 +3,7 @@ import {enableProdMode} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {bootstrap} from '@angular/platform-browser-dynamic';
 
+import {NOTIFICATION_PROVIDERS} from "./shared/notification/notification";
 import {APP_ROUTER_PROVIDERS} from './app.routes';
 import {AppComponent} from './app.component';
 
@@ -18,6 +19,7 @@ bootstrap(<any>AppComponent, [
     disableDeprecatedForms(), // disable the old form functionality and the warning message.
     provideForms(),
     HTTP_PROVIDERS,
+    NOTIFICATION_PROVIDERS,
     APP_ROUTER_PROVIDERS
 ]).catch(err => console.error(err));
 

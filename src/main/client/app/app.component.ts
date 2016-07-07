@@ -3,8 +3,6 @@ import {Http, HTTP_PROVIDERS} from '@angular/http';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {HttpLoader} from './shared/http-loader/httpLoader';
-import {HttpLoaderService} from "./shared/http-loader/httpLoaderService";
-import {Notification} from './shared/notification/notification';
 
 import {Config} from './shared/index';
 
@@ -16,8 +14,8 @@ import {Config} from './shared/index';
     moduleId: module.id,
     selector: 'sd-app',
     templateUrl: 'app.component.html',
-    viewProviders: [HttpLoaderService, Notification, Http, HTTP_PROVIDERS],
-    directives: [HttpLoader, ROUTER_DIRECTIVES]
+    viewProviders: [<any>Http, HTTP_PROVIDERS],
+    directives: [<any>HttpLoader, ROUTER_DIRECTIVES]
 })
 export class AppComponent {
 
