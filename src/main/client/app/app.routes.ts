@@ -3,6 +3,7 @@ import {provideRouter, RouterConfig} from '@angular/router';
 import {AuthGuard} from './shared/auth/auth.guard';
 import {AccountService} from './shared/service/account.service';
 import {HttpLoaderService} from './shared/http-loader/httpLoaderService';
+import {HttpErrorHandlerService} from './shared/http-error-handler/httpErrorHandlerService';
 
 import {HomeComponent} from './pages/home/homeComponent';
 import {LoginComponent}     from './pages/login/login.component';
@@ -19,7 +20,6 @@ const HomeRoutes:RouterConfig = [
 
 // Login
 
-export const loginApiPath = 'api/admin/account/signin';
 export const loginPath = 'login';
 
 const LoginRoutes = [
@@ -42,7 +42,7 @@ export const routes:RouterConfig = [
     {path: '**', redirectTo: ''}
 ];
 
-export const AUTH_PROVIDERS = [AuthGuard, AccountService, HttpLoaderService];
+export const AUTH_PROVIDERS = [AuthGuard, AccountService, HttpLoaderService, HttpErrorHandlerService];
 
 export const APP_ROUTER_PROVIDERS = [
     provideRouter(routes),

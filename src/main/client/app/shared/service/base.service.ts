@@ -1,17 +1,19 @@
 import {Http, Request} from '@angular/http';
-import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/empty';
 
 import {RESTClient} from './rest-client';
-import {HttpLoaderService} from "../http-loader/httpLoaderService";
-import {loginPath, loginApiPath} from '../../app.routes';
+import {HttpLoaderService} from '../http-loader/httpLoaderService';
+import {HttpErrorHandlerService} from '../http-error-handler/httpErrorHandlerService';
+
 
 export abstract class BaseService extends RESTClient {
 
-    constructor(protected router:Router, protected http:Http, protected httpLoaderService:HttpLoaderService) {
+    constructor(protected http:Http,
+                protected httpLoaderService:HttpLoaderService,
+                protected httpErrorHandlerService:HttpErrorHandlerService) {
         super(http);
     }
 
@@ -21,17 +23,11 @@ export abstract class BaseService extends RESTClient {
 
     protected responseInterceptor(req:Request, observable:Observable<any>):Observable<any> {
         // Load handling        
-        observable = this.httpLoaderService.process(req.url, observable);
+        observable = this.httpLoaderService.process(req, observable);
+        // Error handling
+        observable = this.httpErrorHandlerService.process(req, observable);
 
-        // Unauthorized Error handling
-        return observable.catch((err, source) => {
-            if (err.status === 401 && err.url.indexOf(loginApiPath) === -1) {
-                this.router.navigate([loginPath]);
-                return Observable.empty();
-            } else {
-                return Observable.throw(err);
-            }
-        });
+        return observable;
     }
 
 }

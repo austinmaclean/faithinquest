@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {Router} from '@angular/router';
-
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -14,6 +12,7 @@ import {
 import {Study} from '../model/study';
 import {BaseService} from './base.service';
 import {HttpLoaderService} from '../http-loader/httpLoaderService';
+import {HttpErrorHandlerService} from '../http-error-handler/httpErrorHandlerService';
 
 @Injectable()
 @BaseUrl('/api/')
@@ -23,8 +22,10 @@ import {HttpLoaderService} from '../http-loader/httpLoaderService';
 })
 export class StudyService extends BaseService {
 
-    constructor(protected router:Router, protected http:Http, protected httpLoaderService:HttpLoaderService) {
-        super(router, http, httpLoaderService);
+    constructor(protected http:Http,
+                protected httpLoaderService:HttpLoaderService,
+                protected httpErrorHandlerService:HttpErrorHandlerService) {
+        super(http, httpLoaderService, httpErrorHandlerService);
     }
 
     @GET('study')
@@ -35,17 +36,6 @@ export class StudyService extends BaseService {
                @Query('sort') sort?:string):Observable<any> {
         return null;
     }
-
-    // @GET('study/find')
-    // @Produces(MediaType.JSON)
-    // public find(@Query('pattern') pattern?:string,
-    //             @Query('speaker') speaker?:string,
-    //             @Query('limit') limit?:number,
-    //             @Query('offset') offset?:number,
-    //             @Query('order') order?:string,
-    //             @Query('sort') sort?:string):Observable<any> {
-    //     return null;
-    // }
 
     @GET('study/find')
     @Produces(MediaType.JSON)

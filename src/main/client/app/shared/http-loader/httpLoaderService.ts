@@ -1,11 +1,12 @@
 import {Injectable, OnDestroy} from '@angular/core';
+import {Request} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 import {HttpLoaderEventEmitter} from '../notification/notification';
 
 interface IHttpLoaderService {
-    process(url:string, observable:Observable<any>):Observable<any>;
+    process(req:Request, observable:Observable<any>):Observable<any>;
 }
 
 @Injectable()
@@ -34,19 +35,19 @@ export class HttpLoaderService implements IHttpLoaderService, OnDestroy {
         this.subject.next(this.numLoadings);
     }
 
-    public process(url:string, observable:Observable<any>):Observable<any> {
-        this.increment(url);
+    public process(req:Request, observable:Observable<any>):Observable<any> {
+        this.increment(req.url);
 
         return Observable.create(observer => {
             observable.subscribe(
                 data => {
-                    this.decrement(url);
+                    this.decrement(req.url);
 
                     observer.next(data);
                     observer.complete();
                 },
                 error => {
-                    this.decrement(url);
+                    this.decrement(req.url);
 
                     observer.error(error);
                     observer.complete();

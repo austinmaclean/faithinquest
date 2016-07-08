@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Admin} from '../model/admin';
 import {Http} from '@angular/http';
-import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
 import {
@@ -12,8 +11,7 @@ import {
 } from './rest-client';
 import {BaseService} from './base.service';
 import {HttpLoaderService} from '../http-loader/httpLoaderService';
-
-var Token:Admin = null;
+import {HttpErrorHandlerService} from '../http-error-handler/httpErrorHandlerService';
 
 @Injectable()
 @BaseUrl('/api/admin/account/')
@@ -23,8 +21,12 @@ var Token:Admin = null;
 })
 export class AccountService extends BaseService {
 
-    constructor(protected router:Router, protected http:Http, protected httpLoaderService:HttpLoaderService) {
-        super(router, http, httpLoaderService);
+    token:Admin = null;
+
+    constructor(protected http:Http,
+                protected httpLoaderService:HttpLoaderService,
+                protected httpErrorHandlerService:HttpErrorHandlerService) {
+        super(http, httpLoaderService, httpErrorHandlerService);
     }
 
     @GET('info')
@@ -46,14 +48,14 @@ export class AccountService extends BaseService {
 
     public getInfo():Observable<any> {
         return Observable.create(observer => {
-            if (Token) {
-                observer.next(Token);
+            if (this.token) {
+                observer.next(this.token);
                 observer.complete();
             } else {
                 this.info().subscribe(
                     result => {
-                        Token = result;
-                        observer.next(Token);
+                        this.token = result;
+                        observer.next(this.token);
                         observer.complete();
                     },
                     error => {
@@ -68,8 +70,8 @@ export class AccountService extends BaseService {
         return Observable.create(observer => {
             this.signIn(admin).subscribe(
                 response => {
-                    Token = response;
-                    observer.next(Token);
+                    this.token = response;
+                    observer.next(this.token);
                     observer.complete();
                 },
                 error => {
@@ -85,7 +87,7 @@ export class AccountService extends BaseService {
     public logout():Observable<any> {
         return Observable.create(observer => {
             this.signOut().subscribe(null, null, () => {
-                Token = null;
+                this.token = null;
                 observer.next(true);
                 observer.complete();
             });
