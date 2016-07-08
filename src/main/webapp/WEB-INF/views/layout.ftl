@@ -33,9 +33,9 @@
 </head>
 <body>
 
-<sd-app>
+<ti-app>
     <div class="loader"></div>
-</sd-app>
+</ti-app>
 
 <script>
     // function.name (all IE)

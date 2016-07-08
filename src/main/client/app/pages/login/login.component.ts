@@ -7,12 +7,12 @@ import {FooterComponent} from '../../shared/footer/footer.component';
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-signin',
-    templateUrl: 'signin.component.html',
-    styleUrls: ['signin.component.css'],
+    selector: 'ti-login',
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css'],
     directives: [<any>FooterComponent, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
-export class SignInComponent {
+export class LoginComponent {
 
     constructor(private router:Router, private accountService:AccountService) {
     }

@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
 import {Study} from "../../shared/model/study";
 import {StudyService} from "../../shared/service/study.service";
-import {StudyElementComponent} from "./study-element/studyElementComponent";
+import {StudyComponent} from "./study/studyComponent";
 import {YTEmbedComponent} from "../youtube-embed-component/youtubeEmbedComponent";
 import {ModalVideoComponent} from "../modal-component/modalVideoComponent";
 import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
@@ -19,7 +19,7 @@ import {LoadScript} from "../load-script/loadScript";
     styleUrls: ['studyListComponent.css'],
     providers: [StudyService],
     viewProviders: [BS_VIEW_PROVIDERS],
-    directives: [<any>InfiniteScroll, <any>StudyElementComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
+    directives: [<any>InfiniteScroll, <any>StudyComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
 })
 
 export class StudyListComponent implements OnInit, OnChanges {

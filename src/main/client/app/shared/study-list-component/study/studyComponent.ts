@@ -9,12 +9,12 @@ import {AddThisShare} from '../../model/AddThisShare';
 @Component({
     moduleId: module.id,
     selector: 'ti-study',
-    templateUrl: 'studyElementComponent.html',
-    styleUrls: ['studyElementComponent.css'],
+    templateUrl: 'studyComponent.html',
+    styleUrls: ['studyComponent.css'],
     directives: [<any>AddThisComponent]
 })
 
-export class StudyElementComponent implements OnChanges {
+export class StudyComponent implements OnChanges {
 
     @Input() item:Study;
     @Input() editMode:boolean;

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {AdminEditComponent} from './admin-edit/adminEditComponent';
-import {OutputMessage} from './admin-edit/outputMessage';
+import {StudyEditComponent} from './study-edit/studyEditComponent';
+import {OutputMessage} from './study-edit/outputMessage';
 import {StudyListComponent} from '../../shared/study-list-component/studyListComponent';
 import {FooterComponent} from '../../shared/footer/footer.component';
 import {Study} from '../../shared/model/study';
@@ -9,17 +9,23 @@ import {ModalResult, ModalAction, ModalDialogComponent} from '../../shared/modal
 
 @Component({
     moduleId: module.id,
-    selector: 'ti-admin-study-update',
-    templateUrl: 'adminUpdateComponent.html',
-    styleUrls: ['adminUpdateComponent.css'],
-    directives: [<any>StudyListComponent, <any>AdminEditComponent, <any>FooterComponent, <any>ModalMessageComponent, <any>ModalDialogComponent]
+    selector: 'ti-admin',
+    templateUrl: 'adminComponent.html',
+    styleUrls: ['adminComponent.css'],
+    directives: [
+        <any>StudyListComponent,
+        <any>StudyEditComponent,
+        <any>FooterComponent,
+        <any>ModalMessageComponent,
+        <any>ModalDialogComponent
+    ]
 })
 
-export class AdminUpdateComponent {
+export class AdminComponent {
 
     pattern:string = null;
 
-    @ViewChild(<any>AdminEditComponent) private editComponent:AdminEditComponent;
+    @ViewChild(<any>StudyEditComponent) private editComponent:StudyEditComponent;
     @ViewChild(<any>StudyListComponent) private listComponent:StudyListComponent;
     @ViewChild(<any>ModalMessageComponent) private messageComponent:ModalMessageComponent;
     @ViewChild(<any>ModalDialogComponent) private dialogComponent:ModalDialogComponent;

@@ -3,15 +3,15 @@ import {provideRouter, RouterConfig} from '@angular/router';
 import {AuthGuard} from './shared/auth/auth.guard';
 import {AccountService} from './shared/service/account.service';
 import {HttpLoaderService} from './shared/http-loader/httpLoaderService';
-import {SignInRoutes} from './pages/signin/signin.routes';
-import {AdminRoutes} from './pages/admin-update/admin.routes';
-import {HomeRoutes} from './pages/client-list/home.routes';
+import {LoginRoutes} from './pages/login/login.routes';
+import {AdminRoutes} from './pages/admin/admin.routes';
+import {HomeRoutes} from './pages/home/home.routes';
 
 import {CanDeactivateGuard} from './shared/auth/canComponentDeactivate';
 
 export const routes:RouterConfig = [
     ...HomeRoutes,
-    ...SignInRoutes,
+    ...LoginRoutes,
     ...AdminRoutes,
     { path: '**', redirectTo: '' }
 ];

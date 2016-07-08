@@ -12,7 +12,7 @@ import {Config} from './shared/config/env.config';
  */
 @Component({
     moduleId: module.id,
-    selector: 'sd-app',
+    selector: 'ti-app',
     templateUrl: 'app.component.html',
     viewProviders: [<any>Http, HTTP_PROVIDERS],
     directives: [<any>HttpLoader, ROUTER_DIRECTIVES]

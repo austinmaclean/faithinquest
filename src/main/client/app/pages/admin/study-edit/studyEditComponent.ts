@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit, OnChanges, Output, EventEmitter, ElementRef} from '@angular/core';
+import {Component, ViewChild, OnInit, Output, EventEmitter} from '@angular/core';
 import {Http} from '@angular/http';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
@@ -13,14 +13,21 @@ import {VideoType} from '../../../shared/model/videoType';
 
 @Component({
     moduleId: module.id,
-    selector: 'ti-admin-study-edit',
-    templateUrl: 'adminEditComponent.html',
-    styleUrls: ['adminEditComponent.css'],
+    selector: 'ti-study-edit',
+    templateUrl: 'studyEditComponent.html',
+    styleUrls: ['studyEditComponent.css'],
     providers: [StudyService],
-    directives: [FILE_UPLOAD_DIRECTIVES, <any>NgClass, <any>NgStyle,
-        <any>YTEmbedComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, <any>VimeoEmbedComponent]
+    directives: [
+        FILE_UPLOAD_DIRECTIVES,
+        <any>NgClass,
+        <any>NgStyle,
+        <any>YTEmbedComponent,
+        CORE_DIRECTIVES,
+        FORM_DIRECTIVES,
+        <any>VimeoEmbedComponent
+    ]
 })
-export class AdminEditComponent implements OnInit, OnChanges {
+export class StudyEditComponent implements OnInit {
 
     @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
     @ViewChild(<any>VimeoEmbedComponent) vimeoPlayer:VimeoEmbedComponent;
@@ -50,10 +57,6 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.createMode = true;
-    }
-
-    ngOnChanges(changes) {
-        console.log('changes');
     }
 
     validateVideoLink() {
