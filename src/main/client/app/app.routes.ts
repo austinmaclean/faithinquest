@@ -19,6 +19,7 @@ const HomeRoutes:RouterConfig = [
 
 // Login
 
+export const loginApiPath = 'api/admin/account/signin';
 export const loginPath = 'login';
 
 const LoginRoutes = [
