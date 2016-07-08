@@ -3,9 +3,9 @@ import {provideRouter, RouterConfig} from '@angular/router';
 import {AuthGuard} from './shared/auth/auth.guard';
 import {AccountService} from './shared/service/account.service';
 import {HttpLoaderService} from './shared/http-loader/httpLoaderService';
-import {SignInRoutes} from './signin/signin.routes';
-import {AdminRoutes} from './admin-update/adminRoutes.routes';
-import {HomeRoutes} from './client-list/home.routes';
+import {SignInRoutes} from './pages/signin/signin.routes';
+import {AdminRoutes} from './pages/admin-update/admin.routes';
+import {HomeRoutes} from './pages/client-list/home.routes';
 
 import {CanDeactivateGuard} from './shared/auth/canComponentDeactivate';
 

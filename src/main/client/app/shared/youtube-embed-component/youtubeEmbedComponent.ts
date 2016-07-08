@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import {LoadScript} from './loadScript';
+import {LoadScript} from '../load-script/loadScript';
 
 @Component({
     moduleId: module.id,

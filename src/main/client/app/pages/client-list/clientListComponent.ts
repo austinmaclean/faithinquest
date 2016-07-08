@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 
-import {StudyService, FooterComponent, StudyListComponent} from '../shared/index';
+import {StudyService} from '../../shared/service/study.service';
+import {FooterComponent,} from '../../shared/footer/footer.component';
+import {StudyListComponent} from '../../shared/study-list-component/studyListComponent';
 
 @Component({
     moduleId: module.id,

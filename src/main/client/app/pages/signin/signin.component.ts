@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
-import {AccountService, Admin} from '../shared/index';
-import {FooterComponent} from '../shared/index';
+import {AccountService} from '../../shared/service/account.service';
+import {Admin} from '../../shared/model/admin';
+import {FooterComponent} from '../../shared/footer/footer.component';
 
 @Component({
     moduleId: module.id,

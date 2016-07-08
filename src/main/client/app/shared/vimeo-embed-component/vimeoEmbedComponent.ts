@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, Input, ElementRef, provide, Output, EventEmitter } from '@angular/core';
-import {LoadScript} from '../youtube-embed-component/loadScript';
+import {LoadScript} from '../load-script/loadScript';
 import timeout = Q.timeout;
 
 @Component({

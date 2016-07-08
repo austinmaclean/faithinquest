@@ -3,14 +3,14 @@ import {CORE_DIRECTIVES} from "@angular/common";
 import {Router} from "@angular/router";
 import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
 import {Study} from "../../shared/model/study";
-import {StudyService} from "../../shared/index";
+import {StudyService} from "../../shared/service/study.service";
 import {StudyElementComponent} from "./study-element/studyElementComponent";
 import {YTEmbedComponent} from "../youtube-embed-component/youtubeEmbedComponent";
 import {ModalVideoComponent} from "../modal-component/modalVideoComponent";
 import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
 import {IScrollableResult, ScrollableResult} from "../infinite-scroll/scrollableResult";
 import {QueryFilter} from "../infinite-scroll/queryFilter";
-import {LoadScript} from "../youtube-embed-component/loadScript";
+import {LoadScript} from "../load-script/loadScript";
 
 @Component({
     moduleId: module.id,
@@ -64,7 +64,7 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     initQueryFilter() {
-        if(this.queryFilter.filter.view.value != null) {
+        if (this.queryFilter.filter.view.value != null) {
             setTimeout(() => {
                 this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
                     this.viewVideo(study);
@@ -153,11 +153,8 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     loadWidget() {
-        // TODO !!!
-        //SB account ra-5771ed6bfe470e48
-        //test account ra-5768d6ade5563361
-
-        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5771ed6bfe470e48', {async: false});
+        // Load External Scripts
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=' + AppConfig.addThisKey, {async: false});
         if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
             LoadScript.load('//www.youtube.com/iframe_api', {async: false});
         }

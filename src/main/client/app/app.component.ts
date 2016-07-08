@@ -4,7 +4,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {HttpLoader} from './shared/http-loader/httpLoader';
 
-import {Config} from './shared/index';
+import {Config} from './shared/config/env.config';
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the

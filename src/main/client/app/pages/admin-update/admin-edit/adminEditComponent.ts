@@ -5,11 +5,11 @@ import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
 
 import {BulkUploader} from './bulkUploader';
 import {OutputMessage} from './outputMessage';
-import {StudyService} from '../../shared/index';
-import {YTEmbedComponent} from '../../shared/youtube-embed-component/youtubeEmbedComponent';
-import {Study} from '../../shared/model/study';
-import {VimeoEmbedComponent} from '../../shared/vimeo-embed-component/vimeoEmbedComponent';
-import {VideoType} from '../../shared/model/videoType';
+import {StudyService} from '../../../shared/service/study.service';
+import {YTEmbedComponent} from '../../../shared/youtube-embed-component/youtubeEmbedComponent';
+import {Study} from '../../../shared/model/study';
+import {VimeoEmbedComponent} from '../../../shared/vimeo-embed-component/vimeoEmbedComponent';
+import {VideoType} from '../../../shared/model/videoType';
 
 @Component({
     moduleId: module.id,
@@ -32,11 +32,11 @@ export class AdminEditComponent implements OnInit, OnChanges {
     createMode:boolean;
     playerReady:boolean = false;
     hideThumb = false;
-    videoMode: VideoType = VideoType.NONE;
+    videoMode:VideoType = VideoType.NONE;
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
-    constructor(private studyService:StudyService, private http: Http) {
+    constructor(private studyService:StudyService, private http:Http) {
         this.uploader = new BulkUploader({
             url: '/api/admin/study/import',
             autoUpload: true,
@@ -135,7 +135,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
 
         if (this.videoMode == VideoType.YOUTUBE) {
             let code = this.getParameterByName('v', newVal);
-            if (code.length>11) {
+            if (code.length > 11) {
                 code = code.substr(0, 11);
             }
             if (code) {
@@ -150,7 +150,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
             this.hideThumb = false;
         } else if (this.videoMode == VideoType.VIMEO) {
             let ar = newVal.split('/');
-            let code = ar[ar.length-1];
+            let code = ar[ar.length - 1];
             this.getVimeoThumb(code);
             this.vimeoPlayer.loadVideo(code, startTime);
             this.hideThumb = false;
@@ -203,7 +203,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
     }
 
     getVimeoThumb(id:string) {
-        let url = 'http://vimeo.com/api/v2/video/'+id+'.json';
+        let url = 'http://vimeo.com/api/v2/video/' + id + '.json';
         this.http.get(url)
             .map(res => res.json())
             .subscribe(
@@ -213,7 +213,7 @@ export class AdminEditComponent implements OnInit, OnChanges {
             );
     }
 
-    updateThumbUrl (data) {
+    updateThumbUrl(data) {
         this.thumbUrl = data[0].thumbnail_medium;
     }
 

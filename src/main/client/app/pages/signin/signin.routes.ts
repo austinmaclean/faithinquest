@@ -1,5 +1,5 @@
 import {SignInComponent}     from './signin.component';
 
 export const SignInRoutes = [
-    {path: 'login', component: SignInComponent}
+    {path: 'login', component: <any>SignInComponent}
 ];
