@@ -10,16 +10,35 @@
         </span>
     </div>
     <div class="top-panel-cell right form-inline">
-        <div class="form-group">
-            <label for="sel1">sort by: </label>
-            <select class="form-control top-panel-select" id="sel1">
-                <optgroup class="top-panel-select-option">
-                    <option>most recent</option>
-                    <option>most recent1</option>
-                    <option>most recent2</option>
-                    <option>most recent3</option>
-                </optgroup>
-            </select>
+        <div class="form-group sort-option">
+
+            <!-- Split button -->
+            <label for="sel">sort by: </label>
+            <div class="btn-group" dropdown id="sel">
+                <button id="split-button" type="button" class="btn btn-default btn-option btn-text top-panel-select" dropdownToggle>{{selectedSorting.name}}</button>
+                <button type="button" class="btn btn-default btn-option dropdown-toggle" dropdownToggle>
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                    <li role="menuitem" *ngFor="let opt of sortOptions"><a class="dropdown-item" (click)="onChangeSorting(opt)">{{opt.name}}</a></li>
+                </ul>
+            </div>
+
+            <!--<label for="sel">sort by: </label>-->
+            <!--<select [ngModel]="selectedSorting" (ngModelChange)="onChangeSorting($event)" class="form-control top-panel-select selectpicker" id="sel">-->
+                <!--<option *ngFor="let opt of sortOptions" [value]="opt.value">{{opt.name}}</option>-->
+            <!--</select>-->
+
+
+            <!--<select class="form-control top-panel-select selectpicker" id="sel1">-->
+                <!--<optgroup class="top-panel-select-option">-->
+                    <!--<option>most recent</option>-->
+                    <!--<option>most recent1</option>-->
+                    <!--<option>most recent2</option>-->
+                    <!--<option>most recent3</option>-->
+                <!--</optgroup>-->
+            <!--</select>-->
         </div>
     </div>
 </div>

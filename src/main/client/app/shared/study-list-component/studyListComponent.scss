@@ -14,6 +14,39 @@
       width: 30%;
       text-align: right;
 
+      .sort-option {
+
+        .btn-group {
+          .btn {
+            &.btn-option {
+              font-size: 0.9em;
+              background-color: #454545;
+              color: #ffffff;
+              text-transform: capitalize;
+            }
+            &.btn-text {
+              min-width: 150px;
+            }
+          }
+          .dropdown-menu {
+            font-size: 0.9em;
+            background-color: #454545;
+            text-transform: capitalize;
+            li {
+              a {
+                color: #ffffff;
+                cursor: pointer;
+              }
+              a:hover {
+                background: transparent;
+                color: #cccccc;
+              }
+            }
+          }
+        }
+
+      }
+
       .form-control {
         &.top-panel-select {
           font-size: 1em;

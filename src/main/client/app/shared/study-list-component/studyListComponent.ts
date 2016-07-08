@@ -1,7 +1,7 @@
 import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {Router} from "@angular/router";
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from "ng2-bootstrap/ng2-bootstrap";
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 import {Study} from "../../shared/model/study";
 import {StudyService} from "../../shared/service/study.service";
 import {StudyComponent} from "./study/studyComponent";
@@ -19,7 +19,7 @@ import {LoadScript} from "../load-script/loadScript";
     styleUrls: ['studyListComponent.css'],
     providers: [StudyService],
     viewProviders: [BS_VIEW_PROVIDERS],
-    directives: [<any>InfiniteScroll, <any>StudyComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES]
+    directives: [<any>InfiniteScroll, <any>StudyComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES, DROPDOWN_DIRECTIVES]
 })
 
 export class StudyListComponent implements OnInit, OnChanges {
@@ -37,6 +37,16 @@ export class StudyListComponent implements OnInit, OnChanges {
     queryFilter:QueryFilter;
     scrollableResult:IScrollableResult<Study>;
 
+    sortOptions = [
+        {value: 'MostRelevant', name: 'Most Relevant'},
+        {value: 'MostRecent', name: 'Most Recent'},
+        {value: 'MostPopular', name: 'Most Popular'},
+    ];
+
+    selectedSorting = this.sortOptions[0];
+
+    public disabled:boolean = false;
+    public status:{isopen:boolean} = {isopen: false};
 
     constructor(private studyService:StudyService, private router:Router) {
     }
@@ -55,7 +65,9 @@ export class StudyListComponent implements OnInit, OnChanges {
         let filterConfig = {
             pattern: {value: null},
             speaker: {value: null},
-            view: {value: null}
+            view: {value: null},
+            sort: {value: this.selectedSorting.value}
+            
         };
         this.queryFilter = new QueryFilter(filterConfig, this.router);
         let filterReq = this.queryFilter.makeFilterRequest();
@@ -163,5 +175,12 @@ export class StudyListComponent implements OnInit, OnChanges {
     nextPage() {
         this.scrollableResult.next();
     }
+
+    onChangeSorting(obj:any) {
+        this.selectedSorting = obj;
+        this.queryFilter.filter.sort.value = this.selectedSorting.value;
+        this.onSearch();
+    }
+
 
 }
