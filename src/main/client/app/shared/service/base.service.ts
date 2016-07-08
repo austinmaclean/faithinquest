@@ -7,6 +7,7 @@ import 'rxjs/add/observable/empty';
 
 import {RESTClient} from './rest-client';
 import {HttpLoaderService} from "../http-loader/httpLoaderService";
+import {loginPath} from '../../app.routes';
 
 export abstract class BaseService extends RESTClient {
 
@@ -24,8 +25,8 @@ export abstract class BaseService extends RESTClient {
 
         // Unauthorized Error handling
         return observable.catch((err, source) => {
-            if (err.status === 401 && err.url.indexOf('api/admin/account/signin') !== -1) {
-                this.router.navigateByUrl('login');
+            if (err.status === 401 && err.url.indexOf('api/admin/account/signin') === -1) {
+                this.router.navigate([loginPath]);
                 return Observable.empty();
             } else {
                 return Observable.throw(err);

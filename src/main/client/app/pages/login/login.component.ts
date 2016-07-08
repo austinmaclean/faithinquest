@@ -4,6 +4,7 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {AccountService} from '../../shared/service/account.service';
 import {Admin} from '../../shared/model/admin';
 import {FooterComponent} from '../../shared/footer/footer.component';
+import {adminPath} from '../../app.routes';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +20,7 @@ export class LoginComponent {
 
     signInUser(admin:Admin) {
         this.accountService.login(admin).subscribe(response => {
-            this.router.navigate(['/admin']);
+            this.router.navigate([adminPath]);
         });
     }
 
