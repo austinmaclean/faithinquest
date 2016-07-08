@@ -75,8 +75,6 @@ export class AccountService extends BaseService {
                     observer.complete();
                 },
                 error => {
-                    console.log(error.json().message);
-
                     observer.error(error);
                     observer.complete();
                 }

@@ -5,6 +5,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 import {HttpLoader} from './shared/http-loader/httpLoader';
 
 import {Config} from './shared/config/env.config';
+import {MessageComponent} from './shared/message-component/messageComponent';
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -15,7 +16,7 @@ import {Config} from './shared/config/env.config';
     selector: 'ti-app',
     templateUrl: 'app.component.html',
     viewProviders: [<any>Http, HTTP_PROVIDERS],
-    directives: [<any>HttpLoader, ROUTER_DIRECTIVES]
+    directives: [<any>MessageComponent, <any>HttpLoader, ROUTER_DIRECTIVES]
 })
 export class AppComponent {
 
