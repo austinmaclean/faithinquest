@@ -89,6 +89,10 @@ export class StudyListComponent implements OnInit, OnChanges {
         this.onSearch(speaker);
     }
 
+    public onSelectTitle(title:string) {
+        this.onPatternSearch(title);
+    }
+
     public getStudies() {
         this.queryFilter.updateUrlByFilterData();
         let filterReq = this.queryFilter.makeFilterRequest();
