@@ -309,6 +309,10 @@ export class ProjectConfig {
             },
             'rxjs': {
                 defaultExtension: 'js'
+            },
+            'angulartics2': {
+                main: 'index.js',
+                defaultExtension: 'js'
             }
         },
         map: {
@@ -360,6 +364,10 @@ export class ProjectConfig {
                 defaultExtension: 'js'
             },
             'rxjs': {
+                defaultExtension: 'js'
+            },
+            'angulartics2': {
+                main: 'index.js',
                 defaultExtension: 'js'
             }
         },
