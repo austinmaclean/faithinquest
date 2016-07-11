@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, ModalDirective} from 'ng2-bootstrap/ng2-bootstrap';
+import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
 
 import {ErrorMessagesEventEmitter} from '../notification/notification';
 
@@ -23,7 +23,7 @@ export class MessageComponent implements OnInit {
 
     ngOnInit() {
         this.errorMessagesEventEmitter.subscribe(messages => {
-            this.showMsg(messages);
+            this.showMsg({items: messages, type: 'danger'});
         });
     }
 

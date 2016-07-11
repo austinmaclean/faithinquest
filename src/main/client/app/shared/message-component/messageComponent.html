@@ -1,4 +1,4 @@
-<div class="messages-cont messages-cont" [hidden]="messages.length == 0" style="z-index: 9999;">
+<div class="messages-cont" [hidden]="messages.length == 0">
     <div class="backdrop-messages" modal-backdrop></div>
     <div class="modal fade in" *ngFor="let message of messages" style="display: block;">
         <div class="modal-dialog modal-md">
@@ -15,7 +15,7 @@
                                 <div class="col" *ngFor="let item of message.items">
                                     <div class="accordion error-stack">
                                         <h4 (click)="showTrace($parent.$index, $index)">
-                                            <span>{{item.msg}}</span>
+                                            <span [textContent]="item.msg"></span>
                                         </h4>
 
                                         <div class="accordion-content-outer margin-top-10" *ngIf="item.trace" [hidden]="!item.traceOpen">

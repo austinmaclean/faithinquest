@@ -2,9 +2,11 @@ package com.faithinquest.web.controller.components;
 
 import com.faithinquest.validation.ValidationException;
 import com.faithinquest.validation.ValidationResult;
+import com.faithinquest.web.exception.ForbiddenException;
 import com.faithinquest.web.exception.ResourceNotFoundException;
 import com.faithinquest.web.exception.UnauthorizedException;
 import com.faithinquest.web.util.DefaultMessages;
+import com.faithinquest.web.util.InternalErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,9 +78,13 @@ public class JsonViewExceptionResolver extends ResponseEntityExceptionHandler
 		{
 			return jsonEntity( ex, HttpStatus.UNAUTHORIZED );
 		}
+		else if( ex instanceof ForbiddenException )
+		{
+			return jsonEntity( ex, HttpStatus.FORBIDDEN );
+		}
 		else
 		{
-			return jsonEntity( DefaultMessages.INTERNAL_ERROR_RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR );
+			return jsonEntity( new InternalErrorResponse( ex.toString(), ex.getStackTrace() ), HttpStatus.INTERNAL_SERVER_ERROR );
 		}
 	}
 

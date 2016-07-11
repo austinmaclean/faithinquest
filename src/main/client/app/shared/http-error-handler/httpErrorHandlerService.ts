@@ -25,24 +25,25 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
         return observable.catch((err, source) => {
             switch (err.status) {
                 case ErrorStatus.Unauthorized:
-                    return this.process401(err.json());
+                    return this.process401();
                 case ErrorStatus.Forbidden:
-                    return this.process403(err.json());
+                    return this.process403(err);
                 default:
-                    return this.processXXX(err.json(), req);
+                    return this.processXXX(err, req);
             }
         });
     }
 
-    private process401(err:any):Observable<any> {
+    private process401():Observable<any> {
         this.router.navigate([loginPath]);
 
         return Observable.empty();
     }
 
     private process403(err:any):Observable<any> {
-        if (err.statusText) {
-            this.errorMessagesEventEmitter.emit([err.statusText]);
+        let errorData = err.json();
+        if (errorData.statusText) {
+            this.errorMessagesEventEmitter.emit([errorData.statusText]);
         }
 
         return Observable.throw(err);
@@ -50,9 +51,10 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
 
     private processXXX(err:any, req:Request):Observable<any> {
         let messageList:any[] = [];
-        let errList:any[] = err.items ? err.items : [err.data];
+        let errorData = err.json();
+        let errList:any[] = errorData.items ? errorData.items : [errorData];
 
-        errList.forEach(item => {
+        for (var item of errList) {
             if (item.messageCode) {
                 messageList.push({
                     name: item.name,
@@ -74,7 +76,7 @@ export class HttpErrorHandlerService implements IHttpErrorHandlerService {
             } else {
                 console.warn('Unhandled error!');
             }
-        });
+        }
 
         if (messageList.length) {
             this.errorMessagesEventEmitter.emit(messageList);
