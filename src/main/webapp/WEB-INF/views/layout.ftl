@@ -5,7 +5,7 @@
 <head>
     <base href="${baseUrl}/">
 
-    <link rel="shortcut icon" href="<@spring.url "/assets/img/favicon.ico"/>" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<@spring.url "/assets/img/faviconfi.png"/>" type="image/x-icon"/>
     <title>FaithInquest</title>
 
     <meta charset="utf-8">
