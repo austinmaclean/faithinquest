@@ -16,7 +16,7 @@ import {VideoType} from '../model/videoType';
 })
 export class ModalVideoComponent {
 
-    @ViewChild(<any>ModalDirective) lgModal:any;
+    @ViewChild(<any>ModalDirective) mdModal:any;
     @ViewChild(<any>YTEmbedComponent) videoPlayer:YTEmbedComponent;
     @ViewChild(<any>VimeoEmbedComponent) vimeoPlayer:VimeoEmbedComponent;
 
@@ -47,8 +47,8 @@ export class ModalVideoComponent {
             this.videoMode = VideoType.VIMEO;
         }
 
-        if (this.lgModal) {
-            this.lgModal.show();
+        if (this.mdModal) {
+            this.mdModal.show();
         }
     }
 
@@ -57,8 +57,8 @@ export class ModalVideoComponent {
 
         this.open = true;
 
-        let width:number = this.lgModal.element.nativeElement.children[0].offsetWidth;
-        let delta: number = 40;
+        let width:number = this.mdModal.element.nativeElement.children[0].offsetWidth;
+        let delta: number = 30;
         if (width>this.defaultVideoWidth+delta) {
             this.videoWidth = this.defaultVideoWidth;
             this.videoHeight = this.videoWidth * this.coof;
@@ -134,7 +134,7 @@ export class ModalVideoComponent {
     }
 
     close() {
-        this.lgModal.hide();
+        this.mdModal.hide();
     }
 
     getParameterByName(name, url) {

@@ -4,15 +4,34 @@
       margin-top: 5%;
       .modal-content {
 
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+
         .modal-header {
+          padding: 0;
+          border: none;
+          text-align: center;
+
+          .modal-title {
+            padding-top: 10px;
+            color: #ffffff;
+          }
           .close {
+            opacity: 1;
+            i {
+              color: #ffffff;
+              font-size: 1.5em;
+            }
             span {
+              color: #ffffff;
               font-size: 2.5em;
             }
           }
         }
 
         .modal-body {
+          padding: 0;
           &.video-embed {
             text-align: center;
           }
