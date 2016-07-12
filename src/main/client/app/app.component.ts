@@ -28,23 +28,24 @@ export class AppComponent {
 
     viewContainerRef:ViewContainerRef = null;
 
-    constructor(private router: Router, private crazyEgg:CrazyEgg) {
+
+    public constructor(viewContainerRef:ViewContainerRef,
+                       angulartics2: Angulartics2,
+                       angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+                       private router: Router,
+                       private crazyEgg:CrazyEgg
+    ) {
+        console.log('Environment config', Config);
+
+        // You need this small hack in order to catch application root view container ref
+        this.viewContainerRef = viewContainerRef;
+
         router.events.subscribe(e => {
             console.log('e = ', e);
             if (e instanceof NavigationEnd) {
                 this.crazyEgg.fire();
             }
         });
-    }
-
-    public constructor(viewContainerRef:ViewContainerRef,
-                       angulartics2: Angulartics2,
-                       angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
-    ) {
-        console.log('Environment config', Config);
-
-        // You need this small hack in order to catch application root view container ref
-        this.viewContainerRef = viewContainerRef;
     }
 
 }
