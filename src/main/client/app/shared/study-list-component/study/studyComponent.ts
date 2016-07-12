@@ -44,7 +44,7 @@ export class StudyComponent implements OnChanges {
                 this.getVimeoThumb(code);
             }
             this.share.url = this.item.link;
-            this.share.title = this.item.title;
+            this.share.title = 'Got my answer to my question at faithinquest.com! Watch "'+this.item.title +'"';
             this.share.description = this.item.description;
         }
     }
