@@ -9,6 +9,8 @@ import {HttpLoader} from './shared/http-loader/httpLoader';
 
 import {Config} from './shared/config/env.config';
 import {MessageComponent} from './shared/message-component/messageComponent';
+import {CrazyEgg} from "./shared/crazy-egg/crazyEgg";
+import {Router, NavigationEnd} from "@angular/router";
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -18,13 +20,22 @@ import {MessageComponent} from './shared/message-component/messageComponent';
     moduleId: module.id,
     selector: 'ti-app',
     templateUrl: 'app.component.html',
-    providers: [Angulartics2GoogleAnalytics],
+    providers: [Angulartics2GoogleAnalytics, CrazyEgg],
     viewProviders: [<any>Http, HTTP_PROVIDERS],
     directives: [<any>MessageComponent, <any>HttpLoader, ROUTER_DIRECTIVES]
 })
 export class AppComponent {
 
     viewContainerRef:ViewContainerRef = null;
+
+    constructor(private router: Router, private crazyEgg:CrazyEgg) {
+        router.events.subscribe(e => {
+            console.log('e = ', e);
+            if (e instanceof NavigationEnd) {
+                this.crazyEgg.fire();
+            }
+        });
+    }
 
     public constructor(viewContainerRef:ViewContainerRef,
                        angulartics2: Angulartics2,

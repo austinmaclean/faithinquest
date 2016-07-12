@@ -6,6 +6,7 @@ import {FooterComponent} from '../../shared/footer/footer.component';
 import {Study} from '../../shared/model/study';
 import {ModalMessageComponent} from '../../shared/modal-component/modalMessageComponent';
 import {ModalResult, ModalAction, ModalDialogComponent} from '../../shared/modal-component/modalDialogComponent';
+import {CrazyEgg} from "../../shared/crazy-egg/crazyEgg";
 
 @Component({
     moduleId: module.id,
@@ -18,7 +19,8 @@ import {ModalResult, ModalAction, ModalDialogComponent} from '../../shared/modal
         <any>FooterComponent,
         <any>ModalMessageComponent,
         <any>ModalDialogComponent
-    ]
+    ],
+    providers: [<any>CrazyEgg]
 })
 
 export class AdminComponent {
