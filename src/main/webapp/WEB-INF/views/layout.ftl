@@ -30,6 +30,16 @@
             addThisKey: "${addThisKey}"
         };
     </script>
+
+    <#--Crazy Eggs integration -->
+    <script type="text/javascript">
+        setTimeout(function(){var a=document.createElement("script");
+            var b=document.getElementsByTagName("script")[0];
+            a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0052/7990.js?"+Math.floor(new Date().getTime()/3600000);
+            a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <#--end of Crazy Eggs integration -->
+
 </head>
 <body>
 
