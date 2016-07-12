@@ -14,6 +14,7 @@
     color: white;
 
     .inner-panel-cell {
+      text-align: center;
 
       &.right {
         text-align: right;
@@ -26,6 +27,10 @@
 
       }
 
+    }
+
+    a, a:active, a:hover {
+      color: #ffffff;
     }
 
   }
@@ -65,14 +70,13 @@
     .inner-panel {
 
       .inner-panel-cell {
+        width: 100%;
 
         &.right {
-          width: 100%;
           text-align: center;
         }
 
         &.left {
-          width: 100%;
           text-align: center;
 
         }
@@ -90,21 +94,16 @@
     .inner-panel {
 
       .inner-panel-cell {
+        width: 100%;
 
         &.right {
-          width: 100%;
           text-align: center;
         }
 
         &.left {
-          width: 100%;
           text-align: center;
-
         }
-
       }
-
     }
-
   }
 }
