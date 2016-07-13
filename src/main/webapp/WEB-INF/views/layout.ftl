@@ -42,7 +42,7 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-80431868-1', 'auto'); // 'none' while you are working on localhost
-    ga('send', 'pageview'); // this is already done by Angulartics (Now Angulartics disabled)
+    //ga('send', 'pageview'); // this is already done by Angulartics (Now Angulartics disabled)
 </script>
 
 <ti-app>

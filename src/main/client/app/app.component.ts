@@ -30,8 +30,8 @@ export class AppComponent {
 
 
     public constructor(viewContainerRef:ViewContainerRef,
-                       angulartics2: Angulartics2,
-                       angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+                       private angulartics2: Angulartics2,
+                       private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
                        private router: Router,
                        private crazyEgg:CrazyEgg
     ) {
@@ -39,11 +39,13 @@ export class AppComponent {
 
         // You need this small hack in order to catch application root view container ref
         this.viewContainerRef = viewContainerRef;
-
+        //handle depricated _gaq for GA
+        window["_gaq"] = window["_gaq"] || null;
         router.events.subscribe(e => {
             console.log('e = ', e);
             if (e instanceof NavigationEnd) {
                 this.crazyEgg.fire();
+                this.angulartics2GoogleAnalytics.pageTrack(location.href);
             }
         });
     }
