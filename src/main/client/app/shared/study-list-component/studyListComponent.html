@@ -6,7 +6,7 @@
         </span>
         <span *ngIf="queryFilter.filter.pattern.value && queryFilter.filter.speaker.value"> and </span>
         <span *ngIf="queryFilter.filter.speaker.value">
-            "<span class="highlight-blue search-pattern" [innerHTML]="queryFilter.filter.speaker.value" (click)="onSearchClear('speaker')"></span>"
+            speaker "<span class="highlight-blue search-pattern" [innerHTML]="queryFilter.filter.speaker.value" (click)="onSearchClear('speaker')"></span>"
         </span>
     </div>
     <div class="top-panel-cell right form-inline">
