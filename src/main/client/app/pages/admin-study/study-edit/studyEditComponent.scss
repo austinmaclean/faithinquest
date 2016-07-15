@@ -7,6 +7,17 @@
     padding-right: 20px;
     vertical-align: top;
 
+    .btn {
+      height: 40px;
+      padding: 9px 12px;
+      background-color: #454545;
+      color: rgba(255, 255, 255, 0.87);
+
+      &:hover {
+        color: #cccccc;
+      }
+    }
+
     form {
       &.admin-item-edit, &.admin-bulk-upload {
         width: 100%;
@@ -21,28 +32,28 @@
               display: inline-block;
             }
           }
-
-        }
-
-        .btn-form {
-          background-color: #454545;
-
-          &:hover {
-            color: #cccccc;
-          }
         }
       }
 
+      &.admin-item-edit {
+        margin-top: 10px;
+      }
+
       &.admin-bulk-upload {
-        margin-bottom: 10px;
+        display: inline;
 
         .btn-file-input {
           position: relative;
           padding: 10px 12px;
           overflow: hidden;
+          cursor: pointer;
 
           border-style: none;
           color: rgba(255, 255, 255, 0.87);
+
+          &:hover {
+            color: #cccccc;
+          }
         }
 
         .btn-file-input input {
@@ -62,7 +73,6 @@
           cursor: pointer;
         }
       }
-
     }
   }
 

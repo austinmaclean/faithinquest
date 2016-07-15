@@ -1,4 +1,4 @@
-import {provideRouter, RouterConfig} from '@angular/router';
+import {provideRouter, RouterConfig, Route} from '@angular/router';
 
 import {AuthGuard} from './shared/auth/auth.guard';
 import {AccountService} from './shared/service/account.service';
@@ -8,6 +8,8 @@ import {HttpErrorHandlerService} from './shared/http-error-handler/httpErrorHand
 import {HomeComponent} from './pages/home/homeComponent';
 import {LoginComponent}     from './pages/login/login.component';
 import {AdminComponent} from './pages/admin/adminComponent';
+import {AdminStudyComponent} from './pages/admin-study/adminStudyComponent';
+import {SlideEditComponent} from './pages/admin-slide/slideEditComponent';
 import {CanDeactivateGuard} from './shared/auth/canComponentDeactivate';
 
 // Home
@@ -15,7 +17,10 @@ import {CanDeactivateGuard} from './shared/auth/canComponentDeactivate';
 export const homePath = '';
 
 const HomeRoutes:RouterConfig = [
-    {path: homePath, component: <any>HomeComponent}
+    {
+        path: homePath,
+        component: <any>HomeComponent
+    }
 ];
 
 // Login
@@ -23,23 +28,59 @@ const HomeRoutes:RouterConfig = [
 export const loginPath = 'login';
 
 const LoginRoutes = [
-    {path: loginPath, component: <any>LoginComponent}
+    {
+        path: loginPath,
+        component: <any>LoginComponent
+    }
 ];
 
 // Admin
 
 export const adminPath = 'admin';
+export const adminStudyPath = '';
+export const adminSlidePath = 'slide';
 
-const AdminRoutes:RouterConfig = [
-    {path: adminPath, component: <any>AdminComponent, canActivate: [AuthGuard], canDeactivate: [CanDeactivateGuard]}
+const AdminChildrenRoutes:Route = [
+    {
+        path: adminStudyPath,
+        component: AdminStudyComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard]
+    },
+    {
+        path: adminSlidePath,
+        component: SlideEditComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard]
+    },
+    {
+        path: adminSlidePath + '/:id',
+        component: SlideEditComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard]
+    }
 ];
 
+const AdminRoutes:RouterConfig = [
+    {
+        path: adminPath,
+        component: <any>AdminComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard],
+        children: <any>AdminChildrenRoutes
+    }
+];
+
+// Main
 
 export const routes:RouterConfig = [
     ...HomeRoutes,
     ...LoginRoutes,
     ...AdminRoutes,
-    {path: '**', redirectTo: ''}
+    {
+        path: '**',
+        redirectTo: ''
+    }
 ];
 
 export const AUTH_PROVIDERS = [AuthGuard, AccountService, HttpLoaderService, HttpErrorHandlerService];

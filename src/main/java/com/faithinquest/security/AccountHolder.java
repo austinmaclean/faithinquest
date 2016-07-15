@@ -9,7 +9,8 @@ import com.faithinquest.model.Admin;
  */
 public class AccountHolder
 {
-	public static final String ADMIN_KEY = "com.mysaddleback.admin.auth";
+	public static final String FILES_KEY = "com.faithinquest.admin.files";
+	public static final String ADMIN_KEY = "com.faithinquest.admin.auth";
 
 	private static ThreadLocal<Admin> adminHolder = new ThreadLocal<>();
 

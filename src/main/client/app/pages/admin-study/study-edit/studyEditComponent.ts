@@ -1,4 +1,5 @@
 import {Component, ViewChild, OnInit, Output, EventEmitter} from '@angular/core';
+import {Router} from '@angular/router';
 import {Http} from '@angular/http';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
@@ -13,7 +14,7 @@ import {VideoType} from '../../../shared/model/videoType';
 
 @Component({
     moduleId: module.id,
-    selector: 'ti-study-edit',
+    selector: 'ti-admin-study-edit',
     templateUrl: 'studyEditComponent.html',
     styleUrls: ['studyEditComponent.css'],
     providers: [StudyService],
@@ -43,7 +44,7 @@ export class StudyEditComponent implements OnInit {
 
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
-    constructor(private studyService:StudyService, private http:Http) {
+    constructor(private studyService:StudyService, private http:Http, private router:Router) {
         this.uploader = new BulkUploader({
             url: '/api/admin/study/import',
             autoUpload: true,
@@ -224,5 +225,8 @@ export class StudyEditComponent implements OnInit {
         console.log(err);
     }
 
+    onSlides() {
+        this.router.navigate(['admin/slide']);
+    }
 
 }

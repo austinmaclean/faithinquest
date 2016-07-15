@@ -20,7 +20,6 @@ import java.util.List;
 @Service
 public class StudyService extends AbstractPersistenceService<Study, Long> implements IStudyService
 {
-
 	@Override
 	@Transactional( readOnly = true )
 	public List<Study> findByFullText( StudySearch search, Paging paging )
@@ -82,7 +81,7 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 			query.setMaxResults( paging.getLimit() );
 		}
 		List studies = query.list();
-		if ( studies.isEmpty() )
+		if( studies.isEmpty() )
 		{
 			studies = findStudies( search, paging );
 		}

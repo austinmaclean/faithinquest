@@ -16,4 +16,13 @@ public class Routes
 	public static final String STUDY_PATH = "/study";
 	public static final String STUDY = API + STUDY_PATH;
 	public static final String ADMIN_STUDY = ADMIN_API + STUDY_PATH;
+
+	private static final String ATTACH_PATH = "/attach";
+	public static final String ADMIN_ATTACH = ADMIN_API + ATTACH_PATH;
+	public static final String ATTACH = API + ATTACH_PATH;
+
+	private static final String CAROUSEL_SLIDE_PATH = "/carousel-slide";
+	public static final String ADMIN_CAROUSEL_SLIDE = ADMIN_API + CAROUSEL_SLIDE_PATH;
+	public static final String CAROUSEL_SLIDE = API + CAROUSEL_SLIDE_PATH;
+
 }
