@@ -143,23 +143,29 @@ export class StudyEditComponent implements OnInit {
                 code = code.substr(0, 11);
             }
             if (code) {
-                if (this.videoPlayer.player) {
-                    this.videoPlayer.loadAndPause(code, startTime);
+                setTimeout(() => {
+                    if (!this.videoPlayer.player) {
+                        this.videoPlayer.initYoutube(code, startTime, true);
+                    } else {
+                        this.videoPlayer.loadAndPause(code, startTime);
+                    }
                     this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
-                } else {
-                    this.videoPlayer.initYoutube(code, startTime, true);
-                    this.thumbUrl = 'http://img.youtube.com/vi/' + code + '/0.jpg';
-                }
+                }, 500);
             }
             this.hideThumb = false;
         } else if (this.videoMode == VideoType.VIMEO) {
             let ar = newVal.split('/');
             let code = ar[ar.length - 1];
             this.getVimeoThumb(code);
-            this.vimeoPlayer.loadVideo(code, startTime);
-            this.hideThumb = false;
+            setTimeout(() => {
+                if (!this.vimeoPlayer.player) {
+                    this.vimeoPlayer.initVimeoPlayer(code, startTime, false);
+                } else {
+                    this.vimeoPlayer.loadVideo(code, startTime, false);
+                }
+                this.hideThumb = false;
+            }, 500);
         }
-
     }
 
     onYTReady(flag:boolean) {
@@ -169,7 +175,7 @@ export class StudyEditComponent implements OnInit {
 
     onVimeoEditLoaded(flag:boolean) {
         this.playerReady = true;
-        this.vimeoPlayer.initVimeoPlayer(59777392, 0, false);
+        //this.vimeoPlayer.initVimeoPlayer(59777392, 0, false);
     }
 
     onThumbClick() {

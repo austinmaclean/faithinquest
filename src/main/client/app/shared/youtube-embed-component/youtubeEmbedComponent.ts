@@ -55,7 +55,7 @@ export class YTEmbedComponent implements OnInit, OnChanges {
                 this.onPlayerStateChange(event)));
             this.player.addEventListener('onError', <YT.EventHandler>((event: YT.EventArgs) =>
                 this.onPlayerError(event)));
-        },1000);
+        },500);
     }
 
     public playVideo (id: string, start: number = 0, end: number = 1000000000, quality: string = 'default') {
