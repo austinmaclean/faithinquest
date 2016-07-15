@@ -1,83 +1,76 @@
-/*
- * admin-study
- *
- */
+.study-slide-control {
 
-.admin-study-slides {
+  .button {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 10pt;
 
-  .study-slide-control {
-
-    .button {
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
-      padding: 5px 10px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      font-weight: normal;
-      font-size: 10pt;
-
-      &.blue-button {
-        background: rgba(129, 154, 168, 1);
-        color: #FFFFFF;
-      }
-    }
-
-    .slides-create-panel {
-
-    }
-
-    .slides-info-panel {
-      .list-group {
-        margin: 0;
-
-        .list-group-item {
-          border: 0;
-          margin-bottom: 0;
-          padding: 10px 0;
-          border-bottom: 1px solid #dddddd;
-          position: relative;
-          overflow: auto;
-
-          .delete-slide-btn {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-
-            &:hover {
-              opacity: 0.6;
-            }
-
-            .btn-ico {
-              margin-top: 2px;
-              color: #ff5d57;
-              font-size: 25px;
-              font-weight: bold;
-            }
-          }
-        }
-
-        .list-group-item:hover {
-          background-color: #f1f4f6;
-          border-color: #f1f4f6;
-        }
-
-        .lesson-trash:hover {
-          color: #d44a4a;
-        }
-      }
+    &.blue-button {
+      background: rgba(129, 154, 168, 1);
+      color: #FFFFFF;
     }
   }
 
-  .study-action-control {
-    //font-family: georgia;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 14px;
+  .slides-create-panel {
 
-    .fa-button {
-      width: 160px;
+  }
+
+  .slides-info-panel {
+    .list-group {
+      margin: 0;
+
+      .list-group-item {
+        border: 0;
+        margin-bottom: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid #dddddd;
+        position: relative;
+        overflow: auto;
+
+        .delete-slide-btn {
+          position: absolute;
+          top: 20px;
+          right: 10px;
+
+          &:hover {
+            opacity: 0.6;
+          }
+
+          .btn-ico {
+            margin-top: 2px;
+            color: #ff5d57;
+            font-size: 25px;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .list-group-item:hover {
+        background-color: #f1f4f6;
+        border-color: #f1f4f6;
+      }
+
+      .lesson-trash:hover {
+        color: #d44a4a;
+      }
     }
   }
 }
+
+.study-action-control {
+  font-family: georgia;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 14px;
+
+  .fa-button {
+    width: 160px;
+  }
+}
+

@@ -1,15 +1,164 @@
-<div class="admin-study-slides">
-
-    <div class="row margin-top-20">
-        <div class="col-md-12 study-action-control">
-            <a class="fa-button light pull-left" (click)="onBack()">
+<div class="row margin-top-20">
+    <div class="col-md-12 study-action-control">
+        <a class="fa-button light pull-left" ng-click="onBack()">
             <span>
                 <span class="text black">
                     Back
                 </span>
             </span>
+        </a>
+    </div>
+</div>
+
+<div class="row margin-top-20" *ngIf="slide">
+    <div class="col-md-12">
+        <div class="panel panel-default study-slide-control">
+
+            <div class="slides-create-panel">
+                <div class="slide-item">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td class="image-cont" style="background-image:url('/assets/img/faviconfi.png');">
+                                <div class="shadow"></div>
+                                <div class="drop-container">
+                                    <div class="drop-box" *ngIf="slide.attachment"></div>
+
+                                    <!--<div ng-file-drop ng-file-select ng-model="files" ng-model-rejected="rejFiles"-->
+                                         <!--drag-over-class="{accept:'', reject:'dragover-err', delay:100}" class="drop-box"-->
+                                         <!--ng-multiple="true" allow-dir="true" ng-accept="{{allowed}}" ng-size="{{maxUploadSize*1000000}}"-->
+                                         <!--drop-available="dropAvailable"-->
+                                         <!--*ngIf="!slide.attachment">-->
+                                        <!--<div class="upload-info">-->
+                                            <!--<div class="upload-info-inner">-->
+                                                <!--<div class="text" ng-hide="dropAvailable">Drop not available</div>-->
+                                                <!--<div class="text" ng-show="dropAvailable">Drag and Drop <strong>{{alloedFileType}}</strong> (max size {{maxUploadSize}} MB) here to upload or</div>-->
+                                                <!--<br>-->
+                                                <!--<a class="button blue-button" (click)="createPostItem()">-->
+                                                    <!--<span>-->
+                                                        <!--<span class="text black">-->
+                                                            <!--Browse for a file-->
+                                                        <!--</span>-->
+                                                    <!--</span>-->
+                                                <!--</a>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row margin-top-20" *ngIf="slide && slide.attachment">
+    <div class="col-md-12 study-action-control pull-right">
+        <div class="pull-right">
+            <a class="fa-button light" (click)="add()">
+                <span>
+                    <span class="text black">
+                        Save
+                    </span>
+                </span>
+            </a>
+        </div>
+        <div class="pull-right margin-right-20">
+            <a class="fa-button light" (click)="reset()">
+                <span>
+                    <span class="text black">
+                        Cancel
+                    </span>
+                </span>
             </a>
         </div>
     </div>
-
 </div>
+
+<!--<div class="row">-->
+    <!--<div class="col-md-12 margin-top-20">-->
+        <!--<div class="panel panel-default study-slide-control">-->
+
+            <!--<div class="panel-heading">Slides</div>-->
+            <!--<div class="slides-info-panel">-->
+                <!--<ul class="list-group" ui-sortable="sortableOptions" ng-model="slides">-->
+                    <!--<li class="list-group-item" ng-repeat="item in slides">-->
+                        <!--<div class="slide-item" ng-click="edit(item)">-->
+                            <!--<table>-->
+                                <!--<tbody>-->
+                                <!--<tr>-->
+                                    <!--<td class="study-info-cont">-->
+                                        <!--<div class="study-name" ng-bind="item.study.name">Name</div>-->
+                                        <!--<div class="study-author" ng-bind="item.study.author">Author</div>-->
+                                        <!--<div class="study-text" ng-nicescroll>-->
+                                            <!--<div ng-bind-html="item.study.text">Text</div>-->
+                                        <!--</div>-->
+                                        <!--<div class="button blue-button">View Study</div>-->
+                                    <!--</td>-->
+                                    <!--<td class="image-cont" style="background-image:url({{item.attachment | urlAttachment}});">-->
+                                        <!--<div class="shadow"></div>-->
+                                        <!--<div class="drop-container">-->
+                                            <!--<div class="drop-box" ng-if="!editSlide || item.id !== editSlide.id || slide"></div>-->
+                                            <!--<div ng-file-drop ng-file-select ng-model="files" ng-model-rejected="rejFiles"-->
+                                                 <!--drag-over-class="{accept:'', reject:'dragover-err', delay:100}" class="drop-box"-->
+                                                 <!--ng-multiple="true" allow-dir="true" ng-accept="{{allowed}}" ng-size="{{maxUploadSize*1000000}}"-->
+                                                 <!--drop-available="dropAvailable"-->
+                                                 <!--ng-if="editSlide && item.id === editSlide.id && !editSlide.attachment && !slide">-->
+                                                <!--<div class="upload-info">-->
+                                                    <!--<div class="upload-info-inner">-->
+                                                        <!--<div class="text" ng-hide="dropAvailable">Drop not available</div>-->
+                                                        <!--<div class="text" ng-show="dropAvailable">Drag and Drop <strong>{{alloedFileType}}</strong> (max size {{maxUploadSize}} MB) here to upload or</div>-->
+                                                        <!--<br>-->
+                                                        <!--<a class="button blue-button" ng-click="createPostItem()">-->
+                                                            <!--<span>-->
+                                                                <!--<span class="text black">-->
+                                                                    <!--Browse for a file-->
+                                                                <!--</span>-->
+                                                            <!--</span>-->
+                                                        <!--</a>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        <!--</div>-->
+
+                        <!--<a class="delete-slide-btn" ng-click="deleteSlide($index, item)" ng-if="!editSlide">-->
+                            <!--<span class="btn-ico icon-sb-circle-cross red" access-validation></span>-->
+                        <!--</a>-->
+
+                        <!--<div class="col-md-12 study-action-control pull-right">-->
+                            <!--<div class="pull-right margin-top-20" ng-if="editSlide && item.id === editSlide.id && !slide && item.attachment">-->
+                                <!--<a class="fa-button light" ng-click="update()">-->
+                                    <!--<span>-->
+                                        <!--<span class="text black">-->
+                                            <!--Update-->
+                                        <!--</span>-->
+                                    <!--</span>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="pull-right margin-right-20 margin-top-20" ng-if="editSlide && item.id === editSlide.id && !slide">-->
+                                <!--<a class="fa-button light" ng-click="cancelEdit()">-->
+                                    <!--<span>-->
+                                        <!--<span class="text black">-->
+                                            <!--Cancel-->
+                                        <!--</span>-->
+                                    <!--</span>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

@@ -21,7 +21,7 @@ public class Routes
 	public static final String ADMIN_ATTACH = ADMIN_API + ATTACH_PATH;
 	public static final String ATTACH = API + ATTACH_PATH;
 
-	private static final String CAROUSEL_SLIDE_PATH = "/carousel-slide";
+	private static final String CAROUSEL_SLIDE_PATH = "/slide";
 	public static final String ADMIN_CAROUSEL_SLIDE = ADMIN_API + CAROUSEL_SLIDE_PATH;
 	public static final String CAROUSEL_SLIDE = API + CAROUSEL_SLIDE_PATH;
 
