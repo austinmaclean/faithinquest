@@ -28,7 +28,8 @@
             appPath: "<@spring.url "/"/>",
             baseUrl: "${baseUrl}/",
             addThisKey: "${addThisKey}",
-            crazyEggKey: "00527990"
+            crazyEggKey: "00527990",
+            optimizelyKey: "6512121647"
         };
     </script>
 

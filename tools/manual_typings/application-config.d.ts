@@ -3,6 +3,7 @@ interface ApplicationConfig {
     baseUrl:string;
     addThisKey:string;
     crazyEggKey:string;
+    optimizelyKey:string;
 }
 
 declare var AppConfig:ApplicationConfig;
