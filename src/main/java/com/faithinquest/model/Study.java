@@ -1,6 +1,7 @@
 package com.faithinquest.model;
 
 import com.faithinquest.persistence.SyntheticEntity;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.Date;
  * Time: 5:55 PM
  */
 @Entity
+@DynamicUpdate
 public class Study extends SyntheticEntity
 {
 	private Date created = new Date();
@@ -21,6 +23,7 @@ public class Study extends SyntheticEntity
 	private String link;
 	private int startMin;
 	private int startSec;
+	private int viewsCount;
 
 	@Column(nullable = false)
 	public Date getCreated()
@@ -94,5 +97,15 @@ public class Study extends SyntheticEntity
 	public void setStartSec( int startSec )
 	{
 		this.startSec = startSec;
+	}
+
+	public int getViewsCount()
+	{
+		return viewsCount;
+	}
+
+	public void setViewsCount( int viewsCount )
+	{
+		this.viewsCount = viewsCount;
 	}
 }

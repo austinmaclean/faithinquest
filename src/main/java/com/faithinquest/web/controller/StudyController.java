@@ -58,8 +58,17 @@ public class StudyController
 	@ResponseBody
 	public Study update( @RequestBody Study study )
 	{
-		studyService.saveOrUpdate( study );
-		return study;
+		Study result = studyService.merge( study );
+		return result;
+	}
+
+	@RequestMapping( value = { Routes.ADMIN_STUDY + "/views/{studyId}" }, method = RequestMethod.PUT,
+		produces = MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public OkResponse updateViewsCount( @PathVariable Long studyId )
+	{
+		studyService.incrementViewsCount( studyId );
+		return DefaultMessages.OK_RESPONSE;
 	}
 
 	@RequestMapping( value = Routes.ADMIN_STUDY + "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE )

@@ -35,6 +35,7 @@
         start_min int4 not null,
         start_sec int4 not null,
         title varchar(255) not null,
+        views_count int4 not null,
         primary key (id)
     );
 

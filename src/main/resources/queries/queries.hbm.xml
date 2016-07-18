@@ -4,6 +4,12 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
+    <query name="Study.incrementViewsCount"><![CDATA[
+        UPDATE Study s SET s.viewsCount = s.viewsCount + 1
+        WHERE s.id = :studyId
+        ]]>
+    </query>
+
     <sql-query name="Study.fullTextSearch">
         <![CDATA[
             SELECT id,

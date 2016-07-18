@@ -5,6 +5,7 @@ import com.faithinquest.model.dto.StudySearch;
 import com.faithinquest.model.dto.StudySort;
 import com.faithinquest.persistence.AbstractPersistenceService;
 import com.faithinquest.persistence.Paging;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,14 @@ import java.util.List;
 @Service
 public class StudyService extends AbstractPersistenceService<Study, Long> implements IStudyService
 {
+	@Override
+	@Transactional
+	public void incrementViewsCount( Long studyId )
+	{
+		Query query = getSession().getNamedQuery( "Study.incrementViewsCount" ).setParameter( "studyId", studyId );
+		int i = query.executeUpdate();
+	}
+
 	@Override
 	@Transactional( readOnly = true )
 	public List<Study> findByFullText( StudySearch search, Paging paging )
@@ -60,6 +69,10 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		{
 			queryString.append( "\n            ORDER BY created DESC" );
 		}
+		else if ( StudySort.MostPopular.name().equals( sortMode ) )
+		{
+			queryString.append( "\n            ORDER BY views_count DESC" );
+		}
 		else
 		{
 			queryString.append( "\n            ORDER BY ts_rank(p_search.document, to_tsquery(:searchPattern)) DESC" );
@@ -90,7 +103,16 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 
 	private List<Study> findStudies( StudySearch search, Paging paging )
 	{
-		paging.setSortColumn( "created" );  //todo change this to sort by other options
+		String sortMode = paging.getSortColumn();
+		if ( StudySort.MostPopular.name().equals( sortMode ) )
+		{
+			paging.setSortColumn( "viewsCount" );
+		}
+		else
+		{
+			paging.setSortColumn( "created" );  //sort by most recent for all other cases
+		}
+
 		paging.setSortDesc( true );
 		return findBy( search, paging );
 	}

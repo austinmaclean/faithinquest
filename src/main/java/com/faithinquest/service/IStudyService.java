@@ -15,5 +15,7 @@ import java.util.List;
 public interface IStudyService extends IPersistenceService<Study, Long>
 {
 	List<Study> findByFullText( StudySearch search, Paging paging );
+
+	void incrementViewsCount( Long studyId );
 }
 
