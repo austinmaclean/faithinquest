@@ -44,8 +44,7 @@ public class AttachmentController
 
 	@RequestMapping( value = { ADMIN_ATTACH + "/", ADMIN_ATTACH + "" }, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public Attachment create( @RequestParam( value = "attachment" ) MultipartFile file,
-		HttpSession session ) throws IOException
+	public Attachment create( @RequestParam MultipartFile file, HttpSession session ) throws IOException
 	{
 		Attachment attachment = AttachmentUtil.createAttachment( file );
 		File tempFile = fileService.createTempFile( file.getInputStream() );

@@ -4,13 +4,13 @@ import {Http} from '@angular/http';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
 
-import {BulkUploader} from './bulkUploader';
 import {OutputMessage} from './outputMessage';
 import {StudyService} from '../../../shared/service/study.service';
 import {YTEmbedComponent} from '../../../shared/youtube-embed-component/youtubeEmbedComponent';
 import {Study} from '../../../shared/model/study';
 import {VimeoEmbedComponent} from '../../../shared/vimeo-embed-component/vimeoEmbedComponent';
 import {VideoType} from '../../../shared/model/videoType';
+import {FileUploadProvider} from "../../../shared/file-upload/fileUploadProvider";
 
 @Component({
     moduleId: module.id,
@@ -36,7 +36,7 @@ export class StudyEditComponent implements OnInit {
 
     thumbUrl:string = '../../assets/img/over_big.png';
 
-    uploader:BulkUploader;
+    uploader:FileUploadProvider;
     createMode:boolean;
     playerReady:boolean = false;
     hideThumb = false;
@@ -45,15 +45,15 @@ export class StudyEditComponent implements OnInit {
     model = new Study(null, new Date().getTime(), '', '', '', '', 0, 0);
 
     constructor(private studyService:StudyService, private http:Http, private router:Router) {
-        this.uploader = new BulkUploader({
+        this.uploader = new FileUploadProvider({
             url: '/api/admin/study/import',
             autoUpload: true,
             allowedFileType: ['xls']
         });
-        this.uploader.successHandler.subscribe(fileName =>
-            this.onStudiesUpdated.emit(new OutputMessage(true, fileName + ' imported successfully')));
-        this.uploader.errorHandler.subscribe(fileName =>
-            this.onStudiesUpdated.emit(new OutputMessage(false, fileName + ' import error')));
+        this.uploader.successHandler.subscribe(data =>
+            this.onStudiesUpdated.emit(new OutputMessage(true, data.fileName + ' imported successfully')));
+        this.uploader.errorHandler.subscribe(data =>
+            this.onStudiesUpdated.emit(new OutputMessage(false, data.fileName + ' import error')));
     }
 
     ngOnInit() {

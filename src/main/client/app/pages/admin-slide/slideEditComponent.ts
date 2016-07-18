@@ -1,9 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {SlideService} from "../../shared/service/slide.service";
 import {ArrayObservable} from 'rxjs/observable/ArrayObservable';
 import {DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
+import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
+import {FileUploadProvider} from "../../shared/file-upload/fileUploadProvider";
 
 @Component({
     moduleId: module.id,
@@ -12,6 +14,7 @@ import {DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
     styleUrls: ['slideEditComponent.css'],
     viewProviders: [<any>SlideService],
     directives: [
+        FILE_UPLOAD_DIRECTIVES,
         <any>NgClass,
         <any>NgStyle,
         DND_DIRECTIVES,
@@ -19,11 +22,13 @@ import {DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
         FORM_DIRECTIVES,
     ]
 })
-export class SlideEditComponent implements OnInit, OnDestroy {
+export class SlideEditComponent implements OnDestroy {
 
     sub:any = null;
     slide:any = null;
     slides:any[] = [];
+
+    uploader:FileUploadProvider;
 
     constructor(private route:ActivatedRoute, private router:Router, private slideService:SlideService) {
 
@@ -41,9 +46,17 @@ export class SlideEditComponent implements OnInit, OnDestroy {
             indexNumber: 0
         };
 
-    }
-
-    ngOnInit() {
+        this.uploader = new FileUploadProvider({
+            url: '/api/admin/attach',
+            autoUpload: true,
+            allowedFileType: ['image']
+        });
+        this.uploader.successHandler.subscribe(data => {
+            debugger;
+        });
+        this.uploader.errorHandler.subscribe(data => {
+            debugger;
+        });
     }
 
     ngOnDestroy() {
@@ -57,11 +70,20 @@ export class SlideEditComponent implements OnInit, OnDestroy {
     }
 
     add() {
-        
+
     }
 
     reset() {
-        
+
     }
 
+    transferSuccess($event) {
+
+    }
+
+    public hasBaseDropZoneOver:boolean = false;
+
+    public fileOverBase(e:any):void {
+        this.hasBaseDropZoneOver = e;
+    }
 }

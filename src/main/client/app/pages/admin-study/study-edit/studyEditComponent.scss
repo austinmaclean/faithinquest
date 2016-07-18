@@ -29,37 +29,6 @@
 
       &.admin-bulk-upload {
         display: inline;
-
-        .btn-file-input {
-          position: relative;
-          padding: 10px 12px;
-          overflow: hidden;
-          cursor: pointer;
-
-          border-style: none;
-          color: rgba(255, 255, 255, 0.87);
-
-          &:hover {
-            color: #cccccc;
-          }
-        }
-
-        .btn-file-input input {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          z-index: 1;
-          transform: none !important;
-
-          top: 0;
-          right: 0;
-          margin: 0;
-          opacity: 0;
-
-          filter: alpha(opacity=0);
-          direction: ltr;
-          cursor: pointer;
-        }
       }
     }
   }
