@@ -4,8 +4,7 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/commo
 import {SlideService} from "../../shared/service/slide.service";
 import {ArrayObservable} from 'rxjs/observable/ArrayObservable';
 import {DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
-import {FILE_UPLOAD_DIRECTIVES} from 'ng2-file-upload/ng2-file-upload';
-import {FileUploadProvider} from "../../shared/file-upload/fileUploadProvider";
+import {SlideComponent} from "./slide/slideComponent";
 
 @Component({
     moduleId: module.id,
@@ -14,7 +13,7 @@ import {FileUploadProvider} from "../../shared/file-upload/fileUploadProvider";
     styleUrls: ['slideEditComponent.css'],
     viewProviders: [<any>SlideService],
     directives: [
-        FILE_UPLOAD_DIRECTIVES,
+        <any>SlideComponent,
         <any>NgClass,
         <any>NgStyle,
         DND_DIRECTIVES,
@@ -24,14 +23,9 @@ import {FileUploadProvider} from "../../shared/file-upload/fileUploadProvider";
 })
 export class SlideEditComponent implements OnDestroy {
 
-    sub:any = null;
-    slide:any = null;
     slides:any[] = [];
 
-    uploader:FileUploadProvider;
-
     constructor(private route:ActivatedRoute, private router:Router, private slideService:SlideService) {
-
         ArrayObservable.of(1, 2, 3, 4, 5, 6).subscribe((res) => {
             this.slides.push({
                 link: '',
@@ -39,51 +33,17 @@ export class SlideEditComponent implements OnDestroy {
                 indexNumber: res
             });
         });
-
-        this.slide = {
-            link: '',
-            attachment: null,
-            indexNumber: 0
-        };
-
-        this.uploader = new FileUploadProvider({
-            url: '/api/admin/attach',
-            autoUpload: true,
-            allowedFileType: ['image']
-        });
-        this.uploader.successHandler.subscribe(data => {
-            debugger;
-        });
-        this.uploader.errorHandler.subscribe(data => {
-            debugger;
-        });
     }
 
     ngOnDestroy() {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
     }
 
     onBack() {
         this.router.navigate(['admin']);
     }
 
-    add() {
-
-    }
-
-    reset() {
-
-    }
-
     transferSuccess($event) {
-
+        debugger;
     }
 
-    public hasBaseDropZoneOver:boolean = false;
-
-    public fileOverBase(e:any):void {
-        this.hasBaseDropZoneOver = e;
-    }
 }

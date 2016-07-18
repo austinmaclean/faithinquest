@@ -16,31 +16,11 @@
 
     <div class="col-sm-12">
         <ul class="list-inline" dnd-sortable-container [sortableData]="slides">
-            <li class="item" *ngFor="let item of slides; let i = index"
-                dnd-sortable [sortableIndex]="i" (onDropSuccess)="transferSuccess($event)" [dragData]="item">
-                <div class="slide-item-panel">
-                    <div class="slide-item-placeholder well my-drop-zone"
-                         ng2FileDrop
-                         [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                         (fileOver)="fileOverBase($event)"
-                         [uploader]="uploader">
-                        {{item.indexNumber}}<br>
-                        Base drop zone<br>
-                        <span class="btn btn-file-input">
-                             <span>
-                                <input type="file" ng2FileSelect [uploader]="uploader"/>
-                                <span class="text">Bulk Upload</span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
+            <li class="item" *ngFor="let item of slides; let i = index" dnd-sortable [sortableIndex]="i" (onDropSuccess)="transferSuccess($event)" [dragData]="item">
+                <ti-slide [item]="item" [addMode]="false"></ti-slide>
             </li>
             <li class="item">
-                <div class="slide-item-panel">
-                    <div class="slide-item-placeholder">
-                        New
-                    </div>
-                </div>
+                <ti-slide [addMode]="true"></ti-slide>
             </li>
         </ul>
     </div>

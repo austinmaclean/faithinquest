@@ -1,0 +1,39 @@
+.slide-item-panel {
+  position: relative;
+  vertical-align: top;
+  padding: 0 10px 20px 0;
+
+  .slide-item-placeholder {
+    width: 320px;
+    min-height: 270px;
+    background: #b9b9b9;
+    color: #ffffff;
+  }
+
+  .my-drop-zone {
+    border: dotted 3px lightgray;
+  }
+
+  .nv-file-over {
+    border: dotted 3px #FF0000;
+  }
+
+  button {
+    width: 40px;
+  }
+
+  button:hover, button:focus {
+    background-color: transparent;
+    outline-color: transparent;
+  }
+
+  .text-upload {
+    position: absolute;
+    top: 110px;
+    left: 60px;
+
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.34);
+  }
+
+}

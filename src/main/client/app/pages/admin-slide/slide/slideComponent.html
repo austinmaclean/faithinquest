@@ -1,0 +1,16 @@
+<div class="slide-item-panel">
+    <button type="button" class="close" (click)="onRemove()" aria-label="Close">
+        <i class="fa fa-times-circle" (click)="onRemove()"></i>
+    </button>
+    <div class="slide-item-placeholder well my-drop-zone"
+         ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
+        {{item.indexNumber}}<br>
+        <span class="btn btn-file-input">
+             <span>
+                <input type="file" ng2FileSelect [uploader]="uploader"/>
+                <span class="text">Bulk Upload</span>
+            </span>
+        </span>
+        <div class="text-upload">Base drop zone</div>
+    </div>
+</div>
