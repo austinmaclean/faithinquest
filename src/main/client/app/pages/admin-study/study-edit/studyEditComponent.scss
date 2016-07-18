@@ -2,21 +2,9 @@
   width: 100%;
 
   .admin-item-edit-panel {
-
     width: 60%;
     padding-right: 20px;
     vertical-align: top;
-
-    .btn {
-      height: 40px;
-      padding: 9px 12px;
-      background-color: #454545;
-      color: rgba(255, 255, 255, 0.87);
-
-      &:hover {
-        color: #cccccc;
-      }
-    }
 
     form {
       &.admin-item-edit, &.admin-bulk-upload {

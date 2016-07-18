@@ -7,6 +7,7 @@ import {NOTIFICATION_PROVIDERS} from "./shared/notification/notification";
 import {APP_ROUTER_PROVIDERS} from './app.routes';
 import {AppComponent} from './app.component'; 
 import {Angulartics2} from 'angulartics2';
+import {DND_PROVIDERS} from 'ng2-dnd/ng2-dnd';
 
 if ('<%= ENV %>' === 'prod') {
     enableProdMode();
@@ -22,7 +23,8 @@ bootstrap(<any>AppComponent, [
     HTTP_PROVIDERS,
     NOTIFICATION_PROVIDERS,
     APP_ROUTER_PROVIDERS,
-    Angulartics2
+    Angulartics2,
+    DND_PROVIDERS
 ]).catch(err => console.error(err));
 
 // In order to start the Service Worker located at "./worker.js"

@@ -52,13 +52,13 @@ const AdminChildrenRoutes:Route = [
         component: SlideEditComponent,
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard]
-    },
-    {
-        path: adminSlidePath + '/:id',
-        component: SlideEditComponent,
-        canActivate: [AuthGuard],
-        canDeactivate: [CanDeactivateGuard]
     }
+    // {
+    //     path: adminSlidePath + '/:id',
+    //     component: SlideEditComponent,
+    //     canActivate: [AuthGuard],
+    //     canDeactivate: [CanDeactivateGuard]
+    // }
 ];
 
 const AdminRoutes:RouterConfig = [
