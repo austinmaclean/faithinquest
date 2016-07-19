@@ -5,7 +5,7 @@
 
   .slide-item-placeholder {
     width: 320px;
-    min-height: 270px;
+    height: 270px;
     background: #b9b9b9;
     color: #ffffff;
   }
@@ -22,15 +22,18 @@
     margin-bottom: 0;
 
     .link {
-      margin-top: 120px;
+      margin-top: 0;
+      width: 230px;
+      display: inline-block;
     }
   }
 
   button {
     width: 40px;
-    opacity: 0.4;
+    opacity: 0.8;
+
     &:hover {
-      opacity: 0.6;
+      opacity: 0.4;
     }
   }
 

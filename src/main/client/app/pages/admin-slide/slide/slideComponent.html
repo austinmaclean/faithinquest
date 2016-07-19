@@ -2,9 +2,9 @@
     <button type="button" class="close" *ngIf="!addMode" (click)="onRemove()" aria-label="Close">
         <i class="fa fa-times-circle"></i>
     </button>
-    <div class="slide-item-placeholder well my-drop-zone"
-         [ngStyle]="{'background-image': 'url(' + attachURL() + ')'}"
-         ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
+
+    <div class="slide-item-placeholder well my-drop-zone" *ngIf="addMode" [ngStyle]="{'background-image': 'url(' + attachURL() + ')'}"
+        ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
         <span class="btn btn-file-input">
              <span>
                 <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*"/>
@@ -12,17 +12,27 @@
             </span>
         </span>
         <div class="text-upload">Drop zone</div>
-        <fieldset class="form-group">
-            <input class="form-control link" name="link" id="link" placeholder="link" [(ngModel)]="item.link" required [disabled]="!edit && !addMode">
-            <button *ngIf="edit || addMode" type="button" class="close" (click)="onSave()" aria-label="Save">
-                <i class="fa fa-check"></i>
-            </button>
-            <button *ngIf="edit || addMode" type="button" class="close" (click)="onCancel()" aria-label="Cancel">
-                <i class="fa fa-undo"></i>
-            </button>
-            <button *ngIf="!edit && !addMode" type="button" class="close" (click)="onEdit()" aria-label="Edit">
-                <i class="fa fa-pencil"></i>
-            </button>
-        </fieldset>
     </div>
+
+    <div class="slide-item-placeholder well" *ngIf="!addMode" [ngStyle]="{'background-image': 'url(' + attachURL() + ')'}">
+        <span class="btn btn-file-input">
+             <span>
+                <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*"/>
+                <span class="text">Change Image</span>
+            </span>
+        </span>
+    </div>
+
+    <fieldset class="form-group">
+        <input class="form-control link" name="link" id="link" placeholder="link" [(ngModel)]="item.link" required [disabled]="!edit && !addMode">
+        <button *ngIf="edit || addMode" type="button" class="close" (click)="onSave()" aria-label="Save">
+            <i class="fa fa-check"></i>
+        </button>
+        <button *ngIf="edit || addMode" type="button" class="close" (click)="onCancel()" aria-label="Cancel">
+            <i class="fa fa-undo"></i>
+        </button>
+        <button *ngIf="!edit && !addMode" type="button" class="close" (click)="onEdit()" aria-label="Edit">
+            <i class="fa fa-pencil"></i>
+        </button>
+    </fieldset>
 </div>

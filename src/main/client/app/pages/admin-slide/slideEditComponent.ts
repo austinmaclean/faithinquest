@@ -37,12 +37,11 @@ export class SlideEditComponent implements OnInit {
         this.router.navigate(['admin']);
     }
 
-    onTransfer($event) {
-        debugger;
-        // item.indexNumber = ui.item.sortable.dropindex;
-        // this.slideService.update(item).subscribe(res => {
-        //     // none
-        // });
+    onTransfer(item, index) {
+        item.indexNumber = index;
+        this.slideService.update(item).subscribe(res => {
+            // none
+        });
     }
 
     onSaveItem(item:any, addMode:boolean) {

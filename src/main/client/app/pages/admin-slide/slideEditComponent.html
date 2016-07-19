@@ -16,7 +16,7 @@
 
     <div class="col-sm-12">
         <ul class="list-inline" dnd-sortable-container [sortableData]="slides">
-            <li class="item" *ngFor="let item of slides; let i = index" dnd-sortable [sortableIndex]="i" (onDropSuccess)="onTransfer($event)" [dragData]="item">
+            <li class="item" *ngFor="let item of slides; let i = index" dnd-sortable [sortableIndex]="i" (onDropSuccess)="onTransfer($event, i)" [dragData]="item">
                 <ti-slide [item]="item" [addMode]="false"></ti-slide>
             </li>
             <li class="item">
