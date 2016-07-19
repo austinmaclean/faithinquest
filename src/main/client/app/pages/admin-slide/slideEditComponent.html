@@ -5,15 +5,6 @@
 </div>
 
 <div class="row">
-
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <span *ngFor="let item of slides; let i = index">{{i + 1}}) {{item.indexNumber}}<br/></span>
-            </div>
-        </div>
-    </div>
-
     <div class="col-sm-12">
         <ul class="list-inline" dnd-sortable-container [sortableData]="slides">
             <li class="item" *ngFor="let item of slides; let i = index" dnd-sortable [sortableIndex]="i" (onDropSuccess)="onTransfer($event, i)" [dragData]="item">
@@ -24,5 +15,4 @@
             </li>
         </ul>
     </div>
-
 </div>

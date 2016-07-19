@@ -1,0 +1,7 @@
+<div class="slide-placeholder">
+    <carousel [interval]="interval">
+        <slide *ngFor="let item of slides; let index=index" [active]="item.active">
+            <img [src]="item.image" (click)="onClick(item)">
+        </slide>
+    </carousel>
+</div>

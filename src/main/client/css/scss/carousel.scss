@@ -1,0 +1,17 @@
+.carousel.slide {
+  img {
+    width: 320px;
+    height: 270px;
+  }
+
+  .carousel-indicators {
+    display: none !important;
+  }
+
+  .carousel-control.left, .carousel-control.right {
+    display: none !important;
+    &:hover {
+      display: none !important;
+    }
+  }
+}

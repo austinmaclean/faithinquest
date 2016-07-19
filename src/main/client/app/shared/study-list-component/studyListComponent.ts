@@ -11,6 +11,7 @@ import {InfiniteScroll} from "../infinite-scroll/infiniteScroll";
 import {IScrollableResult, ScrollableResult} from "../infinite-scroll/scrollableResult";
 import {QueryFilter} from "../infinite-scroll/queryFilter";
 import {LoadScript} from "../load-script/loadScript";
+import {SlideViewComponent} from "../slide-view-component/slideViewComponent";
 
 @Component({
     moduleId: module.id,
@@ -19,7 +20,16 @@ import {LoadScript} from "../load-script/loadScript";
     styleUrls: ['studyListComponent.css'],
     providers: [StudyService],
     viewProviders: [BS_VIEW_PROVIDERS],
-    directives: [<any>InfiniteScroll, <any>StudyComponent, <any>YTEmbedComponent, <any>ModalVideoComponent, MODAL_DIRECTVES, CORE_DIRECTIVES, DROPDOWN_DIRECTIVES]
+    directives: [
+        <any>SlideViewComponent,
+        <any>InfiniteScroll,
+        <any>StudyComponent,
+        <any>YTEmbedComponent,
+        <any>ModalVideoComponent,
+        MODAL_DIRECTVES,
+        CORE_DIRECTIVES,
+        DROPDOWN_DIRECTIVES
+    ]
 })
 
 export class StudyListComponent implements OnInit, OnChanges {
@@ -67,7 +77,6 @@ export class StudyListComponent implements OnInit, OnChanges {
             speaker: {value: null},
             view: {value: null},
             sort: {value: this.selectedSorting.value}
-            
         };
         this.queryFilter = new QueryFilter(filterConfig, this.router);
         let filterReq = this.queryFilter.makeFilterRequest();

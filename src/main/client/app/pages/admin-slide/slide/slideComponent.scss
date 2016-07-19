@@ -6,8 +6,11 @@
   .slide-item-placeholder {
     width: 320px;
     height: 270px;
-    background: #b9b9b9;
     color: #ffffff;
+
+    background-color: #b9b9b9;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   .my-drop-zone {

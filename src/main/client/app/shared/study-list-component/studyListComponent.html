@@ -11,7 +11,6 @@
     </div>
     <div class="top-panel-cell right form-inline">
         <div class="form-group sort-option">
-
             <!-- Split button -->
             <label for="sel">sort by: </label>
             <div class="btn-group" dropdown id="sel">
@@ -24,21 +23,6 @@
                     <li role="menuitem" *ngFor="let opt of sortOptions"><a class="dropdown-item" (click)="onChangeSorting(opt)">{{opt.name}}</a></li>
                 </ul>
             </div>
-
-            <!--<label for="sel">sort by: </label>-->
-            <!--<select [ngModel]="selectedSorting" (ngModelChange)="onChangeSorting($event)" class="form-control top-panel-select selectpicker" id="sel">-->
-                <!--<option *ngFor="let opt of sortOptions" [value]="opt.value">{{opt.name}}</option>-->
-            <!--</select>-->
-
-
-            <!--<select class="form-control top-panel-select selectpicker" id="sel1">-->
-                <!--<optgroup class="top-panel-select-option">-->
-                    <!--<option>most recent</option>-->
-                    <!--<option>most recent1</option>-->
-                    <!--<option>most recent2</option>-->
-                    <!--<option>most recent3</option>-->
-                <!--</optgroup>-->
-            <!--</select>-->
         </div>
     </div>
 </div>
@@ -53,7 +37,7 @@
 
     <!-- video placeholder -->
     <div class="items-video-panel">
-        <div class="video-placeholder"></div>
+        <ti-slide-view></ti-slide-view>
     </div>
 
 </div>
