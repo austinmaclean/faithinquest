@@ -12,15 +12,6 @@
             </span>
         </span>
         <div class="text-upload">Drop zone</div>
-        <fieldset class="form-group">
-            <input class="form-control link" name="link" placeholder="link" [(ngModel)]="item.link" required>
-            <button type="button" class="close" (click)="onSave()" aria-label="Save">
-                <i class="fa fa-check"></i>
-            </button>
-            <button type="button" class="close" (click)="onCancel()" aria-label="Cancel">
-                <i class="fa fa-undo"></i>
-            </button>
-        </fieldset>
     </div>
 
     <div class="slide-item-placeholder well" *ngIf="!addMode" [ngStyle]="{'background-image': 'url(' + attachURL() + ')'}">
@@ -30,17 +21,18 @@
                 <span class="text">Change Image</span>
             </span>
         </span>
-        <fieldset class="form-group">
-            <input class="form-control link" name="link" placeholder="link" [(ngModel)]="item.link" required [disabled]="!edit">
-            <button *ngIf="edit" type="button" class="close" (click)="onSave()" aria-label="Save">
-                <i class="fa fa-check"></i>
-            </button>
-            <button *ngIf="edit" type="button" class="close" (click)="onCancel()" aria-label="Cancel">
-                <i class="fa fa-undo"></i>
-            </button>
-            <button *ngIf="!edit" type="button" class="close" (click)="onEdit()" aria-label="Edit">
-                <i class="fa fa-pencil"></i>
-            </button>
-        </fieldset>
     </div>
+
+    <fieldset class="form-group">
+        <input class="form-control link" name="link" id="link" placeholder="link" [(ngModel)]="item.link" required [disabled]="!edit && !addMode">
+        <button *ngIf="edit || addMode" type="button" class="close" (click)="onSave()" aria-label="Save">
+            <i class="fa fa-check"></i>
+        </button>
+        <button *ngIf="edit || addMode" type="button" class="close" (click)="onCancel()" aria-label="Cancel">
+            <i class="fa fa-undo"></i>
+        </button>
+        <button *ngIf="!edit && !addMode" type="button" class="close" (click)="onEdit()" aria-label="Edit">
+            <i class="fa fa-pencil"></i>
+        </button>
+    </fieldset>
 </div>
