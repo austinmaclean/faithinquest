@@ -108,6 +108,11 @@ export class StudyListComponent implements OnInit, OnChanges {
 
     viewVideo(study:Study) {
         var studyCopy:Study = Object.assign({}, study);
+        if (!this.editMode) {
+            this.studyService.updateviews(studyCopy.id.toString()).subscribe(res => {
+                console.log(res);
+            });
+        }
         this.component.showModal(studyCopy);
     }
 
