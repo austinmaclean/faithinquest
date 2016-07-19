@@ -12,6 +12,7 @@
         </div>
         <div class="item-author">
             by <span class="highlight-blue search-pattern-select" (click)="component.onSelectSpeaker(item.speaker)">{{item.speaker}}</span>
+            <span *ngIf="editMode">&nbsp;|&nbsp;created: <span class="highlight-blue">{{ item.created | date: 'shortDate' }}</span>&nbsp;|&nbsp;Views: <span class="highlight-blue">{{item.viewsCount}}</span></span>
         </div>
         <div class="item-description" [innerHTML]="item.description">
         </div>

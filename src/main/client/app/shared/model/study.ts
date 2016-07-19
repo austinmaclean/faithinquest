@@ -8,6 +8,7 @@ export class Study extends BaseModel {
     public link:string;
     public startMin:number;
     public startSec:number;
+    public viewsCount:number;
 
     constructor(id?:number,
                 created?:number,
@@ -16,7 +17,8 @@ export class Study extends BaseModel {
                 speaker?:string,
                 link?:string,
                 startMin?:number,
-                startSec?:number) {
+                startSec?:number,
+                viewsCount?:number) {
         super(id);
         this.created = created;
         this.title = title;
@@ -25,6 +27,7 @@ export class Study extends BaseModel {
         this.link = link;
         this.startMin = startMin;
         this.startSec = startSec;
+        this.viewsCount = viewsCount;
     }
 }
 
