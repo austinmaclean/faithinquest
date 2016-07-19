@@ -1,7 +1,6 @@
 import {Component, Input, Host, forwardRef, Inject, OnInit} from "@angular/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from "@angular/common";
-import {DND_DIRECTIVES} from "ng2-dnd/ng2-dnd";
-import {FILE_UPLOAD_DIRECTIVES} from "ng2-file-upload/ng2-file-upload";
+import {FILE_UPLOAD_DIRECTIVES, FileUploaderOptions} from "ng2-file-upload/ng2-file-upload";
 import {FileUploadProvider} from "../../../shared/file-upload/fileUploadProvider";
 import {SlideService} from "../../../shared/service/slide.service";
 import {SlideEditComponent} from "../slideEditComponent";
@@ -16,7 +15,6 @@ import {SlideEditComponent} from "../slideEditComponent";
         FILE_UPLOAD_DIRECTIVES,
         <any>NgClass,
         <any>NgStyle,
-        DND_DIRECTIVES,
         CORE_DIRECTIVES,
         FORM_DIRECTIVES,
     ]
