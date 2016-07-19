@@ -31,16 +31,20 @@ export class SlideComponent implements OnInit {
     @Input() item:any;
     @Input() addMode:boolean;
 
-    constructor(@Host() @Inject(forwardRef(() => SlideEditComponent)) private component:SlideEditComponent, private slideService:SlideService) {
+    constructor(@Host() @Inject(forwardRef(() => SlideEditComponent)) private component:SlideEditComponent) {
+    }
+
+    createItem() {
+        return {
+            link: '',
+            attachment: null,
+            indexNumber: 0
+        }
     }
 
     ngOnInit() {
         if (this.addMode) {
-            this.item = {
-                link: '',
-                attachment: null,
-                indexNumber: 0
-            };
+            this.item = this.createItem();
         }
 
         this.uploader = new FileUploadProvider({
@@ -51,9 +55,6 @@ export class SlideComponent implements OnInit {
         this.uploader.successHandler.subscribe(data => {
             this.onEdit();
             this.item.attachment = data.attachment;
-        });
-        this.uploader.errorHandler.subscribe(data => {
-            // none
         });
     }
 
@@ -77,7 +78,11 @@ export class SlideComponent implements OnInit {
 
     onSave() {
         this.edit = false;
-        this.component.onSaveItem(this.item);
+        this.component.onSaveItem(this.item, this.addMode);
+
+        if (this.addMode) {
+            this.item = this.createItem();
+        }
     }
 
     public hasBaseDropZoneOver:boolean = false;

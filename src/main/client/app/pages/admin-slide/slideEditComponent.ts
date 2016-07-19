@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {SlideService} from "../../shared/service/slide.service";
-import {ArrayObservable} from 'rxjs/observable/ArrayObservable';
 import {DND_DIRECTIVES} from 'ng2-dnd/ng2-dnd';
 import {SlideComponent} from "./slide/slideComponent";
 
@@ -21,18 +20,17 @@ import {SlideComponent} from "./slide/slideComponent";
         FORM_DIRECTIVES,
     ]
 })
-export class SlideEditComponent {
+export class SlideEditComponent implements OnInit {
 
     slides:any[] = [];
 
-    constructor(private route:ActivatedRoute, private router:Router, private slideService:SlideService) {
-        ArrayObservable.of(1, 2, 3, 4, 5, 6).subscribe((res) => {
-            this.slides.push({
-                link: '',
-                attachment: null,
-                indexNumber: res
-            });
-        });
+    constructor(private router:Router, private slideService:SlideService) {
+    }
+
+    ngOnInit() {
+        this.slideService.get().subscribe(res => {
+            this.slides = res.result;
+        })
     }
 
     onBack() {
@@ -41,13 +39,31 @@ export class SlideEditComponent {
 
     onTransfer($event) {
         debugger;
+        // item.indexNumber = ui.item.sortable.dropindex;
+        // this.slideService.update(item).subscribe(res => {
+        //     // none
+        // });
     }
 
-    onSaveItem(item:any) {
-        debugger;
+    onSaveItem(item:any, addMode:boolean) {
+        if (addMode) {
+            this.slideService.create(item).subscribe(res => {
+                this.slideService.get().subscribe(list => {
+                    this.slides = list.result;
+                })
+            });
+        } else {
+            this.slideService.update(item).subscribe(res => {
+                // none
+            });
+        }
     }
 
     onRemoveItem(item:any) {
-        debugger;
+        this.slideService.remove(item.id).subscribe(res => {
+            this.slideService.get().subscribe(list => {
+                this.slides = list.result;
+            })
+        });
     }
 }
