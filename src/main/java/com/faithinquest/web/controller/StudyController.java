@@ -62,7 +62,7 @@ public class StudyController
 		return result;
 	}
 
-	@RequestMapping( value = { Routes.ADMIN_STUDY + "/views/{studyId}" }, method = RequestMethod.PUT,
+	@RequestMapping( value = { Routes.STUDY + "/views/{studyId}" }, method = RequestMethod.PUT,
 		produces = MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public OkResponse updateViewsCount( @PathVariable Long studyId )

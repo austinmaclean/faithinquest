@@ -57,13 +57,13 @@ export class SlideService extends BaseService {
 
     @POST('admin/slide')
     @Produces(MediaType.JSON)
-    public create(@Body study:Study):Observable<any> {
+    public create(@Body slide:any):Observable<any> {
         return null;
     }
 
     @PUT('admin/slide')
     @Produces(MediaType.JSON)
-    public update(@Body study:Study):Observable<any> {
+    public update(@Body slide:any):Observable<any> {
         return null;
     }
 

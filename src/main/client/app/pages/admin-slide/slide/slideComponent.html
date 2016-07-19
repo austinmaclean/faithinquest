@@ -1,6 +1,6 @@
 <div class="slide-item-panel" *ngIf="item">
-    <button type="button" class="close" (click)="onRemove()" aria-label="Close">
-        <i class="fa fa-times-circle" (click)="onRemove()"></i>
+    <button type="button" class="close" *ngIf="!addMode" (click)="onRemove()" aria-label="Close">
+        <i class="fa fa-times-circle"></i>
     </button>
     <div class="slide-item-placeholder well my-drop-zone"
          [ngStyle]="{'background-image': 'url(' + attachURL() + ')'}"
@@ -8,20 +8,20 @@
         <span class="btn btn-file-input">
              <span>
                 <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*"/>
-                <span class="text">Bulk Upload</span>
+                <span class="text">Upload</span>
             </span>
         </span>
-        <div class="text-upload">Base drop zone</div>
+        <div class="text-upload">Drop zone</div>
         <fieldset class="form-group">
-            <input class="form-control link" name="link" id="link" placeholder="link" [(ngModel)]="item.link" required [disabled]="!edit">
-            <button *ngIf="edit" type="button" class="close" (click)="onSave()" aria-label="Save">
-                <i class="fa fa-check" (click)="onSave()"></i>
+            <input class="form-control link" name="link" id="link" placeholder="link" [(ngModel)]="item.link" required [disabled]="!edit && !addMode">
+            <button *ngIf="edit || addMode" type="button" class="close" (click)="onSave()" aria-label="Save">
+                <i class="fa fa-check"></i>
             </button>
-            <button *ngIf="edit" type="button" class="close" (click)="onCancel()" aria-label="Cancel">
-                <i class="fa fa-undo" (click)="onCancel()"></i>
+            <button *ngIf="edit || addMode" type="button" class="close" (click)="onCancel()" aria-label="Cancel">
+                <i class="fa fa-undo"></i>
             </button>
-            <button *ngIf="!edit" type="button" class="close" (click)="onEdit()" aria-label="Edit">
-                <i class="fa fa-pencil" (click)="onEdit()"></i>
+            <button *ngIf="!edit && !addMode" type="button" class="close" (click)="onEdit()" aria-label="Edit">
+                <i class="fa fa-pencil"></i>
             </button>
         </fieldset>
     </div>
