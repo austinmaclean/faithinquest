@@ -49,7 +49,7 @@ export class StudyService extends BaseService {
         return null;
     }
 
-    @PUT('admin/study/views/{id}')
+    @PUT('/study/views/{id}')
     @Produces(MediaType.JSON)
     public updateviews(@Path("id") id:string):Observable<any> {
         return null;

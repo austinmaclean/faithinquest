@@ -19,7 +19,8 @@
 	               speaker,
 	               link,
 	               start_min,
-	               start_sec
+	               start_sec,
+	               views_count
             FROM (SELECT s.*,
                          setweight(to_tsvector(title), 'A') ||
                          setweight(to_tsvector(description), 'B') ||
