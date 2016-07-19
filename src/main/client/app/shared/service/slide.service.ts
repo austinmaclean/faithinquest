@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -27,6 +27,18 @@ export class SlideService extends BaseService {
                 protected httpErrorHandlerService:HttpErrorHandlerService) {
         super(http, httpLoaderService, httpErrorHandlerService);
     }
+
+    static attachURL(attach):string {
+        if (attach.path) {
+            var search = new URLSearchParams();
+            search.set('path', attach.path);
+            search.set('fileName', attach.fileName);
+            search.set('contentType', attach.contentType);
+            return '/api/admin/attach?' + search.toString();
+        } else {
+            return '/api/admin/attach/' + attach.id;
+        }
+    };
 
     @GET('slide')
     @Produces(MediaType.JSON)

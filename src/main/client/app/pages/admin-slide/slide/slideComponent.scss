@@ -18,8 +18,20 @@
     border: dotted 3px #FF0000;
   }
 
+  .form-group {
+    margin-bottom: 0;
+
+    .link {
+      margin-top: 120px;
+    }
+  }
+
   button {
     width: 40px;
+    opacity: 0.4;
+    &:hover {
+      opacity: 0.6;
+    }
   }
 
   button:hover, button:focus {

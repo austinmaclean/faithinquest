@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {SlideService} from "../../shared/service/slide.service";
@@ -21,7 +21,7 @@ import {SlideComponent} from "./slide/slideComponent";
         FORM_DIRECTIVES,
     ]
 })
-export class SlideEditComponent implements OnDestroy {
+export class SlideEditComponent {
 
     slides:any[] = [];
 
@@ -35,15 +35,19 @@ export class SlideEditComponent implements OnDestroy {
         });
     }
 
-    ngOnDestroy() {
-    }
-
     onBack() {
         this.router.navigate(['admin']);
     }
 
-    transferSuccess($event) {
+    onTransfer($event) {
         debugger;
     }
 
+    onSaveItem(item:any) {
+        debugger;
+    }
+
+    onRemoveItem(item:any) {
+        debugger;
+    }
 }
