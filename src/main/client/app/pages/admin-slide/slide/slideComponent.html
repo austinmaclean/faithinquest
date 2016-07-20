@@ -23,7 +23,7 @@
     </div>
 
     <div class="slide-item-placeholder well my-drop-zone" *ngIf="edit || addMode"
-         [ngStyle]="{'background-image': 'url(' + attachURL() + ')', 'background-size': 'cover', 'filter': 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=' + attachURL() + ',sizingMethod=scale)'}"
+         [ngStyle]="{'background-image': 'url(' + attachURL() + ')', 'background-size': 'cover'}"
          ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader">
 
         <div class="text-upload">Drop zone</div>
@@ -33,7 +33,8 @@
         </fieldset>
     </div>
 
-    <div class="slide-item-placeholder well" *ngIf="!edit && !addMode" [ngStyle]="{'background-image': 'url(' + attachURL() + ')'}">
+    <div class="slide-item-placeholder well" *ngIf="!edit && !addMode"
+         [ngStyle]="{'background-image': 'url(' + attachURL() + ')', 'background-size': 'cover'}">
 
         <div class="text-upload">&nbsp;</div>
 
