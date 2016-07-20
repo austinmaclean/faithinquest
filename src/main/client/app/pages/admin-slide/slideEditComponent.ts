@@ -65,4 +65,12 @@ export class SlideEditComponent implements OnInit {
             })
         });
     }
+
+    onEditOn(id:any) {
+        this.slides.filter(item => item.id === id)[0].editMode = true;
+    }
+
+    onEditOff(id:any) {
+        this.slides.filter(item => item.id === id)[0].editMode = false;
+    }
 }

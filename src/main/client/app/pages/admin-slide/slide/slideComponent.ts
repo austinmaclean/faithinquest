@@ -70,14 +70,26 @@ export class SlideComponent implements OnInit {
         Object.assign(this.itemTmp, this.item);
         this.item.attachment = null;
         this.edit = true;
+
+        if (!this.addMode) {
+            this.component.onEditOn(this.item.id);
+        }
     }
 
     onCancel() {
+        if (!this.addMode) {
+            this.component.onEditOff(this.item.id);
+        }
+
         this.edit = false;
         Object.assign(this.item, this.itemTmp);
     }
 
     onSave() {
+        if (!this.addMode) {
+            this.component.onEditOff(this.item.id);
+        }
+
         this.edit = false;
         this.component.onSaveItem(this.item, this.addMode);
 
