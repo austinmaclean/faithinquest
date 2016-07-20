@@ -36,7 +36,7 @@ export class SlideService extends BaseService {
             search.set('contentType', attach.contentType);
             return '/api/admin/attach?' + search.toString();
         } else {
-            return '/api/admin/attach/' + attach.id;
+            return '/api/attach/' + attach.id;
         }
     };
 

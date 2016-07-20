@@ -51,7 +51,9 @@ export class SlideComponent implements OnInit {
             allowedFileType: ['image']
         });
         this.uploader.successHandler.subscribe(data => {
-            this.onEdit();
+            if (!this.edit) {
+                this.onEdit();
+            }
             this.item.attachment = data.attachment;
         });
     }
@@ -66,6 +68,7 @@ export class SlideComponent implements OnInit {
 
     onEdit() {
         Object.assign(this.itemTmp, this.item);
+        this.item.attachment = null;
         this.edit = true;
     }
 
