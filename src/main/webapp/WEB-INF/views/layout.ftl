@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="${baseUrl}/">
+    <base href="${baseUrl}">
 
     <link rel="shortcut icon" href="<@spring.url "/assets/img/faviconfi.png"/>" type="image/x-icon"/>
     <title>FaithInquest</title>

@@ -71,23 +71,18 @@ export class StudyComponent implements OnChanges {
     }
 
     getVimeoThumb(id:string) {
-        let url = 'http://vimeo.com/api/v2/video/' + id + '.json';
+        // let url = 'http://vimeo.com/api/v2/video/' + id + '.json';
+        // https://developer.vimeo.com/apis/oembed
+        let url = 'https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/' + id;
         this.http.get(url)
             .map(res => res.json())
             .subscribe(
-                data => this.updateThumbUrl(data),
-                err => this.logError(err),
+                data => {
+                    this.thumbUrl = data['thumbnail_url'];
+                },
+                err => console.log(err),
                 () => console.log('Vimeo Thumb')
             );
-    }
-
-    updateThumbUrl(data) {
-        this.thumbUrl = data[0].thumbnail_medium;
-    }
-
-    logError(err) {
-        debugger;
-        console.log(err);
     }
 
     matchYoutubeUrl(url) {
