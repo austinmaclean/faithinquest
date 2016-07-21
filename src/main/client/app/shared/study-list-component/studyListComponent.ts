@@ -90,7 +90,9 @@ export class StudyListComponent implements OnInit, OnChanges {
                 this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
                     this.viewVideo(study);
                 });
-            }, 3000);
+            }, 4000);
+
+            // TODO !!!
         }
     }
 
@@ -199,6 +201,5 @@ export class StudyListComponent implements OnInit, OnChanges {
         this.queryFilter.filter.sort.value = this.selectedSorting.value;
         this.onSearch();
     }
-
 
 }

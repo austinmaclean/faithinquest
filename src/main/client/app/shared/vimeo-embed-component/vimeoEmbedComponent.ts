@@ -5,11 +5,10 @@ import timeout = Q.timeout;
 @Component({
     moduleId: module.id,
     selector: 'ti-vimeo-embed',
-    template: '<div id="vimeo-{{embed}}"></div>',
-    providers: [Window]
+    template: '<div id="vimeo-{{embed}}"></div>'
 })
 
-export class VimeoEmbedComponent implements OnInit, OnChanges {
+export class VimeoEmbedComponent implements OnChanges {
 
     @Input() vid : string;
     @Input() videoid : string;
@@ -24,13 +23,7 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
     start: number = 0;
     embed : string;
 
-    ngOnInit() {
-        console.log('init player container');
-    }
-
     ngOnChanges(changes) {
-        console.log(changes);
-
         this.embed = this.vid ? this.vid : 'temp';
 
         if (this.videoid) {
@@ -44,8 +37,6 @@ export class VimeoEmbedComponent implements OnInit, OnChanges {
         } else {
             this.onVimeoLoaded.emit(true);
         }
-
-
     }
 
     public loadVideo(id:string, start?:number, autoPlay?:boolean) {

@@ -12,7 +12,12 @@ import {VideoType} from '../model/videoType';
     templateUrl: 'modalVideoComponent.html',
     styleUrls: ['modalVideoComponent.css'],
     viewProviders: [BS_VIEW_PROVIDERS],
-    directives: [MODAL_DIRECTVES, CORE_DIRECTIVES, <any>YTEmbedComponent, <any>VimeoEmbedComponent],
+    directives: [
+        MODAL_DIRECTVES,
+        CORE_DIRECTIVES,
+        <any>YTEmbedComponent,
+        <any>VimeoEmbedComponent
+    ],
 })
 export class ModalVideoComponent {
 
