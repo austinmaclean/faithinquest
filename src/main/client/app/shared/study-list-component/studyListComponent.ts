@@ -64,7 +64,6 @@ export class StudyListComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.loadWidget();
         this.initList();
-        this.initQueryFilter();
     }
 
     ngOnChanges(changes) {
@@ -90,9 +89,7 @@ export class StudyListComponent implements OnInit, OnChanges {
                 this.studyService.read(this.queryFilter.filter.view.value).subscribe(study => {
                     this.viewVideo(study);
                 });
-            }, 4000);
-
-            // TODO !!!
+            }, 1000);
         }
     }
 
@@ -185,10 +182,22 @@ export class StudyListComponent implements OnInit, OnChanges {
     }
 
     loadWidget() {
+        let counter:number = 0;
+
         // Load External Scripts
-        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=' + AppConfig.addThisKey, {async: false});
+        LoadScript.load('//s7.addthis.com/js/300/addthis_widget.js#pubid=' + AppConfig.addThisKey, {async: true}, () => {
+            counter++;
+            if(counter == 2) {
+                this.initQueryFilter();
+            }
+        });
         if (typeof(YT) === 'undefined' || typeof(YT.Player) === 'undefined') {
-            LoadScript.load('//www.youtube.com/iframe_api', {async: false});
+            LoadScript.load('//www.youtube.com/iframe_api', {async: true}, () => {
+                counter++;
+                if(counter == 2) {
+                    this.initQueryFilter();
+                }
+            });
         }
     }
 
