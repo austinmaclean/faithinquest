@@ -34,8 +34,13 @@
             }
           }
 
+          .search-block {
+            width: 80%;
+            margin: 0 auto;
+          }
+
           .input-group {
-            width: 70%;
+            width: 100%;
             margin: 0 auto;
 
             .input-group-addon {
@@ -51,6 +56,32 @@
         }
 
       }
+
+      .trend-row {
+        width: 100%;
+
+        .trends-content {
+
+          background: rgba(255, 255, 255, 0.3);
+          width: 100%;
+          float: right;
+          margin: 0 0 20px 20px;
+          padding: 10px 20px;
+          border: 1px #ccc solid;
+
+          .trends-header {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+          }
+
+          .trends-element {
+            text-align: left;
+            cursor: pointer;
+          }
+        }
+      }
+
     }
 
   }

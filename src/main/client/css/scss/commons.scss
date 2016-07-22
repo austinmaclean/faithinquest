@@ -38,6 +38,67 @@ html, body {
       margin: 0 auto;
       padding: 20px 0;
       min-height: 100px;
+
+      .items-cloud {
+        width: 100%;
+        margin: 0 auto;
+        height: 200px;
+
+        .jqcloud {
+
+          overflow: hidden;
+          position: relative;
+          font-size: 18px;
+          margin: 0 auto;
+          border: 1px solid #cccccc;
+
+          span {
+            cursor: pointer;
+            &.w1 {
+              font-size: 100%;
+              color: rgba(10, 52, 59, 0.62);
+            }
+            &.w2 {
+              font-size: 150%;
+              color: rgba(9, 100, 105, 0.53);
+            }
+            &.w3 {
+              font-size: 200%;
+              color: #093f48;
+            }
+            &.w4 {
+              font-size: 250%;
+              color: #216480;
+            }
+            &.w5 {
+              font-size: 300%;
+              color: #1f9ab1;
+            }
+            &.w6 {
+              font-size: 350%;
+              color: #147382;
+            }
+            &.w7 {
+              font-size: 400%;
+              color: #5e7597;
+            }
+            &.w8 {
+              font-size: 450%;
+              color: #74b7d2;
+            }
+            &.w9 {
+              font-size: 500%;
+              color: #074052;
+            }
+            &.w10 {
+              font-size: 550%;
+              color: #1fbbd2;
+            }
+          }
+
+        }
+
+      }
     }
   }
 

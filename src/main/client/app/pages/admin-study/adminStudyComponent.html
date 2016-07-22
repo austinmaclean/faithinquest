@@ -1,5 +1,9 @@
 <ti-admin-study-edit (onStudiesUpdated)="onStudyUpdated($event)"></ti-admin-study-edit>
 
+<div class="items-cloud">
+    <jq-cloud [words]="words" [width]="600" [height]="200"></jq-cloud>
+</div>
+
 <div class="items-search">
     <form role="form" class="item-search" (submit)="onSearch()">
         <div class="input-group">

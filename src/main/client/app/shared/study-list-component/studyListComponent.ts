@@ -79,7 +79,9 @@ export class StudyListComponent implements OnInit, OnChanges {
         };
         this.queryFilter = new QueryFilter(filterConfig, this.router);
         let filterReq = this.queryFilter.makeFilterRequest();
-
+        if (filterReq.pattern) {
+            this.onSearchPattern.emit(filterReq.pattern);
+        }
         this.scrollableResult = new ScrollableResult<Study>((data)=> this.studyService.find(data), 10, filterReq, true, false);
     }
 

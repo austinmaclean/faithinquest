@@ -231,7 +231,8 @@ export class ProjectConfig {
         {src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT},
 
         {src: 'bootstrap-sass/assets/javascripts/bootstrap.min.js', inject: 'libs'},
-        {src: 'jquery/dist/jquery.min.js', inject: 'shims'}
+        {src: 'jquery/dist/jquery.min.js', inject: 'shims'},
+        {src: 'jqcloud-npm/dist/jqcloud.min.js', inject: 'shims'}
     ];
 
     /**

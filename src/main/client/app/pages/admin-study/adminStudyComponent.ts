@@ -7,6 +7,8 @@ import {Study} from '../../shared/model/study';
 import {ModalMessageComponent} from '../../shared/modal-component/modalMessageComponent';
 import {ModalResult, ModalAction, ModalDialogComponent} from '../../shared/modal-component/modalDialogComponent';
 import {CrazyEgg} from "../../shared/crazy-egg/crazyEgg";
+import {JQCloud} from "../../shared/jqcloud/jqcloud";
+import {TagsService} from "../../shared/service/tags.service";
 
 @Component({
     moduleId: module.id,
@@ -18,9 +20,10 @@ import {CrazyEgg} from "../../shared/crazy-egg/crazyEgg";
         <any>StudyEditComponent,
         <any>FooterComponent,
         <any>ModalMessageComponent,
-        <any>ModalDialogComponent
+        <any>ModalDialogComponent,
+        <any>JQCloud
     ],
-    providers: [<any>CrazyEgg]
+    providers: [<any>CrazyEgg, TagsService]
 })
 
 export class AdminStudyComponent {
@@ -32,12 +35,33 @@ export class AdminStudyComponent {
     @ViewChild(<any>ModalMessageComponent) private messageComponent:ModalMessageComponent;
     @ViewChild(<any>ModalDialogComponent) private dialogComponent:ModalDialogComponent;
 
+    words:Array<any> = [];
+
+    constructor(private tagsService:TagsService) {
+    }
+
+    public tagSearch (tag:string) {
+        this.pattern = tag;
+        this.onSearch();
+    }
+
+    ngOnInit() {
+        this.tagsService.get(10).subscribe(res => {
+            this.words = [];
+            res.result.forEach( (item) => {
+                this.words.push({text: item.id, weight: item.amount, handlers:{click: () => {this.tagSearch(item.id)}}})
+            });
+        });
+    }
+
     onSearch() {
         this.listComponent.onPatternSearch(this.pattern);
     }
 
     onSearchPattern(outString:string) {
-        this.pattern = outString;
+        setTimeout(() => {
+            this.pattern = outString;
+        });
     }
 
     public editStudy(study:Study) {
@@ -64,4 +88,5 @@ export class AdminStudyComponent {
             this.editComponent.deleteStudy(<Study>res.data);
         }
     }
+
 }

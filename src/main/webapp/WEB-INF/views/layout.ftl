@@ -85,6 +85,7 @@
 <script src="js/core-js/client/shim.min.js"></script>
 <script src="js/systemjs/dist/system.src.js"></script>
 <script src="js/jquery/dist/jquery.min.js"></script>
+<script src="js/jqcloud-npm/dist/jqcloud.min.js"></script>
 
 <script>
     System.config({
