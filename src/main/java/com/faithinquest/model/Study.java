@@ -25,7 +25,7 @@ public class Study extends SyntheticEntity
 	private int startSec;
 	private int viewsCount;
 
-	@Column(nullable = false)
+	@Column(nullable = false, updatable = false)
 	public Date getCreated()
 	{
 		return created;

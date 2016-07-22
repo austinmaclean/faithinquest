@@ -20,10 +20,14 @@ public class StudySearch implements ICriteriaModifier
 	{
 		if( pattern != null )
 		{
-			criteria.add( Restrictions.or(
-				Restrictions.ilike( "title", pattern, MatchMode.ANYWHERE ),
-				Restrictions.ilike( "description", pattern, MatchMode.ANYWHERE ),
-				Restrictions.ilike( "speaker", pattern, MatchMode.ANYWHERE ) ) );
+			pattern = pattern.trim();
+			if( pattern.length() > 0 )
+			{
+				criteria.add( Restrictions.or(
+					Restrictions.ilike( "title", pattern, MatchMode.ANYWHERE ),
+					Restrictions.ilike( "description", pattern, MatchMode.ANYWHERE ),
+					Restrictions.ilike( "speaker", pattern, MatchMode.ANYWHERE ) ) );
+			}
 		}
 		if( speaker != null )
 		{

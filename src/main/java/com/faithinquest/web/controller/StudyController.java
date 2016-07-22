@@ -3,6 +3,7 @@ package com.faithinquest.web.controller;
 import com.faithinquest.model.Study;
 import com.faithinquest.model.dto.StudySearch;
 import com.faithinquest.persistence.Paging;
+import com.faithinquest.service.ISearchRequestService;
 import com.faithinquest.service.IStudyService;
 import com.faithinquest.service.conversion.FormatType;
 import com.faithinquest.service.conversion.IConversionService;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.View;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -38,6 +40,8 @@ public class StudyController
 {
 	@Autowired
 	private IStudyService studyService;
+	@Autowired
+	private ISearchRequestService searchRequestService;
 	@Autowired
 	private IConversionService conversionService;
 	@Autowired
@@ -109,7 +113,24 @@ public class StudyController
 	public GridResult<Study> findStudy( StudySearch search, Paging paging )
 	{
 		Assert.notNull( paging );
-		return new GridResult<>( studyService.findByFullText( search, paging ) );
+		List<Study> studies = studyService.findByFullText( search, paging );
+
+		if( !studies.isEmpty()  && (paging.getOffset() == null || paging.getOffset() == 0) )
+		{
+			String searchId = search.getPattern().toLowerCase().trim();
+			if( searchId.length() > 0 )
+			{
+				searchRequestService.increment( searchId );
+			}
+		}
+
+		if( studies.isEmpty())
+		{
+			//use pattern occurence search if nothing found by fulltext
+			studies = studyService.findByPattern( search, paging );
+		}
+
+		return new GridResult<>( studies );
 	}
 
 	@RequestMapping( value = Routes.ADMIN_STUDY + "/import", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE )

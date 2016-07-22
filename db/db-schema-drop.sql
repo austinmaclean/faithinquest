@@ -6,6 +6,8 @@
 
     drop table if exists attachment cascade;
 
+    drop table if exists search_request cascade;
+
     drop table if exists slide cascade;
 
     drop table if exists study cascade;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,13 +37,13 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 		String pattern = search.getPattern();
 		if( StringUtils.isEmpty( pattern ) )
 		{
-			return findStudies( search, paging );
+			return Collections.emptyList();
 		}
 
 		String[] words = pattern.split( "\\W|_" );
 		if( words.length == 0 )
 		{
-			return findStudies( search, paging );
+			return Collections.emptyList();
 		}
 		StringBuilder sb = new StringBuilder();
 		for( String word : words )
@@ -94,14 +95,11 @@ public class StudyService extends AbstractPersistenceService<Study, Long> implem
 			query.setMaxResults( paging.getLimit() );
 		}
 		List studies = query.list();
-		if( studies.isEmpty() )
-		{
-			studies = findStudies( search, paging );
-		}
 		return studies;
 	}
 
-	private List<Study> findStudies( StudySearch search, Paging paging )
+	@Transactional( readOnly = true )
+	public List<Study> findByPattern( StudySearch search, Paging paging )
 	{
 		String sortMode = paging.getSortColumn();
 		if ( StudySort.MostPopular.name().equals( sortMode ) )

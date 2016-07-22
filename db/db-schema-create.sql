@@ -18,6 +18,13 @@
         primary key (id)
     );
 
+    create table search_request (
+        id varchar(255) not null,
+        amount int4 not null,
+        last_searched timestamp,
+        primary key (id)
+    );
+
     create table slide (
         id int8 not null,
         index_number int4 not null,

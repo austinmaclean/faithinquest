@@ -16,6 +16,8 @@ public interface IStudyService extends IPersistenceService<Study, Long>
 {
 	List<Study> findByFullText( StudySearch search, Paging paging );
 
+	List<Study> findByPattern( StudySearch search, Paging paging );
+
 	void incrementViewsCount( Long studyId );
 }
 
