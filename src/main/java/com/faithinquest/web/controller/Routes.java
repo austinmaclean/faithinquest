@@ -25,4 +25,7 @@ public class Routes
 	public static final String ADMIN_CAROUSEL_SLIDE = ADMIN_API + CAROUSEL_SLIDE_PATH;
 	public static final String CAROUSEL_SLIDE = API + CAROUSEL_SLIDE_PATH;
 
+	public static final String TRENDING_PATH = "/trending";
+	public static final String TRENDING = API + TRENDING_PATH;
+
 }
