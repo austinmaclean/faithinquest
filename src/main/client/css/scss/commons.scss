@@ -54,6 +54,11 @@ html, body {
 
           span {
             cursor: pointer;
+
+            &:hover {
+              opacity: 0.5;
+            }
+
             &.w1 {
               font-size: 100%;
               color: rgba(10, 52, 59, 0.62);
