@@ -59,20 +59,24 @@ html, body {
               opacity: 0.5;
             }
 
-            &.w1 {
+            &.w0 {
               font-size: 100%;
+              color: rgba(9, 100, 105, 0.62);
+            }
+            &.w1 {
+              font-size: 120%;
               color: rgba(10, 52, 59, 0.62);
             }
             &.w2 {
-              font-size: 150%;
+              font-size: 140%;
               color: rgba(9, 100, 105, 0.53);
             }
             &.w3 {
-              font-size: 200%;
+              font-size: 160%;
               color: #093f48;
             }
             &.w4 {
-              font-size: 250%;
+              font-size: 180%;
               color: #216480;
             }
             &.w5 {
@@ -80,24 +84,64 @@ html, body {
               color: #1f9ab1;
             }
             &.w6 {
-              font-size: 350%;
+              font-size: 200%;
               color: #147382;
             }
             &.w7 {
-              font-size: 400%;
+              font-size: 220%;
               color: #5e7597;
             }
             &.w8 {
-              font-size: 450%;
-              color: #74b7d2;
+              font-size: 240%;
+              color: #40a2d2;
             }
             &.w9 {
-              font-size: 500%;
+              font-size: 260%;
               color: #074052;
             }
             &.w10 {
-              font-size: 550%;
+              font-size: 280%;
               color: #1fbbd2;
+            }
+            &.w11 {
+              font-size: 300%;
+              color: #74b7d2;
+            }
+            &.w12 {
+              font-size: 320%;
+              color: #1f9ab1;
+            }
+            &.w13 {
+              font-size: 340%;
+              color: #1fbbd2;
+            }
+            &.w14 {
+              font-size: 360%;
+              color: #074052;
+            }
+            &.w15 {
+              font-size: 380%;
+              color: #45a6d2;
+            }
+            &.w16 {
+              font-size: 400%;
+              color: #1f9ab1;
+            }
+            &.w17 {
+              font-size: 420%;
+              color: #1fbbd2;
+            }
+            &.w18 {
+              font-size: 440%;
+              color: #093f48;
+            }
+            &.w19 {
+              font-size: 460%;
+              color: #1fbbd2;
+            }
+            &.w20 {
+              font-size: 480%;
+              color: #1f9ab1;
             }
           }
 

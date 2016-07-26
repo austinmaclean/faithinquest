@@ -120,6 +120,28 @@
     vertical-align: top;
     padding: 20px 0 0 20px;
 
+    .trend-row {
+      width: 320px;
+
+      .trends-content {
+
+        margin: 0 0 20px 20px;
+        padding: 10px 20px;
+
+        .trends-header {
+          text-align: center;
+          margin-bottom: 10px;
+          font-size: 1.1em;
+        }
+
+        .trends-element {
+          text-align: left;
+          cursor: pointer;
+        }
+      }
+
+    }
+
     .video-placeholder {
       width: 320px;
       min-height: 270px;

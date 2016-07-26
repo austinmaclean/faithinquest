@@ -12,13 +12,14 @@ import {IScrollableResult, ScrollableResult} from "../infinite-scroll/scrollable
 import {QueryFilter} from "../infinite-scroll/queryFilter";
 import {LoadScript} from "../load-script/loadScript";
 import {SlideViewComponent} from "../slide-view-component/slideViewComponent";
+import {TagsService} from "../service/tags.service";
 
 @Component({
     moduleId: module.id,
     selector: 'ti-study-list',
     templateUrl: 'studyListComponent.html',
     styleUrls: ['studyListComponent.css'],
-    providers: [StudyService],
+    providers: [StudyService, TagsService],
     viewProviders: [BS_VIEW_PROVIDERS],
     directives: [
         <any>SlideViewComponent,
@@ -35,6 +36,8 @@ import {SlideViewComponent} from "../slide-view-component/slideViewComponent";
 export class StudyListComponent implements OnInit, OnChanges {
 
     public list:Study[];
+
+    trends:Array<any> = [];
 
     @Input() editMode:boolean;
 
@@ -58,16 +61,31 @@ export class StudyListComponent implements OnInit, OnChanges {
     public disabled:boolean = false;
     public status:{isopen:boolean} = {isopen: false};
 
-    constructor(private studyService:StudyService, private router:Router) {
+    constructor(private studyService:StudyService, private router:Router, private tagsService:TagsService) {
+    }
+
+    convert(item) {
+        return {text: item.id, weight: item.amount};
     }
 
     ngOnInit() {
         this.loadWidget();
         this.initList();
+        if (!this.editMode) {
+            this.tagsService.get(10).subscribe(res => {
+                this.trends = res.result.map(this.convert);
+            });
+        }
     }
 
     ngOnChanges(changes) {
         console.log('study component changes');
+    }
+
+    onTrendSearch(trend:any) {
+        this.queryFilter.filter.pattern.value = trend.text;
+        this.onSearchPattern.emit(this.queryFilter.filter.pattern.value);
+        this.onSearch();
     }
 
     initList() {

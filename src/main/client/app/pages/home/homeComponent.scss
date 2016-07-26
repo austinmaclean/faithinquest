@@ -34,13 +34,8 @@
             }
           }
 
-          .search-block {
-            width: 80%;
-            margin: 0 auto;
-          }
-
           .input-group {
-            width: 100%;
+            width: 70%;
             margin: 0 auto;
 
             .input-group-addon {
@@ -156,6 +151,7 @@
       .inner-panel {
         .content-row {
           &.bottom {
+
             .input-group {
               width: 100%;
               padding-bottom: 20px;

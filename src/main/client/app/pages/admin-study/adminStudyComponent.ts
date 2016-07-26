@@ -46,7 +46,7 @@ export class AdminStudyComponent {
     }
 
     ngOnInit() {
-        this.tagsService.get(10).subscribe(res => {
+        this.tagsService.get(20).subscribe(res => {
             this.words = [];
             res.result.forEach( (item) => {
                 this.words.push({text: item.id, weight: item.amount, handlers:{click: () => {this.tagSearch(item.id)}}})

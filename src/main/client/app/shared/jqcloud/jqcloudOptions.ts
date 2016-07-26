@@ -3,7 +3,7 @@ export class JQCloudOptions {
     public height:number;
     public center: any = {x: 0.5, y:0.5};
     public autoResize:boolean = false;
-    public steps:number = 10;
+    public steps:number = 20;
     public classPattern:string = 'w{n}';
     public afterCloudRender:any = null;
     public delay:number = 0;

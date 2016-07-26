@@ -37,6 +37,19 @@
 
     <!-- video placeholder -->
     <div class="items-video-panel">
+
+        <div class="trend-row" *ngIf="!editMode">
+            <div class="trends-content">
+                <div class="row">
+                    <div class="col-lg-12 trends-header">Trending now:</div>
+                    <div class="col-lg-12 trends-element" *ngFor="let trend of trends; let i = index" (click)="onTrendSearch(trend)">
+                        {{i+1}}. {{trend.text}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <ti-slide-view></ti-slide-view>
     </div>
 

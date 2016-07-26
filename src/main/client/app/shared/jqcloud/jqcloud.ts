@@ -24,6 +24,7 @@ export class JQCloud implements OnInit, OnChanges{
 
     constructor (el: ElementRef) {
         this.el = el.nativeElement;
+        this.jqOptions = new JQCloudOptions(0, 0, {x: 0.5, y:0.5}, false, 20, 'w{n}', null, 0, 'elliptic', true, true, []);
     }
 
     ngOnInit() {
@@ -39,15 +40,18 @@ export class JQCloud implements OnInit, OnChanges{
                 if (word.handlers) jqword.handlers = word.handlers;
                 this.jqwords.push(jqword);
             }
-            setTimeout(() => {
-                this.inited = true;
-                jQuery(this.el.firstChild)["jQCloud"](this.jqwords, this.jqOptions);
-            }, 500);
+            if (!this.inited) {
+                setTimeout(() => {
+                    this.inited = true;
+                    jQuery(this.el.firstChild)["jQCloud"](this.jqwords, this.jqOptions);
+                }, 500);
+            } else {
+                setTimeout(() => {
+                    jQuery(this.el)["jQCloud"]('update', this.jqwords);
+                }, 500);
+            }
         }
 
-        if (this.inited) {
-            jQuery(this.el)["jQCloud"]('update', this.jqwords);
-        }
 
     }
     
