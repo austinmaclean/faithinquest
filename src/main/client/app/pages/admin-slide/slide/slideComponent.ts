@@ -26,6 +26,8 @@ export class SlideComponent implements OnInit {
 
     edit:boolean = false;
 
+    loading:boolean = false;
+
     @Input() item:any;
     @Input() addMode:boolean;
 
@@ -44,18 +46,34 @@ export class SlideComponent implements OnInit {
         if (this.addMode) {
             this.item = this.createItem();
         }
-
         this.uploader = new FileUploadProvider({
             url: '/api/admin/attach',
             autoUpload: true,
             allowedFileType: ['image']
         });
         this.uploader.successHandler.subscribe(data => {
+
             if (!this.edit) {
                 this.onEdit();
             }
+            this.loading = false;
             this.item.attachment = data.attachment;
+
         });
+
+        this.uploader.errorHandler.subscribe(data => {
+            this.loading = false;
+            this.item.attachment = null;
+        });
+
+        this.uploader.beforeUploadHandler.subscribe(data => {
+            this.loading = true;
+        });
+
+        this.uploader.progressHandler.subscribe(progress => {
+            console.log(progress);
+        })
+
     }
 
     attachURL():string {

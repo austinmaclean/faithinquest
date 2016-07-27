@@ -33,7 +33,7 @@ export class SlideViewComponent implements OnInit {
 
     public onClick(item):void {
         if(item.slide.link) {
-            window.location.href = item.slide.link;
+            window.open(item.slide.link, '_blank');
         }
     }
 
