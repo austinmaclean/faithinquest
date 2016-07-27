@@ -22,7 +22,9 @@
         </button>
     </div>
 
-    <div class="small-loader" [hidden]="!loading"></div>
+    <!--<div class="small-loader" [hidden]="!loading"></div>-->
+
+    <progressbar class="slide-progress" [value]="progress" [hidden]="!loading"></progressbar>
 
     <div class="slide-item-placeholder well my-drop-zone" *ngIf="edit || addMode"
          [ngStyle]="{'background-image': 'url(' + attachURL() + ')', 'background-size': 'cover'}"

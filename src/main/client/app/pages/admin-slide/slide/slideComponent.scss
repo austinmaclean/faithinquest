@@ -1,12 +1,21 @@
 .slide-item-panel {
   vertical-align: top;
   padding: 0 10px 20px 0;
+  position: relative;
 
   .small-loader {
     position: absolute;
     background: url(../assets/img/small-loader.gif) no-repeat center center;
     width: 320px;
     height: 270px;
+  }
+
+  .slide-progress {
+    position: absolute;
+    top: 190px;
+    width: 280px;
+    left: 20px;
+    height: 15px;
   }
 
   .action {

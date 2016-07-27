@@ -4,6 +4,8 @@ import {FILE_UPLOAD_DIRECTIVES, FileUploaderOptions} from "ng2-file-upload/ng2-f
 import {FileUploadProvider} from "../../../shared/file-upload/fileUploadProvider";
 import {SlideService} from "../../../shared/service/slide.service";
 import {SlideEditComponent} from "../slideEditComponent";
+import { PROGRESSBAR_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+
 
 @Component({
     moduleId: module.id,
@@ -17,6 +19,7 @@ import {SlideEditComponent} from "../slideEditComponent";
         <any>NgStyle,
         CORE_DIRECTIVES,
         FORM_DIRECTIVES,
+        PROGRESSBAR_DIRECTIVES,
     ]
 })
 export class SlideComponent implements OnInit {
@@ -27,6 +30,7 @@ export class SlideComponent implements OnInit {
     edit:boolean = false;
 
     loading:boolean = false;
+    progress:number = 0;
 
     @Input() item:any;
     @Input() addMode:boolean;
@@ -52,26 +56,27 @@ export class SlideComponent implements OnInit {
             allowedFileType: ['image']
         });
         this.uploader.successHandler.subscribe(data => {
-
             if (!this.edit) {
                 this.onEdit();
             }
             this.loading = false;
+            this.progress = 0;
             this.item.attachment = data.attachment;
-
         });
 
         this.uploader.errorHandler.subscribe(data => {
             this.loading = false;
+            this.progress = 0;
             this.item.attachment = null;
         });
 
         this.uploader.beforeUploadHandler.subscribe(data => {
             this.loading = true;
+            this.progress = 0;
         });
 
         this.uploader.progressHandler.subscribe(progress => {
-            console.log(progress);
+            this.progress = progress;
         })
 
     }
