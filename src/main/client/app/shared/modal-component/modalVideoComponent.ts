@@ -1,6 +1,6 @@
 import {Component, ViewChild, Output, EventEmitter} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, ModalDirective} from 'ng2-bootstrap/ng2-bootstrap';
+import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, ModalDirective} from 'ng2-bootstrap/ng2-bootstrap';
 import {Study} from '../model/study';
 import {YTEmbedComponent} from '../youtube-embed-component/youtubeEmbedComponent';
 import {VimeoEmbedComponent} from '../vimeo-embed-component/vimeoEmbedComponent';
@@ -13,7 +13,7 @@ import {VideoType} from '../model/videoType';
     styleUrls: ['modalVideoComponent.css'],
     viewProviders: [BS_VIEW_PROVIDERS],
     directives: [
-        MODAL_DIRECTVES,
+        MODAL_DIRECTIVES,
         CORE_DIRECTIVES,
         <any>YTEmbedComponent,
         <any>VimeoEmbedComponent

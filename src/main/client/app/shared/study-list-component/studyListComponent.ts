@@ -1,7 +1,7 @@
 import {Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {Router} from "@angular/router";
-import {MODAL_DIRECTVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
+import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 import {Study} from "../../shared/model/study";
 import {StudyService} from "../../shared/service/study.service";
 import {StudyComponent} from "./study/studyComponent";
@@ -27,7 +27,7 @@ import {TagsService} from "../service/tags.service";
         <any>StudyComponent,
         <any>YTEmbedComponent,
         <any>ModalVideoComponent,
-        MODAL_DIRECTVES,
+        MODAL_DIRECTIVES,
         CORE_DIRECTIVES,
         DROPDOWN_DIRECTIVES
     ]

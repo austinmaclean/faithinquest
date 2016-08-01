@@ -40,7 +40,7 @@ export class SlideEditComponent implements OnInit {
     onTransfer(item, index) {
         item.indexNumber = index;
         this.slideService.update(item).subscribe(res => {
-            // none
+            this.slides.forEach((item, key) => item.indexNumber = key);
         });
     }
 
