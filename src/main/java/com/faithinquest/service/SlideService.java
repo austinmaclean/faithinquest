@@ -51,6 +51,14 @@ public class SlideService extends AbstractPersistenceService<Slide, Long> implem
 		reorder( slide, slides );
 		if( slide.getAttachment().getId() == null )
 		{
+			if( slide.getId() != null )
+			{
+				Slide oldSlide = get( slide.getId() );
+				if( oldSlide != null && oldSlide.getAttachment() != null )
+				{
+					attachmentService.delete( oldSlide.getAttachment().getId() );
+				}
+			}
 			attachmentService.saveNewAttachment( slide.getAttachment() );
 		}
 		else
