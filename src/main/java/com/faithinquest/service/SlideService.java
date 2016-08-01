@@ -41,7 +41,7 @@ public class SlideService extends AbstractPersistenceService<Slide, Long> implem
 	@Transactional
 	public Slide merge( Slide slide )
 	{
-		if( slide.getLink() == null && slide.getAttachment() == null )
+		if( slide.getAttachment() == null )
 		{
 			addValidationResult( "", "slide.empty" );
 			validate();
@@ -51,6 +51,8 @@ public class SlideService extends AbstractPersistenceService<Slide, Long> implem
 		reorder( slide, slides );
 		if( slide.getAttachment().getId() == null )
 		{
+			attachmentService.saveNewAttachment( slide.getAttachment() );
+
 			if( slide.getId() != null )
 			{
 				Slide oldSlide = get( slide.getId() );
@@ -59,7 +61,6 @@ public class SlideService extends AbstractPersistenceService<Slide, Long> implem
 					attachmentService.delete( oldSlide.getAttachment().getId() );
 				}
 			}
-			attachmentService.saveNewAttachment( slide.getAttachment() );
 		}
 		else
 		{
